@@ -72,7 +72,8 @@ interface AmazonProductAttributes {
 }
 
 // Atrybuty używane podczas tworzenia nowego produktu
-interface AmazonProductCreationAttributes extends Optional<AmazonProductAttributes, "id"> {}
+interface AmazonProductCreationAttributes
+  extends Optional<AmazonProductAttributes, "id"> {}
 
 class AmazonProduct
   extends Model<AmazonProductAttributes, AmazonProductCreationAttributes>
@@ -159,7 +160,9 @@ class AmazonProduct
     return AmazonProduct.findOne({ where: { url } });
   }
 
-  static async findRecentlyScraped(hours: number = 24): Promise<AmazonProduct[]> {
+  static async findRecentlyScraped(
+    hours: number = 24,
+  ): Promise<AmazonProduct[]> {
     const date = new Date();
     date.setHours(date.getHours() - hours);
 
@@ -176,7 +179,8 @@ class AmazonProduct
   needsRescraping(maxAge: number = 24): boolean {
     if (!this.lastScraped) return true;
 
-    const hours = (new Date().getTime() - this.lastScraped.getTime()) / (1000 * 60 * 60);
+    const hours =
+      (new Date().getTime() - this.lastScraped.getTime()) / (1000 * 60 * 60);
     return hours >= maxAge;
   }
 }
@@ -478,5 +482,5 @@ AmazonProduct.init(
         fields: ["root_bs_category"],
       },
     ],
-  }
+  },
 );

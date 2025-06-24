@@ -2,6 +2,7 @@ import type { FC } from "react";
 import {
   Avatar,
   Button,
+  DarkThemeToggle,
   Dropdown,
   DropdownDivider,
   DropdownHeader,
@@ -52,7 +53,7 @@ export const DashboardNavbar: FC<DashboardNavbarProps> = ({
   };
 
   return (
-    <Navbar fluid className="fixed top-0 right-0 left-0 z-30 shadow-none">
+    <Navbar fluid className="fixed top-0 right-0 left-0 z-50 shadow-none">
       <div className="flex items-center">
         <Button
           className="mr-3 cursor-pointer rounded p-1 text-gray-600 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
@@ -79,6 +80,7 @@ export const DashboardNavbar: FC<DashboardNavbarProps> = ({
         </form>
       </div>
       <div className="flex items-center">
+        <DarkThemeToggle />
         <Dropdown
           arrowIcon={false}
           inline

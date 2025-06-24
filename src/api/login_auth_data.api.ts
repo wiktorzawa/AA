@@ -19,7 +19,9 @@ export interface OdpowiedzLogowania {
  * @param credentials Dane logowania (username, password)
  * @returns Odpowiedź z informacją o sukcesie, roli użytkownika i ewentualnym błędzie
  */
-export const zaloguj = async (credentials: DaneLogowania): Promise<OdpowiedzLogowania> => {
+export const zaloguj = async (
+  credentials: DaneLogowania,
+): Promise<OdpowiedzLogowania> => {
   try {
     const response = await axiosInstance.post("/auth/login", credentials);
     return response.data;

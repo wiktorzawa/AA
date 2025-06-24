@@ -8,7 +8,9 @@ import bcrypt from "bcrypt";
  * @param role Rola pracownika ('admin' lub 'staff')
  * @returns Wygenerowane ID pracownika
  */
-export const generateStaffId = async (role: "admin" | "staff"): Promise<string> => {
+export const generateStaffId = async (
+  role: "admin" | "staff",
+): Promise<string> => {
   const connection = await pool.getConnection();
   try {
     const prefix = role === "admin" ? "ADM/" : "STF/";
@@ -16,7 +18,7 @@ export const generateStaffId = async (role: "admin" | "staff"): Promise<string> 
     // Pobierz wszystkie ID pracowników z określonym prefixem
     const [rows] = await connection.query<RowDataPacket[]>(
       "SELECT id_staff FROM login_table_staff WHERE id_staff LIKE ?",
-      [`${prefix}%`]
+      [`${prefix}%`],
     );
 
     // Znajdź największy numer
@@ -67,7 +69,7 @@ export const generatePassword = (id_staff: string): string => {
  * @returns Dane utworzonego pracownika
  */
 export const createStaffWithPassword = async (
-  staff: Omit<LoginTableStaff, "id_staff" | "created_at" | "updated_at">
+  staff: Omit<LoginTableStaff, "id_staff" | "created_at" | "updated_at">,
 ): Promise<LoginTableStaff | null> => {
   const connection = await pool.getConnection();
   try {
@@ -83,14 +85,21 @@ export const createStaffWithPassword = async (
     // Utwórz nowego pracownika
     await connection.execute(
       "INSERT INTO login_table_staff (id_staff, first_name, last_name, role, email, phone) VALUES (?, ?, ?, ?, ?, ?)",
-      [id_staff, staff.first_name, staff.last_name, staff.role, staff.email, staff.phone]
+      [
+        id_staff,
+        staff.first_name,
+        staff.last_name,
+        staff.role,
+        staff.email,
+        staff.phone,
+      ],
     );
 
     // Utwórz dane uwierzytelniające
     const id_login = `${id_staff}/LOG`;
     await connection.execute(
       "INSERT INTO login_auth_data (id_login, related_id, email, password_hash, role, failed_login_attempts) VALUES (?, ?, ?, ?, ?, ?)",
-      [id_login, id_staff, staff.email, hashedPassword, staff.role, 0]
+      [id_login, id_staff, staff.email, hashedPassword, staff.role, 0],
     );
 
     await connection.commit();
@@ -112,7 +121,9 @@ export const createStaffWithPassword = async (
 export const getAllStaff = async (): Promise<LoginTableStaff[]> => {
   const connection = await pool.getConnection();
   try {
-    const [rows] = await connection.query<RowDataPacket[]>("SELECT * FROM login_table_staff");
+    const [rows] = await connection.query<RowDataPacket[]>(
+      "SELECT * FROM login_table_staff",
+    );
     return rows as LoginTableStaff[];
   } finally {
     connection.release();
@@ -124,12 +135,15 @@ export const getAllStaff = async (): Promise<LoginTableStaff[]> => {
  * @param id_staff Identyfikator pracownika
  * @returns Dane pracownika lub null, jeśli nie znaleziono
  */
-export const getStaffById = async (id_staff: string): Promise<LoginTableStaff | null> => {
+export const getStaffById = async (
+  id_staff: string,
+): Promise<LoginTableStaff | null> => {
   const connection = await pool.getConnection();
   try {
-    const [rows] = await connection.query<RowDataPacket[]>("SELECT * FROM login_table_staff WHERE id_staff = ?", [
-      id_staff,
-    ]);
+    const [rows] = await connection.query<RowDataPacket[]>(
+      "SELECT * FROM login_table_staff WHERE id_staff = ?",
+      [id_staff],
+    );
     return rows.length > 0 ? (rows[0] as LoginTableStaff) : null;
   } finally {
     connection.release();
@@ -141,10 +155,15 @@ export const getStaffById = async (id_staff: string): Promise<LoginTableStaff | 
  * @param email Adres email pracownika
  * @returns Dane pracownika lub null, jeśli nie znaleziono
  */
-export const getStaffByEmail = async (email: string): Promise<LoginTableStaff | null> => {
+export const getStaffByEmail = async (
+  email: string,
+): Promise<LoginTableStaff | null> => {
   const connection = await pool.getConnection();
   try {
-    const [rows] = await connection.query<RowDataPacket[]>("SELECT * FROM login_table_staff WHERE email = ?", [email]);
+    const [rows] = await connection.query<RowDataPacket[]>(
+      "SELECT * FROM login_table_staff WHERE email = ?",
+      [email],
+    );
     return rows.length > 0 ? (rows[0] as LoginTableStaff) : null;
   } finally {
     connection.release();
@@ -157,13 +176,20 @@ export const getStaffByEmail = async (email: string): Promise<LoginTableStaff | 
  * @returns Dane utworzonego pracownika
  */
 export const createStaff = async (
-  staff: Omit<LoginTableStaff, "created_at" | "updated_at">
+  staff: Omit<LoginTableStaff, "created_at" | "updated_at">,
 ): Promise<LoginTableStaff | null> => {
   const connection = await pool.getConnection();
   try {
     await connection.execute(
       "INSERT INTO login_table_staff (id_staff, first_name, last_name, role, email, phone) VALUES (?, ?, ?, ?, ?, ?)",
-      [staff.id_staff, staff.first_name, staff.last_name, staff.role, staff.email, staff.phone]
+      [
+        staff.id_staff,
+        staff.first_name,
+        staff.last_name,
+        staff.role,
+        staff.email,
+        staff.phone,
+      ],
     );
 
     return await getStaffById(staff.id_staff);
@@ -180,7 +206,9 @@ export const createStaff = async (
  */
 export const updateStaff = async (
   id_staff: string,
-  staff: Partial<Omit<LoginTableStaff, "id_staff" | "created_at" | "updated_at">>
+  staff: Partial<
+    Omit<LoginTableStaff, "id_staff" | "created_at" | "updated_at">
+  >,
 ): Promise<LoginTableStaff | null> => {
   const connection = await pool.getConnection();
   try {
@@ -218,7 +246,10 @@ export const updateStaff = async (
 
     values.push(id_staff);
 
-    await connection.execute(`UPDATE login_table_staff SET ${updates.join(", ")} WHERE id_staff = ?`, values);
+    await connection.execute(
+      `UPDATE login_table_staff SET ${updates.join(", ")} WHERE id_staff = ?`,
+      values,
+    );
 
     return await getStaffById(id_staff);
   } finally {
@@ -238,12 +269,16 @@ export const deleteStaff = async (id_staff: string): Promise<boolean> => {
 
     // Usuń powiązane dane logowania
     const id_login = `${id_staff}/LOG`;
-    await connection.execute("DELETE FROM login_auth_data WHERE id_login = ? OR related_id = ?", [id_login, id_staff]);
+    await connection.execute(
+      "DELETE FROM login_auth_data WHERE id_login = ? OR related_id = ?",
+      [id_login, id_staff],
+    );
 
     // Usuń pracownika
-    const [result] = await connection.execute<ResultSetHeader>("DELETE FROM login_table_staff WHERE id_staff = ?", [
-      id_staff,
-    ]);
+    const [result] = await connection.execute<ResultSetHeader>(
+      "DELETE FROM login_table_staff WHERE id_staff = ?",
+      [id_staff],
+    );
 
     await connection.commit();
 

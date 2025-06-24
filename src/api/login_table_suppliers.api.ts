@@ -24,7 +24,9 @@ export interface Dostawca {
 export type NowyDostawca = Omit<Dostawca, "created_at" | "updated_at">;
 
 // Typ dla aktualizacji dostawcy (częściowe dane, bez ID i dat)
-export type AktualizacjaDostawcy = Partial<Omit<Dostawca, "id_supplier" | "created_at" | "updated_at">>;
+export type AktualizacjaDostawcy = Partial<
+  Omit<Dostawca, "id_supplier" | "created_at" | "updated_at">
+>;
 
 // Typ dla nowego dostawcy bez ID (generowane automatycznie)
 export type NowyDostawcaBezId = Omit<NowyDostawca, "id_supplier">;
@@ -77,7 +79,9 @@ export const pobierzDostawce = async (id: string): Promise<Dostawca | null> => {
  * @param dostawca Dane nowego dostawcy
  * @returns Dane utworzonego dostawcy lub null w przypadku błędu
  */
-export const dodajDostawce = async (dostawca: NowyDostawca): Promise<Dostawca | null> => {
+export const dodajDostawce = async (
+  dostawca: NowyDostawca,
+): Promise<Dostawca | null> => {
   try {
     const response = await axiosInstance.post("/suppliers", dostawca);
     return response.data;
@@ -93,7 +97,10 @@ export const dodajDostawce = async (dostawca: NowyDostawca): Promise<Dostawca | 
  * @param dane Dane do aktualizacji
  * @returns Zaktualizowane dane dostawcy lub null w przypadku błędu
  */
-export const aktualizujDostawce = async (id: string, dane: AktualizacjaDostawcy): Promise<Dostawca | null> => {
+export const aktualizujDostawce = async (
+  id: string,
+  dane: AktualizacjaDostawcy,
+): Promise<Dostawca | null> => {
   try {
     const response = await axiosInstance.put(`/suppliers/${id}`, dane);
     return response.data;
@@ -125,10 +132,13 @@ export const usunDostawce = async (id: string): Promise<boolean> => {
  * @returns Dane utworzonego dostawcy wraz z wygenerowanym hasłem lub null w przypadku błędu
  */
 export const dodajDostawceZHaslem = async (
-  dostawca: NowyDostawcaBezId
+  dostawca: NowyDostawcaBezId,
 ): Promise<(Dostawca & { password: string }) | null> => {
   try {
-    const response = await axiosInstance.post("/suppliers/with-password", dostawca);
+    const response = await axiosInstance.post(
+      "/suppliers/with-password",
+      dostawca,
+    );
     return response.data;
   } catch (error) {
     console.error("Błąd podczas dodawania dostawcy z hasłem:", error);

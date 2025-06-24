@@ -10,7 +10,9 @@ import bcrypt from "bcrypt";
 export const getAllSuppliers = async (): Promise<LoginTableSuppliers[]> => {
   const connection = await pool.getConnection();
   try {
-    const [rows] = await connection.query<RowDataPacket[]>("SELECT * FROM login_table_suppliers");
+    const [rows] = await connection.query<RowDataPacket[]>(
+      "SELECT * FROM login_table_suppliers",
+    );
     return rows as LoginTableSuppliers[];
   } finally {
     connection.release();
@@ -22,12 +24,14 @@ export const getAllSuppliers = async (): Promise<LoginTableSuppliers[]> => {
  * @param id_supplier Identyfikator dostawcy
  * @returns Dane dostawcy lub null, jeśli nie znaleziono
  */
-export const getSupplierById = async (id_supplier: string): Promise<LoginTableSuppliers | null> => {
+export const getSupplierById = async (
+  id_supplier: string,
+): Promise<LoginTableSuppliers | null> => {
   const connection = await pool.getConnection();
   try {
     const [rows] = await connection.query<RowDataPacket[]>(
       "SELECT * FROM login_table_suppliers WHERE id_supplier = ?",
-      [id_supplier]
+      [id_supplier],
     );
     return rows.length > 0 ? (rows[0] as LoginTableSuppliers) : null;
   } finally {
@@ -40,12 +44,15 @@ export const getSupplierById = async (id_supplier: string): Promise<LoginTableSu
  * @param email Adres email dostawcy
  * @returns Dane dostawcy lub null, jeśli nie znaleziono
  */
-export const getSupplierByEmail = async (email: string): Promise<LoginTableSuppliers | null> => {
+export const getSupplierByEmail = async (
+  email: string,
+): Promise<LoginTableSuppliers | null> => {
   const connection = await pool.getConnection();
   try {
-    const [rows] = await connection.query<RowDataPacket[]>("SELECT * FROM login_table_suppliers WHERE email = ?", [
-      email,
-    ]);
+    const [rows] = await connection.query<RowDataPacket[]>(
+      "SELECT * FROM login_table_suppliers WHERE email = ?",
+      [email],
+    );
     return rows.length > 0 ? (rows[0] as LoginTableSuppliers) : null;
   } finally {
     connection.release();
@@ -57,10 +64,15 @@ export const getSupplierByEmail = async (email: string): Promise<LoginTableSuppl
  * @param nip Numer NIP dostawcy
  * @returns Dane dostawcy lub null, jeśli nie znaleziono
  */
-export const getSupplierByNip = async (nip: string): Promise<LoginTableSuppliers | null> => {
+export const getSupplierByNip = async (
+  nip: string,
+): Promise<LoginTableSuppliers | null> => {
   const connection = await pool.getConnection();
   try {
-    const [rows] = await connection.query<RowDataPacket[]>("SELECT * FROM login_table_suppliers WHERE nip = ?", [nip]);
+    const [rows] = await connection.query<RowDataPacket[]>(
+      "SELECT * FROM login_table_suppliers WHERE nip = ?",
+      [nip],
+    );
     return rows.length > 0 ? (rows[0] as LoginTableSuppliers) : null;
   } finally {
     connection.release();
@@ -73,7 +85,7 @@ export const getSupplierByNip = async (nip: string): Promise<LoginTableSuppliers
  * @returns Dane utworzonego dostawcy
  */
 export const createSupplier = async (
-  supplier: Omit<LoginTableSuppliers, "created_at" | "updated_at">
+  supplier: Omit<LoginTableSuppliers, "created_at" | "updated_at">,
 ): Promise<LoginTableSuppliers | null> => {
   const connection = await pool.getConnection();
   try {
@@ -98,7 +110,7 @@ export const createSupplier = async (
         supplier.address_city,
         supplier.address_postal_code,
         supplier.address_country,
-      ]
+      ],
     );
 
     return await getSupplierById(supplier.id_supplier);
@@ -113,7 +125,10 @@ export const createSupplier = async (
  * @returns Dane utworzonego dostawcy wraz z wygenerowanym hasłem lub null
  */
 export const createSupplierWithPassword = async (
-  supplier: Omit<LoginTableSuppliers, "id_supplier" | "created_at" | "updated_at">
+  supplier: Omit<
+    LoginTableSuppliers,
+    "id_supplier" | "created_at" | "updated_at"
+  >,
 ): Promise<(LoginTableSuppliers & { password: string }) | null> => {
   const connection = await pool.getConnection();
   try {
@@ -148,14 +163,14 @@ export const createSupplierWithPassword = async (
         supplier.address_city,
         supplier.address_postal_code,
         supplier.address_country,
-      ]
+      ],
     );
 
     // Utwórz dane uwierzytelniające
     const id_login = `${id_supplier}/LOG`;
     await connection.execute(
       "INSERT INTO login_auth_data (id_login, related_id, email, password_hash, role, failed_login_attempts) VALUES (?, ?, ?, ?, ?, ?)",
-      [id_login, id_supplier, supplier.email, hashedPassword, "supplier", 0]
+      [id_login, id_supplier, supplier.email, hashedPassword, "supplier", 0],
     );
 
     await connection.commit();
@@ -186,7 +201,9 @@ export const createSupplierWithPassword = async (
  */
 export const updateSupplier = async (
   id_supplier: string,
-  supplier: Partial<Omit<LoginTableSuppliers, "id_supplier" | "created_at" | "updated_at">>
+  supplier: Partial<
+    Omit<LoginTableSuppliers, "id_supplier" | "created_at" | "updated_at">
+  >,
 ): Promise<LoginTableSuppliers | null> => {
   const connection = await pool.getConnection();
   try {
@@ -207,7 +224,10 @@ export const updateSupplier = async (
 
     values.push(id_supplier);
 
-    await connection.execute(`UPDATE login_table_suppliers SET ${updates.join(", ")} WHERE id_supplier = ?`, values);
+    await connection.execute(
+      `UPDATE login_table_suppliers SET ${updates.join(", ")} WHERE id_supplier = ?`,
+      values,
+    );
 
     return await getSupplierById(id_supplier);
   } finally {
@@ -227,15 +247,15 @@ export const deleteSupplier = async (id_supplier: string): Promise<boolean> => {
 
     // Usuń powiązane dane logowania
     const id_login = `${id_supplier}/LOG`;
-    await connection.execute("DELETE FROM login_auth_data WHERE id_login = ? OR related_id = ?", [
-      id_login,
-      id_supplier,
-    ]);
+    await connection.execute(
+      "DELETE FROM login_auth_data WHERE id_login = ? OR related_id = ?",
+      [id_login, id_supplier],
+    );
 
     // Usuń dostawcę
     const [result] = await connection.execute<ResultSetHeader>(
       "DELETE FROM login_table_suppliers WHERE id_supplier = ?",
-      [id_supplier]
+      [id_supplier],
     );
 
     await connection.commit();
@@ -262,7 +282,7 @@ export const generateSupplierId = async (): Promise<string> => {
     // Pobierz wszystkie ID dostawców
     const [rows] = await connection.query<RowDataPacket[]>(
       "SELECT id_supplier FROM login_table_suppliers WHERE id_supplier LIKE ?",
-      [`${prefix}%`]
+      [`${prefix}%`],
     );
 
     // Znajdź największy numer

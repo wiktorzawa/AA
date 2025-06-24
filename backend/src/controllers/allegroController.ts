@@ -1,5 +1,8 @@
 import { Request, Response } from "express";
-import { allegroService, UserTokenData as TokenData } from "../services/allegroService"; // TokenData zmienione na UserTokenData dla spójności
+import {
+  allegroService,
+  UserTokenData as TokenData,
+} from "../services/allegroService"; // TokenData zmienione na UserTokenData dla spójności
 import crypto from "crypto";
 import asyncHandler from "express-async-handler"; // Zachowujemy, jeśli będzie potrzebne
 
@@ -37,7 +40,10 @@ class AllegroController {
     // Dla przykładu, przekierowujemy bezpośrednio:
     console.log(`--- AllegroController: initLogin ---`);
     console.log(`Redirecting to Allegro login URL: ${url}`);
-    console.log(`Session allegroAuth set:`, (req.session as AllegroAuthSession).allegroAuth);
+    console.log(
+      `Session allegroAuth set:`,
+      (req.session as AllegroAuthSession).allegroAuth,
+    );
     res.redirect(url);
   }
 
@@ -55,7 +61,11 @@ class AllegroController {
     console.log(`Received code: ${code}, state: ${state}`);
     console.log(`Session allegroAuth:`, authContext);
 
-    if (!authContext || typeof state !== "string" || state !== authContext.state) {
+    if (
+      !authContext ||
+      typeof state !== "string" ||
+      state !== authContext.state
+    ) {
       console.error("CSRF state mismatch or auth context missing.");
       throw new Error("CSRF state mismatch or session error.");
     }
@@ -66,18 +76,33 @@ class AllegroController {
     }
 
     try {
-      const tokenData = await allegroService.exchangeCodeForToken(code, authContext.verifier);
+      const tokenData = await allegroService.exchangeCodeForToken(
+        code,
+        authContext.verifier,
+      );
       sessionData.allegroTokens = tokenData; // Zapisz tokeny użytkownika w sesji
       delete sessionData.allegroAuth; // Usuń tymczasowe dane autoryzacji
-      console.log("Successfully obtained user tokens. Stored in session:", sessionData.allegroTokens);
+      console.log(
+        "Successfully obtained user tokens. Stored in session:",
+        sessionData.allegroTokens,
+      );
       // Przekieruj użytkownika do miejsca docelowego w aplikacji, np. profilu
       // Tutaj dla przykładu wysyłamy tokeny jako JSON (NIEZALECANE W PRODUKCJI DLA TOKENÓW)
       // Lepiej przekierować i odczytać z sesji na kolejnej stronie
-      res.json({ message: "Login successful. Tokens obtained.", tokens: tokenData });
+      res.json({
+        message: "Login successful. Tokens obtained.",
+        tokens: tokenData,
+      });
     } catch (error) {
-      console.error("Error in handleCallback while exchanging code for token:", error);
+      console.error(
+        "Error in handleCallback while exchanging code for token:",
+        error,
+      );
       // Możesz chcieć przekierować do strony błędu
-      res.status(500).json({ error: "Failed to exchange code for token", details: (error as Error).message });
+      res.status(500).json({
+        error: "Failed to exchange code for token",
+        details: (error as Error).message,
+      });
     }
   });
 
@@ -86,21 +111,25 @@ class AllegroController {
   // lub dostosowania allegroService aby był klasą i tworzenia instancji tutaj)
   // Poniżej zakładam, że allegroService jest już zaimportowaną instancją.
 
-  public searchOffersByEAN = asyncHandler(async (req: Request, res: Response) => {
-    const ean = req.query.ean as string;
-    if (!ean) {
-      res.status(400).json({ error: "Parametr EAN jest wymagany." });
-      return; // Zakończ funkcję tutaj
-    }
-    if (!/^[0-9]{8,14}$/.test(ean)) {
-      res.status(400).json({ error: "Nieprawidłowy format numeru EAN." });
-      return; // Zakończ funkcję tutaj
-    }
-    console.log("--- AllegroController: searchOffersByEAN (using App Token) ---");
-    const offers = await allegroService.fetchOffers(ean);
-    res.json(offers); // Wyślij odpowiedź
-    // Nie ma potrzeby return res.json(offers)
-  });
+  public searchOffersByEAN = asyncHandler(
+    async (req: Request, res: Response) => {
+      const ean = req.query.ean as string;
+      if (!ean) {
+        res.status(400).json({ error: "Parametr EAN jest wymagany." });
+        return; // Zakończ funkcję tutaj
+      }
+      if (!/^[0-9]{8,14}$/.test(ean)) {
+        res.status(400).json({ error: "Nieprawidłowy format numeru EAN." });
+        return; // Zakończ funkcję tutaj
+      }
+      console.log(
+        "--- AllegroController: searchOffersByEAN (using App Token) ---",
+      );
+      const offers = await allegroService.fetchOffers(ean);
+      res.json(offers); // Wyślij odpowiedź
+      // Nie ma potrzeby return res.json(offers)
+    },
+  );
 
   public getCategories = asyncHandler(async (req: Request, res: Response) => {
     console.log("--- AllegroController: getCategories (using App Token) ---");

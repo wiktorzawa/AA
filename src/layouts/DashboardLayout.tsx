@@ -1,24 +1,33 @@
 import classNames from "classnames";
 import type { FC, PropsWithChildren } from "react";
 import { useState } from "react";
-import { DashboardSidebar } from "../components/sidebar/DashboardSidebar";
 import { DashboardNavbar } from "../components/navbar/DashboardNavbar";
+import { AppSidebar } from "../components/sidebar/AppSidebar";
+import isBrowser from "../helpers/is-browser";
 
 const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isOpen, setOpen] = useState(isBrowser() && window.innerWidth >= 768);
 
   return (
     <>
-      <DashboardNavbar
-        onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
-      />
+      <DashboardNavbar onToggleSidebar={() => setOpen(!isOpen)} />
       <div className="flex items-start pt-16">
-        <DashboardSidebar isOpen={isSidebarOpen} />
+        <div
+          className={classNames(
+            "transition-width fixed top-0 left-0 z-30 h-screen shrink-0 border-r border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800",
+            isOpen ? "block w-64" : "hidden w-16 lg:block",
+          )}
+        >
+          <div className="flex h-full flex-col justify-between pt-16">
+            <AppSidebar collapsed={!isOpen} />
+          </div>
+        </div>
         <main
           className={classNames(
-            "relative h-screen w-full overflow-y-auto bg-gray-50 p-4 dark:bg-gray-900",
+            "relative h-screen flex-1 overflow-y-auto bg-gray-50 p-4 dark:bg-gray-900",
             {
-              "lg:ml-64": isSidebarOpen,
+              "lg:ml-64": isOpen,
+              "lg:ml-16": !isOpen,
             },
           )}
         >

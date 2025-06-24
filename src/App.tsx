@@ -1,22 +1,28 @@
+import { type FC } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import type { FC } from "react";
+
 import DashboardLayout from "./layouts/DashboardLayout";
-import SignInPage from "./pages/authentication/sign-in";
-import SignUpPage from "./pages/authentication/sign-up";
+import ProtectedRoute from "./components/authentication/ProtectedRoute";
+
 import ForgotPasswordPage from "./pages/authentication/forgot-password";
-import ResetPasswordPage from "./pages/authentication/reset-password";
 import ProfileLockPage from "./pages/authentication/profile-lock";
+import ResetPasswordPage from "./pages/authentication/reset-password";
+import SignInBackgroundPage from "./pages/authentication/sign-in-background";
+import SignUpPage from "./pages/authentication/sign-up";
+
 import AdminDashboardPage from "./pages/admin/AdminDashboardPage";
+import DashboardHomePage from "./pages/DashboardHomePage";
 import StaffDashboardPage from "./pages/staff/StaffDashboardPage";
 import SupplierDashboardPage from "./pages/supplier/SupplierDashboardPage";
-import ProtectedRoute from "./components/authentication/ProtectedRoute";
-import DashboardHomePage from "./pages/DashboardHomePage";
 
 const App: FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/authentication/sign-in" element={<SignInPage />} />
+        <Route
+          path="/authentication/sign-in"
+          element={<SignInBackgroundPage />}
+        />
         <Route path="/authentication/sign-up" element={<SignUpPage />} />
         <Route
           path="/authentication/forgot-password"
@@ -42,7 +48,7 @@ const App: FC = () => {
           }
         />
         <Route
-          path="/admin"
+          path="/admin/dashboard"
           element={
             <ProtectedRoute allowedRoles={["admin"]}>
               <DashboardLayout>
@@ -52,7 +58,7 @@ const App: FC = () => {
           }
         />
         <Route
-          path="/staff"
+          path="/staff/dashboard"
           element={
             <ProtectedRoute allowedRoles={["staff", "admin"]}>
               <DashboardLayout>
@@ -62,7 +68,7 @@ const App: FC = () => {
           }
         />
         <Route
-          path="/supplier"
+          path="/supplier/dashboard"
           element={
             <ProtectedRoute allowedRoles={["supplier", "admin"]}>
               <DashboardLayout>

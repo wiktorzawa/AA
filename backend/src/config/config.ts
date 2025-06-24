@@ -12,7 +12,9 @@ const backendEnvPath = path.resolve(__dirname, "../../.env");
 const backendEnvResult = dotenv.config({ path: backendEnvPath });
 
 if (backendEnvResult.error) {
-  console.warn(`Warning: Could not load .env file from ${backendEnvPath}: ${backendEnvResult.error.message}`);
+  console.warn(
+    `Warning: Could not load .env file from ${backendEnvPath}: ${backendEnvResult.error.message}`,
+  );
 }
 
 export interface Config {
@@ -41,7 +43,9 @@ export const config: Config = {
   frontendUrl: process.env.FRONTEND_URL || "http://localhost:5173",
   allegroClientId: process.env.ALLEGRO_CLIENT_ID || "",
   allegroClientSecret: process.env.ALLEGRO_CLIENT_SECRET || "",
-  allegroApiUrl: isSandbox ? "https://api.allegro.pl.allegrosandbox.pl" : "https://api.allegro.pl",
+  allegroApiUrl: isSandbox
+    ? "https://api.allegro.pl.allegrosandbox.pl"
+    : "https://api.allegro.pl",
   allegroAuthTokenUrl: isSandbox
     ? "https://allegro.pl.allegrosandbox.pl/auth/oauth/token"
     : "https://allegro.pl/auth/oauth/token",
@@ -59,8 +63,12 @@ export const config: Config = {
 
 // Walidacja kluczowych zmiennych Allegro
 if (!config.allegroClientId) {
-  console.warn("OSTRZEŻENIE: Zmienna środowiskowa ALLEGRO_CLIENT_ID nie jest ustawiona!");
+  console.warn(
+    "OSTRZEŻENIE: Zmienna środowiskowa ALLEGRO_CLIENT_ID nie jest ustawiona!",
+  );
 }
 if (!config.allegroClientSecret) {
-  console.warn("OSTRZEŻENIE: Zmienna środowiskowa ALLEGRO_CLIENT_SECRET nie jest ustawiona!");
+  console.warn(
+    "OSTRZEŻENIE: Zmienna środowiskowa ALLEGRO_CLIENT_SECRET nie jest ustawiona!",
+  );
 }

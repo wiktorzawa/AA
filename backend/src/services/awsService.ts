@@ -3,7 +3,10 @@
 
 // Serwis do obsługi RDS
 export const rdsService = {
-  async executeQuery(sql: string, parameters: (string | number | boolean | null)[] = []) {
+  async executeQuery(
+    sql: string,
+    parameters: (string | number | boolean | null)[] = [],
+  ) {
     try {
       const response = await fetch("http://localhost:3000/api/query", {
         method: "POST",

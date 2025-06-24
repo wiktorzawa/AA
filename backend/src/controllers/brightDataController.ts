@@ -1,6 +1,9 @@
 import { Request, Response } from "express";
 import asyncHandler from "express-async-handler";
-import { brightDataService, BrightDataProxy } from "../services/brightDataService";
+import {
+  brightDataService,
+  BrightDataProxy,
+} from "../services/brightDataService";
 
 export class BrightDataController {
   /**
@@ -21,4 +24,4 @@ export class BrightDataController {
   });
 }
 
-export const brightDataController = new BrightDataController(); 
+export const brightDataController = new BrightDataController();

@@ -29,7 +29,10 @@ export class RDSService {
    * @returns Obietnica (Promise) zwracająca tablicę wyników typu T.
    * @throws Rzuca błąd, jeśli zapytanie się nie powiedzie lub wystąpi błąd sieci.
    */
-  public async executeQuery<T = unknown>(sql: string, params: any[] = []): Promise<T[]> {
+  public async executeQuery<T = unknown>(
+    sql: string,
+    params: any[] = [],
+  ): Promise<T[]> {
     console.log(`Wysyłanie zapytania do /api/query: ${sql}`);
     console.log(`Parametry: ${JSON.stringify(params)}`);
 
@@ -51,14 +54,16 @@ export class RDSService {
 
       if (!response.ok) {
         // Błąd HTTP
-        const errorMsg = data?.error || `Błąd HTTP ${response.status}: ${response.statusText}`;
+        const errorMsg =
+          data?.error || `Błąd HTTP ${response.status}: ${response.statusText}`;
         console.error(`Błąd HTTP w executeQuery: ${errorMsg}`);
         throw new Error(errorMsg);
       }
 
       if (!data.success) {
         // Błąd zwrócony przez API w polu 'error'
-        const errorMsg = data.error || "Nieznany błąd wykonania zapytania na serwerze.";
+        const errorMsg =
+          data.error || "Nieznany błąd wykonania zapytania na serwerze.";
         console.error(`Błąd API w executeQuery: ${errorMsg}`);
         throw new Error(errorMsg);
       }

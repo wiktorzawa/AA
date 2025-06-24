@@ -71,41 +71,56 @@ class AllegroService {
   }
 
   private getBasicAuthHeader(): string {
-    return Buffer.from(`${config.allegroClientId}:${config.allegroClientSecret}`).toString("base64");
+    return Buffer.from(
+      `${config.allegroClientId}:${config.allegroClientSecret}`,
+    ).toString("base64");
   }
 
   // === CLIENT CREDENTIALS (dla operacji aplikacji, np. publiczne kategorie) =====
   private async refreshAppAccessToken(): Promise<void> {
     if (!config.allegroClientId || !config.allegroClientSecret) {
       console.error(
-        "Klucze API Allegro (allegroClientId lub allegroClientSecret) nie są skonfigurowane dla Client Credentials."
+        "Klucze API Allegro (allegroClientId lub allegroClientSecret) nie są skonfigurowane dla Client Credentials.",
       );
-      throw new Error("Brak konfiguracji kluczy API Allegro dla Client Credentials.");
+      throw new Error(
+        "Brak konfiguracji kluczy API Allegro dla Client Credentials.",
+      );
     }
-    console.log("--- AllegroService: refreshAppAccessToken (Client Credentials) ---");
+    console.log(
+      "--- AllegroService: refreshAppAccessToken (Client Credentials) ---",
+    );
     const tokenUrl = config.allegroAuthTokenUrl;
     console.log("App Token URL:", tokenUrl);
 
-    const requestBody = new URLSearchParams({ grant_type: "client_credentials" }).toString();
+    const requestBody = new URLSearchParams({
+      grant_type: "client_credentials",
+    }).toString();
     console.log("App Token Request body:", requestBody);
 
     try {
-      const response = await axios.post<AllegroAppTokenResponse>(tokenUrl, requestBody, {
-        headers: {
-          Authorization: `Basic ${this.getBasicAuthHeader()}`,
-          "Content-Type": "application/x-www-form-urlencoded",
+      const response = await axios.post<AllegroAppTokenResponse>(
+        tokenUrl,
+        requestBody,
+        {
+          headers: {
+            Authorization: `Basic ${this.getBasicAuthHeader()}`,
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
         },
-      });
+      );
       this.appAccessToken = response.data.access_token;
-      this.appTokenExpiryTime = Date.now() + (response.data.expires_in - 60) * 1000;
-      console.log("Token dostępu aplikacji (Client Credentials) został odświeżony.");
+      this.appTokenExpiryTime =
+        Date.now() + (response.data.expires_in - 60) * 1000;
+      console.log(
+        "Token dostępu aplikacji (Client Credentials) został odświeżony.",
+      );
     } catch (error) {
       const axiosError = error as AxiosError;
       console.error(
         "Błąd podczas odświeżania tokenu aplikacji (Client Credentials):",
         `URL: ${tokenUrl}`,
         axiosError.response?.status,
-        axiosError.response?.data || axiosError.message
+        axiosError.response?.data || axiosError.message,
       );
       throw new Error("Nie udało się odświeżyć tokenu dostępu aplikacji.");
     }
@@ -113,7 +128,9 @@ class AllegroService {
 
   private async getValidAppAccessToken(): Promise<string> {
     if (!this.appAccessToken || Date.now() >= this.appTokenExpiryTime) {
-      console.log("Token aplikacji (Client Credentials) wygasł lub nie istnieje, odświeżanie...");
+      console.log(
+        "Token aplikacji (Client Credentials) wygasł lub nie istnieje, odświeżanie...",
+      );
       await this.refreshAppAccessToken();
     }
     return this.appAccessToken;
@@ -132,19 +149,26 @@ class AllegroService {
         },
         params: { phrase: phrase },
       });
-      return [...(response.data.items.promoted || []), ...(response.data.items.regular || [])];
+      return [
+        ...(response.data.items.promoted || []),
+        ...(response.data.items.regular || []),
+      ];
     } catch (error) {
       const axiosError = error as AxiosError;
       if (axiosError.response?.status === 401) {
-        console.warn("Otrzymano błąd 401 (App Token) przy fetchOffers. Token mógł wygasnąć.");
+        console.warn(
+          "Otrzymano błąd 401 (App Token) przy fetchOffers. Token mógł wygasnąć.",
+        );
       }
       console.error(
         "Błąd podczas pobierania ofert z Allegro (App Token):",
         `URL: ${offersUrl}?phrase=${phrase}`,
         axiosError.response?.status,
-        axiosError.response?.data || axiosError.message
+        axiosError.response?.data || axiosError.message,
       );
-      throw new Error(`Nie udało się pobrać ofert z Allegro (App Token): ${axiosError.message}`);
+      throw new Error(
+        `Nie udało się pobrać ofert z Allegro (App Token): ${axiosError.message}`,
+      );
     }
   }
 
@@ -153,25 +177,32 @@ class AllegroService {
     const categoriesUrl = `${config.allegroApiUrl}/sale/categories`;
     console.log(`--- AllegroService: fetchCategories (using App Token) ---`);
     try {
-      const response = await axios.get<AllegroCategoriesResponse>(categoriesUrl, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          Accept: "application/vnd.allegro.public.v1+json",
+      const response = await axios.get<AllegroCategoriesResponse>(
+        categoriesUrl,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: "application/vnd.allegro.public.v1+json",
+          },
         },
-      });
+      );
       return response.data.categories || [];
     } catch (error) {
       const axiosError = error as AxiosError;
       if (axiosError.response?.status === 401) {
-        console.warn("Otrzymano błąd 401 (App Token) przy fetchCategories. Token mógł wygasnąć.");
+        console.warn(
+          "Otrzymano błąd 401 (App Token) przy fetchCategories. Token mógł wygasnąć.",
+        );
       }
       console.error(
         "Błąd podczas pobierania kategorii z Allegro (App Token):",
         `URL: ${categoriesUrl}`,
         axiosError.response?.status,
-        axiosError.response?.data || axiosError.message
+        axiosError.response?.data || axiosError.message,
       );
-      throw new Error(`Nie udało się pobrać kategorii z Allegro (App Token): ${axiosError.message}`);
+      throw new Error(
+        `Nie udało się pobrać kategorii z Allegro (App Token): ${axiosError.message}`,
+      );
     }
   }
 
@@ -179,7 +210,9 @@ class AllegroService {
   public buildLoginUrl(state: string) {
     const verifier = this.generateCodeVerifier();
     const challenge = this.generateCodeChallenge(verifier);
-    const loginUrl = new URL(`${config.allegroAuthTokenUrl.replace("/token", "")}/authorize`); // Dostosowanie URL do autoryzacji
+    const loginUrl = new URL(
+      `${config.allegroAuthTokenUrl.replace("/token", "")}/authorize`,
+    ); // Dostosowanie URL do autoryzacji
 
     loginUrl.searchParams.set("response_type", "code");
     loginUrl.searchParams.set("client_id", config.allegroClientId);
@@ -198,7 +231,10 @@ class AllegroService {
     return { url: loginUrl.toString(), verifier };
   }
 
-  public async exchangeCodeForToken(code: string, verifier: string): Promise<UserTokenData> {
+  public async exchangeCodeForToken(
+    code: string,
+    verifier: string,
+  ): Promise<UserTokenData> {
     console.log(`--- AllegroService: exchangeCodeForToken ---`);
     const body = new URLSearchParams({
       grant_type: "authorization_code",
@@ -208,12 +244,16 @@ class AllegroService {
     }).toString();
 
     try {
-      const { data } = await axios.post<TokenData>(config.allegroAuthTokenUrl, body, {
-        headers: {
-          Authorization: `Basic ${this.getBasicAuthHeader()}`,
-          "Content-Type": "application/x-www-form-urlencoded",
+      const { data } = await axios.post<TokenData>(
+        config.allegroAuthTokenUrl,
+        body,
+        {
+          headers: {
+            Authorization: `Basic ${this.getBasicAuthHeader()}`,
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
         },
-      });
+      );
       console.log("Successfully exchanged code for user token.");
       return { ...data, obtained_at: Date.now() };
     } catch (error) {
@@ -223,9 +263,11 @@ class AllegroService {
         `URL: ${config.allegroAuthTokenUrl}`,
         axiosError.response?.status,
         axiosError.response?.data || axiosError.message,
-        `Request body: ${body}`
+        `Request body: ${body}`,
       );
-      throw new Error(`Nie udało się wymienić kodu na token użytkownika: ${axiosError.message}`);
+      throw new Error(
+        `Nie udało się wymienić kodu na token użytkownika: ${axiosError.message}`,
+      );
     }
   }
 
@@ -238,12 +280,16 @@ class AllegroService {
     }).toString();
 
     try {
-      const { data } = await axios.post<TokenData>(config.allegroAuthTokenUrl, body, {
-        headers: {
-          Authorization: `Basic ${this.getBasicAuthHeader()}`,
-          "Content-Type": "application/x-www-form-urlencoded",
+      const { data } = await axios.post<TokenData>(
+        config.allegroAuthTokenUrl,
+        body,
+        {
+          headers: {
+            Authorization: `Basic ${this.getBasicAuthHeader()}`,
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
         },
-      });
+      );
       console.log("Successfully refreshed user token.");
       return { ...data, obtained_at: Date.now() };
     } catch (error) {
@@ -253,9 +299,11 @@ class AllegroService {
         `URL: ${config.allegroAuthTokenUrl}`,
         axiosError.response?.status,
         axiosError.response?.data || axiosError.message,
-        `Request body: ${body}`
+        `Request body: ${body}`,
       );
-      throw new Error(`Nie udało się odświeżyć tokenu użytkownika: ${axiosError.message}`);
+      throw new Error(
+        `Nie udało się odświeżyć tokenu użytkownika: ${axiosError.message}`,
+      );
     }
   }
 }

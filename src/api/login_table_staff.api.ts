@@ -16,7 +16,9 @@ export interface Pracownik {
 export type NowyPracownik = Omit<Pracownik, "created_at" | "updated_at">;
 
 // Typ dla aktualizacji pracownika (częściowe dane, bez ID i dat)
-export type AktualizacjaPracownika = Partial<Omit<Pracownik, "id_staff" | "created_at" | "updated_at">>;
+export type AktualizacjaPracownika = Partial<
+  Omit<Pracownik, "id_staff" | "created_at" | "updated_at">
+>;
 
 // Typ dla nowego pracownika bez ID (generowane automatycznie)
 export type NowyPracownikBezId = Omit<NowyPracownik, "id_staff">;
@@ -26,7 +28,9 @@ export type NowyPracownikBezId = Omit<NowyPracownik, "id_staff">;
  * @param role Rola pracownika ('admin' lub 'staff')
  * @returns Wygenerowane ID lub pusty string w przypadku błędu
  */
-export const generujIdPracownika = async (role: "admin" | "staff"): Promise<string> => {
+export const generujIdPracownika = async (
+  role: "admin" | "staff",
+): Promise<string> => {
   try {
     const response = await axiosInstance.get(`/staff/generate-id?role=${role}`);
     return response.data.id_staff;
@@ -41,9 +45,14 @@ export const generujIdPracownika = async (role: "admin" | "staff"): Promise<stri
  * @param pracownik Dane nowego pracownika (bez ID)
  * @returns Dane utworzonego pracownika lub null w przypadku błędu
  */
-export const dodajPracownikaZHaslem = async (pracownik: NowyPracownikBezId): Promise<Pracownik | null> => {
+export const dodajPracownikaZHaslem = async (
+  pracownik: NowyPracownikBezId,
+): Promise<Pracownik | null> => {
   try {
-    const response = await axiosInstance.post("/staff/with-password", pracownik);
+    const response = await axiosInstance.post(
+      "/staff/with-password",
+      pracownik,
+    );
     return response.data;
   } catch (error) {
     console.error("Błąd podczas dodawania pracownika z hasłem:", error);
@@ -70,7 +79,9 @@ export const pobierzPracownikow = async (): Promise<Pracownik[]> => {
  * @param id Identyfikator pracownika
  * @returns Dane pracownika lub null w przypadku błędu
  */
-export const pobierzPracownika = async (id: string): Promise<Pracownik | null> => {
+export const pobierzPracownika = async (
+  id: string,
+): Promise<Pracownik | null> => {
   try {
     const response = await axiosInstance.get(`/staff/${id}`);
     return response.data;
@@ -85,7 +96,9 @@ export const pobierzPracownika = async (id: string): Promise<Pracownik | null> =
  * @param pracownik Dane nowego pracownika
  * @returns Dane utworzonego pracownika lub null w przypadku błędu
  */
-export const dodajPracownika = async (pracownik: NowyPracownik): Promise<Pracownik | null> => {
+export const dodajPracownika = async (
+  pracownik: NowyPracownik,
+): Promise<Pracownik | null> => {
   try {
     const response = await axiosInstance.post("/staff", pracownik);
     return response.data;
@@ -101,7 +114,10 @@ export const dodajPracownika = async (pracownik: NowyPracownik): Promise<Pracown
  * @param dane Dane do aktualizacji
  * @returns Zaktualizowane dane pracownika lub null w przypadku błędu
  */
-export const aktualizujPracownika = async (id: string, dane: AktualizacjaPracownika): Promise<Pracownik | null> => {
+export const aktualizujPracownika = async (
+  id: string,
+  dane: AktualizacjaPracownika,
+): Promise<Pracownik | null> => {
   try {
     const response = await axiosInstance.put(`/staff/${id}`, dane);
     return response.data;
