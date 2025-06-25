@@ -52,6 +52,19 @@ export const DashboardNavbar: FC<DashboardNavbarProps> = ({
     }
   };
 
+  const getLogoHref = () => {
+    switch (userRole) {
+      case "admin":
+        return "/admin";
+      case "supplier":
+        return "/supplier/dashboard";
+      case "staff":
+        return "/staff/dashboard";
+      default:
+        return "/";
+    }
+  };
+
   return (
     <Navbar fluid className="fixed top-0 right-0 left-0 z-50 shadow-none">
       <div className="flex items-center">
@@ -62,7 +75,7 @@ export const DashboardNavbar: FC<DashboardNavbarProps> = ({
           <span className="sr-only">Toggle sidebar</span>
           <HiMenuAlt1 className="h-6 w-6" />
         </Button>
-        <NavbarBrand href="/">
+        <NavbarBrand href={getLogoHref()}>
           <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
             {getLogoText()}
           </span>

@@ -10,142 +10,267 @@ import { useEffect, useState } from "react";
 import {
   HiChartPie,
   HiClipboard,
-  HiCollection,
   HiInformationCircle,
   HiShoppingBag,
   HiUsers,
   HiTruck,
   HiCog,
+  HiDocumentReport,
+  HiCollection,
+  HiTable,
 } from "react-icons/hi";
 
 interface AppSidebarProps {
-  collapsed?: boolean;
+  userRole?: "admin" | "staff" | "supplier";
 }
 
-interface NavItem {
-  href: string;
-  icon: FC<React.SVGProps<SVGSVGElement>>;
-  label: string;
-  roles: ("admin" | "staff" | "supplier")[];
-  children?: NavItem[];
-}
-
-const navItems: NavItem[] = [
-  {
-    href: "/admin/dashboard",
-    icon: HiChartPie,
-    label: "Dashboard",
-    roles: ["admin"],
-  },
-  {
-    href: "/staff/dashboard",
-    icon: HiChartPie,
-    label: "Dashboard",
-    roles: ["staff"],
-  },
-  {
-    href: "/supplier/dashboard",
-    icon: HiChartPie,
-    label: "Dashboard",
-    roles: ["supplier"],
-  },
-  {
-    href: "#",
-    icon: HiShoppingBag,
-    label: "E-commerce",
-    roles: ["admin", "staff"],
-    children: [
-      {
-        href: "/products",
-        icon: HiShoppingBag,
-        label: "Products",
-        roles: ["admin", "staff"],
-      },
-      {
-        href: "/orders",
-        icon: HiClipboard,
-        label: "Orders",
-        roles: ["admin", "staff"],
-      },
-    ],
-  },
-  { href: "/users", icon: HiUsers, label: "Users", roles: ["admin"] },
-  {
-    href: "/deliveries",
-    icon: HiTruck,
-    label: "Deliveries",
-    roles: ["supplier"],
-  },
-  {
-    href: "#",
-    icon: HiCog,
-    label: "Settings",
-    roles: ["admin"],
-    children: [
-      {
-        href: "/settings/general",
-        icon: HiCog,
-        label: "General",
-        roles: ["admin"],
-      },
-      {
-        href: "/settings/users",
-        icon: HiUsers,
-        label: "User Management",
-        roles: ["admin"],
-      },
-    ],
-  },
-  {
-    href: "/help",
-    icon: HiInformationCircle,
-    label: "Help",
-    roles: ["admin", "staff", "supplier"],
-  },
-];
-
-export const AppSidebar: FC<AppSidebarProps> = ({ collapsed }) => {
-  const [userRole, setUserRole] = useState<string | null>(null);
+const AppSidebar: FC<AppSidebarProps> = function ({ userRole }) {
+  const [currentPage, setCurrentPage] = useState("");
+  const [actualUserRole, setActualUserRole] = useState<string | null>(null);
 
   useEffect(() => {
-    // We need to check for the role on the client side
-    const role = localStorage.getItem("userRole");
-    setUserRole(role);
-  }, []);
+    const newPage = window.location.pathname;
+    setCurrentPage(newPage);
 
-  const filteredNavItems = userRole
-    ? navItems.filter((item) => item.roles.includes(userRole as any))
-    : [];
+    // Pobierz rolę z localStorage lub użyj przekazanej prop
+    const roleFromStorage = localStorage.getItem("userRole");
+    const finalRole = userRole || roleFromStorage;
+
+    console.log("AppSidebar - userRole prop:", userRole);
+    console.log("AppSidebar - roleFromStorage:", roleFromStorage);
+    console.log("AppSidebar - finalRole:", finalRole);
+    console.log("AppSidebar - currentPage:", newPage);
+
+    setActualUserRole(finalRole);
+  }, [userRole, currentPage]);
+
+  // Menu dla Admin
+  const renderAdminMenu = () => (
+    <>
+      <SidebarItem
+        href="/admin/dashboard"
+        icon={HiChartPie}
+        className={
+          "/admin/dashboard" === currentPage
+            ? "bg-gray-100 dark:bg-gray-700"
+            : ""
+        }
+      >
+        Dashboard
+      </SidebarItem>
+      <SidebarItem
+        href="/admin/landing"
+        icon={HiCollection}
+        className={
+          "/admin/landing" === currentPage ? "bg-gray-100 dark:bg-gray-700" : ""
+        }
+      >
+        Landing Page
+      </SidebarItem>
+      <SidebarItem
+        href="/admin/tables"
+        icon={HiTable}
+        className={
+          "/admin/tables" === currentPage ? "bg-gray-100 dark:bg-gray-700" : ""
+        }
+      >
+        Advanced Tables
+      </SidebarItem>
+      <SidebarItem
+        href="/admin/users"
+        icon={HiUsers}
+        className={
+          "/admin/users" === currentPage ? "bg-gray-100 dark:bg-gray-700" : ""
+        }
+      >
+        Zarządzanie Użytkownikami
+      </SidebarItem>
+      <SidebarItem
+        href="/admin/staff"
+        icon={HiClipboard}
+        className={
+          "/admin/staff" === currentPage ? "bg-gray-100 dark:bg-gray-700" : ""
+        }
+      >
+        Zarządzanie Personelem
+      </SidebarItem>
+      <SidebarItem
+        href="/admin/suppliers"
+        icon={HiTruck}
+        className={
+          "/admin/suppliers" === currentPage
+            ? "bg-gray-100 dark:bg-gray-700"
+            : ""
+        }
+      >
+        Zarządzanie Dostawcami
+      </SidebarItem>
+      <SidebarCollapse icon={HiShoppingBag} label="E-commerce">
+        <SidebarItem href="/admin/products">Produkty</SidebarItem>
+        <SidebarItem href="/admin/orders">Zamówienia</SidebarItem>
+        <SidebarItem href="/admin/inventory">Magazyn</SidebarItem>
+      </SidebarCollapse>
+      <SidebarItem
+        href="/admin/reports"
+        icon={HiDocumentReport}
+        className={
+          "/admin/reports" === currentPage ? "bg-gray-100 dark:bg-gray-700" : ""
+        }
+      >
+        Raporty
+      </SidebarItem>
+      <SidebarItem
+        href="/admin/settings"
+        icon={HiCog}
+        className={
+          "/admin/settings" === currentPage
+            ? "bg-gray-100 dark:bg-gray-700"
+            : ""
+        }
+      >
+        Ustawienia Systemu
+      </SidebarItem>
+    </>
+  );
+
+  // Menu dla Staff
+  const renderStaffMenu = () => (
+    <>
+      <SidebarItem
+        href="/staff/dashboard"
+        icon={HiChartPie}
+        className={
+          "/staff/dashboard" === currentPage
+            ? "bg-gray-100 dark:bg-gray-700"
+            : ""
+        }
+      >
+        Dashboard
+      </SidebarItem>
+      <SidebarItem
+        href="/staff/tasks"
+        icon={HiClipboard}
+        className={
+          "/staff/tasks" === currentPage ? "bg-gray-100 dark:bg-gray-700" : ""
+        }
+      >
+        Moje Zadania
+      </SidebarItem>
+      <SidebarCollapse icon={HiShoppingBag} label="Obsługa Zamówień">
+        <SidebarItem href="/staff/orders/new">Nowe Zamówienia</SidebarItem>
+        <SidebarItem href="/staff/orders/processing">W Realizacji</SidebarItem>
+        <SidebarItem href="/staff/orders/completed">Zakończone</SidebarItem>
+      </SidebarCollapse>
+      <SidebarItem
+        href="/staff/inventory"
+        icon={HiCollection}
+        className={
+          "/staff/inventory" === currentPage
+            ? "bg-gray-100 dark:bg-gray-700"
+            : ""
+        }
+      >
+        Magazyn
+      </SidebarItem>
+      <SidebarItem
+        href="/staff/reports"
+        icon={HiDocumentReport}
+        className={
+          "/staff/reports" === currentPage ? "bg-gray-100 dark:bg-gray-700" : ""
+        }
+      >
+        Raporty
+      </SidebarItem>
+    </>
+  );
+
+  // Menu dla Supplier
+  const renderSupplierMenu = () => (
+    <>
+      <SidebarItem
+        href="/supplier/dashboard"
+        icon={HiChartPie}
+        className={
+          "/supplier/dashboard" === currentPage
+            ? "bg-gray-100 dark:bg-gray-700"
+            : ""
+        }
+      >
+        Dashboard
+      </SidebarItem>
+      <SidebarItem
+        href="/supplier/deliveries"
+        icon={HiTruck}
+        className={
+          "/supplier/deliveries" === currentPage
+            ? "bg-gray-100 dark:bg-gray-700"
+            : ""
+        }
+      >
+        Moje Dostawy
+      </SidebarItem>
+      <SidebarCollapse icon={HiShoppingBag} label="Produkty">
+        <SidebarItem href="/supplier/products">Lista Produktów</SidebarItem>
+        <SidebarItem href="/supplier/products/add">Dodaj Produkt</SidebarItem>
+        <SidebarItem href="/supplier/inventory">Stan Magazynowy</SidebarItem>
+      </SidebarCollapse>
+      <SidebarItem
+        href="/supplier/orders"
+        icon={HiClipboard}
+        className={
+          "/supplier/orders" === currentPage
+            ? "bg-gray-100 dark:bg-gray-700"
+            : ""
+        }
+      >
+        Zamówienia
+      </SidebarItem>
+      <SidebarItem
+        href="/supplier/invoices"
+        icon={HiDocumentReport}
+        className={
+          "/supplier/invoices" === currentPage
+            ? "bg-gray-100 dark:bg-gray-700"
+            : ""
+        }
+      >
+        Faktury
+      </SidebarItem>
+    </>
+  );
+
+  // Menu domyślne (gdy brak roli lub ogólny dashboard)
+  const renderDefaultMenu = () => (
+    <>
+      <SidebarItem
+        href="/"
+        icon={HiChartPie}
+        className={"/" === currentPage ? "bg-gray-100 dark:bg-gray-700" : ""}
+      >
+        Dashboard
+      </SidebarItem>
+      <SidebarItem href="/authentication/sign-in" icon={HiInformationCircle}>
+        Zaloguj się
+      </SidebarItem>
+    </>
+  );
 
   return (
-    <Sidebar collapsed={collapsed}>
-      <SidebarItems>
-        <SidebarItemGroup>
-          {filteredNavItems.map((item) =>
-            item.children ? (
-              <SidebarCollapse
-                key={item.label}
-                icon={item.icon}
-                label={item.label}
-              >
-                {item.children.map((child) => (
-                  <SidebarItem
-                    key={child.label}
-                    href={child.href}
-                    icon={child.icon}
-                  >
-                    {child.label}
-                  </SidebarItem>
-                ))}
-              </SidebarCollapse>
-            ) : (
-              <SidebarItem key={item.label} href={item.href} icon={item.icon}>
-                {item.label}
-              </SidebarItem>
-            ),
-          )}
-        </SidebarItemGroup>
-      </SidebarItems>
+    <Sidebar aria-label="Sidebar with multi-level dropdown example">
+      <div className="flex h-full flex-col justify-between py-2">
+        <div>
+          <SidebarItems>
+            <SidebarItemGroup>
+              {actualUserRole === "admin" && renderAdminMenu()}
+              {actualUserRole === "staff" && renderStaffMenu()}
+              {actualUserRole === "supplier" && renderSupplierMenu()}
+              {!actualUserRole && renderDefaultMenu()}
+            </SidebarItemGroup>
+          </SidebarItems>
+        </div>
+      </div>
     </Sidebar>
   );
 };
+
+export default AppSidebar;

@@ -3,10 +3,7 @@ import React, { useState } from "react";
 import { Button, Card, Checkbox, Label, TextInput } from "flowbite-react";
 import type { FC } from "react";
 import { useNavigate } from "react-router-dom";
-import { zaloguj, DaneLogowania } from "../../api/login_auth_data.api"; // Import funkcji API
-
-// URL API - domyślnie localhost:3001
-const API_URL = "http://localhost:3001";
+import { zaloguj, DaneLogowania } from "@api/login_auth_data.api"; // Import funkcji API
 
 const SignInPage: FC = function () {
   const [email, setEmail] = useState("");
@@ -33,19 +30,19 @@ const SignInPage: FC = function () {
         localStorage.setItem("userRole", data.userRole);
         localStorage.setItem("username", email); // Zapisz email do wyświetlenia w navbarze
 
-        // Przekieruj na podstawie roli
+        // Bezpośrednie przekierowanie z odświeżeniem strony
         switch (data.userRole) {
           case "admin":
-            navigate("/admin");
+            window.location.href = "/admin";
             break;
           case "staff":
-            navigate("/staff");
+            window.location.href = "/staff";
             break;
           case "supplier":
-            navigate("/supplier");
+            window.location.href = "/supplier";
             break;
           default:
-            navigate("/"); // Domyślne przekierowanie
+            window.location.href = "/"; // Domyślne przekierowanie
             break;
         }
       } else {

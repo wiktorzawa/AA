@@ -1,11 +1,16 @@
 import classNames from "classnames";
 import type { FC, PropsWithChildren } from "react";
 import { useState } from "react";
-import { DashboardNavbar } from "../components/navbar/DashboardNavbar";
-import { AppSidebar } from "../components/sidebar/AppSidebar";
-import isBrowser from "../helpers/is-browser";
+import { DashboardNavbar } from "@components/navbar/DashboardNavbar";
+import AppSidebar from "@components/sidebar/AppSidebar";
+import isBrowser from "@/helpers/is-browser";
+import { Outlet } from "react-router-dom";
 
-const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
+interface DashboardLayoutProps extends PropsWithChildren {
+  userRole?: "admin" | "staff" | "supplier";
+}
+
+const DashboardLayout: FC<DashboardLayoutProps> = ({ children, userRole }) => {
   const [isOpen, setOpen] = useState(isBrowser() && window.innerWidth >= 768);
 
   return (
@@ -19,7 +24,7 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
           )}
         >
           <div className="flex h-full flex-col justify-between pt-16">
-            <AppSidebar collapsed={!isOpen} />
+            <AppSidebar userRole={userRole} />
           </div>
         </div>
         <main
@@ -31,7 +36,7 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
             },
           )}
         >
-          {children}
+          {children || <Outlet />}
         </main>
       </div>
     </>

@@ -39,9 +39,9 @@ interface AmazonProductAttributes {
   plus_content: boolean | null;
   upc: string | null;
   video: string[] | null;
-  top_review: Record<string, any> | null;
-  variations: Record<string, any>[] | null;
-  delivery: Record<string, any> | null;
+  top_review: Record<string, unknown> | null;
+  variations: Record<string, unknown>[] | null;
+  delivery: Record<string, unknown> | null;
   features: string[] | null;
   format: string | null;
   buybox_prices: number[] | null;
@@ -463,7 +463,7 @@ AmazonProduct.init(
   },
   {
     sequelize,
-    tableName: "amazon_products",
+    tableName: "prod_amazon_produkty",
     indexes: [
       {
         unique: true,

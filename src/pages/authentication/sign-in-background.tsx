@@ -29,23 +29,24 @@ const SignInBackgroundPage: FC = function () {
       const response = await zaloguj({ username: email, password });
 
       if (response.success && response.userRole) {
-        // Zapisz rolę użytkownika w localStorage
+        // Zapisz rolę użytkownika i email w localStorage
         localStorage.setItem("userRole", response.userRole);
+        localStorage.setItem("username", email); // Zapisz email do wyświetlenia w navbarze
 
-        // Przekierowanie na podstawie roli użytkownika
+        // Bezpośrednie przekierowanie z odświeżeniem strony
         switch (response.userRole) {
           case "admin":
-            navigate("/admin/dashboard");
+            window.location.href = "/admin";
             break;
           case "staff":
-            navigate("/staff/dashboard");
+            window.location.href = "/staff/dashboard";
             break;
           case "supplier":
-            navigate("/supplier/dashboard");
+            window.location.href = "/supplier/dashboard";
             break;
           default:
             // Domyślne przekierowanie, jeśli rola nie jest określona
-            navigate("/");
+            window.location.href = "/";
             break;
         }
       } else {
