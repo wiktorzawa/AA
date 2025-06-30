@@ -15,10 +15,10 @@ export function DeleteConfirmationWithItemsList() {
         size="md"
         show={showModal}
       >
-        <ModalBody className="relative rounded-lg bg-white p-4 shadow dark:bg-gray-800 sm:p-5">
+        <ModalBody className="relative rounded-lg bg-white p-4 shadow sm:p-5 dark:bg-gray-800">
           <button
             onClick={() => setShowModal(false)}
-            className="absolute right-2.5 top-2.5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+            className="absolute top-2.5 right-2.5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
           >
             <svg
               aria-hidden
@@ -42,7 +42,7 @@ export function DeleteConfirmationWithItemsList() {
             You are about to delete the following 3 products, this cannot be
             undone:
           </p>
-          <ul className="mb-4 space-y-2 text-left text-gray-500 dark:text-gray-400 sm:mb-5">
+          <ul className="mb-4 space-y-2 text-left text-gray-500 sm:mb-5 dark:text-gray-400">
             <li className="flex items-center space-x-2">
               <svg
                 aria-hidden
@@ -111,7 +111,7 @@ export function DeleteConfirmationWithItemsList() {
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
-                className="-ml-1 mr-1.5 h-4 w-4"
+                className="mr-1.5 -ml-1 h-4 w-4"
               >
                 <path
                   fillRule="evenodd"

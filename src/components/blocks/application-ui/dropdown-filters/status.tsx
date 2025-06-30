@@ -48,7 +48,7 @@ export function DropdownFilterStatus() {
               id="temporarily-admitted"
               name="temporarily-admitted"
             />
-            <div className="ml-2 h-3 w-3 rounded-full border-2 border-primary-500 bg-primary-500"></div>
+            <div className="border-primary-500 bg-primary-500 ml-2 h-3 w-3 rounded-full border-2"></div>
             <label
               htmlFor="temporarily-admitted"
               className="ml-1.5 flex items-center text-sm font-medium text-gray-900 dark:text-gray-100"

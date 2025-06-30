@@ -17,12 +17,12 @@ export function DeleteConfirmationWithInputField() {
       >
         <ModalBody className="relative rounded-lg bg-white p-0 shadow dark:bg-gray-800">
           <div className="flex items-center justify-between p-4 sm:px-5">
-            <h3 className="text-lg font-semibold leading-none text-gray-900 dark:text-white">
+            <h3 className="text-lg leading-none font-semibold text-gray-900 dark:text-white">
               Are you sure?
             </h3>
             <button
               onClick={() => setShowModal(false)}
-              className="absolute right-2.5 top-2.5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+              className="absolute top-2.5 right-2.5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
             >
               <svg
                 aria-hidden
@@ -40,7 +40,7 @@ export function DeleteConfirmationWithInputField() {
               <span className="sr-only">Close modal</span>
             </button>
           </div>
-          <p className="border-y border-orange-200 bg-orange-100 p-4 text-orange-700 dark:border-gray-600 dark:bg-gray-700 dark:text-orange-300 sm:px-5">
+          <p className="border-y border-orange-200 bg-orange-100 p-4 text-orange-700 sm:px-5 dark:border-gray-600 dark:bg-gray-700 dark:text-orange-300">
             Unexpected bad things can happen if you don’t read this!
           </p>
           <div className="p-4 sm:p-5">
@@ -57,7 +57,7 @@ export function DeleteConfirmationWithInputField() {
               assosiations.
             </p>
             <form>
-              <div className="mb-4 mt-2">
+              <div className="mt-2 mb-4">
                 <Label
                   htmlFor="repository-name-input"
                   className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"

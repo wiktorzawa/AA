@@ -51,7 +51,7 @@ export function CreateFormWithAccordion() {
                         required
                       />
                     </div>
-                    <div className="space-y-4 sm:flex sm:space-x-4 sm:space-y-0">
+                    <div className="space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
                       <div className="w-full">
                         <Label
                           htmlFor="brand"
@@ -82,7 +82,7 @@ export function CreateFormWithAccordion() {
                         />
                       </div>
                     </div>
-                    <div className="space-y-4 sm:flex sm:space-x-4 sm:space-y-0">
+                    <div className="space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
                       <div className="w-full">
                         <Label
                           htmlFor="category"
@@ -112,7 +112,7 @@ export function CreateFormWithAccordion() {
                         </Select>
                       </div>
                     </div>
-                    <div className="space-y-4 sm:flex sm:space-x-4 sm:space-y-0">
+                    <div className="space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
                       <div className="w-full">
                         <Label
                           htmlFor="shipping"
@@ -142,7 +142,7 @@ export function CreateFormWithAccordion() {
                         />
                       </div>
                     </div>
-                    <div className="space-y-4 sm:flex sm:space-x-4 sm:space-y-0">
+                    <div className="space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
                       <div className="w-full">
                         <Label
                           htmlFor="import-fees"
@@ -180,7 +180,7 @@ export function CreateFormWithAccordion() {
                       </Label>
                       <div className="mb-4 w-full rounded-lg border border-gray-200 bg-gray-100 dark:border-gray-600 dark:bg-gray-700">
                         <div className="flex items-center justify-between border-b px-3 py-2 dark:border-gray-600">
-                          <div className="flex flex-wrap items-center divide-gray-200 dark:divide-gray-600 sm:divide-x">
+                          <div className="flex flex-wrap items-center divide-gray-200 sm:divide-x dark:divide-gray-600">
                             <div className="flex items-center space-x-1 sm:pr-4">
                               <button className="cursor-pointer rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white">
                                 <svg
@@ -299,7 +299,7 @@ export function CreateFormWithAccordion() {
                             </div>
                           </div>
                           <Tooltip content="Show full screen">
-                            <button className="cursor-pointer rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white sm:ml-auto">
+                            <button className="cursor-pointer rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 sm:ml-auto dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white">
                               <svg
                                 aria-hidden
                                 className="h-5 w-5"
@@ -369,7 +369,7 @@ export function CreateFormWithAccordion() {
                         type="number"
                       />
                     </div>
-                    <div className="space-y-4 sm:flex sm:space-x-4 sm:space-y-0">
+                    <div className="space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
                       <div className="w-full">
                         <Label
                           htmlFor="length"
@@ -428,7 +428,7 @@ export function CreateFormWithAccordion() {
                           htmlFor="dropzone-file"
                           className="flex h-64 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600"
                         >
-                          <div className="flex flex-col items-center justify-center pb-6 pt-5">
+                          <div className="flex flex-col items-center justify-center pt-5 pb-6">
                             <svg
                               aria-hidden
                               className="mb-3 h-10 w-10 text-gray-400"
@@ -481,7 +481,7 @@ export function CreateFormWithAccordion() {
               <AccordionContent className="px-0">
                 <div className="grid gap-4 md:grid-cols-2 md:gap-6">
                   <div className="space-y-4 sm:space-y-6">
-                    <div className="space-y-4 sm:flex sm:space-x-4 sm:space-y-0">
+                    <div className="space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
                       <div className="w-full">
                         <Label
                           htmlFor="discount"
@@ -588,7 +588,7 @@ export function CreateFormWithAccordion() {
                     >
                       Offer Validity Period
                     </Label>
-                    <div className="w-full items-center space-y-4 sm:flex sm:space-x-4 sm:space-y-0">
+                    <div className="w-full items-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
                       <div className="relative w-full">
                         <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                           <svg

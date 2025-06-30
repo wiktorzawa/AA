@@ -45,19 +45,19 @@ export function AdvancedDropdownFilterKeywords() {
           <div className="flex items-center space-x-3">
             <button
               type="submit"
-              className="flex items-center text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
+              className="text-primary-600 dark:text-primary-500 flex items-center text-sm font-medium hover:underline"
             >
               Save view
             </button>
             <button
               type="reset"
-              className="flex items-center text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
+              className="text-primary-600 dark:text-primary-500 flex items-center text-sm font-medium hover:underline"
             >
               Clear all
             </button>
           </div>
         </div>
-        <div className="pb-2 pt-3">
+        <div className="pt-3 pb-2">
           <Label htmlFor="Checkbox-group-search" className="sr-only">
             Search
           </Label>
@@ -83,7 +83,7 @@ export function AdvancedDropdownFilterKeywords() {
                   colors: {
                     gray: twMerge(
                       theme.textInput.field.input.colors.gray,
-                      "focus:border-primary-500 focus:ring-primary-500 dark:border-gray-500 dark:bg-gray-600 dark:focus:border-primary-500 dark:focus:ring-primary-500",
+                      "focus:border-primary-500 focus:ring-primary-500 dark:focus:border-primary-500 dark:focus:ring-primary-500 dark:border-gray-500 dark:bg-gray-600",
                     ),
                   },
                 },
@@ -206,7 +206,7 @@ export function AdvancedDropdownFilterKeywords() {
                   </li>
                   <a
                     href="#"
-                    className="flex items-center text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
+                    className="text-primary-600 dark:text-primary-500 flex items-center text-sm font-medium hover:underline"
                   >
                     View all
                   </a>

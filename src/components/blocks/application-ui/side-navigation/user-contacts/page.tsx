@@ -37,7 +37,7 @@ export default function SidenavWithUserContacts() {
         <DrawerItems className="h-full">
           <Sidebar
             aria-label="Default side navigation"
-            className="w-full [&>div]:bg-transparent [&>div]:p-0 [&_*]:font-medium"
+            className="w-full [&_*]:font-medium [&>div]:bg-transparent [&>div]:p-0"
           >
             <SidebarItems>
               <SidebarItemGroup>
@@ -50,7 +50,7 @@ export default function SidenavWithUserContacts() {
                     className="mr-3 h-6 sm:h-8"
                     alt="Flowbite Logo"
                   />
-                  <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
+                  <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
                     Flowbite
                   </span>
                 </a>
@@ -82,7 +82,7 @@ export default function SidenavWithUserContacts() {
                 </SidebarCollapse>
               </SidebarItemGroup>
               <SidebarItemGroup>
-                <div className="mb-4 pl-2 text-sm font-medium uppercase text-gray-500 dark:border-gray-700 dark:text-gray-400">
+                <div className="mb-4 pl-2 text-sm font-medium text-gray-500 uppercase dark:border-gray-700 dark:text-gray-400">
                   Active contacts
                 </div>
                 <ul className="space-y-4 pl-2 dark:border-gray-700">
@@ -97,7 +97,7 @@ export default function SidenavWithUserContacts() {
                           src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png"
                           alt="jese avatar"
                         />
-                        <span className="absolute left-4 top-0 h-3 w-3 rounded-full border-2 border-white bg-green-400 dark:border-gray-800"></span>
+                        <span className="absolute top-0 left-4 h-3 w-3 rounded-full border-2 border-white bg-green-400 dark:border-gray-800"></span>
                       </div>
                       Jese Leos
                     </a>
@@ -113,7 +113,7 @@ export default function SidenavWithUserContacts() {
                           src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
                           alt="bonnie avatar"
                         />
-                        <span className="absolute left-4 top-0 h-3 w-3 rounded-full border-2 border-white bg-green-400 dark:border-gray-800"></span>
+                        <span className="absolute top-0 left-4 h-3 w-3 rounded-full border-2 border-white bg-green-400 dark:border-gray-800"></span>
                       </div>
                       Bonnie Green
                     </a>
@@ -129,7 +129,7 @@ export default function SidenavWithUserContacts() {
                           src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/joseph-mcfall.png"
                           alt="Joseph avatar"
                         />
-                        <span className="absolute left-4 top-0 h-3 w-3 rounded-full border-2 border-white bg-red-400 dark:border-gray-800"></span>
+                        <span className="absolute top-0 left-4 h-3 w-3 rounded-full border-2 border-white bg-red-400 dark:border-gray-800"></span>
                       </div>
                       Joseph McFall
                     </a>
@@ -145,7 +145,7 @@ export default function SidenavWithUserContacts() {
                           src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
                           alt="Lana avatar"
                         />
-                        <span className="absolute left-4 top-0 h-3 w-3 rounded-full border-2 border-white bg-red-400 dark:border-gray-800"></span>
+                        <span className="absolute top-0 left-4 h-3 w-3 rounded-full border-2 border-white bg-red-400 dark:border-gray-800"></span>
                       </div>
                       Lana Byrd
                     </a>
@@ -161,7 +161,7 @@ export default function SidenavWithUserContacts() {
                           src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/roberta-casas.png"
                           alt="Leslie avatar"
                         />
-                        <span className="absolute left-4 top-0 h-3 w-3 rounded-full border-2 border-white bg-green-400 dark:border-gray-800"></span>
+                        <span className="absolute top-0 left-4 h-3 w-3 rounded-full border-2 border-white bg-green-400 dark:border-gray-800"></span>
                       </div>
                       Leslie Livingston
                     </a>
@@ -177,7 +177,7 @@ export default function SidenavWithUserContacts() {
                           src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/thomas-lean.png"
                           alt="Thomas avatar"
                         />
-                        <span className="absolute left-4 top-0 h-3 w-3 rounded-full border-2 border-white bg-green-400 dark:border-gray-800"></span>
+                        <span className="absolute top-0 left-4 h-3 w-3 rounded-full border-2 border-white bg-green-400 dark:border-gray-800"></span>
                       </div>
                       Thomas Lean
                     </a>
@@ -193,7 +193,7 @@ export default function SidenavWithUserContacts() {
                           src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/robert-brown.png"
                           alt="Robert avatar"
                         />
-                        <span className="absolute left-4 top-0 h-3 w-3 rounded-full border-2 border-white bg-red-400 dark:border-gray-800"></span>
+                        <span className="absolute top-0 left-4 h-3 w-3 rounded-full border-2 border-white bg-red-400 dark:border-gray-800"></span>
                       </div>
                       Robert Brown
                     </a>
@@ -209,7 +209,7 @@ export default function SidenavWithUserContacts() {
                           src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gouch.png"
                           alt="Micheal avatar"
                         />
-                        <span className="absolute left-4 top-0 h-3 w-3 rounded-full border-2 border-white bg-green-400 dark:border-gray-800"></span>
+                        <span className="absolute top-0 left-4 h-3 w-3 rounded-full border-2 border-white bg-green-400 dark:border-gray-800"></span>
                       </div>
                       Micheal Gough
                     </a>
@@ -225,7 +225,7 @@ export default function SidenavWithUserContacts() {
                           src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/roberta-casas.png"
                           alt="Roberta avatar"
                         />
-                        <span className="absolute left-4 top-0 h-3 w-3 rounded-full border-2 border-white bg-green-400 dark:border-gray-800"></span>
+                        <span className="absolute top-0 left-4 h-3 w-3 rounded-full border-2 border-white bg-green-400 dark:border-gray-800"></span>
                       </div>
                       Roberta Casas
                     </a>
@@ -241,7 +241,7 @@ export default function SidenavWithUserContacts() {
                           src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/neil-sims.png"
                           alt="Neil avatar"
                         />
-                        <span className="absolute left-4 top-0 h-3 w-3 rounded-full border-2 border-white bg-green-400 dark:border-gray-800"></span>
+                        <span className="absolute top-0 left-4 h-3 w-3 rounded-full border-2 border-white bg-green-400 dark:border-gray-800"></span>
                       </div>
                       Neil Sims
                     </a>
@@ -249,7 +249,7 @@ export default function SidenavWithUserContacts() {
                 </ul>
               </SidebarItemGroup>
             </SidebarItems>
-            <div className="absolute bottom-0 left-0 z-20 hidden w-full justify-center space-x-4 bg-white p-4 dark:bg-gray-800 lg:flex">
+            <div className="absolute bottom-0 left-0 z-20 hidden w-full justify-center space-x-4 bg-white p-4 lg:flex dark:bg-gray-800">
               <a
                 href="#"
                 className="inline-flex cursor-pointer items-center rounded p-2 text-sm font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"

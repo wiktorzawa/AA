@@ -53,7 +53,7 @@ export default function SidenavWithSearch() {
         <DrawerItems className="h-full">
           <Sidebar
             aria-label="Default side navigation"
-            className="w-full [&>div]:bg-transparent [&>div]:p-0 [&_*]:font-medium"
+            className="w-full [&_*]:font-medium [&>div]:bg-transparent [&>div]:p-0"
           >
             <div className="flex h-full flex-col justify-between py-2">
               <SidebarItems>
@@ -67,7 +67,7 @@ export default function SidenavWithSearch() {
                       className="mr-3 h-6 sm:h-8"
                       alt="Flowbite Logo"
                     />
-                    <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
+                    <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
                       Flowbite
                     </span>
                   </a>
@@ -341,7 +341,7 @@ export default function SidenavWithSearch() {
               <div className="font-medium text-gray-900 dark:text-white">
                 70 of 150 GB
               </div>
-              <div className="mb-4 mt-2 h-2.5 w-full rounded-full bg-gray-200 dark:bg-gray-700">
+              <div className="mt-2 mb-4 h-2.5 w-full rounded-full bg-gray-200 dark:bg-gray-700">
                 <Progress color="green" progress={50} />
               </div>
               <Button color="gray" className="w-full">

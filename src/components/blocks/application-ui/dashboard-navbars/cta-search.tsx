@@ -24,7 +24,7 @@ export function TripleDashboardNavbarWithCTAButtonAndSearchInput() {
           },
         }}
       >
-        <div className="order-1 border-gray-200 bg-white px-4 py-2.5 dark:bg-gray-900 lg:px-6">
+        <div className="order-1 border-gray-200 bg-white px-4 py-2.5 lg:px-6 dark:bg-gray-900">
           <div className="flex items-center justify-between">
             <div className="flex items-center justify-start">
               <a href="https://flowbite.com" className="mr-6 flex">
@@ -33,7 +33,7 @@ export function TripleDashboardNavbarWithCTAButtonAndSearchInput() {
                   className="mr-3 h-8"
                   alt=""
                 />
-                <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
+                <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
                   Flowbite
                 </span>
               </a>
@@ -49,7 +49,7 @@ export function TripleDashboardNavbarWithCTAButtonAndSearchInput() {
                         alt=""
                       />
                       <div className="text-left">
-                        <div className="mb-0.5 font-semibold leading-none text-gray-900 dark:text-white">
+                        <div className="mb-0.5 leading-none font-semibold text-gray-900 dark:text-white">
                           Bonnie <span className="hidden md:inline">Green</span>
                         </div>
                       </div>
@@ -82,7 +82,7 @@ export function TripleDashboardNavbarWithCTAButtonAndSearchInput() {
                     alt=""
                   />
                   <div className="text-left">
-                    <div className="mb-0.5 font-semibold leading-none text-gray-900 dark:text-white">
+                    <div className="mb-0.5 leading-none font-semibold text-gray-900 dark:text-white">
                       Michael Gough
                     </div>
                     <div className="text-sm text-gray-500 dark:text-gray-400">
@@ -98,7 +98,7 @@ export function TripleDashboardNavbarWithCTAButtonAndSearchInput() {
                     alt=""
                   />
                   <div className="text-left">
-                    <div className="mb-0.5 font-semibold leading-none text-gray-900 dark:text-white">
+                    <div className="mb-0.5 leading-none font-semibold text-gray-900 dark:text-white">
                       Roberta Casas
                     </div>
                     <div className="text-sm text-gray-500 dark:text-gray-400">
@@ -109,11 +109,11 @@ export function TripleDashboardNavbarWithCTAButtonAndSearchInput() {
               </Dropdown>
             </div>
             <div className="flex items-center justify-between lg:order-2">
-              <ul className="mr-4 mt-0 hidden w-full flex-col text-sm font-medium text-gray-900 dark:text-white md:flex md:flex-row">
+              <ul className="mt-0 mr-4 hidden w-full flex-col text-sm font-medium text-gray-900 md:flex md:flex-row dark:text-white">
                 <li>
                   <a
                     href="#"
-                    className="px-4 py-3 hover:text-primary-600 dark:hover:text-primary-500"
+                    className="hover:text-primary-600 dark:hover:text-primary-500 px-4 py-3"
                     aria-current="page"
                   >
                     Changelog
@@ -122,7 +122,7 @@ export function TripleDashboardNavbarWithCTAButtonAndSearchInput() {
                 <li>
                   <a
                     href="#"
-                    className="px-4 py-3 hover:text-primary-600 dark:hover:text-primary-500"
+                    className="hover:text-primary-600 dark:hover:text-primary-500 px-4 py-3"
                     aria-current="page"
                   >
                     Support
@@ -131,7 +131,7 @@ export function TripleDashboardNavbarWithCTAButtonAndSearchInput() {
                 <li>
                   <a
                     href="#"
-                    className="px-4 py-3 hover:text-primary-600 dark:hover:text-primary-500"
+                    className="hover:text-primary-600 dark:hover:text-primary-500 px-4 py-3"
                     aria-current="page"
                   >
                     Docs
@@ -146,77 +146,77 @@ export function TripleDashboardNavbarWithCTAButtonAndSearchInput() {
           </div>
         </div>
         <NavbarCollapse className="order-3 md:order-2 md:px-6">
-          <div className="flex w-full flex-col items-center border-b border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-gray-900 lg:flex-row [&_li]:w-full lg:[&_li]:w-auto">
+          <div className="flex w-full flex-col items-center border-b border-gray-200 bg-white shadow-sm lg:flex-row dark:border-gray-800 dark:bg-gray-900 [&_li]:w-full lg:[&_li]:w-auto">
             <NavbarLink
               aria-current="page"
               href="#"
-              className="block border-b p-0 dark:border-gray-700 lg:inline lg:border-b-0"
+              className="block border-b p-0 lg:inline lg:border-b-0 dark:border-gray-700"
             >
-              <span className="block border-b-2 border-primary-600 px-4 py-3 text-sm font-medium text-primary-600 hover:text-primary-600 dark:border-primary-500 dark:text-primary-500">
+              <span className="border-primary-600 text-primary-600 hover:text-primary-600 dark:border-primary-500 dark:text-primary-500 block border-b-2 px-4 py-3 text-sm font-medium">
                 Overview
               </span>
             </NavbarLink>
             <NavbarLink
               href="#"
-              className="block border-b p-0 dark:border-gray-700 md:inline md:border-b-0"
+              className="block border-b p-0 md:inline md:border-b-0 dark:border-gray-700"
             >
-              <span className="block border-b-2 border-transparent px-4 py-3 text-sm font-medium text-gray-500 hover:border-primary-600 hover:text-primary-600 dark:text-gray-400 dark:hover:border-primary-500 dark:hover:text-primary-500">
+              <span className="hover:border-primary-600 hover:text-primary-600 dark:hover:border-primary-500 dark:hover:text-primary-500 block border-b-2 border-transparent px-4 py-3 text-sm font-medium text-gray-500 dark:text-gray-400">
                 Company
               </span>
             </NavbarLink>
             <NavbarLink
               href="#"
-              className="block border-b p-0 dark:border-gray-700 md:inline md:border-b-0"
+              className="block border-b p-0 md:inline md:border-b-0 dark:border-gray-700"
             >
-              <span className="block border-b-2 border-transparent px-4 py-3 text-sm font-medium text-gray-500 hover:border-primary-600 hover:text-primary-600 dark:text-gray-400 dark:hover:border-primary-500 dark:hover:text-primary-500">
+              <span className="hover:border-primary-600 hover:text-primary-600 dark:hover:border-primary-500 dark:hover:text-primary-500 block border-b-2 border-transparent px-4 py-3 text-sm font-medium text-gray-500 dark:text-gray-400">
                 Team
               </span>
             </NavbarLink>
             <NavbarLink
               href="#"
-              className="block border-b p-0 dark:border-gray-700 md:inline md:border-b-0"
+              className="block border-b p-0 md:inline md:border-b-0 dark:border-gray-700"
             >
-              <span className="block border-b-2 border-transparent px-4 py-3 text-sm font-medium text-gray-500 hover:border-primary-600 hover:text-primary-600 dark:text-gray-400 dark:hover:border-primary-500 dark:hover:text-primary-500">
+              <span className="hover:border-primary-600 hover:text-primary-600 dark:hover:border-primary-500 dark:hover:text-primary-500 block border-b-2 border-transparent px-4 py-3 text-sm font-medium text-gray-500 dark:text-gray-400">
                 Features
               </span>
             </NavbarLink>
             <NavbarLink
               href="#"
-              className="block border-b p-0 dark:border-gray-700 md:inline md:border-b-0"
+              className="block border-b p-0 md:inline md:border-b-0 dark:border-gray-700"
             >
-              <span className="block border-b-2 border-transparent px-4 py-3 text-sm font-medium text-gray-500 hover:border-primary-600 hover:text-primary-600 dark:text-gray-400 dark:hover:border-primary-500 dark:hover:text-primary-500">
+              <span className="hover:border-primary-600 hover:text-primary-600 dark:hover:border-primary-500 dark:hover:text-primary-500 block border-b-2 border-transparent px-4 py-3 text-sm font-medium text-gray-500 dark:text-gray-400">
                 Marketplace
               </span>
             </NavbarLink>
             <NavbarLink
               href="#"
-              className="block border-b p-0 dark:border-gray-700 md:inline md:border-b-0"
+              className="block border-b p-0 md:inline md:border-b-0 dark:border-gray-700"
             >
-              <span className="block border-b-2 border-transparent px-4 py-3 text-sm font-medium text-gray-500 hover:border-primary-600 hover:text-primary-600 dark:text-gray-400 dark:hover:border-primary-500 dark:hover:text-primary-500">
+              <span className="hover:border-primary-600 hover:text-primary-600 dark:hover:border-primary-500 dark:hover:text-primary-500 block border-b-2 border-transparent px-4 py-3 text-sm font-medium text-gray-500 dark:text-gray-400">
                 Resources
               </span>
             </NavbarLink>
             <NavbarLink
               href="#"
-              className="block border-b p-0 dark:border-gray-700 md:inline md:border-b-0"
+              className="block border-b p-0 md:inline md:border-b-0 dark:border-gray-700"
             >
-              <span className="block border-b-2 border-transparent px-4 py-3 text-sm font-medium text-gray-500 hover:border-primary-600 hover:text-primary-600 dark:text-gray-400 dark:hover:border-primary-500 dark:hover:text-primary-500">
+              <span className="hover:border-primary-600 hover:text-primary-600 dark:hover:border-primary-500 dark:hover:text-primary-500 block border-b-2 border-transparent px-4 py-3 text-sm font-medium text-gray-500 dark:text-gray-400">
                 Forum
               </span>
             </NavbarLink>
             <NavbarLink
               href="#"
-              className="block border-b p-0 dark:border-gray-700 md:inline md:border-b-0"
+              className="block border-b p-0 md:inline md:border-b-0 dark:border-gray-700"
             >
-              <span className="block border-b-2 border-transparent px-4 py-3 text-sm font-medium text-gray-500 hover:border-primary-600 hover:text-primary-600 dark:text-gray-400 dark:hover:border-primary-500 dark:hover:text-primary-500">
+              <span className="hover:border-primary-600 hover:text-primary-600 dark:hover:border-primary-500 dark:hover:text-primary-500 block border-b-2 border-transparent px-4 py-3 text-sm font-medium text-gray-500 dark:text-gray-400">
                 Support
               </span>
             </NavbarLink>
           </div>
         </NavbarCollapse>
-        <nav className="order-2 border-b border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-800 md:order-3">
+        <nav className="order-2 border-b border-gray-200 bg-gray-50 md:order-3 dark:border-gray-700 dark:bg-gray-800">
           <div className="flex flex-col items-center px-4 py-3 md:flex-row lg:px-6">
-            <form className="relative mb-4 w-full md:mb-0 md:mr-4 md:max-w-sm">
+            <form className="relative mb-4 w-full md:mr-4 md:mb-0 md:max-w-sm">
               <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                 <svg
                   className="h-4 w-4 text-gray-500 dark:text-gray-400"

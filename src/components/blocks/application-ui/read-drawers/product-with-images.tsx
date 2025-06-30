@@ -1,6 +1,13 @@
 "use client";
 
-import { Badge, Button, Drawer, DrawerHeader, DrawerItems, theme } from "flowbite-react";
+import {
+  Badge,
+  Button,
+  Drawer,
+  DrawerHeader,
+  DrawerItems,
+  theme,
+} from "flowbite-react";
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 
@@ -71,10 +78,10 @@ export function ReadProductDrawerWithImages() {
             </div>
           </div>
           <dl className="sm:mb-5">
-            <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+            <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
               Details
             </dt>
-            <dd className="mb-4 font-light text-gray-500 dark:text-gray-400 sm:mb-5">
+            <dd className="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">
               Standard glass ,3.8GHz 8-core 10th-generation Intel Core i7
               processor, Turbo Boost up to 5.0GHz, 16GB 2666MHz DDR4 memory,
               Radeon Pro 5500 XT with 8GB of GDDR6 memory, 256GB SSD storage,
@@ -82,8 +89,8 @@ export function ReadProductDrawerWithImages() {
             </dd>
           </dl>
           <dl className="mb-4 grid grid-cols-2 gap-4">
-            <div className="col-span-2 rounded-lg border border-gray-200 bg-gray-100 p-3 dark:border-gray-600 dark:bg-gray-700 sm:col-span-1">
-              <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+            <div className="col-span-2 rounded-lg border border-gray-200 bg-gray-100 p-3 sm:col-span-1 dark:border-gray-600 dark:bg-gray-700">
+              <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
                 Shipping
               </dt>
               <dd className="flex items-center text-gray-500 dark:text-gray-400">
@@ -103,21 +110,21 @@ export function ReadProductDrawerWithImages() {
                 United States, Europe
               </dd>
             </div>
-            <div className="col-span-2 rounded-lg border border-gray-200 bg-gray-100 p-3 dark:border-gray-600 dark:bg-gray-700 sm:col-span-1">
-              <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+            <div className="col-span-2 rounded-lg border border-gray-200 bg-gray-100 p-3 sm:col-span-1 dark:border-gray-600 dark:bg-gray-700">
+              <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
                 Colors
               </dt>
               <dd className="flex items-center space-x-2 font-light text-gray-500 dark:text-gray-400">
                 <div className="h-6 w-6 shrink-0 rounded-full bg-purple-600"></div>
                 <div className="h-6 w-6 shrink-0 rounded-full bg-indigo-400"></div>
-                <div className="h-6 w-6 shrink-0 rounded-full bg-primary-600"></div>
+                <div className="bg-primary-600 h-6 w-6 shrink-0 rounded-full"></div>
                 <div className="h-6 w-6 shrink-0 rounded-full bg-pink-400"></div>
                 <div className="h-6 w-6 shrink-0 rounded-full bg-teal-300"></div>
                 <div className="h-6 w-6 shrink-0 rounded-full bg-green-300"></div>
               </dd>
             </div>
             <div className="rounded-lg border border-gray-200 bg-gray-100 p-3 dark:border-gray-600 dark:bg-gray-700">
-              <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+              <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
                 Product State
               </dt>
               <dd>
@@ -136,25 +143,25 @@ export function ReadProductDrawerWithImages() {
               </dd>
             </div>
             <div className="rounded-lg border border-gray-200 bg-gray-100 p-3 dark:border-gray-600 dark:bg-gray-700">
-              <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+              <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
                 Sold by
               </dt>
               <dd className="text-gray-500 dark:text-gray-400">Flowbite</dd>
             </div>
             <div className="rounded-lg border border-gray-200 bg-gray-100 p-3 dark:border-gray-600 dark:bg-gray-700">
-              <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+              <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
                 Ships from
               </dt>
               <dd className="text-gray-500 dark:text-gray-400">Flowbite</dd>
             </div>
             <div className="rounded-lg border border-gray-200 bg-gray-100 p-3 dark:border-gray-600 dark:bg-gray-700">
-              <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+              <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
                 Brand
               </dt>
               <dd className="text-gray-500 dark:text-gray-400">Apple</dd>
             </div>
             <div className="rounded-lg border border-gray-200 bg-gray-100 p-3 dark:border-gray-600 dark:bg-gray-700">
-              <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+              <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
                 Dimensions (cm)
               </dt>
               <dd className="text-gray-500 dark:text-gray-400">
@@ -162,7 +169,7 @@ export function ReadProductDrawerWithImages() {
               </dd>
             </div>
             <div className="rounded-lg border border-gray-200 bg-gray-100 p-3 dark:border-gray-600 dark:bg-gray-700">
-              <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+              <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
                 Item weight
               </dt>
               <dd className="text-gray-500 dark:text-gray-400">12kg</dd>
@@ -172,7 +179,7 @@ export function ReadProductDrawerWithImages() {
             <Button className="inline-flex w-full">
               <svg
                 aria-hidden
-                className="-ml-1 mr-1 h-5 w-5"
+                className="mr-1 -ml-1 h-5 w-5"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
@@ -196,7 +203,7 @@ export function ReadProductDrawerWithImages() {
             <Button color="failure" className="inline-flex w-full">
               <svg
                 aria-hidden
-                className="-ml-1 mr-1.5 h-5 w-5"
+                className="mr-1.5 -ml-1 h-5 w-5"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"

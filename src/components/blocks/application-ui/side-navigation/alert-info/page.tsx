@@ -58,7 +58,7 @@ export default function SidenavWithAlertInfo() {
                     className="mr-3 h-6 sm:h-8"
                     alt="Flowbite"
                   />
-                  <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
+                  <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
                     Flowbite
                   </span>
                 </Link>
@@ -102,13 +102,13 @@ export default function SidenavWithAlertInfo() {
                 <Alert
                   additionalContent={
                     <>
-                      <div className="mb-3 mt-2 text-sm font-light text-primary-700 dark:text-primary-300">
+                      <div className="text-primary-700 dark:text-primary-300 mt-2 mb-3 text-sm font-light">
                         Preview the new Flowbite v2.0! You can turn the new
                         features off for a limited time in your settings page.
                       </div>
                       <Link
                         href="#"
-                        className="text-sm font-medium text-primary-700 underline hover:no-underline dark:text-primary-300"
+                        className="text-primary-700 dark:text-primary-300 text-sm font-medium underline hover:no-underline"
                       >
                         Turn new features off
                       </Link>

@@ -27,7 +27,7 @@ export function TripleDashbardNavbarWithProjectSwitchAndSubnav() {
           },
         }}
       >
-        <div className="border-gray-200 bg-white px-4 py-2.5 dark:bg-gray-900 lg:px-6">
+        <div className="border-gray-200 bg-white px-4 py-2.5 lg:px-6 dark:bg-gray-900">
           <div className="flex items-center justify-between">
             <div className="flex items-center justify-start">
               <a href="https://flowbite.com" className="mr-6 flex">
@@ -36,7 +36,7 @@ export function TripleDashbardNavbarWithProjectSwitchAndSubnav() {
                   className="mr-3 h-8"
                   alt=""
                 />
-                <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
+                <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
                   Flowbite
                 </span>
               </a>
@@ -130,7 +130,7 @@ export function TripleDashbardNavbarWithProjectSwitchAndSubnav() {
                         src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
                         alt=""
                       />
-                      <div className="absolute -mt-5 ml-6 flex h-5 w-5 items-center justify-center rounded-full border border-white bg-primary-700 dark:border-gray-700">
+                      <div className="bg-primary-700 absolute -mt-5 ml-6 flex h-5 w-5 items-center justify-center rounded-full border border-white dark:border-gray-700">
                         <svg
                           className="h-2 w-2 text-white"
                           aria-hidden
@@ -151,7 +151,7 @@ export function TripleDashbardNavbarWithProjectSwitchAndSubnav() {
                         </span>
                         : "Hey, what's up? All set for the presentation?"
                       </div>
-                      <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                      <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                         a few moments ago
                       </div>
                     </div>
@@ -189,7 +189,7 @@ export function TripleDashbardNavbarWithProjectSwitchAndSubnav() {
                         </span>
                         &nbsp;started following you.
                       </div>
-                      <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                      <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                         10 minutes ago
                       </div>
                     </div>
@@ -227,7 +227,7 @@ export function TripleDashbardNavbarWithProjectSwitchAndSubnav() {
                         </span>
                         &nbsp;love your story. See it and view more stories.
                       </div>
-                      <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                      <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                         44 minutes ago
                       </div>
                     </div>
@@ -260,12 +260,12 @@ export function TripleDashbardNavbarWithProjectSwitchAndSubnav() {
                           Leslie Livingston
                         </span>
                         &nbsp;mentioned you in a comment:&nbsp;
-                        <span className="font-medium text-primary-700 dark:text-primary-500">
+                        <span className="text-primary-700 dark:text-primary-500 font-medium">
                           @bonnie.green
                         </span>
                         &nbsp;what do you say?
                       </div>
-                      <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                      <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                         1 hour ago
                       </div>
                     </div>
@@ -300,7 +300,7 @@ export function TripleDashbardNavbarWithProjectSwitchAndSubnav() {
                         &nbsp;posted a new video: Glassmorphism - learn how to
                         implement the new design trend.
                       </div>
-                      <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                      <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                         3 hours ago
                       </div>
                     </div>
@@ -310,7 +310,7 @@ export function TripleDashbardNavbarWithProjectSwitchAndSubnav() {
                   href="#"
                   className="block border-t border-gray-200 bg-gray-50 py-2 text-center text-base font-medium text-gray-900 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:hover:underline"
                 >
-                  <div className="inline-flex items-center ">
+                  <div className="inline-flex items-center">
                     <svg
                       aria-hidden
                       className="mr-2 h-5 w-5"
@@ -329,7 +329,7 @@ export function TripleDashbardNavbarWithProjectSwitchAndSubnav() {
                   </div>
                 </a>
               </Dropdown>
-              <span className="mx-2 hidden h-5 w-px bg-gray-200 dark:bg-gray-600 lg:inline" />
+              <span className="mx-2 hidden h-5 w-px bg-gray-200 lg:inline dark:bg-gray-600" />
               <Dropdown
                 inline
                 label={
@@ -531,7 +531,7 @@ export function TripleDashbardNavbarWithProjectSwitchAndSubnav() {
                   </a>
                 </div>
               </Dropdown>
-              <span className="mx-2 hidden h-5 w-px bg-gray-200 dark:bg-gray-600 lg:inline" />
+              <span className="mx-2 hidden h-5 w-px bg-gray-200 lg:inline dark:bg-gray-600" />
               <Dropdown
                 inline
                 label={
@@ -602,7 +602,7 @@ export function TripleDashbardNavbarWithProjectSwitchAndSubnav() {
                   <div className="flex w-full items-center justify-between">
                     <span className="flex items-center">
                       <svg
-                        className="mr-2 h-4 w-4 text-primary-600 dark:text-primary-500"
+                        className="text-primary-600 dark:text-primary-500 mr-2 h-4 w-4"
                         aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="currentColor"
@@ -653,7 +653,7 @@ export function TripleDashbardNavbarWithProjectSwitchAndSubnav() {
                         alt=""
                       />
                       <div className="text-left">
-                        <div className="text-sm font-semibold leading-none text-gray-900 dark:text-white">
+                        <div className="text-sm leading-none font-semibold text-gray-900 dark:text-white">
                           Personal
                         </div>
                       </div>
@@ -679,7 +679,7 @@ export function TripleDashbardNavbarWithProjectSwitchAndSubnav() {
                   arrowIcon: "hidden",
                   inlineWrapper: twMerge(
                     theme.dropdown.inlineWrapper,
-                    "rounded-lg p-2 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700",
+                    "rounded-lg p-2 hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 focus:outline-none dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700",
                   ),
                 }}
               >
@@ -688,7 +688,7 @@ export function TripleDashbardNavbarWithProjectSwitchAndSubnav() {
                   className="flex items-center rounded px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-600"
                 >
                   <div className="text-left">
-                    <div className="mb-0.5 text-sm font-medium leading-none text-gray-900 dark:text-white">
+                    <div className="mb-0.5 text-sm leading-none font-medium text-gray-900 dark:text-white">
                       Company
                     </div>
                     <div className="text-xs text-gray-500 dark:text-gray-400">
@@ -701,7 +701,7 @@ export function TripleDashbardNavbarWithProjectSwitchAndSubnav() {
                   className="flex items-center rounded px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-600"
                 >
                   <div className="text-left">
-                    <div className="mb-0.5 text-sm font-medium leading-none text-gray-900 dark:text-white">
+                    <div className="mb-0.5 text-sm leading-none font-medium text-gray-900 dark:text-white">
                       Personal
                     </div>
                     <div className="text-xs text-gray-500 dark:text-gray-400">
@@ -732,7 +732,7 @@ export function TripleDashbardNavbarWithProjectSwitchAndSubnav() {
                   arrowIcon: "hidden",
                   inlineWrapper: twMerge(
                     theme.dropdown.inlineWrapper,
-                    "rounded-lg p-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700",
+                    "rounded-lg p-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus:ring-4 focus:ring-gray-200 focus:outline-none dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700",
                   ),
                 }}
               >
@@ -907,69 +907,69 @@ export function TripleDashbardNavbarWithProjectSwitchAndSubnav() {
           </div>
         </nav>
         <NavbarCollapse>
-          <div className="flex w-full flex-col items-center border-b border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-gray-900 lg:flex-row [&_li]:w-full lg:[&_li]:w-auto">
+          <div className="flex w-full flex-col items-center border-b border-gray-200 bg-white shadow-sm lg:flex-row dark:border-gray-800 dark:bg-gray-900 [&_li]:w-full lg:[&_li]:w-auto">
             <NavbarLink
               aria-current="page"
               href="#"
-              className="block border-b p-0 dark:border-gray-700 lg:inline lg:border-b-0"
+              className="block border-b p-0 lg:inline lg:border-b-0 dark:border-gray-700"
             >
-              <span className="block border-b-2 border-primary-600 px-4 py-3 text-sm font-medium text-primary-600 hover:text-primary-600 dark:border-primary-500 dark:text-primary-500">
+              <span className="border-primary-600 text-primary-600 hover:text-primary-600 dark:border-primary-500 dark:text-primary-500 block border-b-2 px-4 py-3 text-sm font-medium">
                 Home
               </span>
             </NavbarLink>
             <NavbarLink
               href="#"
-              className="block border-b p-0 dark:border-gray-700 md:inline md:border-b-0"
+              className="block border-b p-0 md:inline md:border-b-0 dark:border-gray-700"
             >
-              <span className="block border-b-2 border-transparent px-4 py-3 text-sm font-medium text-gray-500 hover:border-primary-600 hover:text-primary-600 dark:text-gray-400 dark:hover:border-primary-500 dark:hover:text-primary-500">
+              <span className="hover:border-primary-600 hover:text-primary-600 dark:hover:border-primary-500 dark:hover:text-primary-500 block border-b-2 border-transparent px-4 py-3 text-sm font-medium text-gray-500 dark:text-gray-400">
                 Company
               </span>
             </NavbarLink>
             <NavbarLink
               href="#"
-              className="block border-b p-0 dark:border-gray-700 md:inline md:border-b-0"
+              className="block border-b p-0 md:inline md:border-b-0 dark:border-gray-700"
             >
-              <span className="block border-b-2 border-transparent px-4 py-3 text-sm font-medium text-gray-500 hover:border-primary-600 hover:text-primary-600 dark:text-gray-400 dark:hover:border-primary-500 dark:hover:text-primary-500">
+              <span className="hover:border-primary-600 hover:text-primary-600 dark:hover:border-primary-500 dark:hover:text-primary-500 block border-b-2 border-transparent px-4 py-3 text-sm font-medium text-gray-500 dark:text-gray-400">
                 Team
               </span>
             </NavbarLink>
             <NavbarLink
               href="#"
-              className="block border-b p-0 dark:border-gray-700 md:inline md:border-b-0"
+              className="block border-b p-0 md:inline md:border-b-0 dark:border-gray-700"
             >
-              <span className="block border-b-2 border-transparent px-4 py-3 text-sm font-medium text-gray-500 hover:border-primary-600 hover:text-primary-600 dark:text-gray-400 dark:hover:border-primary-500 dark:hover:text-primary-500">
+              <span className="hover:border-primary-600 hover:text-primary-600 dark:hover:border-primary-500 dark:hover:text-primary-500 block border-b-2 border-transparent px-4 py-3 text-sm font-medium text-gray-500 dark:text-gray-400">
                 Features
               </span>
             </NavbarLink>
             <NavbarLink
               href="#"
-              className="block border-b p-0 dark:border-gray-700 md:inline md:border-b-0"
+              className="block border-b p-0 md:inline md:border-b-0 dark:border-gray-700"
             >
-              <span className="block border-b-2 border-transparent px-4 py-3 text-sm font-medium text-gray-500 hover:border-primary-600 hover:text-primary-600 dark:text-gray-400 dark:hover:border-primary-500 dark:hover:text-primary-500">
+              <span className="hover:border-primary-600 hover:text-primary-600 dark:hover:border-primary-500 dark:hover:text-primary-500 block border-b-2 border-transparent px-4 py-3 text-sm font-medium text-gray-500 dark:text-gray-400">
                 Marketplace
               </span>
             </NavbarLink>
             <NavbarLink
               href="#"
-              className="block border-b p-0 dark:border-gray-700 md:inline md:border-b-0"
+              className="block border-b p-0 md:inline md:border-b-0 dark:border-gray-700"
             >
-              <span className="block border-b-2 border-transparent px-4 py-3 text-sm font-medium text-gray-500 hover:border-primary-600 hover:text-primary-600 dark:text-gray-400 dark:hover:border-primary-500 dark:hover:text-primary-500">
+              <span className="hover:border-primary-600 hover:text-primary-600 dark:hover:border-primary-500 dark:hover:text-primary-500 block border-b-2 border-transparent px-4 py-3 text-sm font-medium text-gray-500 dark:text-gray-400">
                 Resources
               </span>
             </NavbarLink>
             <NavbarLink
               href="#"
-              className="block border-b p-0 dark:border-gray-700 md:inline md:border-b-0"
+              className="block border-b p-0 md:inline md:border-b-0 dark:border-gray-700"
             >
-              <span className="block border-b-2 border-transparent px-4 py-3 text-sm font-medium text-gray-500 hover:border-primary-600 hover:text-primary-600 dark:text-gray-400 dark:hover:border-primary-500 dark:hover:text-primary-500">
+              <span className="hover:border-primary-600 hover:text-primary-600 dark:hover:border-primary-500 dark:hover:text-primary-500 block border-b-2 border-transparent px-4 py-3 text-sm font-medium text-gray-500 dark:text-gray-400">
                 Forum
               </span>
             </NavbarLink>
             <NavbarLink
               href="#"
-              className="block border-b p-0 dark:border-gray-700 md:inline md:border-b-0"
+              className="block border-b p-0 md:inline md:border-b-0 dark:border-gray-700"
             >
-              <span className="block border-b-2 border-transparent px-4 py-3 text-sm font-medium text-gray-500 hover:border-primary-600 hover:text-primary-600 dark:text-gray-400 dark:hover:border-primary-500 dark:hover:text-primary-500">
+              <span className="hover:border-primary-600 hover:text-primary-600 dark:hover:border-primary-500 dark:hover:text-primary-500 block border-b-2 border-transparent px-4 py-3 text-sm font-medium text-gray-500 dark:text-gray-400">
                 Support
               </span>
             </NavbarLink>

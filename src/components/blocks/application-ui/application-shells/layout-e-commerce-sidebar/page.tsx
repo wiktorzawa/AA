@@ -67,7 +67,7 @@ export default function ShellLayoutForEcommerceWithSidebar() {
                   className="mr-3 h-8"
                   alt=""
                 />
-                <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
+                <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
                   Flowbite
                 </span>
               </a>
@@ -300,12 +300,12 @@ export default function ShellLayoutForEcommerceWithSidebar() {
               </div>
               <button
                 onClick={() => setSidebarOpen(true)}
-                className="cursor-pointer rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:bg-gray-700 dark:focus:ring-gray-700 lg:hidden"
+                className="cursor-pointer rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 lg:hidden dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:bg-gray-700 dark:focus:ring-gray-700"
               >
                 <span className="sr-only">Search</span>
                 <HiSearch className="h-6 w-6" />
               </button>
-              <div className="mx-3 hidden h-5 w-px bg-gray-200 dark:bg-gray-600 lg:inline" />
+              <div className="mx-3 hidden h-5 w-px bg-gray-200 lg:inline dark:bg-gray-600" />
               <Dropdown
                 className="rounded-xl"
                 arrowIcon={false}
@@ -335,7 +335,7 @@ export default function ShellLayoutForEcommerceWithSidebar() {
                           width={44}
                           className="rounded-full"
                         />
-                        <div className="absolute -mt-5 ml-6 flex h-5 w-5 items-center justify-center rounded-full border border-white bg-primary-700 dark:border-gray-700">
+                        <div className="bg-primary-700 absolute -mt-5 ml-6 flex h-5 w-5 items-center justify-center rounded-full border border-white dark:border-gray-700">
                           <svg
                             className="h-3 w-3 text-white"
                             fill="currentColor"
@@ -356,7 +356,7 @@ export default function ShellLayoutForEcommerceWithSidebar() {
                           : &quot;Hey, what&apos;s up? All set for the
                           presentation?&quot;
                         </div>
-                        <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                        <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                           a few moments ago
                         </div>
                       </div>
@@ -395,7 +395,7 @@ export default function ShellLayoutForEcommerceWithSidebar() {
                           </span>
                           &nbsp;started following you.
                         </div>
-                        <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                        <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                           10 minutes ago
                         </div>
                       </div>
@@ -438,7 +438,7 @@ export default function ShellLayoutForEcommerceWithSidebar() {
                           </span>
                           &nbsp;love your story. See it and view more stories.
                         </div>
-                        <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                        <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                           44 minutes ago
                         </div>
                       </div>
@@ -476,12 +476,12 @@ export default function ShellLayoutForEcommerceWithSidebar() {
                             Leslie Livingston
                           </span>
                           &nbsp;mentioned you in a comment:&nbsp;
-                          <span className="font-medium text-primary-700 dark:text-primary-500">
+                          <span className="text-primary-700 dark:text-primary-500 font-medium">
                             @bonnie.green
                           </span>
                           &nbsp;what do you say?
                         </div>
-                        <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                        <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                           1 hour ago
                         </div>
                       </div>
@@ -517,7 +517,7 @@ export default function ShellLayoutForEcommerceWithSidebar() {
                           &nbsp;posted a new video: Glassmorphism - learn how to
                           implement the new design trend.
                         </div>
-                        <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                        <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                           3 hours ago
                         </div>
                       </div>
@@ -534,14 +534,14 @@ export default function ShellLayoutForEcommerceWithSidebar() {
                   </Link>
                 </div>
               </Dropdown>
-              <div className="mx-3 hidden h-5 w-px bg-gray-200 dark:bg-gray-600 lg:inline" />
+              <div className="mx-3 hidden h-5 w-px bg-gray-200 lg:inline dark:bg-gray-600" />
               <a
                 href="#"
-                className="inline-flex items-center rounded-lg px-2.5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring-4 focus:ring-gray-300 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-800"
+                className="inline-flex items-center rounded-lg px-2.5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 focus:outline-none dark:text-white dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-800"
               >
                 <div className="relative">
                   <svg
-                    className="h-6 w-6 text-gray-500 dark:text-gray-400 sm:mr-2"
+                    className="h-6 w-6 text-gray-500 sm:mr-2 dark:text-gray-400"
                     fill="none"
                     stroke="currentColor"
                     stroke-width="2"
@@ -555,7 +555,7 @@ export default function ShellLayoutForEcommerceWithSidebar() {
                       d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
                     ></path>
                   </svg>
-                  <span className="absolute -right-2 -top-1.5 h-4 w-4 rounded-full bg-red-700 text-center text-xs text-white sm:right-0">
+                  <span className="absolute -top-1.5 -right-2 h-4 w-4 rounded-full bg-red-700 text-center text-xs text-white sm:right-0">
                     2
                   </span>
                 </div>
@@ -563,7 +563,7 @@ export default function ShellLayoutForEcommerceWithSidebar() {
               </a>
               <button
                 onClick={() => setSidebarOpen(!isSidebarOpen)}
-                className="mr-3 cursor-pointer rounded p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:hidden"
+                className="mr-3 cursor-pointer rounded p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 lg:hidden dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
               >
                 <span className="sr-only">Toggle sidebar</span>
                 <div className="lg:hidden">
@@ -580,49 +580,49 @@ export default function ShellLayoutForEcommerceWithSidebar() {
           theme={{
             list: twMerge(
               theme.navbar.collapse.list,
-              "mt-0 hidden w-full border-y bg-gray-100 dark:border-gray-700 dark:bg-gray-900 md:space-x-0 md:px-6 md:py-2 md:dark:bg-gray-700 lg:flex",
+              "mt-0 hidden w-full border-y bg-gray-100 md:space-x-0 md:px-6 md:py-2 lg:flex dark:border-gray-700 dark:bg-gray-900 md:dark:bg-gray-700",
             ),
           }}
         >
           <NavbarLink
             href="#"
-            className="rounded-lg text-sm font-medium dark:text-gray-100 md:px-3 md:py-2 lg:hover:bg-gray-200 lg:hover:text-gray-900 lg:dark:hover:bg-gray-600"
+            className="rounded-lg text-sm font-medium md:px-3 md:py-2 lg:hover:bg-gray-200 lg:hover:text-gray-900 dark:text-gray-100 lg:dark:hover:bg-gray-600"
           >
             Home
           </NavbarLink>
           <NavbarLink
             href="#"
-            className="rounded-lg text-sm font-medium dark:text-gray-100 md:px-3 md:py-2 lg:hover:bg-gray-200 lg:hover:text-gray-900 lg:dark:hover:bg-gray-600"
+            className="rounded-lg text-sm font-medium md:px-3 md:py-2 lg:hover:bg-gray-200 lg:hover:text-gray-900 dark:text-gray-100 lg:dark:hover:bg-gray-600"
           >
             Shop
           </NavbarLink>
           <NavbarLink
             href="#"
-            className="rounded-lg text-sm font-medium dark:text-gray-100 md:px-3 md:py-2 lg:hover:bg-gray-200 lg:hover:text-gray-900 lg:dark:hover:bg-gray-600"
+            className="rounded-lg text-sm font-medium md:px-3 md:py-2 lg:hover:bg-gray-200 lg:hover:text-gray-900 dark:text-gray-100 lg:dark:hover:bg-gray-600"
           >
             Today's deals
           </NavbarLink>
           <NavbarLink
             href="#"
-            className="rounded-lg text-sm font-medium dark:text-gray-100 md:px-3 md:py-2 lg:hover:bg-gray-200 lg:hover:text-gray-900 lg:dark:hover:bg-gray-600"
+            className="rounded-lg text-sm font-medium md:px-3 md:py-2 lg:hover:bg-gray-200 lg:hover:text-gray-900 dark:text-gray-100 lg:dark:hover:bg-gray-600"
           >
             Blog
           </NavbarLink>
           <NavbarLink
             href="#"
-            className="rounded-lg text-sm font-medium dark:text-gray-100 md:px-3 md:py-2 lg:hover:bg-gray-200 lg:hover:text-gray-900 lg:dark:hover:bg-gray-600"
+            className="rounded-lg text-sm font-medium md:px-3 md:py-2 lg:hover:bg-gray-200 lg:hover:text-gray-900 dark:text-gray-100 lg:dark:hover:bg-gray-600"
           >
             Contact
           </NavbarLink>
           <NavbarLink
             href="#"
-            className="rounded-lg text-sm font-medium dark:text-gray-100 md:px-3 md:py-2 lg:hover:bg-gray-200 lg:hover:text-gray-900 lg:dark:hover:bg-gray-600"
+            className="rounded-lg text-sm font-medium md:px-3 md:py-2 lg:hover:bg-gray-200 lg:hover:text-gray-900 dark:text-gray-100 lg:dark:hover:bg-gray-600"
           >
             Forum
           </NavbarLink>
           <NavbarLink
             href="#"
-            className="rounded-lg text-sm font-medium dark:text-gray-100 md:px-3 md:py-2 lg:hover:bg-gray-200 lg:hover:text-gray-900 lg:dark:hover:bg-gray-600"
+            className="rounded-lg text-sm font-medium md:px-3 md:py-2 lg:hover:bg-gray-200 lg:hover:text-gray-900 dark:text-gray-100 lg:dark:hover:bg-gray-600"
           >
             Support
           </NavbarLink>
@@ -688,10 +688,10 @@ export default function ShellLayoutForEcommerceWithSidebar() {
           className="hidden bg-transparent lg:block [&>div]:rounded-xl [&>div]:bg-white"
         >
           <div className="flex h-full flex-col justify-between py-2">
-            <div className="h-full overflow-y-auto bg-white pt-1 dark:bg-gray-800 lg:rounded-lg">
+            <div className="h-full overflow-y-auto bg-white pt-1 lg:rounded-lg dark:bg-gray-800">
               <a
                 href="#"
-                className="dark:hover-bg-gray-700 mb-5 flex w-full items-center justify-between rounded-lg p-2 hover:bg-gray-50 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
+                className="dark:hover-bg-gray-700 mb-5 flex w-full items-center justify-between rounded-lg p-2 hover:bg-gray-50 focus:ring-4 focus:ring-gray-200 focus:outline-none dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
                 type="button"
               >
                 <span className="sr-only">Open user menu</span>
@@ -700,7 +700,7 @@ export default function ShellLayoutForEcommerceWithSidebar() {
                   img="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
                   rounded
                 >
-                  <div className="mb-0.5 font-semibold leading-none text-gray-900 dark:text-white">
+                  <div className="mb-0.5 leading-none font-semibold text-gray-900 dark:text-white">
                     Bonnie Green
                   </div>
                   <div className="text-sm text-gray-500 dark:text-gray-400">
@@ -714,11 +714,11 @@ export default function ShellLayoutForEcommerceWithSidebar() {
                   <li>
                     <a
                       href="#"
-                      className="group flex flex-col items-center justify-center rounded-xl bg-primary-50 p-2.5 hover:bg-primary-100 dark:bg-primary-900 dark:hover:bg-primary-800"
+                      className="group bg-primary-50 hover:bg-primary-100 dark:bg-primary-900 dark:hover:bg-primary-800 flex flex-col items-center justify-center rounded-xl p-2.5"
                     >
-                      <span className="mb-1 flex h-8 w-8 items-center justify-center rounded-full bg-primary-100 group-hover:bg-primary-200 dark:bg-primary-800  dark:group-hover:bg-primary-700">
+                      <span className="bg-primary-100 group-hover:bg-primary-200 dark:bg-primary-800 dark:group-hover:bg-primary-700 mb-1 flex h-8 w-8 items-center justify-center rounded-full">
                         <svg
-                          className="h-5 w-5 text-primary-600 dark:text-primary-300"
+                          className="text-primary-600 dark:text-primary-300 h-5 w-5"
                           fill="currentColor"
                           viewBox="0 0 20 20"
                           xmlns="http://www.w3.org/2000/svg"
@@ -731,7 +731,7 @@ export default function ShellLayoutForEcommerceWithSidebar() {
                           ></path>
                         </svg>
                       </span>
-                      <span className="text-sm font-medium text-primary-600 dark:text-primary-300">
+                      <span className="text-primary-600 dark:text-primary-300 text-sm font-medium">
                         Profile
                       </span>
                     </a>
@@ -741,7 +741,7 @@ export default function ShellLayoutForEcommerceWithSidebar() {
                       href="#"
                       className="group flex flex-col items-center justify-center rounded-xl bg-purple-50 p-2.5 hover:bg-purple-100 dark:bg-purple-900 dark:hover:bg-purple-800"
                     >
-                      <span className="mb-1 flex h-8 w-8 items-center justify-center rounded-full bg-purple-100 group-hover:bg-purple-200 dark:bg-purple-800  dark:group-hover:bg-purple-700">
+                      <span className="mb-1 flex h-8 w-8 items-center justify-center rounded-full bg-purple-100 group-hover:bg-purple-200 dark:bg-purple-800 dark:group-hover:bg-purple-700">
                         <svg
                           className="h-5 w-5 text-purple-600 dark:text-purple-300"
                           fill="currentColor"
@@ -767,7 +767,7 @@ export default function ShellLayoutForEcommerceWithSidebar() {
                       href="#"
                       className="group flex flex-col items-center justify-center rounded-xl bg-teal-50 p-2.5 hover:bg-teal-100 dark:bg-teal-900 dark:hover:bg-teal-800"
                     >
-                      <span className="mb-1 flex h-8 w-8 items-center justify-center rounded-full bg-teal-100 group-hover:bg-teal-200 dark:bg-teal-800  dark:group-hover:bg-teal-700">
+                      <span className="mb-1 flex h-8 w-8 items-center justify-center rounded-full bg-teal-100 group-hover:bg-teal-200 dark:bg-teal-800 dark:group-hover:bg-teal-700">
                         <svg
                           className="h-5 w-5 text-teal-600 dark:text-teal-300"
                           fill="currentColor"
@@ -852,23 +852,23 @@ export default function ShellLayoutForEcommerceWithSidebar() {
         </Sidebar>
         <div className="h-full flex-1 overflow-y-auto pb-4 lg:pl-4">
           <div className="mb-4 grid grid-cols-2 gap-4 xl:grid-cols-4">
-            <div className="h-32 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600 lg:h-64"></div>
-            <div className="h-32 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600 lg:h-64"></div>
+            <div className="h-32 rounded-xl border-2 border-dashed border-gray-300 lg:h-64 dark:border-gray-600"></div>
+            <div className="h-32 rounded-xl border-2 border-dashed border-gray-300 lg:h-64 dark:border-gray-600"></div>
             <div className="rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600"></div>
-            <div className="h-32 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600 lg:h-64"></div>
+            <div className="h-32 rounded-xl border-2 border-dashed border-gray-300 lg:h-64 dark:border-gray-600"></div>
           </div>
           <div className="mb-4 grid grid-cols-2 gap-4">
-            <div className="h-48 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600 lg:h-96"></div>
-            <div className="h-48 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600 lg:h-96"></div>
+            <div className="h-48 rounded-xl border-2 border-dashed border-gray-300 lg:h-96 dark:border-gray-600"></div>
+            <div className="h-48 rounded-xl border-2 border-dashed border-gray-300 lg:h-96 dark:border-gray-600"></div>
           </div>
           <div className="mb-4 grid grid-cols-3 gap-4">
-            <div className="h-32 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600 lg:h-64"></div>
-            <div className="h-32 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600 lg:h-64"></div>
-            <div className="h-32 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600 lg:h-64"></div>
+            <div className="h-32 rounded-xl border-2 border-dashed border-gray-300 lg:h-64 dark:border-gray-600"></div>
+            <div className="h-32 rounded-xl border-2 border-dashed border-gray-300 lg:h-64 dark:border-gray-600"></div>
+            <div className="h-32 rounded-xl border-2 border-dashed border-gray-300 lg:h-64 dark:border-gray-600"></div>
           </div>
           <div className="grid grid-cols-2 gap-4">
-            <div className="h-48 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600 lg:h-96"></div>
-            <div className="h-48 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600 lg:h-96"></div>
+            <div className="h-48 rounded-xl border-2 border-dashed border-gray-300 lg:h-96 dark:border-gray-600"></div>
+            <div className="h-48 rounded-xl border-2 border-dashed border-gray-300 lg:h-96 dark:border-gray-600"></div>
           </div>
         </div>
       </div>
@@ -894,10 +894,10 @@ export default function ShellLayoutForEcommerceWithSidebar() {
               />
             </form>
             <div className="flex h-full flex-col justify-between py-2">
-              <div className="h-full overflow-y-auto bg-white pt-1 dark:bg-gray-800 lg:rounded-lg">
+              <div className="h-full overflow-y-auto bg-white pt-1 lg:rounded-lg dark:bg-gray-800">
                 <a
                   href="#"
-                  className="dark:hover-bg-gray-700 mb-5 flex w-full items-center justify-between rounded-lg p-2 hover:bg-gray-50 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
+                  className="dark:hover-bg-gray-700 mb-5 flex w-full items-center justify-between rounded-lg p-2 hover:bg-gray-50 focus:ring-4 focus:ring-gray-200 focus:outline-none dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
                   type="button"
                 >
                   <span className="sr-only">Open user menu</span>
@@ -906,7 +906,7 @@ export default function ShellLayoutForEcommerceWithSidebar() {
                     img="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
                     rounded
                   >
-                    <div className="mb-0.5 font-semibold leading-none text-gray-900 dark:text-white">
+                    <div className="mb-0.5 leading-none font-semibold text-gray-900 dark:text-white">
                       Bonnie Green
                     </div>
                     <div className="text-sm text-gray-500 dark:text-gray-400">
@@ -919,11 +919,11 @@ export default function ShellLayoutForEcommerceWithSidebar() {
                     <li>
                       <a
                         href="#"
-                        className="group flex flex-col items-center justify-center rounded-xl bg-primary-50 p-2.5 hover:bg-primary-100 dark:bg-primary-900 dark:hover:bg-primary-800"
+                        className="group bg-primary-50 hover:bg-primary-100 dark:bg-primary-900 dark:hover:bg-primary-800 flex flex-col items-center justify-center rounded-xl p-2.5"
                       >
-                        <span className="mb-1 flex h-8 w-8 items-center justify-center rounded-full bg-primary-100 group-hover:bg-primary-200 dark:bg-primary-800  dark:group-hover:bg-primary-700">
+                        <span className="bg-primary-100 group-hover:bg-primary-200 dark:bg-primary-800 dark:group-hover:bg-primary-700 mb-1 flex h-8 w-8 items-center justify-center rounded-full">
                           <svg
-                            className="h-5 w-5 text-primary-600 dark:text-primary-300"
+                            className="text-primary-600 dark:text-primary-300 h-5 w-5"
                             fill="currentColor"
                             viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg"
@@ -936,7 +936,7 @@ export default function ShellLayoutForEcommerceWithSidebar() {
                             ></path>
                           </svg>
                         </span>
-                        <span className="text-sm font-medium text-primary-600 dark:text-primary-300">
+                        <span className="text-primary-600 dark:text-primary-300 text-sm font-medium">
                           Profile
                         </span>
                       </a>
@@ -946,7 +946,7 @@ export default function ShellLayoutForEcommerceWithSidebar() {
                         href="#"
                         className="group flex flex-col items-center justify-center rounded-xl bg-purple-50 p-2.5 hover:bg-purple-100 dark:bg-purple-900 dark:hover:bg-purple-800"
                       >
-                        <span className="mb-1 flex h-8 w-8 items-center justify-center rounded-full bg-purple-100 group-hover:bg-purple-200 dark:bg-purple-800  dark:group-hover:bg-purple-700">
+                        <span className="mb-1 flex h-8 w-8 items-center justify-center rounded-full bg-purple-100 group-hover:bg-purple-200 dark:bg-purple-800 dark:group-hover:bg-purple-700">
                           <svg
                             className="h-5 w-5 text-purple-600 dark:text-purple-300"
                             fill="currentColor"
@@ -972,7 +972,7 @@ export default function ShellLayoutForEcommerceWithSidebar() {
                         href="#"
                         className="group flex flex-col items-center justify-center rounded-xl bg-teal-50 p-2.5 hover:bg-teal-100 dark:bg-teal-900 dark:hover:bg-teal-800"
                       >
-                        <span className="mb-1 flex h-8 w-8 items-center justify-center rounded-full bg-teal-100 group-hover:bg-teal-200 dark:bg-teal-800  dark:group-hover:bg-teal-700">
+                        <span className="mb-1 flex h-8 w-8 items-center justify-center rounded-full bg-teal-100 group-hover:bg-teal-200 dark:bg-teal-800 dark:group-hover:bg-teal-700">
                           <svg
                             className="h-5 w-5 text-teal-600 dark:text-teal-300"
                             fill="currentColor"
@@ -1009,9 +1009,7 @@ export default function ShellLayoutForEcommerceWithSidebar() {
                       <SidebarCollapse icon={HiCreditCard} label="Payments">
                         <SidebarItem href="#">Invoices</SidebarItem>
                         <SidebarItem href="#">Payouts</SidebarItem>
-                        <SidebarItem href="#">
-                          Billing information
-                        </SidebarItem>
+                        <SidebarItem href="#">Billing information</SidebarItem>
                       </SidebarCollapse>
                       <SidebarItem
                         href="#"
@@ -1023,9 +1021,7 @@ export default function ShellLayoutForEcommerceWithSidebar() {
                       </SidebarItem>
                       <SidebarItem icon={HiStar}>Reviews</SidebarItem>
                       <SidebarItem icon={HiEye}>Recently viewed</SidebarItem>
-                      <SidebarItem icon={HiHeart}>
-                        Favourite items
-                      </SidebarItem>
+                      <SidebarItem icon={HiHeart}>Favourite items</SidebarItem>
                     </SidebarItemGroup>
                     <SidebarItemGroup>
                       <SidebarItem href="#" icon={HiCog}>

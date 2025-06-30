@@ -1,4 +1,13 @@
-import { Button, Checkbox, Label, Modal, ModalBody, Select, Textarea, TextInput } from "flowbite-react";
+import {
+  Button,
+  Checkbox,
+  Label,
+  Modal,
+  ModalBody,
+  Select,
+  Textarea,
+  TextInput,
+} from "flowbite-react";
 import { useState } from "react";
 import { HiCalendar, HiCloudUpload, HiX } from "react-icons/hi";
 
@@ -11,14 +20,14 @@ export function CreateProductModal() {
         <Button onClick={() => setShowModal(true)}>Create product</Button>
       </div>
       <Modal onClose={() => setShowModal(false)} show={showModal} size="3xl">
-        <ModalBody className="relative rounded-lg bg-white p-4 shadow dark:bg-gray-800 sm:p-5">
-          <div className="mb-4 flex items-center justify-between rounded-t border-b pb-4 dark:border-gray-600 sm:mb-5">
+        <ModalBody className="relative rounded-lg bg-white p-4 shadow sm:p-5 dark:bg-gray-800">
+          <div className="mb-4 flex items-center justify-between rounded-t border-b pb-4 sm:mb-5 dark:border-gray-600">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
               Add Product
             </h3>
             <button
               onClick={() => setShowModal(false)}
-              className="absolute right-5 top-[18px] ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+              className="absolute top-[18px] right-5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
             >
               <HiX className="h-5 w-5" />
               <span className="sr-only">Close modal</span>
@@ -203,7 +212,7 @@ export function CreateProductModal() {
                   htmlFor="dropzone-file"
                   className="flex h-64 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600"
                 >
-                  <div className="flex flex-col items-center justify-center pb-6 pt-5">
+                  <div className="flex flex-col items-center justify-center pt-5 pb-6">
                     <HiCloudUpload className="mb-3 h-10 w-10 text-gray-400" />
                     <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
                       <span className="font-semibold">Click to upload</span> or
@@ -217,7 +226,7 @@ export function CreateProductModal() {
                 </Label>
               </div>
             </div>
-            <div className="items-center space-y-4 sm:flex sm:space-x-4 sm:space-y-0">
+            <div className="items-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
               <Button
                 type="submit"
                 size="lg"
@@ -226,16 +235,16 @@ export function CreateProductModal() {
                 Add product
               </Button>
               <Button size="lg" className="w-full md:w-fit [&>span]:text-sm">
-                <HiCalendar className="-ml-1 mr-1 h-5 w-5" />
+                <HiCalendar className="mr-1 -ml-1 h-5 w-5" />
                 Schedule
               </Button>
               <Button
                 color="gray"
                 onClick={() => setShowModal(false)}
                 size="lg"
-                className="w-full text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-primary-300 dark:border-gray-500 dark:bg-gray-700 dark:text-gray-300 dark:focus:ring-gray-600 sm:w-auto [&>span]:text-sm hover:[&>span]:text-gray-900 dark:hover:[&>span]:bg-gray-600 dark:hover:[&>span]:text-white"
+                className="focus:ring-primary-300 w-full text-gray-500 hover:bg-gray-100 focus:outline-none sm:w-auto dark:border-gray-500 dark:bg-gray-700 dark:text-gray-300 dark:focus:ring-gray-600 [&>span]:text-sm hover:[&>span]:text-gray-900 dark:hover:[&>span]:bg-gray-600 dark:hover:[&>span]:text-white"
               >
-                <HiX className="-ml-1 mr-1 h-5 w-5" />
+                <HiX className="mr-1 -ml-1 h-5 w-5" />
                 Discard
               </Button>
             </div>

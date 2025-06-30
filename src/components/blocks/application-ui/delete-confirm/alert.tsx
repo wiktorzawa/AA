@@ -15,10 +15,10 @@ export function ConfirmDeleteWithAlert() {
         size="md"
         show={showModal}
       >
-        <ModalBody className="relative rounded-lg bg-white p-4 text-center shadow dark:bg-gray-800 sm:p-5">
+        <ModalBody className="relative rounded-lg bg-white p-4 text-center shadow sm:p-5 dark:bg-gray-800">
           <button
             onClick={() => setShowModal(false)}
-            className="absolute right-2.5 top-2.5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+            className="absolute top-2.5 right-2.5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
           >
             <svg
               aria-hidden
@@ -58,7 +58,7 @@ export function ConfirmDeleteWithAlert() {
                 />
               </svg>
               <span className="sr-only">Danger</span>
-              <span className="font-semibold leading-none">Warning</span>
+              <span className="leading-none font-semibold">Warning</span>
             </div>
             <p>
               By deleting this user 6 associated posts will also be permanently
@@ -83,7 +83,7 @@ export function ConfirmDeleteWithAlert() {
             >
               <svg
                 aria-hidden
-                className="-ml-1 mr-1.5 h-4 w-4"
+                className="mr-1.5 -ml-1 h-4 w-4"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"

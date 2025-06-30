@@ -1,12 +1,5 @@
 {
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnSave": true,
-  "editor.quickSuggestions": {
-    "strings": "on"
-  },
-  "files.associations": {
-    "*.css": "tailwindcss"
-  },
+  // Tailwind CSS dla tego projektu
   "tailwindCSS.classAttributes": ["class", "className", "theme"],
   "tailwindCSS.experimental.classRegex": [
     ["twMerge\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
@@ -15,6 +8,17 @@
       "{?\\s?[\\w].*:\\s*?[\"'`]([^\"'`]*).*?,?\\s?}?"
     ]
   ],
-  "typescript.preferences.preferTypeOnlyAutoImports": true,
-  "typescript.tsdk": "node_modules/typescript/lib"
+
+  // TypeScript dla tego projektu
+  "typescript.tsdk": "node_modules/typescript/lib",
+
+  // Konfiguracja plików projektu
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+
+  // SQL formatter dla tego projektu
+  "[sql]": {
+    "editor.defaultFormatter": "cweijan.vscode-database-client2"
+  }
 }

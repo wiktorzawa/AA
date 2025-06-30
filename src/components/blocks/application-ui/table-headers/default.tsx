@@ -16,8 +16,8 @@ export function DefaultTableHeader() {
   return (
     <section className="flex items-center bg-gray-50 py-6 dark:bg-gray-900">
       <div className="mx-auto w-full max-w-screen-xl px-4 lg:px-12">
-        <div className="relative bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
-          <div className="flex flex-col items-center justify-between space-y-3 p-4 md:flex-row md:space-x-4 md:space-y-0">
+        <div className="relative bg-white shadow-md sm:rounded-lg dark:bg-gray-800">
+          <div className="flex flex-col items-center justify-between space-y-3 p-4 md:flex-row md:space-y-0 md:space-x-4">
             <div className="w-full md:w-1/2">
               <form className="flex items-center">
                 <Label htmlFor="simple-search" className="sr-only">
@@ -34,7 +34,7 @@ export function DefaultTableHeader() {
                 />
               </form>
             </div>
-            <div className="flex w-full shrink-0 flex-col items-stretch justify-end space-y-2 md:w-auto md:flex-row md:items-center md:space-x-3 md:space-y-0">
+            <div className="flex w-full shrink-0 flex-col items-stretch justify-end space-y-2 md:w-auto md:flex-row md:items-center md:space-y-0 md:space-x-3">
               <Button>
                 <HiPlus className="mr-2 h-4 w-4" />
                 Add product

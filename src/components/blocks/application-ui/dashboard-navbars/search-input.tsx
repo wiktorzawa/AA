@@ -27,7 +27,7 @@ export function DoubleDashboardNavbarWithSearchInput() {
                 className="mr-3 h-8"
                 alt=""
               />
-              <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
+              <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
                 Flowbite
               </span>
             </a>
@@ -105,7 +105,7 @@ export function DoubleDashboardNavbarWithSearchInput() {
                           src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
                           alt=""
                         />
-                        <div className="absolute -mt-5 ml-6 flex h-5 w-5 items-center justify-center rounded-full border border-white bg-primary-700 dark:border-gray-700">
+                        <div className="bg-primary-700 absolute -mt-5 ml-6 flex h-5 w-5 items-center justify-center rounded-full border border-white dark:border-gray-700">
                           <svg
                             className="h-2 w-2 text-white"
                             aria-hidden
@@ -126,7 +126,7 @@ export function DoubleDashboardNavbarWithSearchInput() {
                           </span>
                           : "Hey, what's up? All set for the presentation?"
                         </div>
-                        <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                        <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                           a few moments ago
                         </div>
                       </div>
@@ -164,7 +164,7 @@ export function DoubleDashboardNavbarWithSearchInput() {
                           </span>
                           &nbsp;started following you.
                         </div>
-                        <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                        <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                           10 minutes ago
                         </div>
                       </div>
@@ -202,7 +202,7 @@ export function DoubleDashboardNavbarWithSearchInput() {
                           </span>
                           &nbsp;love your story. See it and view more stories.
                         </div>
-                        <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                        <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                           44 minutes ago
                         </div>
                       </div>
@@ -235,12 +235,12 @@ export function DoubleDashboardNavbarWithSearchInput() {
                             Leslie Livingston
                           </span>
                           &nbsp;mentioned you in a comment:&nbsp;
-                          <span className="font-medium text-primary-700 dark:text-primary-500">
+                          <span className="text-primary-700 dark:text-primary-500 font-medium">
                             @bonnie.green
                           </span>
                           &nbsp;what do you say?
                         </div>
-                        <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                        <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                           1 hour ago
                         </div>
                       </div>
@@ -275,7 +275,7 @@ export function DoubleDashboardNavbarWithSearchInput() {
                           &nbsp;posted a new video: Glassmorphism - learn how to
                           implement the new design trend.
                         </div>
-                        <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                        <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                           3 hours ago
                         </div>
                       </div>
@@ -285,7 +285,7 @@ export function DoubleDashboardNavbarWithSearchInput() {
                     href="#"
                     className="block bg-gray-50 py-2 text-center text-base font-medium text-gray-900 hover:bg-gray-100 dark:bg-gray-700 dark:text-white dark:hover:underline"
                   >
-                    <div className="inline-flex items-center ">
+                    <div className="inline-flex items-center">
                       <svg
                         aria-hidden
                         className="mr-2 h-5 w-5"
@@ -304,7 +304,7 @@ export function DoubleDashboardNavbarWithSearchInput() {
                     </div>
                   </a>
                 </Dropdown>
-                <span className="mx-2 hidden h-5 w-px bg-gray-200 dark:bg-gray-600 lg:inline"></span>
+                <span className="mx-2 hidden h-5 w-px bg-gray-200 lg:inline dark:bg-gray-600"></span>
                 <Dropdown
                   inline
                   label={
@@ -509,7 +509,7 @@ export function DoubleDashboardNavbarWithSearchInput() {
                     </a>
                   </div>
                 </Dropdown>
-                <span className="mx-2 hidden h-5 w-px bg-gray-200 dark:bg-gray-600 md:inline"></span>
+                <span className="mx-2 hidden h-5 w-px bg-gray-200 md:inline dark:bg-gray-600"></span>
                 <Dropdown
                   inline
                   label="flowbite.com"
@@ -520,7 +520,7 @@ export function DoubleDashboardNavbarWithSearchInput() {
                     },
                     inlineWrapper: twMerge(
                       theme.dropdown.inlineWrapper,
-                      "hidden rounded-lg px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus:ring-4 focus:ring-gray-300 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-600 md:inline",
+                      "hidden rounded-lg px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus:ring-4 focus:ring-gray-300 md:inline dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-600",
                     ),
                   }}
                 >
@@ -581,7 +581,7 @@ export function DoubleDashboardNavbarWithSearchInput() {
                     </li>
                   </ul>
                 </Dropdown>
-                <span className="ml-2 mr-4 hidden h-5 w-px bg-gray-200 dark:bg-gray-600 md:inline"></span>
+                <span className="mr-4 ml-2 hidden h-5 w-px bg-gray-200 md:inline dark:bg-gray-600"></span>
                 <Dropdown
                   inline
                   label={
@@ -611,7 +611,7 @@ export function DoubleDashboardNavbarWithSearchInput() {
                     </span>
                   </div>
                   <ul
-                    className="py-1  text-gray-500 dark:text-gray-400"
+                    className="py-1 text-gray-500 dark:text-gray-400"
                     aria-labelledby="userMenuDropdownButton"
                   >
                     <li>
@@ -679,7 +679,7 @@ export function DoubleDashboardNavbarWithSearchInput() {
                       >
                         <span className="flex items-center">
                           <svg
-                            className="mr-2 h-4 w-4 text-primary-600 dark:text-primary-500"
+                            className="text-primary-600 dark:text-primary-500 mr-2 h-4 w-4"
                             aria-hidden
                             xmlns="http://www.w3.org/2000/svg"
                             fill="currentColor"
@@ -708,7 +708,7 @@ export function DoubleDashboardNavbarWithSearchInput() {
                     </li>
                   </ul>
                   <ul
-                    className="py-1  text-gray-500 dark:text-gray-400"
+                    className="py-1 text-gray-500 dark:text-gray-400"
                     aria-labelledby="dropdown"
                   >
                     <li>
@@ -740,7 +740,7 @@ export function DoubleDashboardNavbarWithSearchInput() {
                   theme={{
                     floating: {
                       target:
-                        "hidden whitespace-nowrap rounded-r-none bg-gray-100 text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus:ring-4 focus:ring-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-600 md:inline",
+                        "hidden rounded-r-none bg-gray-100 whitespace-nowrap text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus:ring-4 focus:ring-gray-300 md:inline dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-600",
                     },
                   }}
                 >
@@ -779,7 +779,7 @@ export function DoubleDashboardNavbarWithSearchInput() {
                       ),
                       floating: {
                         target:
-                          "whitespace-nowrap rounded-none bg-gray-100 text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus:ring-4 focus:ring-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-600",
+                          "rounded-none bg-gray-100 whitespace-nowrap text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus:ring-4 focus:ring-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-600",
                       },
                     }}
                   >
@@ -789,7 +789,7 @@ export function DoubleDashboardNavbarWithSearchInput() {
                   </Dropdown>
                   <button
                     type="submit"
-                    className="rounded-r-lg border border-primary-700 bg-primary-700 p-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                    className="border-primary-700 bg-primary-700 hover:bg-primary-800 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 rounded-r-lg border p-2.5 text-sm font-medium text-white focus:ring-4 focus:outline-none"
                   >
                     <svg
                       className="h-4 w-4"

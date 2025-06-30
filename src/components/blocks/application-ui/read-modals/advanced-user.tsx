@@ -15,9 +15,9 @@ export function AdvancedUserReadModal() {
         size="3xl"
         show={showModal}
       >
-        <ModalBody className="relative rounded-lg bg-white p-4 shadow dark:bg-gray-800 sm:p-5">
+        <ModalBody className="relative rounded-lg bg-white p-4 shadow sm:p-5 dark:bg-gray-800">
           <div className="mb-4 flex justify-between rounded-t sm:mb-5">
-            <div className="text-lg text-gray-900 dark:text-white md:text-xl">
+            <div className="text-lg text-gray-900 md:text-xl dark:text-white">
               <div className="flex items-center">
                 <img
                   alt="Helene avatar"
@@ -25,7 +25,7 @@ export function AdvancedUserReadModal() {
                   className="mr-2 h-12 w-12 rounded-full sm:mr-4"
                 ></img>
                 <div>
-                  <h3 className="text-lg font-bold text-gray-900 dark:text-white md:text-xl">
+                  <h3 className="text-lg font-bold text-gray-900 md:text-xl dark:text-white">
                     Helene Engels
                   </h3>
                   <p className="text-base text-gray-500 dark:text-gray-400">
@@ -37,7 +37,7 @@ export function AdvancedUserReadModal() {
             <div>
               <button
                 onClick={() => setShowModal(false)}
-                className="absolute right-5 top-[18px] ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+                className="absolute top-[18px] right-5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
               >
                 <svg
                   aria-hidden
@@ -77,7 +77,7 @@ export function AdvancedUserReadModal() {
                 Frontend Developer
               </dd>
               <dt className="sr-only">Location</dt>
-              <dd className="mb-4 flex items-center text-gray-500 dark:text-gray-400 sm:mb-5">
+              <dd className="mb-4 flex items-center text-gray-500 sm:mb-5 dark:text-gray-400">
                 <svg
                   className="mr-1.5 h-4 w-4 text-gray-400 dark:text-gray-500"
                   aria-hidden
@@ -96,13 +96,13 @@ export function AdvancedUserReadModal() {
               <dt className="mb-2 leading-none text-gray-500 dark:text-gray-400">
                 Email Adress
               </dt>
-              <dd className="mb-4 font-medium text-gray-900 dark:text-white sm:mb-5">
+              <dd className="mb-4 font-medium text-gray-900 sm:mb-5 dark:text-white">
                 helene@company.com
               </dd>
               <dt className="mb-2 leading-none text-gray-500 dark:text-gray-400">
                 Home Adress
               </dt>
-              <dd className="mb-4 font-medium text-gray-900 dark:text-white sm:mb-5">
+              <dd className="mb-4 font-medium text-gray-900 sm:mb-5 dark:text-white">
                 92 Miles Drive, Newark, NJ 07103, California, United States of
                 America
               </dd>
@@ -114,15 +114,15 @@ export function AdvancedUserReadModal() {
               </dd>
             </dl>
             <dl>
-              <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+              <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
                 Biography
               </dt>
-              <dd className="mb-4 text-gray-500 dark:text-gray-400 sm:mb-5">
+              <dd className="mb-4 text-gray-500 sm:mb-5 dark:text-gray-400">
                 Hello, I'm Helene Engels, USA Designer, Creating things that
                 stand out, Featured by Adobe, Figma, Webflow and others, Daily
                 design tips & resources, Exploring Web3.
               </dd>
-              <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+              <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
                 Social
               </dt>
               <dd className="inline-flex items-center space-x-1">
@@ -205,7 +205,7 @@ export function AdvancedUserReadModal() {
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
-                  className="-ml-1 mr-1 h-5 w-5"
+                  className="mr-1 -ml-1 h-5 w-5"
                 >
                   <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
                   <path
@@ -235,7 +235,7 @@ export function AdvancedUserReadModal() {
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
-                className="-ml-1 mr-1.5 h-5 w-5"
+                className="mr-1.5 -ml-1 h-5 w-5"
               >
                 <path
                   fillRule="evenodd"

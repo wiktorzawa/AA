@@ -153,7 +153,7 @@ export function AdvancedDropdownFilterOptions() {
               <Checkbox id="gaming" name="gaming" className="peer hidden" />
               <Label
                 htmlFor="gaming"
-                className="inline-flex w-full cursor-pointer items-center justify-center rounded-lg border border-gray-300 bg-gray-100 p-2 text-center text-sm font-medium text-gray-500 hover:bg-primary-500 hover:text-white peer-checked:border-primary-600 peer-checked:bg-primary-600 peer-checked:text-white dark:border-gray-500 dark:bg-gray-600 dark:text-gray-100 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:hover:text-white dark:peer-checked:bg-primary-600"
+                className="hover:bg-primary-500 peer-checked:border-primary-600 peer-checked:bg-primary-600 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:peer-checked:bg-primary-600 inline-flex w-full cursor-pointer items-center justify-center rounded-lg border border-gray-300 bg-gray-100 p-2 text-center text-sm font-medium text-gray-500 peer-checked:text-white hover:text-white dark:border-gray-500 dark:bg-gray-600 dark:text-gray-100 dark:hover:text-white"
               >
                 Gaming
               </Label>
@@ -166,7 +166,7 @@ export function AdvancedDropdownFilterOptions() {
               />
               <Label
                 htmlFor="electronics"
-                className="inline-flex w-full cursor-pointer items-center justify-center rounded-lg border border-gray-300 bg-gray-100 p-2 text-center text-sm font-medium text-gray-500 hover:bg-primary-500 hover:text-white peer-checked:border-primary-600 peer-checked:bg-primary-600 peer-checked:text-white dark:border-gray-500 dark:bg-gray-600 dark:text-gray-100 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:hover:text-white dark:peer-checked:bg-primary-600"
+                className="hover:bg-primary-500 peer-checked:border-primary-600 peer-checked:bg-primary-600 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:peer-checked:bg-primary-600 inline-flex w-full cursor-pointer items-center justify-center rounded-lg border border-gray-300 bg-gray-100 p-2 text-center text-sm font-medium text-gray-500 peer-checked:text-white hover:text-white dark:border-gray-500 dark:bg-gray-600 dark:text-gray-100 dark:hover:text-white"
               >
                 Electronics
               </Label>
@@ -180,7 +180,7 @@ export function AdvancedDropdownFilterOptions() {
               />
               <Label
                 htmlFor="phone"
-                className="inline-flex w-full cursor-pointer items-center justify-center rounded-lg border border-gray-300 bg-gray-100 p-2 text-center text-sm font-medium text-gray-500 hover:bg-primary-500 hover:text-white peer-checked:border-primary-600 peer-checked:bg-primary-600 peer-checked:text-white dark:border-gray-500 dark:bg-gray-600 dark:text-gray-100 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:hover:text-white dark:peer-checked:bg-primary-600"
+                className="hover:bg-primary-500 peer-checked:border-primary-600 peer-checked:bg-primary-600 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:peer-checked:bg-primary-600 inline-flex w-full cursor-pointer items-center justify-center rounded-lg border border-gray-300 bg-gray-100 p-2 text-center text-sm font-medium text-gray-500 peer-checked:text-white hover:text-white dark:border-gray-500 dark:bg-gray-600 dark:text-gray-100 dark:hover:text-white"
               >
                 Phone
               </Label>
@@ -193,7 +193,7 @@ export function AdvancedDropdownFilterOptions() {
               />
               <Label
                 htmlFor="tv-monitor"
-                className="inline-flex w-full cursor-pointer items-center justify-center rounded-lg border border-gray-300 bg-gray-100 p-2 text-center text-sm font-medium text-gray-500 hover:bg-primary-500 hover:text-white peer-checked:border-primary-600 peer-checked:bg-primary-600 peer-checked:text-white dark:border-gray-500 dark:bg-gray-600 dark:text-gray-100 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:hover:text-white dark:peer-checked:bg-primary-600"
+                className="hover:bg-primary-500 peer-checked:border-primary-600 peer-checked:bg-primary-600 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:peer-checked:bg-primary-600 inline-flex w-full cursor-pointer items-center justify-center rounded-lg border border-gray-300 bg-gray-100 p-2 text-center text-sm font-medium text-gray-500 peer-checked:text-white hover:text-white dark:border-gray-500 dark:bg-gray-600 dark:text-gray-100 dark:hover:text-white"
               >
                 TV/Monitor
               </Label>
@@ -202,7 +202,7 @@ export function AdvancedDropdownFilterOptions() {
               <Checkbox id="laptop" name="laptop" className="peer hidden" />
               <Label
                 htmlFor="laptop"
-                className="inline-flex w-full cursor-pointer items-center justify-center rounded-lg border border-gray-300 bg-gray-100 p-2 text-center text-sm font-medium text-gray-500 hover:bg-primary-500 hover:text-white peer-checked:border-primary-600 peer-checked:bg-primary-600 peer-checked:text-white dark:border-gray-500 dark:bg-gray-600 dark:text-gray-100 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:hover:text-white dark:peer-checked:bg-primary-600"
+                className="hover:bg-primary-500 peer-checked:border-primary-600 peer-checked:bg-primary-600 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:peer-checked:bg-primary-600 inline-flex w-full cursor-pointer items-center justify-center rounded-lg border border-gray-300 bg-gray-100 p-2 text-center text-sm font-medium text-gray-500 peer-checked:text-white hover:text-white dark:border-gray-500 dark:bg-gray-600 dark:text-gray-100 dark:hover:text-white"
               >
                 Laptop
               </Label>
@@ -216,7 +216,7 @@ export function AdvancedDropdownFilterOptions() {
               />
               <Label
                 htmlFor="watch"
-                className="inline-flex w-full cursor-pointer items-center justify-center rounded-lg border border-gray-300 bg-gray-100 p-2 text-center text-sm font-medium text-gray-500 hover:bg-primary-500 hover:text-white peer-checked:border-primary-600 peer-checked:bg-primary-600 peer-checked:text-white dark:border-gray-500 dark:bg-gray-600 dark:text-gray-100 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:hover:text-white dark:peer-checked:bg-primary-600"
+                className="hover:bg-primary-500 peer-checked:border-primary-600 peer-checked:bg-primary-600 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:peer-checked:bg-primary-600 inline-flex w-full cursor-pointer items-center justify-center rounded-lg border border-gray-300 bg-gray-100 p-2 text-center text-sm font-medium text-gray-500 peer-checked:text-white hover:text-white dark:border-gray-500 dark:bg-gray-600 dark:text-gray-100 dark:hover:text-white"
               >
                 Watch
               </Label>

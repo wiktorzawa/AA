@@ -37,7 +37,7 @@ export default function SecondarySidenavWithUserContacts() {
         <DrawerItems className="h-full">
           <Sidebar
             aria-label="Default side navigation"
-            className="w-full [&>div]:bg-transparent [&>div]:p-0 [&_*]:font-medium"
+            className="w-full [&_*]:font-medium [&>div]:bg-transparent [&>div]:p-0"
           >
             <SidebarItems className="py-1">
               <SidebarItemGroup>
@@ -46,7 +46,7 @@ export default function SecondarySidenavWithUserContacts() {
                   <div className="flex items-center space-x-1">
                     <a
                       href="#"
-                      className="inline-flex rounded-lg p-1.5 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
+                      className="inline-flex rounded-lg p-1.5 text-sm text-gray-500 hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 focus:outline-none dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
                     >
                       <svg
                         aria-hidden="true"
@@ -61,7 +61,7 @@ export default function SecondarySidenavWithUserContacts() {
                     </a>
                     <a
                       href="#"
-                      className="inline-flex rounded-lg p-1.5 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
+                      className="inline-flex rounded-lg p-1.5 text-sm text-gray-500 hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 focus:outline-none dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
                     >
                       <svg
                         aria-hidden="true"
@@ -109,7 +109,7 @@ export default function SecondarySidenavWithUserContacts() {
                           src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png"
                           alt="jese avatar"
                         />
-                        <span className="absolute left-4 top-0 h-3 w-3 rounded-full border-2 border-white bg-green-400 dark:border-gray-800"></span>
+                        <span className="absolute top-0 left-4 h-3 w-3 rounded-full border-2 border-white bg-green-400 dark:border-gray-800"></span>
                       </div>
                       Jese Leos
                     </a>
@@ -125,7 +125,7 @@ export default function SecondarySidenavWithUserContacts() {
                           src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
                           alt="bonnie avatar"
                         />
-                        <span className="absolute left-4 top-0 h-3 w-3 rounded-full border-2 border-white bg-green-400 dark:border-gray-800"></span>
+                        <span className="absolute top-0 left-4 h-3 w-3 rounded-full border-2 border-white bg-green-400 dark:border-gray-800"></span>
                       </div>
                       Bonnie Green
                     </a>
@@ -141,7 +141,7 @@ export default function SecondarySidenavWithUserContacts() {
                           src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/joseph-mcfall.png"
                           alt="Joseph avatar"
                         />
-                        <span className="absolute left-4 top-0 h-3 w-3 rounded-full border-2 border-white bg-red-400 dark:border-gray-800"></span>
+                        <span className="absolute top-0 left-4 h-3 w-3 rounded-full border-2 border-white bg-red-400 dark:border-gray-800"></span>
                       </div>
                       Joseph McFall
                     </a>
@@ -157,7 +157,7 @@ export default function SecondarySidenavWithUserContacts() {
                           src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
                           alt="Lana avatar"
                         />
-                        <span className="absolute left-4 top-0 h-3 w-3 rounded-full border-2 border-white bg-red-400 dark:border-gray-800"></span>
+                        <span className="absolute top-0 left-4 h-3 w-3 rounded-full border-2 border-white bg-red-400 dark:border-gray-800"></span>
                       </div>
                       Lana Byrd
                     </a>
@@ -173,7 +173,7 @@ export default function SecondarySidenavWithUserContacts() {
                           src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/roberta-casas.png"
                           alt="Leslie avatar"
                         />
-                        <span className="absolute left-4 top-0 h-3 w-3 rounded-full border-2 border-white bg-green-400 dark:border-gray-800"></span>
+                        <span className="absolute top-0 left-4 h-3 w-3 rounded-full border-2 border-white bg-green-400 dark:border-gray-800"></span>
                       </div>
                       Leslie Livingston
                     </a>
@@ -189,7 +189,7 @@ export default function SecondarySidenavWithUserContacts() {
                           src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/thomas-lean.png"
                           alt="Thomas avatar"
                         />
-                        <span className="absolute left-4 top-0 h-3 w-3 rounded-full border-2 border-white bg-green-400 dark:border-gray-800"></span>
+                        <span className="absolute top-0 left-4 h-3 w-3 rounded-full border-2 border-white bg-green-400 dark:border-gray-800"></span>
                       </div>
                       Thomas Lean
                     </a>
@@ -205,7 +205,7 @@ export default function SecondarySidenavWithUserContacts() {
                           src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/robert-brown.png"
                           alt="Robert avatar"
                         />
-                        <span className="absolute left-4 top-0 h-3 w-3 rounded-full border-2 border-white bg-red-400 dark:border-gray-800"></span>
+                        <span className="absolute top-0 left-4 h-3 w-3 rounded-full border-2 border-white bg-red-400 dark:border-gray-800"></span>
                       </div>
                       Robert Brown
                     </a>
@@ -221,7 +221,7 @@ export default function SecondarySidenavWithUserContacts() {
                           src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gouch.png"
                           alt="Micheal avatar"
                         />
-                        <span className="absolute left-4 top-0 h-3 w-3 rounded-full border-2 border-white bg-green-400 dark:border-gray-800"></span>
+                        <span className="absolute top-0 left-4 h-3 w-3 rounded-full border-2 border-white bg-green-400 dark:border-gray-800"></span>
                       </div>
                       Micheal Gough
                     </a>
@@ -237,7 +237,7 @@ export default function SecondarySidenavWithUserContacts() {
                           src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/roberta-casas.png"
                           alt="Roberta avatar"
                         />
-                        <span className="absolute left-4 top-0 h-3 w-3 rounded-full border-2 border-white bg-green-400 dark:border-gray-800"></span>
+                        <span className="absolute top-0 left-4 h-3 w-3 rounded-full border-2 border-white bg-green-400 dark:border-gray-800"></span>
                       </div>
                       Roberta Casas
                     </a>
@@ -253,7 +253,7 @@ export default function SecondarySidenavWithUserContacts() {
                           src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/neil-sims.png"
                           alt="Neil avatar"
                         />
-                        <span className="absolute left-4 top-0 h-3 w-3 rounded-full border-2 border-white bg-green-400 dark:border-gray-800"></span>
+                        <span className="absolute top-0 left-4 h-3 w-3 rounded-full border-2 border-white bg-green-400 dark:border-gray-800"></span>
                       </div>
                       Neil Sims
                     </a>
@@ -265,7 +265,7 @@ export default function SecondarySidenavWithUserContacts() {
                   <h3 className="uppercase">Group conversations</h3>
                   <a
                     href="#"
-                    className="mr-1 inline-flex rounded-lg p-1.5 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
+                    className="mr-1 inline-flex rounded-lg p-1.5 text-sm text-gray-500 hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 focus:outline-none dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
                   >
                     <svg
                       aria-hidden="true"
@@ -302,7 +302,7 @@ export default function SecondarySidenavWithUserContacts() {
                       />
                     </AvatarGroup>
                     <div>
-                      <div className="font-medium leading-tight text-gray-900 dark:text-white">
+                      <div className="leading-tight font-medium text-gray-900 dark:text-white">
                         Business Group
                       </div>
                       <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
@@ -326,7 +326,7 @@ export default function SecondarySidenavWithUserContacts() {
                       />
                     </AvatarGroup>
                     <div>
-                      <div className="font-medium leading-tight text-gray-900 dark:text-white">
+                      <div className="leading-tight font-medium text-gray-900 dark:text-white">
                         Funny Week
                       </div>
                       <span className="text-sm font-normal text-gray-500 dark:text-gray-400">

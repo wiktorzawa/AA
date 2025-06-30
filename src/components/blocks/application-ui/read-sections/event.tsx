@@ -8,9 +8,9 @@ import {
 
 export function ReadEventSection() {
   return (
-    <section className="bg-white py-8 dark:bg-gray-900 lg:py-16">
+    <section className="bg-white py-8 lg:py-16 dark:bg-gray-900">
       <div className="mx-auto max-w-2xl px-4">
-        <h2 className="mb-4 flex items-center text-xl font-bold leading-none text-gray-900 dark:text-white sm:mb-5 sm:text-2xl">
+        <h2 className="mb-4 flex items-center text-xl leading-none font-bold text-gray-900 sm:mb-5 sm:text-2xl dark:text-white">
           The 4th Digital Transformation
         </h2>
         <dl className="mb-4 flex items-center space-x-4 sm:mb-5">
@@ -30,7 +30,7 @@ export function ReadEventSection() {
           </div>
         </dl>
         <dl className="mb-4 sm:mb-5">
-          <dt className="mb-2 font-medium leading-none text-gray-900 dark:text-white">
+          <dt className="mb-2 leading-none font-medium text-gray-900 dark:text-white">
             Details:
           </dt>
           <dd className="text-gray-500 dark:text-gray-400">
@@ -44,7 +44,7 @@ export function ReadEventSection() {
         </dl>
         <div className="flex items-center space-x-4">
           <Button size="lg" className="[&>span]:text-sm">
-            <HiPencilAlt className="-ml-1 mr-1 h-5 w-5" />
+            <HiPencilAlt className="mr-1 -ml-1 h-5 w-5" />
             Edit
           </Button>
           <Button
@@ -55,7 +55,7 @@ export function ReadEventSection() {
             Preview
           </Button>
           <Button color="failure" size="lg" className="[&>span]:text-sm">
-            <HiTrash className="-ml-1 mr-1.5 h-5 w-5" />
+            <HiTrash className="mr-1.5 -ml-1 h-5 w-5" />
             Delete
           </Button>
         </div>

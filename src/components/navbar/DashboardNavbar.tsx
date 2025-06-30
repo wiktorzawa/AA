@@ -1,7 +1,6 @@
 import type { FC } from "react";
 import {
   Avatar,
-  Button,
   DarkThemeToggle,
   Dropdown,
   DropdownDivider,
@@ -11,9 +10,10 @@ import {
   NavbarBrand,
   TextInput,
 } from "flowbite-react";
-import { HiMenuAlt1, HiSearch } from "react-icons/hi";
+import { HiSearch } from "react-icons/hi";
+import { HiBars3 } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface DashboardNavbarProps {
   onToggleSidebar: () => void;
@@ -23,24 +23,15 @@ export const DashboardNavbar: FC<DashboardNavbarProps> = ({
   onToggleSidebar,
 }) => {
   const navigate = useNavigate();
-  const [userRole, setUserRole] = useState<string | null>(null);
-  const [username, setUsername] = useState<string | null>(null);
+  const { user, logout } = useAuth();
 
-  useEffect(() => {
-    const role = localStorage.getItem("userRole");
-    const email = localStorage.getItem("username");
-    setUserRole(role);
-    setUsername(email);
-  }, []);
-
-  const handleSignOut = () => {
-    localStorage.removeItem("userRole");
-    localStorage.removeItem("username");
+  const handleSignOut = async () => {
+    await logout();
     navigate("/authentication/sign-in");
   };
 
   const getLogoText = () => {
-    switch (userRole) {
+    switch (user?.rola_uzytkownika) {
       case "admin":
         return "MsBox_admin";
       case "supplier":
@@ -53,7 +44,7 @@ export const DashboardNavbar: FC<DashboardNavbarProps> = ({
   };
 
   const getLogoHref = () => {
-    switch (userRole) {
+    switch (user?.rola_uzytkownika) {
       case "admin":
         return "/admin";
       case "supplier":
@@ -68,13 +59,14 @@ export const DashboardNavbar: FC<DashboardNavbarProps> = ({
   return (
     <Navbar fluid className="fixed top-0 right-0 left-0 z-50 shadow-none">
       <div className="flex items-center">
-        <Button
-          className="mr-3 cursor-pointer rounded p-1 text-gray-600 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+        <button
           onClick={onToggleSidebar}
+          className="mr-3 flex h-10 w-10 items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-500 hover:bg-gray-50 hover:text-gray-900 focus:ring-2 focus:ring-gray-200 focus:outline-none dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-600"
+          type="button"
+          aria-label="Toggle sidebar"
         >
-          <span className="sr-only">Toggle sidebar</span>
-          <HiMenuAlt1 className="h-6 w-6" />
-        </Button>
+          <HiBars3 className="h-5 w-5" />
+        </button>
         <NavbarBrand href={getLogoHref()}>
           <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
             {getLogoText()}
@@ -108,7 +100,7 @@ export const DashboardNavbar: FC<DashboardNavbarProps> = ({
           <DropdownHeader>
             <span className="block text-sm">Użytkownik</span>
             <span className="block truncate text-sm font-medium">
-              {username || "brak danych"}
+              {user?.adres_email || "brak danych"}
             </span>
           </DropdownHeader>
           <DropdownItem>Dashboard</DropdownItem>

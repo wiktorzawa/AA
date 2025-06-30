@@ -58,10 +58,10 @@ export function CRUDLayoutForProductManagement() {
 
   return (
     <>
-      <section className="bg-gray-50 py-3 dark:bg-gray-900 sm:py-3">
+      <section className="bg-gray-50 py-3 sm:py-3 dark:bg-gray-900">
         <div className="mx-auto max-w-screen-2xl px-4 lg:px-12">
-          <div className="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
-            <div className="flex flex-col space-y-3 px-4 pt-3 lg:flex-row lg:items-center lg:justify-between lg:space-x-4 lg:space-y-0">
+          <div className="relative overflow-hidden bg-white shadow-md sm:rounded-lg dark:bg-gray-800">
+            <div className="flex flex-col space-y-3 px-4 pt-3 lg:flex-row lg:items-center lg:justify-between lg:space-y-0 lg:space-x-4">
               <h5 className="flex gap-x-2">
                 <span>
                   <span className="text-gray-500">All Products:&nbsp;</span>
@@ -74,7 +74,7 @@ export function CRUDLayoutForProductManagement() {
                   <HiInformationCircle className="mb-1 h-4 w-4 text-gray-400 hover:text-white" />
                 </Tooltip>
               </h5>
-              <div className="flex shrink-0 flex-col items-start space-y-3 md:flex-row md:items-center md:space-x-3 md:space-y-0 lg:justify-end">
+              <div className="flex shrink-0 flex-col items-start space-y-3 md:flex-row md:items-center md:space-y-0 md:space-x-3 lg:justify-end">
                 <Button color="gray" className="[&>span]:text-xs">
                   <HiCog className="mr-2 h-4 w-4" />
                   Table settings
@@ -82,7 +82,7 @@ export function CRUDLayoutForProductManagement() {
               </div>
             </div>
             <div className="mx-4 my-3 border-t border-gray-200 pt-4 dark:border-gray-700">
-              <div className="flex shrink-0 flex-col space-y-3 md:flex-row md:items-center md:space-x-3 md:space-y-0 lg:justify-between">
+              <div className="flex shrink-0 flex-col space-y-3 md:flex-row md:items-center md:space-y-0 md:space-x-3 lg:justify-between">
                 <TextInput
                   icon={() => (
                     <HiSearch className="h-4 w-4 text-gray-500 dark:text-gray-400" />
@@ -151,19 +151,19 @@ export function CRUDLayoutForProductManagement() {
                         <div className="flex items-center space-x-3">
                           <button
                             type="submit"
-                            className="flex items-center text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
+                            className="text-primary-600 dark:text-primary-500 flex items-center text-sm font-medium hover:underline"
                           >
                             Save view
                           </button>
                           <button
                             type="reset"
-                            className="flex items-center text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
+                            className="text-primary-600 dark:text-primary-500 flex items-center text-sm font-medium hover:underline"
                           >
                             Clear all
                           </button>
                         </div>
                       </div>
-                      <div className="pb-2 pt-3">
+                      <div className="pt-3 pb-2">
                         <Label
                           htmlFor="Checkbox-group-search"
                           className="sr-only"
@@ -318,7 +318,7 @@ export function CRUDLayoutForProductManagement() {
                                 </li>
                                 <a
                                   href="#"
-                                  className="flex items-center text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
+                                  className="text-primary-600 dark:text-primary-500 flex items-center text-sm font-medium hover:underline"
                                 >
                                   View all
                                 </a>
@@ -580,7 +580,7 @@ export function CRUDLayoutForProductManagement() {
                         <Checkbox
                           id="checkbox-table-search-1"
                           name="checkbox-table-search-1"
-                          className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600"
+                          className="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800"
                         />
                         <Label
                           htmlFor="checkbox-table-search-1"
@@ -592,7 +592,7 @@ export function CRUDLayoutForProductManagement() {
                     </TableCell>
                     <TableCell
                       scope="row"
-                      className="flex items-center whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white"
+                      className="flex items-center px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white"
                     >
                       <img
                         src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
@@ -604,19 +604,19 @@ export function CRUDLayoutForProductManagement() {
                     <TableCell className="px-4 py-3.5">
                       <Badge className="w-fit">Desktop PC</Badge>
                     </TableCell>
-                    <TableCell className="whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white">
+                    <TableCell className="px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                       <div className="flex items-center">
                         <div className="mr-2 inline-block h-4 w-4 rounded-full bg-red-700"></div>
                         95
                       </div>
                     </TableCell>
-                    <TableCell className="whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white">
+                    <TableCell className="px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                       1.47
                     </TableCell>
-                    <TableCell className="whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white">
+                    <TableCell className="px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                       0.47
                     </TableCell>
-                    <TableCell className="whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white">
+                    <TableCell className="px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                       <Rating>
                         <RatingStar />
                         <RatingStar />
@@ -628,7 +628,7 @@ export function CRUDLayoutForProductManagement() {
                         </p>
                       </Rating>
                     </TableCell>
-                    <TableCell className="whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white">
+                    <TableCell className="px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                       <div className="flex items-center">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -643,12 +643,12 @@ export function CRUDLayoutForProductManagement() {
                       </div>
                     </TableCell>
                     <TableCell className="px-4 py-3.5">$3.2M</TableCell>
-                    <TableCell className="whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white">
+                    <TableCell className="px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                       <div className="flex items-center space-x-4">
                         <Button onClick={() => setEditDrawerOpen(true)}>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            className="-ml-0.5 mr-2 h-4 w-4"
+                            className="mr-2 -ml-0.5 h-4 w-4"
                             viewBox="0 0 20 20"
                             fill="currentColor"
                             aria-hidden="true"
@@ -670,7 +670,7 @@ export function CRUDLayoutForProductManagement() {
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24"
                             fill="currentColor"
-                            className="-ml-0.5 mr-2 h-4 w-4"
+                            className="mr-2 -ml-0.5 h-4 w-4"
                           >
                             <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
                             <path
@@ -691,7 +691,7 @@ export function CRUDLayoutForProductManagement() {
                         <Checkbox
                           id="checkbox-table-search-1"
                           name="checkbox-table-search-1"
-                          className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600"
+                          className="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800"
                         />
                         <Label
                           htmlFor="checkbox-table-search-1"
@@ -703,7 +703,7 @@ export function CRUDLayoutForProductManagement() {
                     </TableCell>
                     <TableCell
                       scope="row"
-                      className="flex items-center whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white"
+                      className="flex items-center px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white"
                     >
                       <img
                         src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
@@ -715,19 +715,19 @@ export function CRUDLayoutForProductManagement() {
                     <TableCell className="px-4 py-3.5">
                       <Badge className="w-fit">Desktop PC</Badge>
                     </TableCell>
-                    <TableCell className="whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white">
+                    <TableCell className="px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                       <div className="flex items-center">
                         <div className="mr-2 inline-block h-4 w-4 rounded-full bg-red-700"></div>
                         108
                       </div>
                     </TableCell>
-                    <TableCell className="whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white">
+                    <TableCell className="px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                       1.15
                     </TableCell>
-                    <TableCell className="whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white">
+                    <TableCell className="px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                       0.32
                     </TableCell>
-                    <TableCell className="whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white">
+                    <TableCell className="px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                       <Rating>
                         <RatingStar />
                         <RatingStar />
@@ -739,7 +739,7 @@ export function CRUDLayoutForProductManagement() {
                         </p>
                       </Rating>
                     </TableCell>
-                    <TableCell className="whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white">
+                    <TableCell className="px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                       <div className="flex items-center">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -754,12 +754,12 @@ export function CRUDLayoutForProductManagement() {
                       </div>
                     </TableCell>
                     <TableCell className="px-4 py-3.5">$785K</TableCell>
-                    <TableCell className="whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white">
+                    <TableCell className="px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                       <div className="flex items-center space-x-4">
                         <Button onClick={() => setEditDrawerOpen(true)}>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            className="-ml-0.5 mr-2 h-4 w-4"
+                            className="mr-2 -ml-0.5 h-4 w-4"
                             viewBox="0 0 20 20"
                             fill="currentColor"
                             aria-hidden="true"
@@ -781,7 +781,7 @@ export function CRUDLayoutForProductManagement() {
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24"
                             fill="currentColor"
-                            className="-ml-0.5 mr-2 h-4 w-4"
+                            className="mr-2 -ml-0.5 h-4 w-4"
                           >
                             <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
                             <path
@@ -802,7 +802,7 @@ export function CRUDLayoutForProductManagement() {
                         <Checkbox
                           id="checkbox-table-search-1"
                           name="checkbox-table-search-1"
-                          className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600"
+                          className="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800"
                         />
                         <Label
                           htmlFor="checkbox-table-search-1"
@@ -814,7 +814,7 @@ export function CRUDLayoutForProductManagement() {
                     </TableCell>
                     <TableCell
                       scope="row"
-                      className="flex items-center whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white"
+                      className="flex items-center px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white"
                     >
                       <img
                         src="https://flowbite.s3.amazonaws.com/blocks/application-ui/devices/apple-iphone-14.png"
@@ -826,19 +826,19 @@ export function CRUDLayoutForProductManagement() {
                     <TableCell className="px-4 py-3.5">
                       <Badge className="w-fit">Phone</Badge>
                     </TableCell>
-                    <TableCell className="whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white">
+                    <TableCell className="px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                       <div className="flex items-center">
                         <div className="mr-2 inline-block h-4 w-4 rounded-full bg-green-400"></div>
                         24
                       </div>
                     </TableCell>
-                    <TableCell className="whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white">
+                    <TableCell className="px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                       1.00
                     </TableCell>
-                    <TableCell className="whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white">
+                    <TableCell className="px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                       0.99
                     </TableCell>
-                    <TableCell className="whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white">
+                    <TableCell className="px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                       <Rating>
                         <RatingStar />
                         <RatingStar />
@@ -850,7 +850,7 @@ export function CRUDLayoutForProductManagement() {
                         </p>
                       </Rating>
                     </TableCell>
-                    <TableCell className="whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white">
+                    <TableCell className="px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                       <div className="flex items-center">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -865,12 +865,12 @@ export function CRUDLayoutForProductManagement() {
                       </div>
                     </TableCell>
                     <TableCell className="px-4 py-3.5">$3.2M</TableCell>
-                    <TableCell className="whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white">
+                    <TableCell className="px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                       <div className="flex items-center space-x-4">
                         <Button onClick={() => setEditDrawerOpen(true)}>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            className="-ml-0.5 mr-2 h-4 w-4"
+                            className="mr-2 -ml-0.5 h-4 w-4"
                             viewBox="0 0 20 20"
                             fill="currentColor"
                             aria-hidden="true"
@@ -892,7 +892,7 @@ export function CRUDLayoutForProductManagement() {
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24"
                             fill="currentColor"
-                            className="-ml-0.5 mr-2 h-4 w-4"
+                            className="mr-2 -ml-0.5 h-4 w-4"
                           >
                             <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
                             <path
@@ -913,7 +913,7 @@ export function CRUDLayoutForProductManagement() {
                         <Checkbox
                           id="checkbox-table-search-1"
                           name="checkbox-table-search-1"
-                          className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600"
+                          className="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800"
                         />
                         <Label
                           htmlFor="checkbox-table-search-1"
@@ -925,7 +925,7 @@ export function CRUDLayoutForProductManagement() {
                     </TableCell>
                     <TableCell
                       scope="row"
-                      className="flex items-center whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white"
+                      className="flex items-center px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white"
                     >
                       <img
                         src="https://flowbite.s3.amazonaws.com/blocks/application-ui/devices/apple-ipad-air.png"
@@ -937,19 +937,19 @@ export function CRUDLayoutForProductManagement() {
                     <TableCell className="px-4 py-3.5">
                       <Badge className="w-fit">Tablet</Badge>
                     </TableCell>
-                    <TableCell className="whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white">
+                    <TableCell className="px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                       <div className="flex items-center">
                         <div className="mr-2 inline-block h-4 w-4 rounded-full bg-red-700"></div>
                         287
                       </div>
                     </TableCell>
-                    <TableCell className="whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white">
+                    <TableCell className="px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                       0.47
                     </TableCell>
-                    <TableCell className="whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white">
+                    <TableCell className="px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                       1.00
                     </TableCell>
-                    <TableCell className="whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white">
+                    <TableCell className="px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                       <Rating>
                         <RatingStar />
                         <RatingStar />
@@ -961,7 +961,7 @@ export function CRUDLayoutForProductManagement() {
                         </p>
                       </Rating>
                     </TableCell>
-                    <TableCell className="whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white">
+                    <TableCell className="px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                       <div className="flex items-center">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -976,12 +976,12 @@ export function CRUDLayoutForProductManagement() {
                       </div>
                     </TableCell>
                     <TableCell className="px-4 py-3.5">$425K</TableCell>
-                    <TableCell className="whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white">
+                    <TableCell className="px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                       <div className="flex items-center space-x-4">
                         <Button onClick={() => setEditDrawerOpen(true)}>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            className="-ml-0.5 mr-2 h-4 w-4"
+                            className="mr-2 -ml-0.5 h-4 w-4"
                             viewBox="0 0 20 20"
                             fill="currentColor"
                             aria-hidden="true"
@@ -1003,7 +1003,7 @@ export function CRUDLayoutForProductManagement() {
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24"
                             fill="currentColor"
-                            className="-ml-0.5 mr-2 h-4 w-4"
+                            className="mr-2 -ml-0.5 h-4 w-4"
                           >
                             <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
                             <path
@@ -1024,7 +1024,7 @@ export function CRUDLayoutForProductManagement() {
                         <Checkbox
                           id="checkbox-table-search-1"
                           name="checkbox-table-search-1"
-                          className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600"
+                          className="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800"
                         />
                         <Label
                           htmlFor="checkbox-table-search-1"
@@ -1036,7 +1036,7 @@ export function CRUDLayoutForProductManagement() {
                     </TableCell>
                     <TableCell
                       scope="row"
-                      className="flex items-center whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white"
+                      className="flex items-center px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white"
                     >
                       <img
                         src="https://flowbite.s3.amazonaws.com/blocks/application-ui/devices/xbox-series-s.png"
@@ -1048,19 +1048,19 @@ export function CRUDLayoutForProductManagement() {
                     <TableCell className="px-4 py-3.5">
                       <Badge className="w-fit">Gaming/Console</Badge>
                     </TableCell>
-                    <TableCell className="whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white">
+                    <TableCell className="px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                       <div className="flex items-center">
                         <div className="mr-2 inline-block h-4 w-4 rounded-full bg-yellow-300"></div>
                         450
                       </div>
                     </TableCell>
-                    <TableCell className="whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white">
+                    <TableCell className="px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                       1.61
                     </TableCell>
-                    <TableCell className="whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white">
+                    <TableCell className="px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                       0.30
                     </TableCell>
-                    <TableCell className="whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white">
+                    <TableCell className="px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                       <Rating>
                         <RatingStar />
                         <RatingStar />
@@ -1072,7 +1072,7 @@ export function CRUDLayoutForProductManagement() {
                         </p>
                       </Rating>
                     </TableCell>
-                    <TableCell className="whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white">
+                    <TableCell className="px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                       <div className="flex items-center">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -1087,12 +1087,12 @@ export function CRUDLayoutForProductManagement() {
                       </div>
                     </TableCell>
                     <TableCell className="px-4 py-3.5">$345K</TableCell>
-                    <TableCell className="whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white">
+                    <TableCell className="px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                       <div className="flex items-center space-x-4">
                         <Button onClick={() => setEditDrawerOpen(true)}>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            className="-ml-0.5 mr-2 h-4 w-4"
+                            className="mr-2 -ml-0.5 h-4 w-4"
                             viewBox="0 0 20 20"
                             fill="currentColor"
                             aria-hidden="true"
@@ -1114,7 +1114,7 @@ export function CRUDLayoutForProductManagement() {
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24"
                             fill="currentColor"
-                            className="-ml-0.5 mr-2 h-4 w-4"
+                            className="mr-2 -ml-0.5 h-4 w-4"
                           >
                             <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
                             <path
@@ -1135,7 +1135,7 @@ export function CRUDLayoutForProductManagement() {
                         <Checkbox
                           id="checkbox-table-search-1"
                           name="checkbox-table-search-1"
-                          className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600"
+                          className="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800"
                         />
                         <Label
                           htmlFor="checkbox-table-search-1"
@@ -1147,7 +1147,7 @@ export function CRUDLayoutForProductManagement() {
                     </TableCell>
                     <TableCell
                       scope="row"
-                      className="flex items-center whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white"
+                      className="flex items-center px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white"
                     >
                       <img
                         src="https://flowbite.s3.amazonaws.com/blocks/application-ui/devices/playstation-5.png"
@@ -1159,19 +1159,19 @@ export function CRUDLayoutForProductManagement() {
                     <TableCell className="px-4 py-3.5">
                       <Badge className="w-fit">Gaming/Console</Badge>
                     </TableCell>
-                    <TableCell className="whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white">
+                    <TableCell className="px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                       <div className="flex items-center">
                         <div className="mr-2 inline-block h-4 w-4 rounded-full bg-green-400"></div>
                         2435
                       </div>
                     </TableCell>
-                    <TableCell className="whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white">
+                    <TableCell className="px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                       1.41
                     </TableCell>
-                    <TableCell className="whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white">
+                    <TableCell className="px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                       0.11
                     </TableCell>
-                    <TableCell className="whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white">
+                    <TableCell className="px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                       <Rating>
                         <RatingStar />
                         <RatingStar />
@@ -1183,7 +1183,7 @@ export function CRUDLayoutForProductManagement() {
                         </p>
                       </Rating>
                     </TableCell>
-                    <TableCell className="whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white">
+                    <TableCell className="px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                       <div className="flex items-center">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -1198,12 +1198,12 @@ export function CRUDLayoutForProductManagement() {
                       </div>
                     </TableCell>
                     <TableCell className="px-4 py-3.5">$4.2M</TableCell>
-                    <TableCell className="whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white">
+                    <TableCell className="px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                       <div className="flex items-center space-x-4">
                         <Button onClick={() => setEditDrawerOpen(true)}>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            className="-ml-0.5 mr-2 h-4 w-4"
+                            className="mr-2 -ml-0.5 h-4 w-4"
                             viewBox="0 0 20 20"
                             fill="currentColor"
                             aria-hidden="true"
@@ -1225,7 +1225,7 @@ export function CRUDLayoutForProductManagement() {
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24"
                             fill="currentColor"
-                            className="-ml-0.5 mr-2 h-4 w-4"
+                            className="mr-2 -ml-0.5 h-4 w-4"
                           >
                             <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
                             <path
@@ -1246,7 +1246,7 @@ export function CRUDLayoutForProductManagement() {
                         <Checkbox
                           id="checkbox-table-search-1"
                           name="checkbox-table-search-1"
-                          className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600"
+                          className="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800"
                         />
                         <Label
                           htmlFor="checkbox-table-search-1"
@@ -1258,7 +1258,7 @@ export function CRUDLayoutForProductManagement() {
                     </TableCell>
                     <TableCell
                       scope="row"
-                      className="flex items-center whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white"
+                      className="flex items-center px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white"
                     >
                       <img
                         src="https://flowbite.s3.amazonaws.com/blocks/application-ui/devices/xbox-series-x.png"
@@ -1270,19 +1270,19 @@ export function CRUDLayoutForProductManagement() {
                     <TableCell className="px-4 py-3.5">
                       <Badge className="w-fit">Gaming/Console</Badge>
                     </TableCell>
-                    <TableCell className="whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white">
+                    <TableCell className="px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                       <div className="flex items-center">
                         <div className="mr-2 inline-block h-4 w-4 rounded-full bg-orange-400"></div>
                         235
                       </div>
                     </TableCell>
-                    <TableCell className="whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white">
+                    <TableCell className="px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                       7.09
                     </TableCell>
-                    <TableCell className="whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white">
+                    <TableCell className="px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                       3.32
                     </TableCell>
-                    <TableCell className="whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white">
+                    <TableCell className="px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                       <Rating>
                         <RatingStar />
                         <RatingStar />
@@ -1294,7 +1294,7 @@ export function CRUDLayoutForProductManagement() {
                         </p>
                       </Rating>
                     </TableCell>
-                    <TableCell className="whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white">
+                    <TableCell className="px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                       <div className="flex items-center">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -1309,12 +1309,12 @@ export function CRUDLayoutForProductManagement() {
                       </div>
                     </TableCell>
                     <TableCell className="px-4 py-3.5">$2.27M</TableCell>
-                    <TableCell className="whitespace-nowrap px-4 py-3.5 font-medium text-gray-900 dark:text-white">
+                    <TableCell className="px-4 py-3.5 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                       <div className="flex items-center space-x-4">
                         <Button onClick={() => setEditDrawerOpen(true)}>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            className="-ml-0.5 mr-2 h-4 w-4"
+                            className="mr-2 -ml-0.5 h-4 w-4"
                             viewBox="0 0 20 20"
                             fill="currentColor"
                             aria-hidden="true"
@@ -1336,7 +1336,7 @@ export function CRUDLayoutForProductManagement() {
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24"
                             fill="currentColor"
-                            className="-ml-0.5 mr-2 h-4 w-4"
+                            className="mr-2 -ml-0.5 h-4 w-4"
                           >
                             <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
                             <path
@@ -1433,7 +1433,7 @@ export function CRUDLayoutForProductManagement() {
                   </Label>
                   <div className="mb-4 w-full rounded-lg border border-gray-200 bg-gray-100 dark:border-gray-600 dark:bg-gray-700">
                     <div className="flex items-center justify-between border-b px-3 py-2 dark:border-gray-600">
-                      <div className="flex flex-wrap items-center divide-gray-200 dark:divide-gray-600 sm:divide-x">
+                      <div className="flex flex-wrap items-center divide-gray-200 sm:divide-x dark:divide-gray-600">
                         <div className="flex items-center space-x-1 sm:pr-4">
                           <button className="cursor-pointer rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white">
                             <svg
@@ -1558,7 +1558,7 @@ export function CRUDLayoutForProductManagement() {
                         </div>
                       </div>
                       <Tooltip content="Show full screen">
-                        <button className="cursor-pointer rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white sm:ml-auto">
+                        <button className="cursor-pointer rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 sm:ml-auto dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white">
                           <svg
                             aria-hidden
                             className="h-5 w-5"
@@ -1595,7 +1595,7 @@ export function CRUDLayoutForProductManagement() {
                   </Label>
                   <div className="flex w-full items-center justify-center">
                     <div className="mb-4 grid w-full grid-cols-3 gap-4">
-                      <div className="relative rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-36">
+                      <div className="relative rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-36 dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-side-image.png"
                           alt="imac"
@@ -1620,7 +1620,7 @@ export function CRUDLayoutForProductManagement() {
                           <span className="sr-only">Remove image</span>
                         </button>
                       </div>
-                      <div className="relative rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-36">
+                      <div className="relative rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-36 dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
                           alt="imac"
@@ -1645,7 +1645,7 @@ export function CRUDLayoutForProductManagement() {
                           <span className="sr-only">Remove image</span>
                         </button>
                       </div>
-                      <div className="relative rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-36">
+                      <div className="relative rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-36 dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
                           alt="imac"
@@ -1670,7 +1670,7 @@ export function CRUDLayoutForProductManagement() {
                           <span className="sr-only">Remove image</span>
                         </button>
                       </div>
-                      <div className="relative rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-36">
+                      <div className="relative rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-36 dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-side-image.png"
                           alt="imac"
@@ -1701,7 +1701,7 @@ export function CRUDLayoutForProductManagement() {
                     htmlFor="dropzone-file"
                     className="flex h-64 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600"
                   >
-                    <div className="flex flex-col items-center justify-center pb-6 pt-5">
+                    <div className="flex flex-col items-center justify-center pt-5 pb-6">
                       <svg
                         aria-hidden
                         className="mb-3 h-10 w-10 text-gray-400"
@@ -1835,7 +1835,7 @@ export function CRUDLayoutForProductManagement() {
               >
                 <svg
                   aria-hidden
-                  className="-ml-1 mr-1 h-5 w-5"
+                  className="mr-1 -ml-1 h-5 w-5"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -1911,10 +1911,10 @@ export function CRUDLayoutForProductManagement() {
             </div>
           </div>
           <dl className="sm:mb-5">
-            <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+            <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
               Details
             </dt>
-            <dd className="mb-4 font-light text-gray-500 dark:text-gray-400 sm:mb-5">
+            <dd className="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">
               Standard glass ,3.8GHz 8-core 10th-generation Intel Core i7
               processor, Turbo Boost up to 5.0GHz, 16GB 2666MHz DDR4 memory,
               Radeon Pro 5500 XT with 8GB of GDDR6 memory, 256GB SSD storage,
@@ -1922,8 +1922,8 @@ export function CRUDLayoutForProductManagement() {
             </dd>
           </dl>
           <dl className="mb-4 grid grid-cols-2 gap-4">
-            <div className="col-span-2 rounded-lg border border-gray-200 bg-gray-100 p-3 dark:border-gray-600 dark:bg-gray-700 sm:col-span-1">
-              <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+            <div className="col-span-2 rounded-lg border border-gray-200 bg-gray-100 p-3 sm:col-span-1 dark:border-gray-600 dark:bg-gray-700">
+              <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
                 Shipping
               </dt>
               <dd className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1943,21 +1943,21 @@ export function CRUDLayoutForProductManagement() {
                 United States, Europe
               </dd>
             </div>
-            <div className="col-span-2 rounded-lg border border-gray-200 bg-gray-100 p-3 dark:border-gray-600 dark:bg-gray-700 sm:col-span-1">
-              <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+            <div className="col-span-2 rounded-lg border border-gray-200 bg-gray-100 p-3 sm:col-span-1 dark:border-gray-600 dark:bg-gray-700">
+              <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
                 Colors
               </dt>
               <dd className="flex items-center space-x-2 font-light text-gray-500 dark:text-gray-400">
                 <div className="h-6 w-6 shrink-0 rounded-full bg-purple-600"></div>
                 <div className="h-6 w-6 shrink-0 rounded-full bg-indigo-400"></div>
-                <div className="h-6 w-6 shrink-0 rounded-full bg-primary-600"></div>
+                <div className="bg-primary-600 h-6 w-6 shrink-0 rounded-full"></div>
                 <div className="h-6 w-6 shrink-0 rounded-full bg-pink-400"></div>
                 <div className="h-6 w-6 shrink-0 rounded-full bg-teal-300"></div>
                 <div className="h-6 w-6 shrink-0 rounded-full bg-green-300"></div>
               </dd>
             </div>
             <div className="rounded-lg border border-gray-200 bg-gray-100 p-3 dark:border-gray-600 dark:bg-gray-700">
-              <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+              <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
                 Product State
               </dt>
               <dd>
@@ -1976,25 +1976,25 @@ export function CRUDLayoutForProductManagement() {
               </dd>
             </div>
             <div className="rounded-lg border border-gray-200 bg-gray-100 p-3 dark:border-gray-600 dark:bg-gray-700">
-              <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+              <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
                 Sold by
               </dt>
               <dd className="text-gray-500 dark:text-gray-400">Flowbite</dd>
             </div>
             <div className="rounded-lg border border-gray-200 bg-gray-100 p-3 dark:border-gray-600 dark:bg-gray-700">
-              <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+              <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
                 Ships from
               </dt>
               <dd className="text-gray-500 dark:text-gray-400">Flowbite</dd>
             </div>
             <div className="rounded-lg border border-gray-200 bg-gray-100 p-3 dark:border-gray-600 dark:bg-gray-700">
-              <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+              <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
                 Brand
               </dt>
               <dd className="text-gray-500 dark:text-gray-400">Apple</dd>
             </div>
             <div className="rounded-lg border border-gray-200 bg-gray-100 p-3 dark:border-gray-600 dark:bg-gray-700">
-              <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+              <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
                 Dimensions (cm)
               </dt>
               <dd className="text-gray-500 dark:text-gray-400">
@@ -2002,7 +2002,7 @@ export function CRUDLayoutForProductManagement() {
               </dd>
             </div>
             <div className="rounded-lg border border-gray-200 bg-gray-100 p-3 dark:border-gray-600 dark:bg-gray-700">
-              <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+              <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
                 Item weight
               </dt>
               <dd className="text-gray-500 dark:text-gray-400">12kg</dd>
@@ -2012,7 +2012,7 @@ export function CRUDLayoutForProductManagement() {
             <Button className="inline-flex w-full">
               <svg
                 aria-hidden
-                className="-ml-1 mr-1 h-5 w-5"
+                className="mr-1 -ml-1 h-5 w-5"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
@@ -2029,7 +2029,7 @@ export function CRUDLayoutForProductManagement() {
             <Button color="failure" className="inline-flex w-full">
               <svg
                 aria-hidden
-                className="-ml-1 mr-1.5 h-5 w-5"
+                className="mr-1.5 -ml-1 h-5 w-5"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
@@ -2057,7 +2057,7 @@ function DeleteModal() {
       <Button color="failure" onClick={() => setShowModal(true)}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="-ml-0.5 mr-2 h-4 w-4"
+          className="mr-2 -ml-0.5 h-4 w-4"
           viewBox="0 0 20 20"
           fill="currentColor"
           aria-hidden="true"
@@ -2076,10 +2076,10 @@ function DeleteModal() {
         size="lg"
         show={showModal}
       >
-        <ModalBody className="relative rounded-lg bg-white p-4 text-center shadow dark:bg-gray-800 sm:p-5">
+        <ModalBody className="relative rounded-lg bg-white p-4 text-center shadow sm:p-5 dark:bg-gray-800">
           <button
             onClick={() => setShowModal(false)}
-            className="absolute right-2.5 top-2.5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+            className="absolute top-2.5 right-2.5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
           >
             <svg
               aria-hidden

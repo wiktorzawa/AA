@@ -1,6 +1,12 @@
 "use client";
 
-import { Button, Drawer, DrawerHeader, DrawerItems, theme } from "flowbite-react";
+import {
+  Button,
+  Drawer,
+  DrawerHeader,
+  DrawerItems,
+  theme,
+} from "flowbite-react";
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 
@@ -29,18 +35,18 @@ export function ReadUserDrawer() {
         <DrawerHeader title="Helene Engels" titleIcon={() => <></>} />
         <DrawerItems>
           <dl className="mt-4 sm:mt-5">
-            <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+            <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
               Biography
             </dt>
-            <dd className="mb-4 font-light text-gray-500 dark:text-gray-400 sm:mb-5">
+            <dd className="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">
               Hello, I'm Helene Engels, USA Designer, Creating things that stand
               out, Featured by Adobe, Figma, Webflow and others, Daily design
               tips & resources, Exploring Web3.
             </dd>
-            <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+            <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
               Email
             </dt>
-            <dd className="mb-4 font-light text-gray-500 dark:text-gray-400 sm:mb-5">
+            <dd className="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">
               helene@company.com
             </dd>
           </dl>
@@ -48,7 +54,7 @@ export function ReadUserDrawer() {
             <Button className="inline-flex w-full">
               <svg
                 aria-hidden
-                className="-ml-1 mr-1 h-5 w-5"
+                className="mr-1 -ml-1 h-5 w-5"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
@@ -65,7 +71,7 @@ export function ReadUserDrawer() {
             <Button color="failure" className="inline-flex w-full">
               <svg
                 aria-hidden
-                className="-ml-1 mr-1.5 h-5 w-5"
+                className="mr-1.5 -ml-1 h-5 w-5"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"

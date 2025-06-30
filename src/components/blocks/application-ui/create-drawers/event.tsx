@@ -136,7 +136,7 @@ export function CreateEventDrawer() {
                     >
                       <svg
                         aria-hidden
-                        className="-ml-0.5 mr-0.5 h-4 w-4"
+                        className="mr-0.5 -ml-0.5 h-4 w-4"
                         fill="currentColor"
                         viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg"
@@ -152,7 +152,7 @@ export function CreateEventDrawer() {
                   )}
                   type="search"
                 />
-                <div className="mb-5 mt-2 flex space-x-1">
+                <div className="mt-2 mb-5 flex space-x-1">
                   <div className="relative">
                     <Avatar
                       alt="helene avatar"
@@ -163,7 +163,7 @@ export function CreateEventDrawer() {
                     />
                     <a
                       href="#"
-                      className="absolute left-5 top-0 flex h-3.5 w-3.5  items-center justify-center rounded-full border-2 border-white bg-gray-400 hover:bg-gray-500 dark:border-gray-800"
+                      className="absolute top-0 left-5 flex h-3.5 w-3.5 items-center justify-center rounded-full border-2 border-white bg-gray-400 hover:bg-gray-500 dark:border-gray-800"
                     >
                       <svg
                         aria-hidden
@@ -191,7 +191,7 @@ export function CreateEventDrawer() {
                     />
                     <button
                       type="button"
-                      className="absolute left-5 top-0 flex h-3.5 w-3.5  items-center justify-center rounded-full border-2 border-white bg-gray-400 hover:bg-gray-500 dark:border-gray-800"
+                      className="absolute top-0 left-5 flex h-3.5 w-3.5 items-center justify-center rounded-full border-2 border-white bg-gray-400 hover:bg-gray-500 dark:border-gray-800"
                     >
                       <svg
                         aria-hidden
@@ -219,7 +219,7 @@ export function CreateEventDrawer() {
                     />
                     <button
                       type="button"
-                      className="absolute left-5 top-0 flex h-3.5 w-3.5  items-center justify-center rounded-full border-2 border-white bg-gray-400 hover:bg-gray-500 dark:border-gray-800"
+                      className="absolute top-0 left-5 flex h-3.5 w-3.5 items-center justify-center rounded-full border-2 border-white bg-gray-400 hover:bg-gray-500 dark:border-gray-800"
                     >
                       <svg
                         aria-hidden
@@ -247,7 +247,7 @@ export function CreateEventDrawer() {
                     />
                     <button
                       type="button"
-                      className="absolute left-5 top-0 flex h-3.5 w-3.5  items-center justify-center rounded-full border-2 border-white bg-gray-400 hover:bg-gray-500 dark:border-gray-800"
+                      className="absolute top-0 left-5 flex h-3.5 w-3.5 items-center justify-center rounded-full border-2 border-white bg-gray-400 hover:bg-gray-500 dark:border-gray-800"
                     >
                       <svg
                         aria-hidden
@@ -284,7 +284,7 @@ export function CreateEventDrawer() {
                   ></button>
                   <button
                     type="button"
-                    className="h-6 w-6 rounded-sm bg-primary-600"
+                    className="bg-primary-600 h-6 w-6 rounded-sm"
                   ></button>
                   <button
                     type="button"
@@ -367,11 +367,11 @@ export function CreateEventDrawer() {
               <Button
                 color="alt"
                 onClick={() => setOpen(false)}
-                className="inline-flex w-full border border-gray-200 bg-white text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:ring-primary-300 dark:border-gray-500 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-600"
+                className="focus:ring-primary-300 inline-flex w-full border border-gray-200 bg-white text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:border-gray-500 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-600"
               >
                 <svg
                   aria-hidden
-                  className="-ml-1 mr-1 h-5 w-5"
+                  className="mr-1 -ml-1 h-5 w-5"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"

@@ -95,7 +95,7 @@ export function DropdownFilterProperties() {
         </div>
         <button
           type="submit"
-          className="flex items-center border-b pb-2 text-sm font-medium text-primary-600 hover:underline dark:border-gray-600 dark:text-primary-500"
+          className="text-primary-600 dark:text-primary-500 flex items-center border-b pb-2 text-sm font-medium hover:underline dark:border-gray-600"
         >
           <svg
             aria-hidden
@@ -118,7 +118,7 @@ export function DropdownFilterProperties() {
           </Button>
           <button
             type="reset"
-            className="flex items-center rounded-lg px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-black focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-700"
+            className="flex items-center rounded-lg px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-black focus:z-10 focus:ring-4 focus:ring-gray-200 focus:outline-none dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-700"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

@@ -52,10 +52,10 @@ export function CRUDLayoutForUserManagement() {
   const [isShowDeleteUserModal, setShowDeleteUserModal] = useState(false);
 
   return (
-    <section className="bg-gray-50 py-3 dark:bg-gray-900 sm:py-5">
+    <section className="bg-gray-50 py-3 sm:py-5 dark:bg-gray-900">
       <div className="mx-auto max-w-screen-2xl px-4 lg:px-12">
-        <div className="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
-          <div className="flex flex-col px-4 pb-3 pt-4 md:flex-row md:items-center md:justify-between">
+        <div className="relative overflow-hidden bg-white shadow-md sm:rounded-lg dark:bg-gray-800">
+          <div className="flex flex-col px-4 pt-4 pb-3 md:flex-row md:items-center md:justify-between">
             <div>
               <Breadcrumb className="mb-2 flex w-fit rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-gray-700 dark:border-gray-600 dark:bg-gray-700">
                 <BreadcrumbItem href="#">Dashboard</BreadcrumbItem>
@@ -87,14 +87,14 @@ export function CRUDLayoutForUserManagement() {
               onClose={() => setShowNewUserModal(false)}
               show={isShowNewUserModal}
             >
-              <ModalBody className="relative rounded-lg bg-white p-4 shadow dark:bg-gray-800 sm:p-5">
-                <div className="mb-4 flex items-center justify-between rounded-t border-b pb-4 dark:border-gray-600 sm:mb-5">
+              <ModalBody className="relative rounded-lg bg-white p-4 shadow sm:p-5 dark:bg-gray-800">
+                <div className="mb-4 flex items-center justify-between rounded-t border-b pb-4 sm:mb-5 dark:border-gray-600">
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                     Add new user
                   </h3>
                   <button
                     onClick={() => setShowNewUserModal(false)}
-                    className="absolute right-5 top-[18px] ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+                    className="absolute top-[18px] right-5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
                   >
                     <HiX className="h-5 w-5" />
                     <span className="sr-only">Close modal</span>
@@ -205,7 +205,7 @@ export function CRUDLayoutForUserManagement() {
                       </Label>
                       <div className="w-full rounded-lg border border-gray-200 bg-gray-50 dark:border-gray-600 dark:bg-gray-700">
                         <div className="flex items-center justify-between border-b px-3 py-2 dark:border-gray-600">
-                          <div className="flex flex-wrap items-center divide-gray-200 dark:divide-gray-600 sm:divide-x">
+                          <div className="flex flex-wrap items-center divide-gray-200 sm:divide-x dark:divide-gray-600">
                             <div className="flex items-center space-x-1 sm:pr-4">
                               <button className="cursor-pointer rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white">
                                 <HiPaperClip className="h-5 w-5" />
@@ -260,7 +260,7 @@ export function CRUDLayoutForUserManagement() {
                             </div>
                           </div>
                           <Tooltip content="Show full screen">
-                            <button className="cursor-pointer rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white sm:ml-auto">
+                            <button className="cursor-pointer rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 sm:ml-auto dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white">
                               <svg
                                 aria-hidden
                                 fill="currentColor"
@@ -303,7 +303,7 @@ export function CRUDLayoutForUserManagement() {
                           img="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/helene-engels.png"
                           rounded
                           size="lg"
-                          className="mb-4 sm:mb-0 sm:mr-4 [&_img]:max-w-none"
+                          className="mb-4 sm:mr-4 sm:mb-0 [&_img]:max-w-none"
                         />
                         <div className="w-full">
                           <input
@@ -431,7 +431,7 @@ export function CRUDLayoutForUserManagement() {
               <option value="australia">Australia</option>
             </Select>
           </div>
-          <div className="block w-full items-center justify-between border-t px-4 py-3 dark:border-gray-700 md:flex">
+          <div className="block w-full items-center justify-between border-t px-4 py-3 md:flex dark:border-gray-700">
             <div className="flex flex-wrap">
               <div className="mr-4 flex items-center text-sm font-medium text-gray-900 dark:text-white">
                 Show:
@@ -488,7 +488,7 @@ export function CRUDLayoutForUserManagement() {
                 label={
                   <>
                     <svg
-                      className="-ml-1 mr-1.5 h-5 w-5"
+                      className="mr-1.5 -ml-1 h-5 w-5"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                       xmlns="http://www.w3.org/2000/svg"
@@ -525,7 +525,7 @@ export function CRUDLayoutForUserManagement() {
               }}
               className="w-full text-left text-sm text-gray-500 dark:text-gray-400"
             >
-              <TableHead className="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
+              <TableHead className="bg-gray-50 text-xs text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
                 <TableHeadCell scope="col" className="p-4">
                   <div className="flex items-center">
                     <Checkbox id="checkbox-all" name="checkbox-all" />
@@ -543,7 +543,7 @@ export function CRUDLayoutForUserManagement() {
                 <TableHeadCell scope="col" className="p-4">
                   Email
                 </TableHeadCell>
-                <TableHeadCell scope="col" className="whitespace-nowrap p-4">
+                <TableHeadCell scope="col" className="p-4 whitespace-nowrap">
                   Account type
                 </TableHeadCell>
                 <TableHeadCell scope="col" className="p-4">
@@ -552,7 +552,7 @@ export function CRUDLayoutForUserManagement() {
                 <TableHeadCell scope="col" className="p-4">
                   Country
                 </TableHeadCell>
-                <TableHeadCell scope="col" className="whitespace-nowrap p-4">
+                <TableHeadCell scope="col" className="p-4 whitespace-nowrap">
                   Status
                 </TableHeadCell>
                 <TableHeadCell scope="col" className="p-4">
@@ -577,7 +577,7 @@ export function CRUDLayoutForUserManagement() {
                   </TableCell>
                   <th
                     scope="row"
-                    className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white"
+                    className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white"
                   >
                     <div className="mr-3 flex items-center">
                       <img
@@ -591,7 +591,7 @@ export function CRUDLayoutForUserManagement() {
                   <TableCell className="px-4 py-3">
                     <div
                       data-tooltip-target="tooltip-role-1"
-                      className="inline-flex items-center rounded bg-primary-100 px-2 py-0.5 text-xs font-medium text-primary-800 dark:bg-primary-900 dark:text-primary-300"
+                      className="bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-300 inline-flex items-center rounded px-2 py-0.5 text-xs font-medium"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -614,25 +614,25 @@ export function CRUDLayoutForUserManagement() {
                       role="tooltip"
                       className="tooltip invisible absolute z-10 inline-block max-w-56 rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white opacity-0 shadow-sm transition-opacity duration-300 dark:bg-gray-700"
                     >
-                      <h6 className="mb-1 text-sm font-medium leading-none dark:text-white">
+                      <h6 className="mb-1 text-sm leading-none font-medium dark:text-white">
                         Administrator
                       </h6>
-                      <p className="text-xs font-medium leading-tight text-gray-500 dark:text-gray-400">
+                      <p className="text-xs leading-tight font-medium text-gray-500 dark:text-gray-400">
                         Administrators are responsible for managing the entire
                         system.
                       </p>
                       <div className="tooltip-arrow" data-popper-arrow=""></div>
                     </div>
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3">
+                  <TableCell className="px-4 py-3 whitespace-nowrap">
                     <div className="flex items-center space-x-1.5">
                       jese@example.com
                     </div>
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     PRO
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     <div className="flex items-center">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -652,16 +652,16 @@ export function CRUDLayoutForUserManagement() {
                       4.7
                     </div>
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3">
+                  <TableCell className="px-4 py-3 whitespace-nowrap">
                     United States
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     <div className="flex items-center">
                       <div className="mr-2 h-3 w-3 rounded-full bg-green-500"></div>
                       Active
                     </div>
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     <Dropdown
                       dismissOnClick={false}
                       inline
@@ -762,7 +762,7 @@ export function CRUDLayoutForUserManagement() {
                   </TableCell>
                   <th
                     scope="row"
-                    className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white"
+                    className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white"
                   >
                     <div className="mr-3 flex items-center">
                       <img
@@ -799,25 +799,25 @@ export function CRUDLayoutForUserManagement() {
                       role="tooltip"
                       className="tooltip invisible absolute z-10 inline-block max-w-56 rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white opacity-0 shadow-sm transition-opacity duration-300 dark:bg-gray-700"
                     >
-                      <h6 className="mb-1 text-sm font-medium leading-none dark:text-white">
+                      <h6 className="mb-1 text-sm leading-none font-medium dark:text-white">
                         Viewer
                       </h6>
-                      <p className="text-xs font-medium leading-tight text-gray-500 dark:text-gray-400">
+                      <p className="text-xs leading-tight font-medium text-gray-500 dark:text-gray-400">
                         Viewers are responsible for observing and consuming the
                         content of a discussion or a debate.
                       </p>
                       <div className="tooltip-arrow" data-popper-arrow=""></div>
                     </div>
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3">
+                  <TableCell className="px-4 py-3 whitespace-nowrap">
                     <div className="flex items-center space-x-1.5">
                       bonnie@example.com
                     </div>
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     PRO
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     <div className="flex items-center">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -837,16 +837,16 @@ export function CRUDLayoutForUserManagement() {
                       3.9
                     </div>
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3">
+                  <TableCell className="px-4 py-3 whitespace-nowrap">
                     United States
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     <div className="flex items-center">
                       <div className="mr-2 h-3 w-3 rounded-full bg-green-500"></div>
                       Active
                     </div>
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     <Dropdown
                       dismissOnClick={false}
                       inline
@@ -947,7 +947,7 @@ export function CRUDLayoutForUserManagement() {
                   </TableCell>
                   <th
                     scope="row"
-                    className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white"
+                    className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white"
                   >
                     <div className="mr-3 flex items-center">
                       <img
@@ -983,25 +983,25 @@ export function CRUDLayoutForUserManagement() {
                       role="tooltip"
                       className="tooltip invisible absolute z-10 inline-block max-w-56 rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white opacity-0 shadow-sm transition-opacity duration-300 dark:bg-gray-700"
                     >
-                      <h6 className="mb-1 text-sm font-medium leading-none dark:text-white">
+                      <h6 className="mb-1 text-sm leading-none font-medium dark:text-white">
                         Moderator
                       </h6>
-                      <p className="text-xs font-medium leading-tight text-gray-500 dark:text-gray-400">
+                      <p className="text-xs leading-tight font-medium text-gray-500 dark:text-gray-400">
                         Moderators are responsible for the facilitation, review,
                         and guidance of a discussion or a debate.
                       </p>
                       <div className="tooltip-arrow" data-popper-arrow=""></div>
                     </div>
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3">
+                  <TableCell className="px-4 py-3 whitespace-nowrap">
                     <div className="flex items-center space-x-1.5">
                       leslie@example.com
                     </div>
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     PRO
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     <div className="flex items-center">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -1021,16 +1021,16 @@ export function CRUDLayoutForUserManagement() {
                       4.8
                     </div>
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3">
+                  <TableCell className="px-4 py-3 whitespace-nowrap">
                     United States
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     <div className="flex items-center">
                       <div className="mr-2 h-3 w-3 rounded-full bg-red-500"></div>
                       Inactive
                     </div>
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     <Dropdown
                       dismissOnClick={false}
                       inline
@@ -1131,7 +1131,7 @@ export function CRUDLayoutForUserManagement() {
                   </TableCell>
                   <th
                     scope="row"
-                    className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white"
+                    className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white"
                   >
                     <div className="mr-3 flex items-center">
                       <img
@@ -1167,25 +1167,25 @@ export function CRUDLayoutForUserManagement() {
                       role="tooltip"
                       className="tooltip invisible absolute z-10 inline-block max-w-56 rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white opacity-0 shadow-sm transition-opacity duration-300 dark:bg-gray-700"
                     >
-                      <h6 className="mb-1 text-sm font-medium leading-none dark:text-white">
+                      <h6 className="mb-1 text-sm leading-none font-medium dark:text-white">
                         Moderator
                       </h6>
-                      <p className="text-xs font-medium leading-tight text-gray-500 dark:text-gray-400">
+                      <p className="text-xs leading-tight font-medium text-gray-500 dark:text-gray-400">
                         Moderators are responsible for the facilitation, review,
                         and guidance of a discussion or a debate.
                       </p>
                       <div className="tooltip-arrow" data-popper-arrow=""></div>
                     </div>
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3">
+                  <TableCell className="px-4 py-3 whitespace-nowrap">
                     <div className="flex items-center space-x-1.5">
                       michael@example.com
                     </div>
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     Basic
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     <div className="flex items-center">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -1205,16 +1205,16 @@ export function CRUDLayoutForUserManagement() {
                       5
                     </div>
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3">
+                  <TableCell className="px-4 py-3 whitespace-nowrap">
                     France
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     <div className="flex items-center">
                       <div className="mr-2 h-3 w-3 rounded-full bg-green-500"></div>
                       Active
                     </div>
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     <Dropdown
                       dismissOnClick={false}
                       inline
@@ -1315,7 +1315,7 @@ export function CRUDLayoutForUserManagement() {
                   </TableCell>
                   <th
                     scope="row"
-                    className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white"
+                    className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white"
                   >
                     <div className="mr-3 flex items-center">
                       <img
@@ -1352,25 +1352,25 @@ export function CRUDLayoutForUserManagement() {
                       role="tooltip"
                       className="tooltip invisible absolute z-10 inline-block max-w-56 rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white opacity-0 shadow-sm transition-opacity duration-300 dark:bg-gray-700"
                     >
-                      <h6 className="mb-1 text-sm font-medium leading-none dark:text-white">
+                      <h6 className="mb-1 text-sm leading-none font-medium dark:text-white">
                         Viewer
                       </h6>
-                      <p className="text-xs font-medium leading-tight text-gray-500 dark:text-gray-400">
+                      <p className="text-xs leading-tight font-medium text-gray-500 dark:text-gray-400">
                         Viewers are responsible for observing and consuming the
                         content of a discussion or a debate.
                       </p>
                       <div className="tooltip-arrow" data-popper-arrow=""></div>
                     </div>
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3">
+                  <TableCell className="px-4 py-3 whitespace-nowrap">
                     <div className="flex items-center space-x-1.5">
                       joseph@example.com
                     </div>
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     Basic
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     <div className="flex items-center">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -1390,16 +1390,16 @@ export function CRUDLayoutForUserManagement() {
                       4.2
                     </div>
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3">
+                  <TableCell className="px-4 py-3 whitespace-nowrap">
                     England
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     <div className="flex items-center">
                       <div className="mr-2 h-3 w-3 rounded-full bg-green-500"></div>
                       Active
                     </div>
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     <Dropdown
                       dismissOnClick={false}
                       inline
@@ -1500,7 +1500,7 @@ export function CRUDLayoutForUserManagement() {
                   </TableCell>
                   <th
                     scope="row"
-                    className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white"
+                    className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white"
                   >
                     <div className="mr-3 flex items-center">
                       <img
@@ -1537,25 +1537,25 @@ export function CRUDLayoutForUserManagement() {
                       role="tooltip"
                       className="tooltip invisible absolute z-10 inline-block max-w-56 rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white opacity-0 shadow-sm transition-opacity duration-300 dark:bg-gray-700"
                     >
-                      <h6 className="mb-1 text-sm font-medium leading-none dark:text-white">
+                      <h6 className="mb-1 text-sm leading-none font-medium dark:text-white">
                         Viewer
                       </h6>
-                      <p className="text-xs font-medium leading-tight text-gray-500 dark:text-gray-400">
+                      <p className="text-xs leading-tight font-medium text-gray-500 dark:text-gray-400">
                         Viewers are responsible for observing and consuming the
                         content of a discussion or a debate.
                       </p>
                       <div className="tooltip-arrow" data-popper-arrow=""></div>
                     </div>
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3">
+                  <TableCell className="px-4 py-3 whitespace-nowrap">
                     <div className="flex items-center space-x-1.5">
                       robert@example.com
                     </div>
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     Basic
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     <div className="flex items-center">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -1575,16 +1575,16 @@ export function CRUDLayoutForUserManagement() {
                       4.5
                     </div>
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3">
+                  <TableCell className="px-4 py-3 whitespace-nowrap">
                     Canada
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     <div className="flex items-center">
                       <div className="mr-2 h-3 w-3 rounded-full bg-red-500"></div>
                       Inactive
                     </div>
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     <Dropdown
                       dismissOnClick={false}
                       inline
@@ -1685,7 +1685,7 @@ export function CRUDLayoutForUserManagement() {
                   </TableCell>
                   <th
                     scope="row"
-                    className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white"
+                    className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white"
                   >
                     <div className="mr-3 flex items-center">
                       <img
@@ -1722,25 +1722,25 @@ export function CRUDLayoutForUserManagement() {
                       role="tooltip"
                       className="tooltip invisible absolute z-10 inline-block max-w-56 rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white opacity-0 shadow-sm transition-opacity duration-300 dark:bg-gray-700"
                     >
-                      <h6 className="mb-1 text-sm font-medium leading-none dark:text-white">
+                      <h6 className="mb-1 text-sm leading-none font-medium dark:text-white">
                         Viewer
                       </h6>
-                      <p className="text-xs font-medium leading-tight text-gray-500 dark:text-gray-400">
+                      <p className="text-xs leading-tight font-medium text-gray-500 dark:text-gray-400">
                         Viewers are responsible for observing and consuming the
                         content of a discussion or a debate.
                       </p>
                       <div className="tooltip-arrow" data-popper-arrow=""></div>
                     </div>
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3">
+                  <TableCell className="px-4 py-3 whitespace-nowrap">
                     <div className="flex items-center space-x-1.5">
                       karen@example.com
                     </div>
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     PRO
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     <div className="flex items-center">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -1760,16 +1760,16 @@ export function CRUDLayoutForUserManagement() {
                       4.1
                     </div>
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3">
+                  <TableCell className="px-4 py-3 whitespace-nowrap">
                     Canada
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     <div className="flex items-center">
                       <div className="mr-2 h-3 w-3 rounded-full bg-red-500"></div>
                       Inactive
                     </div>
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     <Dropdown
                       dismissOnClick={false}
                       inline
@@ -1871,14 +1871,14 @@ export function CRUDLayoutForUserManagement() {
         show={isShowUpdateUserModal}
         size="2xl"
       >
-        <ModalBody className="relative rounded-lg bg-white p-4 shadow dark:bg-gray-800 sm:p-5">
-          <div className="mb-4 flex items-center justify-between rounded-t border-b pb-4 dark:border-gray-600 sm:mb-5">
+        <ModalBody className="relative rounded-lg bg-white p-4 shadow sm:p-5 dark:bg-gray-800">
+          <div className="mb-4 flex items-center justify-between rounded-t border-b pb-4 sm:mb-5 dark:border-gray-600">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
               Update user
             </h3>
             <button
               onClick={() => setShowUpdateUserModal(false)}
-              className="absolute right-5 top-[18px] ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+              className="absolute top-[18px] right-5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
             >
               <svg
                 aria-hidden
@@ -2000,7 +2000,7 @@ export function CRUDLayoutForUserManagement() {
                 </Label>
                 <div className="w-full rounded-lg border border-gray-200 bg-gray-50 dark:border-gray-600 dark:bg-gray-700">
                   <div className="flex items-center justify-between border-b px-3 py-2 dark:border-gray-600">
-                    <div className="flex flex-wrap items-center divide-gray-200 dark:divide-gray-600 sm:divide-x">
+                    <div className="flex flex-wrap items-center divide-gray-200 sm:divide-x dark:divide-gray-600">
                       <div className="flex items-center space-x-1 sm:pr-4">
                         <button
                           type="button"
@@ -2181,7 +2181,7 @@ export function CRUDLayoutForUserManagement() {
                       <button
                         type="button"
                         data-tooltip-target="tooltip-fullscreen"
-                        className="cursor-pointer rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white sm:ml-auto"
+                        className="cursor-pointer rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 sm:ml-auto dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
                       >
                         <svg
                           aria-hidden
@@ -2221,7 +2221,7 @@ export function CRUDLayoutForUserManagement() {
                   <img
                     alt="Helene avatar"
                     src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/helene-engels.png"
-                    className="mb-4 h-20 w-20 rounded-full sm:mb-0 sm:mr-4"
+                    className="mb-4 h-20 w-20 rounded-full sm:mr-4 sm:mb-0"
                   />
                   <div className="w-full">
                     <input
@@ -2231,7 +2231,7 @@ export function CRUDLayoutForUserManagement() {
                       type="file"
                     />
                     <p
-                      className="mb-3 mt-1 text-xs font-normal text-gray-500 dark:text-gray-300"
+                      className="mt-1 mb-3 text-xs font-normal text-gray-500 dark:text-gray-300"
                       id="file_input_help"
                     >
                       SVG, PNG, JPG or GIF (MAX. 800x400px).
@@ -2242,7 +2242,7 @@ export function CRUDLayoutForUserManagement() {
                         className="inline-flex [&>span]:text-xs"
                       >
                         <svg
-                          className="-ml-1 mr-1 h-4 w-4"
+                          className="mr-1 -ml-1 h-4 w-4"
                           fill="currentColor"
                           viewBox="0 0 20 20"
                           xmlns="http://www.w3.org/2000/svg"
@@ -2342,7 +2342,7 @@ export function CRUDLayoutForUserManagement() {
             </h3>
             <button
               onClick={() => setShowUpdateUserModal(false)}
-              className="absolute right-5 top-[18px] ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+              className="absolute top-[18px] right-5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
             >
               <svg
                 aria-hidden
@@ -2383,7 +2383,7 @@ export function CRUDLayoutForUserManagement() {
                         <img
                           alt="Helene avatar"
                           src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/helene-engels.png"
-                          className="mb-4 h-20 w-20 rounded-full sm:mb-0 sm:mr-4"
+                          className="mb-4 h-20 w-20 rounded-full sm:mr-4 sm:mb-0"
                         />
                         <div className="w-full">
                           <input
@@ -2393,7 +2393,7 @@ export function CRUDLayoutForUserManagement() {
                             type="file"
                           />
                           <p
-                            className="mb-3 mt-1 text-xs font-normal text-gray-500 dark:text-gray-300"
+                            className="mt-1 mb-3 text-xs font-normal text-gray-500 dark:text-gray-300"
                             id="file_input_help"
                           >
                             SVG, PNG, JPG or GIF (MAX. 800x400px).
@@ -2404,7 +2404,7 @@ export function CRUDLayoutForUserManagement() {
                               className="inline-flex [&>span]:text-xs"
                             >
                               <svg
-                                className="-ml-1 mr-1 h-4 w-4"
+                                className="mr-1 -ml-1 h-4 w-4"
                                 fill="currentColor"
                                 viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg"
@@ -2850,7 +2850,7 @@ export function CRUDLayoutForUserManagement() {
                 className="enabled:hover:bg-red-600 [&>span]:border-red-600 [&>span]:text-sm [&>span]:text-red-600 dark:[&>span]:bg-gray-800 dark:[&>span]:text-red-600"
               >
                 <svg
-                  className="-ml-1 mr-1 h-5 w-5"
+                  className="mr-1 -ml-1 h-5 w-5"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -2873,9 +2873,9 @@ export function CRUDLayoutForUserManagement() {
         size="3xl"
         show={isShowReadUserModal}
       >
-        <ModalBody className="relative rounded-lg bg-white p-4 shadow dark:bg-gray-800 sm:p-5">
+        <ModalBody className="relative rounded-lg bg-white p-4 shadow sm:p-5 dark:bg-gray-800">
           <div className="mb-4 flex justify-between rounded-t sm:mb-5">
-            <div className="text-lg text-gray-900 dark:text-white md:text-xl">
+            <div className="text-lg text-gray-900 md:text-xl dark:text-white">
               <div className="flex items-center">
                 <img
                   alt="Helene avatar"
@@ -2883,7 +2883,7 @@ export function CRUDLayoutForUserManagement() {
                   className="mr-2 h-12 w-12 rounded-full sm:mr-4"
                 ></img>
                 <div>
-                  <h3 className="text-lg font-bold text-gray-900 dark:text-white md:text-xl">
+                  <h3 className="text-lg font-bold text-gray-900 md:text-xl dark:text-white">
                     Helene Engels
                   </h3>
                   <p className="text-base text-gray-500 dark:text-gray-400">
@@ -2895,7 +2895,7 @@ export function CRUDLayoutForUserManagement() {
             <div>
               <button
                 onClick={() => setShowReadUserModal(false)}
-                className="absolute right-5 top-[18px] ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+                className="absolute top-[18px] right-5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
               >
                 <svg
                   aria-hidden
@@ -2935,7 +2935,7 @@ export function CRUDLayoutForUserManagement() {
                 Frontend Developer
               </dd>
               <dt className="sr-only">Location</dt>
-              <dd className="mb-4 flex items-center text-gray-500 dark:text-gray-400 sm:mb-5">
+              <dd className="mb-4 flex items-center text-gray-500 sm:mb-5 dark:text-gray-400">
                 <svg
                   className="mr-1.5 h-4 w-4 text-gray-400 dark:text-gray-500"
                   aria-hidden
@@ -2954,13 +2954,13 @@ export function CRUDLayoutForUserManagement() {
               <dt className="mb-2 leading-none text-gray-500 dark:text-gray-400">
                 Email Adress
               </dt>
-              <dd className="mb-4 font-medium text-gray-900 dark:text-white sm:mb-5">
+              <dd className="mb-4 font-medium text-gray-900 sm:mb-5 dark:text-white">
                 helene@company.com
               </dd>
               <dt className="mb-2 leading-none text-gray-500 dark:text-gray-400">
                 Home Adress
               </dt>
-              <dd className="mb-4 font-medium text-gray-900 dark:text-white sm:mb-5">
+              <dd className="mb-4 font-medium text-gray-900 sm:mb-5 dark:text-white">
                 92 Miles Drive, Newark, NJ 07103, California, United States of
                 America
               </dd>
@@ -2972,15 +2972,15 @@ export function CRUDLayoutForUserManagement() {
               </dd>
             </dl>
             <dl>
-              <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+              <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
                 Biography
               </dt>
-              <dd className="mb-4 text-gray-500 dark:text-gray-400 sm:mb-5">
+              <dd className="mb-4 text-gray-500 sm:mb-5 dark:text-gray-400">
                 Hello, I'm Helene Engels, USA Designer, Creating things that
                 stand out, Featured by Adobe, Figma, Webflow and others, Daily
                 design tips & resources, Exploring Web3.
               </dd>
-              <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+              <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
                 Social
               </dt>
               <dd className="inline-flex items-center space-x-1">
@@ -3063,7 +3063,7 @@ export function CRUDLayoutForUserManagement() {
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
-                  className="-ml-1 mr-1 h-5 w-5"
+                  className="mr-1 -ml-1 h-5 w-5"
                 >
                   <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
                   <path
@@ -3085,7 +3085,7 @@ export function CRUDLayoutForUserManagement() {
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
-                className="-ml-1 mr-1.5 h-5 w-5"
+                className="mr-1.5 -ml-1 h-5 w-5"
               >
                 <path
                   fillRule="evenodd"
@@ -3104,10 +3104,10 @@ export function CRUDLayoutForUserManagement() {
         size="md"
         show={isShowDeleteUserModal}
       >
-        <ModalBody className="relative rounded-lg bg-white p-4 text-center shadow dark:bg-gray-700 sm:p-5">
+        <ModalBody className="relative rounded-lg bg-white p-4 text-center shadow sm:p-5 dark:bg-gray-700">
           <button
             onClick={() => setShowDeleteUserModal(false)}
-            className="absolute right-2.5 top-2.5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+            className="absolute top-2.5 right-2.5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
           >
             <svg
               aria-hidden

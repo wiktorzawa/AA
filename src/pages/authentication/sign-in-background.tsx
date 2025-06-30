@@ -10,15 +10,17 @@ import {
   TextInput,
 } from "flowbite-react";
 import { HiInformationCircle } from "react-icons/hi";
-import { zaloguj } from "../../api/login_auth_data.api";
+import { zaloguj } from "../../api/authApi";
+import { useAuth } from "@/contexts/AuthContext";
 
 const SignInBackgroundPage: FC = function () {
+  const navigate = useNavigate();
+  const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -26,35 +28,40 @@ const SignInBackgroundPage: FC = function () {
     setLoading(true);
 
     try {
-      const response = await zaloguj({ username: email, password });
+      const response = await zaloguj({ adres_email: email, haslo: password });
 
-      if (response.success && response.userRole) {
-        // Zapisz rolę użytkownika i email w localStorage
-        localStorage.setItem("userRole", response.userRole);
-        localStorage.setItem("username", email); // Zapisz email do wyświetlenia w navbarze
+      if (response.token && response.refresh_token && response.uzytkownik) {
+        // Użyj AuthContext do logowania
+        login(response.token, response.refresh_token, response.uzytkownik);
 
-        // Bezpośrednie przekierowanie z odświeżeniem strony
-        switch (response.userRole) {
+        // Przekierowanie na podstawie roli
+        switch (response.uzytkownik.rola_uzytkownika) {
           case "admin":
-            window.location.href = "/admin";
+            navigate("/admin");
             break;
           case "staff":
-            window.location.href = "/staff/dashboard";
+            navigate("/staff/dashboard");
             break;
           case "supplier":
-            window.location.href = "/supplier/dashboard";
+            navigate("/supplier/dashboard");
             break;
           default:
-            // Domyślne przekierowanie, jeśli rola nie jest określona
-            window.location.href = "/";
+            navigate("/");
             break;
         }
       } else {
-        setError(response.error || "Wystąpił nieznany błąd.");
+        setError(
+          (response as any).error ||
+            "Wystąpił nieznany błąd podczas logowania.",
+        );
       }
-    } catch (err) {
-      console.error("Login API call failed:", err);
-      setError("Błąd połączenia z serwerem. Spróbuj ponownie później.");
+    } catch (err: any) {
+      console.error("Błąd API logowania:", err);
+      if (err.response && err.response.data && err.response.data.error) {
+        setError(err.response.data.error);
+      } else {
+        setError("Błąd połączenia z serwerem. Spróbuj ponownie później.");
+      }
     } finally {
       setLoading(false);
     }
@@ -63,17 +70,14 @@ const SignInBackgroundPage: FC = function () {
   return (
     <section className="bg-gray-700/60 bg-[url('https://flowbite.s3.amazonaws.com/blocks/marketing-ui/authentication/background.jpg')] bg-cover bg-center bg-no-repeat bg-blend-multiply">
       <div className="pt:mt-0 mx-auto flex flex-col items-center justify-center px-6 py-8 md:h-screen">
-        <a
-          href="#"
-          className="mb-6 flex items-center text-2xl font-semibold text-white"
-        >
+        <div className="mb-6 flex items-center text-2xl font-semibold text-white">
           <img
             className="mr-2 h-8 w-8"
             src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
             alt="logo"
           />
           Your Brand
-        </a>
+        </div>
         <div className="w-full rounded-lg bg-white shadow sm:max-w-md md:mt-0 xl:p-0 dark:bg-gray-800">
           <div className="space-y-4 p-6 sm:p-8 md:space-y-6 lg:space-y-8">
             {error && (

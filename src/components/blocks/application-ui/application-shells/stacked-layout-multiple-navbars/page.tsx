@@ -31,7 +31,7 @@ export default function StackedLayoutWithMultipleNavbars() {
         }}
         className="pb-0"
       >
-        <div className="border-gray-200 bg-white px-4 py-2.5 dark:bg-gray-800 lg:px-6">
+        <div className="border-gray-200 bg-white px-4 py-2.5 lg:px-6 dark:bg-gray-800">
           <div className="flex items-center justify-between">
             <div className="flex items-center justify-start">
               <a href="https://flowbite.com" className="mr-6 flex">
@@ -40,7 +40,7 @@ export default function StackedLayoutWithMultipleNavbars() {
                   className="mr-3 h-8"
                   alt=""
                 />
-                <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
+                <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
                   Flowbite
                 </span>
               </a>
@@ -137,7 +137,7 @@ export default function StackedLayoutWithMultipleNavbars() {
                         src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
                         alt=""
                       />
-                      <div className="absolute -mt-5 ml-6 flex h-5 w-5 items-center justify-center rounded-full border border-white bg-primary-700 dark:border-gray-700">
+                      <div className="bg-primary-700 absolute -mt-5 ml-6 flex h-5 w-5 items-center justify-center rounded-full border border-white dark:border-gray-700">
                         <svg
                           className="h-2 w-2 text-white"
                           aria-hidden
@@ -158,7 +158,7 @@ export default function StackedLayoutWithMultipleNavbars() {
                         </span>
                         : "Hey, what's up? All set for the presentation?"
                       </div>
-                      <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                      <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                         a few moments ago
                       </div>
                     </div>
@@ -196,7 +196,7 @@ export default function StackedLayoutWithMultipleNavbars() {
                         </span>
                         &nbsp;started following you.
                       </div>
-                      <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                      <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                         10 minutes ago
                       </div>
                     </div>
@@ -234,7 +234,7 @@ export default function StackedLayoutWithMultipleNavbars() {
                         </span>
                         &nbsp;love your story. See it and view more stories.
                       </div>
-                      <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                      <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                         44 minutes ago
                       </div>
                     </div>
@@ -267,12 +267,12 @@ export default function StackedLayoutWithMultipleNavbars() {
                           Leslie Livingston
                         </span>
                         &nbsp;mentioned you in a comment:&nbsp;
-                        <span className="font-medium text-primary-700 dark:text-primary-500">
+                        <span className="text-primary-700 dark:text-primary-500 font-medium">
                           @bonnie.green
                         </span>
                         &nbsp;what do you say?
                       </div>
-                      <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                      <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                         1 hour ago
                       </div>
                     </div>
@@ -307,7 +307,7 @@ export default function StackedLayoutWithMultipleNavbars() {
                         &nbsp;posted a new video: Glassmorphism - learn how to
                         implement the new design trend.
                       </div>
-                      <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                      <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                         3 hours ago
                       </div>
                     </div>
@@ -317,7 +317,7 @@ export default function StackedLayoutWithMultipleNavbars() {
                   href="#"
                   className="block rounded-b-xl border-t border-gray-100 bg-gray-50 py-2 text-center text-base font-medium text-gray-900 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-600 dark:text-white dark:hover:underline"
                 >
-                  <div className="inline-flex items-center ">
+                  <div className="inline-flex items-center">
                     <svg
                       aria-hidden
                       className="mr-2 h-5 w-5"
@@ -409,7 +409,7 @@ export default function StackedLayoutWithMultipleNavbars() {
                   <div className="flex w-full items-center justify-between">
                     <span className="flex items-center">
                       <svg
-                        className="mr-2 h-4 w-4 text-primary-600 dark:text-primary-500"
+                        className="text-primary-600 dark:text-primary-500 mr-2 h-4 w-4"
                         aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="currentColor"
@@ -460,7 +460,7 @@ export default function StackedLayoutWithMultipleNavbars() {
                         alt=""
                       />
                       <div className="text-left">
-                        <div className="text-sm font-semibold leading-none text-gray-900 dark:text-white">
+                        <div className="text-sm leading-none font-semibold text-gray-900 dark:text-white">
                           Personal
                         </div>
                       </div>
@@ -486,7 +486,7 @@ export default function StackedLayoutWithMultipleNavbars() {
                   arrowIcon: "hidden",
                   inlineWrapper: twMerge(
                     theme.dropdown.inlineWrapper,
-                    "rounded-lg p-2 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:bg-gray-700 dark:hover:bg-gray-800 dark:focus:ring-gray-700",
+                    "rounded-lg p-2 hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-800 dark:focus:ring-gray-700",
                   ),
                 }}
               >
@@ -495,7 +495,7 @@ export default function StackedLayoutWithMultipleNavbars() {
                   className="flex items-center rounded px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-600"
                 >
                   <div className="text-left">
-                    <div className="mb-0.5 text-sm font-medium leading-none text-gray-900 dark:text-white">
+                    <div className="mb-0.5 text-sm leading-none font-medium text-gray-900 dark:text-white">
                       Company
                     </div>
                     <div className="text-xs text-gray-500 dark:text-gray-400">
@@ -508,7 +508,7 @@ export default function StackedLayoutWithMultipleNavbars() {
                   className="flex items-center rounded px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-600"
                 >
                   <div className="text-left">
-                    <div className="mb-0.5 text-sm font-medium leading-none text-gray-900 dark:text-white">
+                    <div className="mb-0.5 text-sm leading-none font-medium text-gray-900 dark:text-white">
                       Personal
                     </div>
                     <div className="text-xs text-gray-500 dark:text-gray-400">
@@ -539,7 +539,7 @@ export default function StackedLayoutWithMultipleNavbars() {
                   arrowIcon: "hidden",
                   inlineWrapper: twMerge(
                     theme.dropdown.inlineWrapper,
-                    "rounded-lg p-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white dark:focus:ring-gray-700",
+                    "rounded-lg p-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus:ring-4 focus:ring-gray-200 focus:outline-none dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white dark:focus:ring-gray-700",
                   ),
                 }}
               >
@@ -715,7 +715,7 @@ export default function StackedLayoutWithMultipleNavbars() {
         <form
           action="#"
           method="GET"
-          className="px-4 py-3 dark:bg-gray-800 lg:hidden"
+          className="px-4 py-3 lg:hidden dark:bg-gray-800"
         >
           <Label htmlFor="topbar-search" className="sr-only">
             Search
@@ -753,69 +753,69 @@ export default function StackedLayoutWithMultipleNavbars() {
             </Select>
           </div>
         </form>
-        <NavbarCollapse className=" border-b border-gray-200 dark:border-gray-800">
-          <div className="flex w-full flex-col items-center bg-white shadow-sm  dark:bg-gray-900 lg:mx-5 lg:flex-row [&_li]:w-full lg:[&_li]:w-auto">
+        <NavbarCollapse className="border-b border-gray-200 dark:border-gray-800">
+          <div className="flex w-full flex-col items-center bg-white shadow-sm lg:mx-5 lg:flex-row dark:bg-gray-900 [&_li]:w-full lg:[&_li]:w-auto">
             <NavbarLink
               aria-current="page"
               href="#"
-              className="block border-b p-0 dark:border-gray-700 dark:hover:bg-transparent lg:inline lg:border-b-0"
+              className="block border-b p-0 lg:inline lg:border-b-0 dark:border-gray-700 dark:hover:bg-transparent"
             >
-              <span className="block border-b-2 border-primary-600 px-4 py-3 text-sm font-medium text-primary-600 hover:text-primary-600 dark:border-primary-500 dark:text-primary-500">
+              <span className="border-primary-600 text-primary-600 hover:text-primary-600 dark:border-primary-500 dark:text-primary-500 block border-b-2 px-4 py-3 text-sm font-medium">
                 Overview
               </span>
             </NavbarLink>
             <NavbarLink
               href="#"
-              className="block border-b p-0 dark:border-gray-700 dark:hover:bg-transparent md:inline md:border-b-0"
+              className="block border-b p-0 md:inline md:border-b-0 dark:border-gray-700 dark:hover:bg-transparent"
             >
-              <span className="block border-b-2 border-transparent px-4 py-3 text-sm font-medium text-gray-500 hover:border-primary-600 hover:text-primary-600 dark:text-gray-400 dark:hover:border-primary-500 dark:hover:text-primary-500">
+              <span className="hover:border-primary-600 hover:text-primary-600 dark:hover:border-primary-500 dark:hover:text-primary-500 block border-b-2 border-transparent px-4 py-3 text-sm font-medium text-gray-500 dark:text-gray-400">
                 Resources
               </span>
             </NavbarLink>
             <NavbarLink
               href="#"
-              className="block border-b p-0 dark:border-gray-700 dark:hover:bg-transparent md:inline md:border-b-0"
+              className="block border-b p-0 md:inline md:border-b-0 dark:border-gray-700 dark:hover:bg-transparent"
             >
-              <span className="block border-b-2 border-transparent px-4 py-3 text-sm font-medium text-gray-500 hover:border-primary-600 hover:text-primary-600 dark:text-gray-400 dark:hover:border-primary-500 dark:hover:text-primary-500">
+              <span className="hover:border-primary-600 hover:text-primary-600 dark:hover:border-primary-500 dark:hover:text-primary-500 block border-b-2 border-transparent px-4 py-3 text-sm font-medium text-gray-500 dark:text-gray-400">
                 Deploy
               </span>
             </NavbarLink>
             <NavbarLink
               href="#"
-              className="block border-b p-0 dark:border-gray-700 dark:hover:bg-transparent md:inline md:border-b-0"
+              className="block border-b p-0 md:inline md:border-b-0 dark:border-gray-700 dark:hover:bg-transparent"
             >
-              <span className="block border-b-2 border-transparent px-4 py-3 text-sm font-medium text-gray-500 hover:border-primary-600 hover:text-primary-600 dark:text-gray-400 dark:hover:border-primary-500 dark:hover:text-primary-500">
+              <span className="hover:border-primary-600 hover:text-primary-600 dark:hover:border-primary-500 dark:hover:text-primary-500 block border-b-2 border-transparent px-4 py-3 text-sm font-medium text-gray-500 dark:text-gray-400">
                 Metrics
               </span>
             </NavbarLink>
             <NavbarLink
               href="#"
-              className="block border-b p-0 dark:border-gray-700 dark:hover:bg-transparent md:inline md:border-b-0"
+              className="block border-b p-0 md:inline md:border-b-0 dark:border-gray-700 dark:hover:bg-transparent"
             >
-              <span className="block border-b-2 border-transparent px-4 py-3 text-sm font-medium text-gray-500 hover:border-primary-600 hover:text-primary-600 dark:text-gray-400 dark:hover:border-primary-500 dark:hover:text-primary-500">
+              <span className="hover:border-primary-600 hover:text-primary-600 dark:hover:border-primary-500 dark:hover:text-primary-500 block border-b-2 border-transparent px-4 py-3 text-sm font-medium text-gray-500 dark:text-gray-400">
                 Activity
               </span>
             </NavbarLink>
             <NavbarLink
               href="#"
-              className="block border-b p-0 dark:border-gray-700 dark:hover:bg-transparent md:inline md:border-b-0"
+              className="block border-b p-0 md:inline md:border-b-0 dark:border-gray-700 dark:hover:bg-transparent"
             >
-              <span className="block border-b-2 border-transparent px-4 py-3 text-sm font-medium text-gray-500 hover:border-primary-600 hover:text-primary-600 dark:text-gray-400 dark:hover:border-primary-500 dark:hover:text-primary-500">
+              <span className="hover:border-primary-600 hover:text-primary-600 dark:hover:border-primary-500 dark:hover:text-primary-500 block border-b-2 border-transparent px-4 py-3 text-sm font-medium text-gray-500 dark:text-gray-400">
                 Access
               </span>
             </NavbarLink>
             <NavbarLink
               href="#"
-              className="block border-b p-0 dark:border-gray-700 dark:hover:bg-transparent md:inline md:border-b-0"
+              className="block border-b p-0 md:inline md:border-b-0 dark:border-gray-700 dark:hover:bg-transparent"
             >
-              <span className="block border-b-2 border-transparent px-4 py-3 text-sm font-medium text-gray-500 hover:border-primary-600 hover:text-primary-600 dark:text-gray-400 dark:hover:border-primary-500 dark:hover:text-primary-500">
+              <span className="hover:border-primary-600 hover:text-primary-600 dark:hover:border-primary-500 dark:hover:text-primary-500 block border-b-2 border-transparent px-4 py-3 text-sm font-medium text-gray-500 dark:text-gray-400">
                 Settings
               </span>
             </NavbarLink>
           </div>
         </NavbarCollapse>
       </Navbar>
-      <div className="grid flex-1 grid-cols-1 gap-5 p-4 dark:bg-gray-900 md:grid-cols-2">
+      <div className="grid flex-1 grid-cols-1 gap-5 p-4 md:grid-cols-2 dark:bg-gray-900">
         <div className="h-96 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600"></div>
         <div className="h-96 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600"></div>
         <div className="h-96 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600"></div>

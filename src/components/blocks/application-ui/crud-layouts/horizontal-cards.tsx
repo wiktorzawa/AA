@@ -27,10 +27,10 @@ export function CRUDLayoutWithHorizontalCards() {
   const [isShowDeleteModal, setShowDeleteModal] = useState(false);
 
   return (
-    <section className="bg-gray-50 py-3 antialiased dark:bg-gray-900 sm:py-5">
+    <section className="bg-gray-50 py-3 antialiased sm:py-5 dark:bg-gray-900">
       <div className="mx-auto max-w-screen-2xl px-4 lg:px-12">
-        <div className="relative bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
-          <div className="flex flex-col justify-between space-y-3 p-4 md:flex-row md:items-center md:space-x-4 md:space-y-0">
+        <div className="relative bg-white shadow-md sm:rounded-lg dark:bg-gray-800">
+          <div className="flex flex-col justify-between space-y-3 p-4 md:flex-row md:items-center md:space-y-0 md:space-x-4">
             <div className="w-full md:w-1/2">
               <form className="flex items-center">
                 <Label htmlFor="simple-search" className="sr-only">
@@ -55,7 +55,7 @@ export function CRUDLayoutWithHorizontalCards() {
                   <input
                     type="text"
                     id="simple-search"
-                    className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2 pl-10 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
+                    className="focus:border-primary-500 focus:ring-primary-500 dark:focus:border-primary-500 dark:focus:ring-primary-500 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2 pl-10 text-sm text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400"
                     placeholder="Search"
                     required
                   />
@@ -246,7 +246,7 @@ export function CRUDLayoutWithHorizontalCards() {
                           />
                           <Label
                             htmlFor="gaming"
-                            className="inline-flex w-full cursor-pointer items-center justify-center rounded-lg border border-gray-300 bg-gray-100 p-2 text-center text-sm font-medium text-gray-500 hover:bg-primary-500 hover:text-white peer-checked:border-primary-600 peer-checked:bg-primary-600 peer-checked:text-white dark:border-gray-500 dark:bg-gray-600 dark:text-gray-100 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:hover:text-white dark:peer-checked:bg-primary-600"
+                            className="hover:bg-primary-500 peer-checked:border-primary-600 peer-checked:bg-primary-600 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:peer-checked:bg-primary-600 inline-flex w-full cursor-pointer items-center justify-center rounded-lg border border-gray-300 bg-gray-100 p-2 text-center text-sm font-medium text-gray-500 peer-checked:text-white hover:text-white dark:border-gray-500 dark:bg-gray-600 dark:text-gray-100 dark:hover:text-white"
                           >
                             Gaming
                           </Label>
@@ -259,7 +259,7 @@ export function CRUDLayoutWithHorizontalCards() {
                           />
                           <Label
                             htmlFor="electronics"
-                            className="inline-flex w-full cursor-pointer items-center justify-center rounded-lg border border-gray-300 bg-gray-100 p-2 text-center text-sm font-medium text-gray-500 hover:bg-primary-500 hover:text-white peer-checked:border-primary-600 peer-checked:bg-primary-600 peer-checked:text-white dark:border-gray-500 dark:bg-gray-600 dark:text-gray-100 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:hover:text-white dark:peer-checked:bg-primary-600"
+                            className="hover:bg-primary-500 peer-checked:border-primary-600 peer-checked:bg-primary-600 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:peer-checked:bg-primary-600 inline-flex w-full cursor-pointer items-center justify-center rounded-lg border border-gray-300 bg-gray-100 p-2 text-center text-sm font-medium text-gray-500 peer-checked:text-white hover:text-white dark:border-gray-500 dark:bg-gray-600 dark:text-gray-100 dark:hover:text-white"
                           >
                             Electronics
                           </Label>
@@ -273,7 +273,7 @@ export function CRUDLayoutWithHorizontalCards() {
                           />
                           <Label
                             htmlFor="phone"
-                            className="inline-flex w-full cursor-pointer items-center justify-center rounded-lg border border-gray-300 bg-gray-100 p-2 text-center text-sm font-medium text-gray-500 hover:bg-primary-500 hover:text-white peer-checked:border-primary-600 peer-checked:bg-primary-600 peer-checked:text-white dark:border-gray-500 dark:bg-gray-600 dark:text-gray-100 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:hover:text-white dark:peer-checked:bg-primary-600"
+                            className="hover:bg-primary-500 peer-checked:border-primary-600 peer-checked:bg-primary-600 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:peer-checked:bg-primary-600 inline-flex w-full cursor-pointer items-center justify-center rounded-lg border border-gray-300 bg-gray-100 p-2 text-center text-sm font-medium text-gray-500 peer-checked:text-white hover:text-white dark:border-gray-500 dark:bg-gray-600 dark:text-gray-100 dark:hover:text-white"
                           >
                             Phone
                           </Label>
@@ -286,7 +286,7 @@ export function CRUDLayoutWithHorizontalCards() {
                           />
                           <Label
                             htmlFor="tv-monitor"
-                            className="inline-flex w-full cursor-pointer items-center justify-center rounded-lg border border-gray-300 bg-gray-100 p-2 text-center text-sm font-medium text-gray-500 hover:bg-primary-500 hover:text-white peer-checked:border-primary-600 peer-checked:bg-primary-600 peer-checked:text-white dark:border-gray-500 dark:bg-gray-600 dark:text-gray-100 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:hover:text-white dark:peer-checked:bg-primary-600"
+                            className="hover:bg-primary-500 peer-checked:border-primary-600 peer-checked:bg-primary-600 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:peer-checked:bg-primary-600 inline-flex w-full cursor-pointer items-center justify-center rounded-lg border border-gray-300 bg-gray-100 p-2 text-center text-sm font-medium text-gray-500 peer-checked:text-white hover:text-white dark:border-gray-500 dark:bg-gray-600 dark:text-gray-100 dark:hover:text-white"
                           >
                             TV/Monitor
                           </Label>
@@ -299,7 +299,7 @@ export function CRUDLayoutWithHorizontalCards() {
                           />
                           <Label
                             htmlFor="laptop"
-                            className="inline-flex w-full cursor-pointer items-center justify-center rounded-lg border border-gray-300 bg-gray-100 p-2 text-center text-sm font-medium text-gray-500 hover:bg-primary-500 hover:text-white peer-checked:border-primary-600 peer-checked:bg-primary-600 peer-checked:text-white dark:border-gray-500 dark:bg-gray-600 dark:text-gray-100 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:hover:text-white dark:peer-checked:bg-primary-600"
+                            className="hover:bg-primary-500 peer-checked:border-primary-600 peer-checked:bg-primary-600 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:peer-checked:bg-primary-600 inline-flex w-full cursor-pointer items-center justify-center rounded-lg border border-gray-300 bg-gray-100 p-2 text-center text-sm font-medium text-gray-500 peer-checked:text-white hover:text-white dark:border-gray-500 dark:bg-gray-600 dark:text-gray-100 dark:hover:text-white"
                           >
                             Laptop
                           </Label>
@@ -313,7 +313,7 @@ export function CRUDLayoutWithHorizontalCards() {
                           />
                           <Label
                             htmlFor="watch"
-                            className="inline-flex w-full cursor-pointer items-center justify-center rounded-lg border border-gray-300 bg-gray-100 p-2 text-center text-sm font-medium text-gray-500 hover:bg-primary-500 hover:text-white peer-checked:border-primary-600 peer-checked:bg-primary-600 peer-checked:text-white dark:border-gray-500 dark:bg-gray-600 dark:text-gray-100 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:hover:text-white dark:peer-checked:bg-primary-600"
+                            className="hover:bg-primary-500 peer-checked:border-primary-600 peer-checked:bg-primary-600 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:peer-checked:bg-primary-600 inline-flex w-full cursor-pointer items-center justify-center rounded-lg border border-gray-300 bg-gray-100 p-2 text-center text-sm font-medium text-gray-500 peer-checked:text-white hover:text-white dark:border-gray-500 dark:bg-gray-600 dark:text-gray-100 dark:hover:text-white"
                           >
                             Watch
                           </Label>
@@ -369,7 +369,7 @@ export function CRUDLayoutWithHorizontalCards() {
               </div>
               <div className="flex items-center space-x-1">
                 <button
-                  className="flex items-center justify-center rounded-lg bg-white p-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
+                  className="hover:text-primary-700 flex items-center justify-center rounded-lg bg-white p-2 text-sm font-medium text-gray-900 hover:bg-gray-100 focus:z-10 focus:ring-4 focus:ring-gray-200 focus:outline-none dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
                   type="button"
                 >
                   <svg
@@ -387,7 +387,7 @@ export function CRUDLayoutWithHorizontalCards() {
                   </svg>
                 </button>
                 <button
-                  className="flex items-center justify-center rounded-lg bg-white p-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
+                  className="hover:text-primary-700 flex items-center justify-center rounded-lg bg-white p-2 text-sm font-medium text-gray-900 hover:bg-gray-100 focus:z-10 focus:ring-4 focus:ring-gray-200 focus:outline-none dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
                   type="button"
                 >
                   <svg
@@ -404,7 +404,7 @@ export function CRUDLayoutWithHorizontalCards() {
             </div>
           </div>
           <div className="mx-4 space-y-4 overflow-x-auto">
-            <div className="relative flex w-full cursor-pointer flex-col rounded-lg border border-gray-200 bg-white p-3 shadow hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 md:flex-row md:items-center md:space-x-6">
+            <div className="relative flex w-full cursor-pointer flex-col rounded-lg border border-gray-200 bg-white p-3 shadow hover:bg-gray-50 md:flex-row md:items-center md:space-x-6 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600">
               <img
                 src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
                 alt=""
@@ -413,7 +413,7 @@ export function CRUDLayoutWithHorizontalCards() {
               <div className="flex flex-col md:justify-between">
                 <div className="grid w-full grid-cols-2 gap-2 md:grid-cols-6">
                   <div className="col-span-3 flex h-full flex-col justify-between">
-                    <h3 className="mb-2 text-lg font-semibold text-gray-700 dark:text-white md:mb-3">
+                    <h3 className="mb-2 text-lg font-semibold text-gray-700 md:mb-3 dark:text-white">
                       Apple iMac 27&#34;
                     </h3>
                     <div>
@@ -451,7 +451,7 @@ export function CRUDLayoutWithHorizontalCards() {
                   </div>
                 </div>
               </div>
-              <div className="absolute right-3 top-3 dark:text-gray-400">
+              <div className="absolute top-3 right-3 dark:text-gray-400">
                 <Dropdown
                   dismissOnClick={false}
                   inline
@@ -533,7 +533,7 @@ export function CRUDLayoutWithHorizontalCards() {
                 </Dropdown>
               </div>
             </div>
-            <div className="relative flex w-full cursor-pointer flex-col rounded-lg border border-gray-200 bg-white p-3 shadow hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 md:flex-row md:items-center md:space-x-6">
+            <div className="relative flex w-full cursor-pointer flex-col rounded-lg border border-gray-200 bg-white p-3 shadow hover:bg-gray-50 md:flex-row md:items-center md:space-x-6 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600">
               <img
                 src="https://flowbite.s3.amazonaws.com/blocks/application-ui/devices/xbox-series-s.png"
                 alt=""
@@ -542,7 +542,7 @@ export function CRUDLayoutWithHorizontalCards() {
               <div className="flex flex-col md:justify-between">
                 <div className="grid w-full grid-cols-2 gap-2 md:grid-cols-6">
                   <div className="col-span-3 flex h-full flex-col justify-between">
-                    <h3 className="mb-2 text-lg font-semibold text-gray-700 dark:text-white md:mb-3">
+                    <h3 className="mb-2 text-lg font-semibold text-gray-700 md:mb-3 dark:text-white">
                       Xbox Series S
                     </h3>
                     <div>
@@ -580,7 +580,7 @@ export function CRUDLayoutWithHorizontalCards() {
                   </div>
                 </div>
               </div>
-              <div className="absolute right-3 top-3 dark:text-gray-400">
+              <div className="absolute top-3 right-3 dark:text-gray-400">
                 <Dropdown
                   dismissOnClick={false}
                   inline
@@ -662,7 +662,7 @@ export function CRUDLayoutWithHorizontalCards() {
                 </Dropdown>
               </div>
             </div>
-            <div className="relative flex w-full cursor-pointer flex-col rounded-lg border border-gray-200 bg-white p-3 shadow hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 md:flex-row md:items-center md:space-x-6">
+            <div className="relative flex w-full cursor-pointer flex-col rounded-lg border border-gray-200 bg-white p-3 shadow hover:bg-gray-50 md:flex-row md:items-center md:space-x-6 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600">
               <img
                 src="https://flowbite.s3.amazonaws.com/blocks/application-ui/devices/playstation-5.png"
                 alt=""
@@ -671,7 +671,7 @@ export function CRUDLayoutWithHorizontalCards() {
               <div className="flex flex-col md:justify-between">
                 <div className="grid w-full grid-cols-2 gap-2 md:grid-cols-6">
                   <div className="col-span-3 flex h-full flex-col justify-between">
-                    <h3 className="mb-2 text-lg font-semibold text-gray-700 dark:text-white md:mb-3">
+                    <h3 className="mb-2 text-lg font-semibold text-gray-700 md:mb-3 dark:text-white">
                       PlayStation 5
                     </h3>
                     <div>
@@ -709,7 +709,7 @@ export function CRUDLayoutWithHorizontalCards() {
                   </div>
                 </div>
               </div>
-              <div className="absolute right-3 top-3 dark:text-gray-400">
+              <div className="absolute top-3 right-3 dark:text-gray-400">
                 <Dropdown
                   dismissOnClick={false}
                   inline
@@ -791,7 +791,7 @@ export function CRUDLayoutWithHorizontalCards() {
                 </Dropdown>
               </div>
             </div>
-            <div className="relative flex w-full cursor-pointer flex-col rounded-lg border border-gray-200 bg-white p-3 shadow hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 md:flex-row md:items-center md:space-x-6">
+            <div className="relative flex w-full cursor-pointer flex-col rounded-lg border border-gray-200 bg-white p-3 shadow hover:bg-gray-50 md:flex-row md:items-center md:space-x-6 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600">
               <img
                 src="https://flowbite.s3.amazonaws.com/blocks/application-ui/devices/benq-ex2710q.png"
                 alt=""
@@ -800,7 +800,7 @@ export function CRUDLayoutWithHorizontalCards() {
               <div className="flex flex-col md:justify-between">
                 <div className="grid w-full grid-cols-2 gap-2 md:grid-cols-6">
                   <div className="col-span-3 flex h-full flex-col justify-between">
-                    <h3 className="mb-2 text-lg font-semibold text-gray-700 dark:text-white md:mb-3">
+                    <h3 className="mb-2 text-lg font-semibold text-gray-700 md:mb-3 dark:text-white">
                       Monitor BenQ EX2710Q
                     </h3>
                     <div>
@@ -838,7 +838,7 @@ export function CRUDLayoutWithHorizontalCards() {
                   </div>
                 </div>
               </div>
-              <div className="absolute right-3 top-3 dark:text-gray-400">
+              <div className="absolute top-3 right-3 dark:text-gray-400">
                 <Dropdown
                   dismissOnClick={false}
                   inline
@@ -920,7 +920,7 @@ export function CRUDLayoutWithHorizontalCards() {
                 </Dropdown>
               </div>
             </div>
-            <div className="relative flex w-full cursor-pointer flex-col rounded-lg border border-gray-200 bg-white p-3 shadow hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 md:flex-row md:items-center md:space-x-6">
+            <div className="relative flex w-full cursor-pointer flex-col rounded-lg border border-gray-200 bg-white p-3 shadow hover:bg-gray-50 md:flex-row md:items-center md:space-x-6 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600">
               <img
                 src="https://flowbite.s3.amazonaws.com/blocks/application-ui/devices/apple-iphone-14.png"
                 alt=""
@@ -929,7 +929,7 @@ export function CRUDLayoutWithHorizontalCards() {
               <div className="flex flex-col md:justify-between">
                 <div className="grid w-full grid-cols-2 gap-2 md:grid-cols-6">
                   <div className="col-span-3 flex h-full flex-col justify-between">
-                    <h3 className="mb-2 text-lg font-semibold text-gray-700 dark:text-white md:mb-3">
+                    <h3 className="mb-2 text-lg font-semibold text-gray-700 md:mb-3 dark:text-white">
                       Apple iPhone 14
                     </h3>
                     <div>
@@ -967,7 +967,7 @@ export function CRUDLayoutWithHorizontalCards() {
                   </div>
                 </div>
               </div>
-              <div className="absolute right-3 top-3 dark:text-gray-400">
+              <div className="absolute top-3 right-3 dark:text-gray-400">
                 <Dropdown
                   dismissOnClick={false}
                   inline
@@ -1091,14 +1091,14 @@ export function CRUDLayoutWithHorizontalCards() {
         show={isShowUpdateModal}
         size="3xl"
       >
-        <ModalBody className="relative rounded-lg bg-white p-4 shadow dark:bg-gray-800 sm:p-5">
-          <div className="mb-4 flex items-center justify-between rounded-t border-b pb-4 dark:border-gray-600 sm:mb-5">
+        <ModalBody className="relative rounded-lg bg-white p-4 shadow sm:p-5 dark:bg-gray-800">
+          <div className="mb-4 flex items-center justify-between rounded-t border-b pb-4 sm:mb-5 dark:border-gray-600">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
               Update Product
             </h3>
             <button
               onClick={() => setShowUpdateModal(false)}
-              className="absolute right-5 top-[18px] ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+              className="absolute top-[18px] right-5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
             >
               <svg
                 aria-hidden
@@ -1252,7 +1252,7 @@ export function CRUDLayoutWithHorizontalCards() {
                 <Checkbox
                   id="inline-2-checkbox"
                   name="sellingType"
-                  className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600"
+                  className="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800"
                 />
                 <Label
                   htmlFor="inline-2-checkbox"
@@ -1278,7 +1278,7 @@ export function CRUDLayoutWithHorizontalCards() {
             <div className="mb-4">
               <span className="mb-2 block dark:text-white">Product Images</span>
               <div className="mb-4 grid grid-cols-3 gap-4 sm:grid-cols-4">
-                <div className="relative rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-36">
+                <div className="relative rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-36 dark:bg-gray-700">
                   <img
                     alt="iMac Side"
                     src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-side-image.png"
@@ -1303,7 +1303,7 @@ export function CRUDLayoutWithHorizontalCards() {
                     <span className="sr-only">Delete image</span>
                   </button>
                 </div>
-                <div className="relative rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-36">
+                <div className="relative rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-36 dark:bg-gray-700">
                   <img
                     alt="iMac Front"
                     src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
@@ -1328,7 +1328,7 @@ export function CRUDLayoutWithHorizontalCards() {
                     <span className="sr-only">Delete image</span>
                   </button>
                 </div>
-                <div className="relative rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-36">
+                <div className="relative rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-36 dark:bg-gray-700">
                   <img
                     alt="iMac Back"
                     src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
@@ -1353,7 +1353,7 @@ export function CRUDLayoutWithHorizontalCards() {
                     <span className="sr-only">Delete image</span>
                   </button>
                 </div>
-                <div className="relative rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-36">
+                <div className="relative rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-36 dark:bg-gray-700">
                   <img
                     alt="iMac Back"
                     src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
@@ -1384,7 +1384,7 @@ export function CRUDLayoutWithHorizontalCards() {
                   htmlFor="dropzone-file"
                   className="flex h-64 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600"
                 >
-                  <div className="flex flex-col items-center justify-center pb-6 pt-5">
+                  <div className="flex flex-col items-center justify-center pt-5 pb-6">
                     <svg
                       aria-hidden
                       className="mb-3 h-10 w-10 text-gray-400"
@@ -1423,7 +1423,7 @@ export function CRUDLayoutWithHorizontalCards() {
                 className="enabled:hover:bg-red-600 [&>span]:border-red-600 [&>span]:text-sm [&>span]:text-red-600"
               >
                 <svg
-                  className="-ml-1 mr-1 h-5 w-5"
+                  className="mr-1 -ml-1 h-5 w-5"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -1446,16 +1446,16 @@ export function CRUDLayoutWithHorizontalCards() {
         size="3xl"
         show={isShowReadModal}
       >
-        <ModalBody className="relative rounded-lg bg-white p-4 shadow dark:bg-gray-800 sm:p-5">
+        <ModalBody className="relative rounded-lg bg-white p-4 shadow sm:p-5 dark:bg-gray-800">
           <div className="mb-4 flex justify-between rounded-t sm:mb-5">
-            <div className="text-lg text-gray-900 dark:text-white md:text-xl">
-              <h3 className="font-semibold ">Apple iMac 27”</h3>
+            <div className="text-lg text-gray-900 md:text-xl dark:text-white">
+              <h3 className="font-semibold">Apple iMac 27”</h3>
               <p className="font-bold">$2999</p>
             </div>
             <div>
               <button
                 onClick={() => setShowReadModal(false)}
-                className="absolute right-5 top-[18px] ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+                className="absolute top-[18px] right-5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
               >
                 <svg
                   aria-hidden
@@ -1475,25 +1475,25 @@ export function CRUDLayoutWithHorizontalCards() {
             </div>
           </div>
           <div className="mb-4 grid grid-cols-3 gap-4 sm:mb-5 sm:grid-cols-4">
-            <div className="rounded-lg bg-gray-100 p-2 dark:bg-gray-700 md:h-36 md:w-36">
+            <div className="rounded-lg bg-gray-100 p-2 md:h-36 md:w-36 dark:bg-gray-700">
               <img
                 alt="iMac Side"
                 src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-side-image.png"
               />
             </div>
-            <div className="rounded-lg bg-gray-100 p-2 dark:bg-gray-700 md:h-36 md:w-36">
+            <div className="rounded-lg bg-gray-100 p-2 md:h-36 md:w-36 dark:bg-gray-700">
               <img
                 alt="iMac Front"
                 src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
               />
             </div>
-            <div className="rounded-lg bg-gray-100 p-2 dark:bg-gray-700 md:h-36 md:w-36">
+            <div className="rounded-lg bg-gray-100 p-2 md:h-36 md:w-36 dark:bg-gray-700">
               <img
                 alt="iMac Back"
                 src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
               />
             </div>
-            <div className="rounded-lg bg-gray-100 p-2 dark:bg-gray-700 md:h-36 md:w-36">
+            <div className="rounded-lg bg-gray-100 p-2 md:h-36 md:w-36 dark:bg-gray-700">
               <img
                 alt="iMac Back"
                 src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
@@ -1501,22 +1501,22 @@ export function CRUDLayoutWithHorizontalCards() {
             </div>
           </div>
           <dl className="sm:mb-5">
-            <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+            <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
               Details
             </dt>
-            <dd className="mb-4 text-gray-500 dark:text-gray-400 sm:mb-5">
+            <dd className="mb-4 text-gray-500 sm:mb-5 dark:text-gray-400">
               Standard glass ,3.8GHz 8-core 10th-generation Intel Core i7
               processor, Turbo Boost up to 5.0GHz, 16GB 2666MHz DDR4 memory,
               Radeon Pro 5500 XT with 8GB of GDDR6 memory, 256GB SSD storage,
               Gigabit Ethernet, Magic Mouse 2, Magic Keyboard - US.
             </dd>
-            <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+            <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
               Colors
             </dt>
             <dd className="mb-4 flex items-center space-x-2 text-gray-500 dark:text-gray-400">
               <div className="h-6 w-6 rounded-full bg-purple-600"></div>
               <div className="h-6 w-6 rounded-full bg-indigo-400"></div>
-              <div className="h-6 w-6 rounded-full bg-primary-600"></div>
+              <div className="bg-primary-600 h-6 w-6 rounded-full"></div>
               <div className="h-6 w-6 rounded-full bg-pink-400"></div>
               <div className="h-6 w-6 rounded-full bg-teal-300"></div>
               <div className="h-6 w-6 rounded-full bg-green-300"></div>
@@ -1524,19 +1524,19 @@ export function CRUDLayoutWithHorizontalCards() {
           </dl>
           <dl className="mb-4 grid grid-cols-2 gap-4 sm:mb-5 sm:grid-cols-3">
             <div className="rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-              <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+              <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
                 Sold by
               </dt>
               <dd className="text-gray-500 dark:text-gray-400">Flowbite</dd>
             </div>
             <div className="rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-              <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+              <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
                 Ships from
               </dt>
               <dd className="text-gray-500 dark:text-gray-400">Flowbite</dd>
             </div>
             <div className="rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-              <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+              <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
                 Product State
               </dt>
               <dd className="text-gray-500 dark:text-gray-400">
@@ -1555,7 +1555,7 @@ export function CRUDLayoutWithHorizontalCards() {
               </dd>
             </div>
             <div className="rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-              <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+              <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
                 Shipping
               </dt>
               <dd className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1576,7 +1576,7 @@ export function CRUDLayoutWithHorizontalCards() {
               </dd>
             </div>
             <div className="rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-              <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+              <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
                 Dimensions (cm)
               </dt>
               <dd className="text-gray-500 dark:text-gray-400">
@@ -1584,7 +1584,7 @@ export function CRUDLayoutWithHorizontalCards() {
               </dd>
             </div>
             <div className="rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-              <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+              <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
                 Item weight
               </dt>
               <dd className="text-gray-500 dark:text-gray-400">12kg</dd>
@@ -1598,7 +1598,7 @@ export function CRUDLayoutWithHorizontalCards() {
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
-                  className="-ml-1 mr-1 h-5 w-5"
+                  className="mr-1 -ml-1 h-5 w-5"
                 >
                   <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path>
                   <path
@@ -1628,7 +1628,7 @@ export function CRUDLayoutWithHorizontalCards() {
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
-                className="-ml-1 mr-1.5 h-5 w-5"
+                className="mr-1.5 -ml-1 h-5 w-5"
               >
                 <path
                   fillRule="evenodd"
@@ -1647,10 +1647,10 @@ export function CRUDLayoutWithHorizontalCards() {
         size="md"
         show={isShowDeleteModal}
       >
-        <ModalBody className="relative rounded-lg bg-white p-4 text-center shadow dark:bg-gray-800 sm:p-5">
+        <ModalBody className="relative rounded-lg bg-white p-4 text-center shadow sm:p-5 dark:bg-gray-800">
           <button
             onClick={() => setShowDeleteModal(false)}
-            className="absolute right-2.5 top-2.5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+            className="absolute top-2.5 right-2.5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
           >
             <svg
               aria-hidden
@@ -1703,14 +1703,14 @@ export function CRUDLayoutWithHorizontalCards() {
         popup
         show={isShowCreateModal}
       >
-        <ModalBody className="relative rounded-lg bg-white p-4 shadow dark:bg-gray-800 sm:p-5">
-          <div className="mb-4 flex items-center justify-between rounded-t border-b pb-4 dark:border-gray-600 sm:mb-5">
+        <ModalBody className="relative rounded-lg bg-white p-4 shadow sm:p-5 dark:bg-gray-800">
+          <div className="mb-4 flex items-center justify-between rounded-t border-b pb-4 sm:mb-5 dark:border-gray-600">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
               Add Product
             </h3>
             <button
               onClick={() => setShowCreateModal(false)}
-              className="absolute right-5 top-[18px] ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+              className="absolute top-[18px] right-5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
             >
               <HiX className="h-5 w-5" />
               <span className="sr-only">Close modal</span>
@@ -1790,7 +1790,7 @@ export function CRUDLayoutWithHorizontalCards() {
               </div>
             </div>
             <Button size="lg" className="[&>span]:text-sm">
-              <HiPlus className="-ml-1 mr-2 h-4 w-4" />
+              <HiPlus className="mr-2 -ml-1 h-4 w-4" />
               Add new product
             </Button>
           </form>

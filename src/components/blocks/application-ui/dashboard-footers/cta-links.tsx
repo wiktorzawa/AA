@@ -7,7 +7,7 @@ export function FooterWithCTAAndLinks() {
       container
       className="md:block xl:flex xl:items-center xl:justify-between"
     >
-      <div className="mb-3 flex flex-row text-gray-500 dark:text-gray-400 md:items-center xl:mb-0">
+      <div className="mb-3 flex flex-row text-gray-500 md:items-center xl:mb-0 dark:text-gray-400">
         <p>Looking for language selection?</p>
         <a
           href="#"
@@ -22,7 +22,7 @@ export function FooterWithCTAAndLinks() {
           <li>
             <a
               href="#"
-              className="mr-4 text-gray-900 underline hover:no-underline dark:text-white md:mr-6"
+              className="mr-4 text-gray-900 underline hover:no-underline md:mr-6 dark:text-white"
             >
               Terms
             </a>
@@ -30,7 +30,7 @@ export function FooterWithCTAAndLinks() {
           <li>
             <a
               href="#"
-              className="mr-4 text-gray-900 underline hover:no-underline dark:text-white md:mr-6"
+              className="mr-4 text-gray-900 underline hover:no-underline md:mr-6 dark:text-white"
             >
               Privacy
             </a>
@@ -38,7 +38,7 @@ export function FooterWithCTAAndLinks() {
           <li>
             <a
               href="#"
-              className="mr-4 text-gray-900 underline hover:no-underline dark:text-white md:mr-6"
+              className="mr-4 text-gray-900 underline hover:no-underline md:mr-6 dark:text-white"
             >
               Cookies
             </a>

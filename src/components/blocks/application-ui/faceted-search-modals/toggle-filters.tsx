@@ -1,4 +1,12 @@
-import { Button, Modal, ModalBody, ModalHeader, Select, theme, ToggleSwitch } from "flowbite-react";
+import {
+  Button,
+  Modal,
+  ModalBody,
+  ModalHeader,
+  Select,
+  theme,
+  ToggleSwitch,
+} from "flowbite-react";
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 

@@ -1,4 +1,10 @@
-import { Dropdown, DropdownItem, Footer, Pagination, theme } from "flowbite-react";
+import {
+  Dropdown,
+  DropdownItem,
+  Footer,
+  Pagination,
+  theme,
+} from "flowbite-react";
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 
@@ -12,7 +18,7 @@ export function FooterWithPagination() {
       container
       className="md:block xl:flex xl:items-center xl:justify-between"
     >
-      <p className="mb-4 text-sm text-gray-500 dark:text-gray-400 xl:mb-0 xl:text-center">
+      <p className="mb-4 text-sm text-gray-500 xl:mb-0 xl:text-center dark:text-gray-400">
         &copy; 2022&nbsp;
         <a
           href="https://flowbite.com/"
@@ -25,7 +31,7 @@ export function FooterWithPagination() {
         . All rights reserved.
       </p>
       <div className="items-center sm:flex sm:space-x-4 lg:space-x-6">
-        <div className="mb-4 text-sm text-gray-500 dark:text-gray-400 sm:mb-0">
+        <div className="mb-4 text-sm text-gray-500 sm:mb-0 dark:text-gray-400">
           On every page&nbsp;
           <Dropdown
             inline
@@ -33,7 +39,7 @@ export function FooterWithPagination() {
             theme={{
               inlineWrapper: twMerge(
                 theme.dropdown.inlineWrapper,
-                "ml-1.5 inline-flex items-center rounded-full p-1.5 text-sm font-semibold text-gray-900 hover:text-primary-600 focus:ring-4 focus:ring-gray-100 dark:text-white dark:hover:text-primary-500 dark:focus:ring-gray-700 md:mr-0",
+                "hover:text-primary-600 dark:hover:text-primary-500 ml-1.5 inline-flex items-center rounded-full p-1.5 text-sm font-semibold text-gray-900 focus:ring-4 focus:ring-gray-100 md:mr-0 dark:text-white dark:focus:ring-gray-700",
               ),
               content: twMerge(theme.dropdown.content, "w-24"),
             }}
@@ -43,7 +49,7 @@ export function FooterWithPagination() {
             <DropdownItem>1000</DropdownItem>
           </Dropdown>
         </div>
-        <p className="mb-4 text-sm text-gray-500 dark:text-gray-400 sm:mb-0 xl:text-center">
+        <p className="mb-4 text-sm text-gray-500 sm:mb-0 xl:text-center dark:text-gray-400">
           Show&nbsp;
           <span className="font-semibold text-gray-900 dark:text-white">
             1-15

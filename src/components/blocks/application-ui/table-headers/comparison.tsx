@@ -1,4 +1,12 @@
-import { Button, Dropdown, DropdownDivider, DropdownItem, Select, theme, Tooltip } from "flowbite-react";
+import {
+  Button,
+  Dropdown,
+  DropdownDivider,
+  DropdownItem,
+  Select,
+  theme,
+  Tooltip,
+} from "flowbite-react";
 import { HiInformationCircle, HiPlus, HiRefresh } from "react-icons/hi";
 import { twMerge } from "tailwind-merge";
 
@@ -6,8 +14,8 @@ export function TableHeaderWithComparison() {
   return (
     <section className="flex items-center bg-gray-50 py-6 dark:bg-gray-900">
       <div className="mx-auto w-full max-w-screen-xl px-4 lg:px-12">
-        <div className="relative bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
-          <div className="flex flex-col items-start justify-between space-y-3 p-4 dark:bg-gray-800 md:flex-row md:items-center md:space-x-4 md:space-y-0">
+        <div className="relative bg-white shadow-md sm:rounded-lg dark:bg-gray-800">
+          <div className="flex flex-col items-start justify-between space-y-3 p-4 md:flex-row md:items-center md:space-y-0 md:space-x-4 dark:bg-gray-800">
             <div className="flex items-center">
               <h5 className="mr-3 font-semibold dark:text-white">
                 Compare Products
@@ -29,9 +37,9 @@ export function TableHeaderWithComparison() {
             </div>
           </div>
           <div className="mx-4 border-t dark:mx-0 dark:border-gray-700 dark:bg-gray-800"></div>
-          <div className="flex flex-col items-center justify-between space-y-3 px-4 pb-4 dark:bg-gray-800 md:mt-4 md:flex-row md:space-x-4 md:space-y-0 md:pb-0">
-            <ul className="hidden flex-wrap text-center text-sm font-medium text-gray-500 dark:text-gray-400 md:flex">
-              <li className="mb-4 mr-2 lg:mr-4">
+          <div className="flex flex-col items-center justify-between space-y-3 px-4 pb-4 md:mt-4 md:flex-row md:space-y-0 md:space-x-4 md:pb-0 dark:bg-gray-800">
+            <ul className="hidden flex-wrap text-center text-sm font-medium text-gray-500 md:flex dark:text-gray-400">
+              <li className="mr-2 mb-4 lg:mr-4">
                 <Button
                   color="gray"
                   pill
@@ -40,7 +48,7 @@ export function TableHeaderWithComparison() {
                   General Information
                 </Button>
               </li>
-              <li className="mb-4 mr-2 lg:mr-4">
+              <li className="mr-2 mb-4 lg:mr-4">
                 <Button
                   color="gray"
                   pill
@@ -49,10 +57,10 @@ export function TableHeaderWithComparison() {
                   Technical Information
                 </Button>
               </li>
-              <li className="mb-4 mr-2 lg:mr-4">
+              <li className="mr-2 mb-4 lg:mr-4">
                 <Button pill>Delivery Information</Button>
               </li>
-              <li className="mb-4 mr-2 lg:mr-4">
+              <li className="mr-2 mb-4 lg:mr-4">
                 <Button
                   color="gray"
                   pill

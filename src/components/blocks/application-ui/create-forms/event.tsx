@@ -121,7 +121,7 @@ export function CreateEventForm() {
                   <option value="CU">Custom</option>
                 </Select>
               </div>
-              <button className="mb-2 mr-2 inline-flex items-center rounded-lg bg-[#4285F4] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#4285F4]/90 focus:outline-none focus:ring-4 focus:ring-[#4285F4]/50 dark:focus:ring-[#4285F4]/55">
+              <button className="mr-2 mb-2 inline-flex items-center rounded-lg bg-[#4285F4] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#4285F4]/90 focus:ring-4 focus:ring-[#4285F4]/50 focus:outline-none dark:focus:ring-[#4285F4]/55">
                 <svg
                   aria-hidden
                   focusable="false"
@@ -130,7 +130,7 @@ export function CreateEventForm() {
                   role="img"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 488 512"
-                  className="-ml-1 mr-2 h-4 w-4"
+                  className="mr-2 -ml-1 h-4 w-4"
                 >
                   <path
                     fill="currentColor"
@@ -144,7 +144,7 @@ export function CreateEventForm() {
                 <div className="flex items-center space-x-2">
                   <button className="h-6 w-6 rounded-sm bg-purple-500" />
                   <button className="h-6 w-6 rounded-sm bg-indigo-500" />
-                  <button className="h-6 w-6 rounded-sm bg-primary-600" />
+                  <button className="bg-primary-600 h-6 w-6 rounded-sm" />
                   <button className="h-6 w-6 rounded-sm bg-pink-500" />
                   <button className="h-6 w-6 rounded-sm bg-teal-400" />
                   <button className="h-6 w-6 rounded-sm bg-green-400" />
@@ -162,7 +162,7 @@ export function CreateEventForm() {
                 </Label>
                 <div className="mb-4 w-full rounded-lg border border-gray-200 bg-gray-100 dark:border-gray-600 dark:bg-gray-600">
                   <div className="flex items-center justify-between border-b px-3 py-2 dark:border-gray-600">
-                    <div className="flex flex-wrap items-center divide-gray-200 dark:divide-gray-600 sm:divide-x">
+                    <div className="flex flex-wrap items-center divide-gray-200 sm:divide-x dark:divide-gray-600">
                       <div className="flex items-center space-x-1 sm:pr-4">
                         <button className="cursor-pointer rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white">
                           <svg
@@ -281,7 +281,7 @@ export function CreateEventForm() {
                       </div>
                     </div>
                     <Tooltip content="Show full screen">
-                      <button className="cursor-pointer rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white sm:ml-auto">
+                      <button className="cursor-pointer rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 sm:ml-auto dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white">
                         <svg
                           aria-hidden
                           fill="currentColor"
@@ -313,7 +313,7 @@ export function CreateEventForm() {
               </div>
               <div>
                 <div className="mb-2 block dark:text-white">Reminder</div>
-                <div className="space-y-4 md:flex md:space-x-4 md:space-y-0">
+                <div className="space-y-4 md:flex md:space-y-0 md:space-x-4">
                   <div className="w-full">
                     <Label htmlFor="reminder-type" className="sr-only">
                       Reminder type
@@ -364,9 +364,9 @@ export function CreateEventForm() {
                     placeholder="Add guest email"
                     required
                   />
-                  <Button className="absolute inset-y-2.5 right-2.5 inline-flex items-center rounded-lg bg-primary-700 px-3 py-1.5 font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 [&>span]:p-0 [&>span]:text-xs">
+                  <Button className="bg-primary-700 hover:bg-primary-800 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 absolute inset-y-2.5 right-2.5 inline-flex items-center rounded-lg px-3 py-1.5 font-medium text-white focus:ring-4 focus:outline-none [&>span]:p-0 [&>span]:text-xs">
                     <svg
-                      className="-ml-0.5 mr-0.5 h-4 w-4"
+                      className="mr-0.5 -ml-0.5 h-4 w-4"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                       xmlns="http://www.w3.org/2000/svg"
@@ -412,11 +412,11 @@ export function CreateEventForm() {
                 <Button
                   color="gray"
                   outline
-                  className="mr-3 inline-flex hover:bg-gray-100 hover:text-primary-700 focus:outline-none focus:ring-gray-100 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700 [&>span]:border-gray-200 [&>span]:bg-white [&>span]:text-xs [&>span]:text-gray-900 dark:[&>span]:border-gray-600 dark:[&>span]:bg-gray-800 dark:[&>span]:text-gray-400"
+                  className="hover:text-primary-700 mr-3 inline-flex hover:bg-gray-100 focus:ring-gray-100 focus:outline-none dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700 [&>span]:border-gray-200 [&>span]:bg-white [&>span]:text-xs [&>span]:text-gray-900 dark:[&>span]:border-gray-600 dark:[&>span]:bg-gray-800 dark:[&>span]:text-gray-400"
                 >
                   <svg
                     aria-hidden
-                    className="-ml-1 mr-1 h-4 w-4"
+                    className="mr-1 -ml-1 h-4 w-4"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg"
@@ -432,11 +432,11 @@ export function CreateEventForm() {
                 <Button
                   color="gray"
                   outline
-                  className="mr-3 inline-flex hover:bg-gray-100 hover:text-primary-700 focus:outline-none focus:ring-gray-100 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700 [&>span]:border-gray-200 [&>span]:bg-white [&>span]:text-xs [&>span]:text-gray-900 dark:[&>span]:border-gray-600 dark:[&>span]:bg-gray-800 dark:[&>span]:text-gray-400"
+                  className="hover:text-primary-700 mr-3 inline-flex hover:bg-gray-100 focus:ring-gray-100 focus:outline-none dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700 [&>span]:border-gray-200 [&>span]:bg-white [&>span]:text-xs [&>span]:text-gray-900 dark:[&>span]:border-gray-600 dark:[&>span]:bg-gray-800 dark:[&>span]:text-gray-400"
                 >
                   <svg
                     aria-hidden
-                    className="-ml-1 mr-1 h-4 w-4"
+                    className="mr-1 -ml-1 h-4 w-4"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"

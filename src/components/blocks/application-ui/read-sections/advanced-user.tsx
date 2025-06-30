@@ -21,28 +21,28 @@ export function AdvancedReadUserSection() {
                 size="lg"
               />
               <div>
-                <h2 className="mb-2 flex items-center text-xl font-bold leading-none text-gray-900 dark:text-white sm:text-2xl">
+                <h2 className="mb-2 flex items-center text-xl leading-none font-bold text-gray-900 sm:text-2xl dark:text-white">
                   Helene Engels
                   <Badge color="gray" className="ml-3 text-base uppercase">
                     Pro
                   </Badge>
                 </h2>
                 <Badge color="info" className="w-fit px-3">
-                  <HiEye className="mb-0.5 mr-1 h-3 w-3" />
+                  <HiEye className="mr-1 mb-0.5 h-3 w-3" />
                   Moderator
                 </Badge>
               </div>
             </div>
             <dl className="mt-4">
-              <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+              <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
                 Biography
               </dt>
-              <dd className="mb-4 text-gray-500 dark:text-gray-400 sm:mb-5">
+              <dd className="mb-4 text-gray-500 sm:mb-5 dark:text-gray-400">
                 UI/UX Designer, creating things that stand out, Featured by
                 Adobe, Figma, Webflow and others, Daily design tips & resources,
                 Exploring Web3.
               </dd>
-              <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+              <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
                 Social
               </dt>
               <dd className="mb-4 inline-flex items-center space-x-1 sm:mb-5">
@@ -79,16 +79,16 @@ export function AdvancedReadUserSection() {
                   </a>
                 </Tooltip>
               </dd>
-              <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+              <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
                 Location
               </dt>
-              <dd className="mb-4 flex items-center text-gray-900 dark:text-white sm:mb-5">
+              <dd className="mb-4 flex items-center text-gray-900 sm:mb-5 dark:text-white">
                 <HiLocationMarker className="mr-1.5 h-4 w-4 text-gray-400 dark:text-gray-500" />
                 <span className="text-gray-500 dark:text-gray-400">
                   California, United States of America
                 </span>
               </dd>
-              <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+              <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
                 Job Title
               </dt>
               <dd className="flex items-center text-gray-900 dark:text-white">
@@ -100,26 +100,26 @@ export function AdvancedReadUserSection() {
             </dl>
           </div>
           <dl>
-            <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+            <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
               Email Adress
             </dt>
-            <dd className="mb-4 text-gray-500 dark:text-gray-400 sm:mb-5">
+            <dd className="mb-4 text-gray-500 sm:mb-5 dark:text-gray-400">
               helene@company.com
             </dd>
-            <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+            <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
               Home Adress
             </dt>
-            <dd className="mb-4 text-gray-500 dark:text-gray-400 sm:mb-5">
+            <dd className="mb-4 text-gray-500 sm:mb-5 dark:text-gray-400">
               92 Miles Drive, Newark, NJ 07103, California, United States of
               America
             </dd>
-            <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+            <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
               Phone Number
             </dt>
-            <dd className="mb-4 text-gray-500 dark:text-gray-400 sm:mb-5">
+            <dd className="mb-4 text-gray-500 sm:mb-5 dark:text-gray-400">
               +1234 567 890 / +12 345 678
             </dd>
-            <dt className="mb-2.5 font-semibold leading-none text-gray-900 dark:text-white">
+            <dt className="mb-2.5 leading-none font-semibold text-gray-900 dark:text-white">
               Software Skills
             </dt>
             <dd className="mb-4 flex items-center space-x-1 sm:mb-5">
@@ -306,7 +306,7 @@ export function AdvancedReadUserSection() {
                 </a>
               </Tooltip>
             </dd>
-            <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+            <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
               Languages
             </dt>
             <dd className="text-gray-500 dark:text-gray-400">
@@ -316,7 +316,7 @@ export function AdvancedReadUserSection() {
         </div>
         <div className="flex items-center space-x-4 px-4">
           <Button size="lg" className="[&>span]:text-sm">
-            <HiPencilAlt className="-ml-1 mr-1 h-5 w-5" />
+            <HiPencilAlt className="mr-1 -ml-1 h-5 w-5" />
             Edit
           </Button>
           <Button
@@ -327,7 +327,7 @@ export function AdvancedReadUserSection() {
             Preview
           </Button>
           <Button color="failure" size="lg" className="[&>span]:text-sm">
-            <HiTrash className="-ml-1 mr-1.5 h-5 w-5" />
+            <HiTrash className="mr-1.5 -ml-1 h-5 w-5" />
             Delete
           </Button>
         </div>

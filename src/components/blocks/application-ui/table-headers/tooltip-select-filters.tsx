@@ -16,8 +16,8 @@ export function TableHeaderWithTooltipAndSelectFilters() {
   return (
     <section className="flex items-center bg-gray-50 py-6 dark:bg-gray-900">
       <div className="mx-auto w-full max-w-screen-xl px-4 lg:px-12">
-        <div className="relative bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
-          <div className="mx-4 flex flex-col items-center justify-between space-y-3 border-b py-4 dark:border-gray-700 md:flex-row md:space-x-4 md:space-y-0">
+        <div className="relative bg-white shadow-md sm:rounded-lg dark:bg-gray-800">
+          <div className="mx-4 flex flex-col items-center justify-between space-y-3 border-b py-4 md:flex-row md:space-y-0 md:space-x-4 dark:border-gray-700">
             <div className="flex w-full items-center space-x-3">
               <h5 className="font-semibold dark:text-white">
                 Flowbite Products
@@ -50,7 +50,7 @@ export function TableHeaderWithTooltipAndSelectFilters() {
               </Button>
             </div>
           </div>
-          <div className="flex flex-col-reverse items-start justify-between border-b p-4 dark:border-gray-700 md:flex-row md:items-center md:space-x-4">
+          <div className="flex flex-col-reverse items-start justify-between border-b p-4 md:flex-row md:items-center md:space-x-4 dark:border-gray-700">
             <div className="mt-3 md:mt-0">
               <Dropdown
                 color="gray"

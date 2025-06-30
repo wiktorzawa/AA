@@ -91,7 +91,7 @@ export function LargeFacetedSearchDrawerWithMultipleOptions() {
                       />
                       <Label
                         htmlFor="html-css"
-                        className="inline-flex w-full cursor-pointer items-center justify-center rounded-lg border-2 border-primary-600 bg-white p-2 text-center text-sm font-medium text-primary-600 hover:bg-primary-500 hover:text-white peer-checked:border-primary-600 peer-checked:bg-primary-600 peer-checked:text-white dark:border-primary-500 dark:bg-gray-800 dark:text-primary-500 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:hover:text-white dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-500"
+                        className="border-primary-600 text-primary-600 hover:bg-primary-500 peer-checked:border-primary-600 peer-checked:bg-primary-600 dark:border-primary-500 dark:text-primary-500 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-500 inline-flex w-full cursor-pointer items-center justify-center rounded-lg border-2 bg-white p-2 text-center text-sm font-medium peer-checked:text-white hover:text-white dark:bg-gray-800 dark:hover:text-white"
                       >
                         HTML/CSS
                       </Label>
@@ -104,7 +104,7 @@ export function LargeFacetedSearchDrawerWithMultipleOptions() {
                       />
                       <Label
                         htmlFor="ui-design"
-                        className="inline-flex w-full cursor-pointer items-center justify-center rounded-lg border-2 border-primary-600 bg-white p-2 text-center text-sm font-medium text-primary-600 hover:bg-primary-500 hover:text-white peer-checked:border-primary-600 peer-checked:bg-primary-600 peer-checked:text-white dark:border-primary-500 dark:bg-gray-800 dark:text-primary-500 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:hover:text-white dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-500"
+                        className="border-primary-600 text-primary-600 hover:bg-primary-500 peer-checked:border-primary-600 peer-checked:bg-primary-600 dark:border-primary-500 dark:text-primary-500 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-500 inline-flex w-full cursor-pointer items-center justify-center rounded-lg border-2 bg-white p-2 text-center text-sm font-medium peer-checked:text-white hover:text-white dark:bg-gray-800 dark:hover:text-white"
                       >
                         UI Design
                       </Label>
@@ -118,7 +118,7 @@ export function LargeFacetedSearchDrawerWithMultipleOptions() {
                       />
                       <Label
                         htmlFor="figma"
-                        className="inline-flex w-full cursor-pointer items-center justify-center rounded-lg border-2 border-primary-600 bg-white p-2 text-center text-sm font-medium text-primary-600 hover:bg-primary-500 hover:text-white peer-checked:border-primary-600 peer-checked:bg-primary-600 peer-checked:text-white dark:border-primary-500 dark:bg-gray-800 dark:text-primary-500 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:hover:text-white dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-500"
+                        className="border-primary-600 text-primary-600 hover:bg-primary-500 peer-checked:border-primary-600 peer-checked:bg-primary-600 dark:border-primary-500 dark:text-primary-500 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-500 inline-flex w-full cursor-pointer items-center justify-center rounded-lg border-2 bg-white p-2 text-center text-sm font-medium peer-checked:text-white hover:text-white dark:bg-gray-800 dark:hover:text-white"
                       >
                         Figma
                       </Label>
@@ -131,7 +131,7 @@ export function LargeFacetedSearchDrawerWithMultipleOptions() {
                       />
                       <Label
                         htmlFor="react"
-                        className="inline-flex w-full cursor-pointer items-center justify-center rounded-lg border-2 border-primary-600 bg-white p-2 text-center text-sm font-medium text-primary-600 hover:bg-primary-500 hover:text-white peer-checked:border-primary-600 peer-checked:bg-primary-600 peer-checked:text-white dark:border-primary-500 dark:bg-gray-800 dark:text-primary-500 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:hover:text-white dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-500"
+                        className="border-primary-600 text-primary-600 hover:bg-primary-500 peer-checked:border-primary-600 peer-checked:bg-primary-600 dark:border-primary-500 dark:text-primary-500 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-500 inline-flex w-full cursor-pointer items-center justify-center rounded-lg border-2 bg-white p-2 text-center text-sm font-medium peer-checked:text-white hover:text-white dark:bg-gray-800 dark:hover:text-white"
                       >
                         React
                       </Label>
@@ -145,7 +145,7 @@ export function LargeFacetedSearchDrawerWithMultipleOptions() {
                       />
                       <Label
                         htmlFor="flowbite"
-                        className="inline-flex w-full cursor-pointer items-center justify-center rounded-lg border-2 border-primary-600 bg-white p-2 text-center text-sm font-medium text-primary-600 hover:bg-primary-500 hover:text-white peer-checked:border-primary-600 peer-checked:bg-primary-600 peer-checked:text-white dark:border-primary-500 dark:bg-gray-800 dark:text-primary-500 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:hover:text-white dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-500"
+                        className="border-primary-600 text-primary-600 hover:bg-primary-500 peer-checked:border-primary-600 peer-checked:bg-primary-600 dark:border-primary-500 dark:text-primary-500 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-500 inline-flex w-full cursor-pointer items-center justify-center rounded-lg border-2 bg-white p-2 text-center text-sm font-medium peer-checked:text-white hover:text-white dark:bg-gray-800 dark:hover:text-white"
                       >
                         Flowbite
                       </Label>
@@ -154,7 +154,7 @@ export function LargeFacetedSearchDrawerWithMultipleOptions() {
                       <Checkbox id="js" className="peer hidden" name="skills" />
                       <Label
                         htmlFor="js"
-                        className="inline-flex w-full cursor-pointer items-center justify-center rounded-lg border-2 border-primary-600 bg-white p-2 text-center text-sm font-medium text-primary-600 hover:bg-primary-500 hover:text-white peer-checked:border-primary-600 peer-checked:bg-primary-600 peer-checked:text-white dark:border-primary-500 dark:bg-gray-800 dark:text-primary-500 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:hover:text-white dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-500"
+                        className="border-primary-600 text-primary-600 hover:bg-primary-500 peer-checked:border-primary-600 peer-checked:bg-primary-600 dark:border-primary-500 dark:text-primary-500 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-500 inline-flex w-full cursor-pointer items-center justify-center rounded-lg border-2 bg-white p-2 text-center text-sm font-medium peer-checked:text-white hover:text-white dark:bg-gray-800 dark:hover:text-white"
                       >
                         JS
                       </Label>
@@ -163,7 +163,7 @@ export function LargeFacetedSearchDrawerWithMultipleOptions() {
                       <Checkbox id="php" value="" className="peer hidden" />
                       <Label
                         htmlFor="php"
-                        className="inline-flex w-full cursor-pointer items-center justify-center rounded-lg border-2 border-primary-600 bg-white p-2 text-center text-sm font-medium text-primary-600 hover:bg-primary-500 hover:text-white peer-checked:border-primary-600 peer-checked:bg-primary-600 peer-checked:text-white dark:border-primary-500 dark:bg-gray-800 dark:text-primary-500 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:hover:text-white dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-500"
+                        className="border-primary-600 text-primary-600 hover:bg-primary-500 peer-checked:border-primary-600 peer-checked:bg-primary-600 dark:border-primary-500 dark:text-primary-500 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-500 inline-flex w-full cursor-pointer items-center justify-center rounded-lg border-2 bg-white p-2 text-center text-sm font-medium peer-checked:text-white hover:text-white dark:bg-gray-800 dark:hover:text-white"
                       >
                         PHP
                       </Label>
@@ -177,7 +177,7 @@ export function LargeFacetedSearchDrawerWithMultipleOptions() {
                       />
                       <Label
                         htmlFor="ux"
-                        className="inline-flex w-full cursor-pointer items-center justify-center rounded-lg border-2 border-primary-600 bg-white p-2 text-center text-sm font-medium text-primary-600 hover:bg-primary-500 hover:text-white peer-checked:border-primary-600 peer-checked:bg-primary-600 peer-checked:text-white dark:border-primary-500 dark:bg-gray-800 dark:text-primary-500 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:hover:text-white dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-500"
+                        className="border-primary-600 text-primary-600 hover:bg-primary-500 peer-checked:border-primary-600 peer-checked:bg-primary-600 dark:border-primary-500 dark:text-primary-500 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-500 inline-flex w-full cursor-pointer items-center justify-center rounded-lg border-2 bg-white p-2 text-center text-sm font-medium peer-checked:text-white hover:text-white dark:bg-gray-800 dark:hover:text-white"
                       >
                         UX
                       </Label>
@@ -190,7 +190,7 @@ export function LargeFacetedSearchDrawerWithMultipleOptions() {
                       />
                       <Label
                         htmlFor="logo-design"
-                        className="inline-flex w-full cursor-pointer items-center justify-center rounded-lg border-2 border-primary-600 bg-white p-2 text-center text-sm font-medium text-primary-600 hover:bg-primary-500 hover:text-white peer-checked:border-primary-600 peer-checked:bg-primary-600 peer-checked:text-white dark:border-primary-500 dark:bg-gray-800 dark:text-primary-500 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:hover:text-white dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-500"
+                        className="border-primary-600 text-primary-600 hover:bg-primary-500 peer-checked:border-primary-600 peer-checked:bg-primary-600 dark:border-primary-500 dark:text-primary-500 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-500 inline-flex w-full cursor-pointer items-center justify-center rounded-lg border-2 bg-white p-2 text-center text-sm font-medium peer-checked:text-white hover:text-white dark:bg-gray-800 dark:hover:text-white"
                       >
                         Logo Design
                       </Label>
@@ -210,7 +210,7 @@ export function LargeFacetedSearchDrawerWithMultipleOptions() {
                       />
                       <Label
                         htmlFor="react-option"
-                        className="inline-flex w-full cursor-pointer items-center justify-between rounded-lg border-2 border-gray-200 bg-white p-2 text-gray-500 hover:bg-gray-50 hover:text-gray-600 peer-checked:border-primary-600 peer-checked:text-gray-600 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:peer-checked:text-gray-300 md:p-5"
+                        className="peer-checked:border-primary-600 inline-flex w-full cursor-pointer items-center justify-between rounded-lg border-2 border-gray-200 bg-white p-2 text-gray-500 peer-checked:text-gray-600 hover:bg-gray-50 hover:text-gray-600 md:p-5 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:peer-checked:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-gray-300"
                       >
                         <div className="block">
                           <svg
@@ -239,7 +239,7 @@ export function LargeFacetedSearchDrawerWithMultipleOptions() {
                       />
                       <Label
                         htmlFor="vue-option"
-                        className="inline-flex w-full cursor-pointer items-center justify-between rounded-lg border-2 border-gray-200 bg-white p-2 text-gray-500 hover:bg-gray-50 hover:text-gray-600 peer-checked:border-primary-600 peer-checked:text-gray-600 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:peer-checked:text-gray-300 md:p-5"
+                        className="peer-checked:border-primary-600 inline-flex w-full cursor-pointer items-center justify-between rounded-lg border-2 border-gray-200 bg-white p-2 text-gray-500 peer-checked:text-gray-600 hover:bg-gray-50 hover:text-gray-600 md:p-5 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:peer-checked:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-gray-300"
                       >
                         <div className="block">
                           <svg
@@ -268,7 +268,7 @@ export function LargeFacetedSearchDrawerWithMultipleOptions() {
                       />
                       <Label
                         htmlFor="flowbite-option"
-                        className="inline-flex w-full cursor-pointer items-center justify-between rounded-lg border-2 border-gray-200 bg-white p-2 text-gray-500 hover:bg-gray-50 hover:text-gray-600 peer-checked:border-primary-600 peer-checked:text-gray-600 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:peer-checked:text-gray-300 md:p-5"
+                        className="peer-checked:border-primary-600 inline-flex w-full cursor-pointer items-center justify-between rounded-lg border-2 border-gray-200 bg-white p-2 text-gray-500 peer-checked:text-gray-600 hover:bg-gray-50 hover:text-gray-600 md:p-5 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:peer-checked:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-gray-300"
                       >
                         <div className="block">
                           <svg
@@ -432,7 +432,7 @@ export function LargeFacetedSearchDrawerWithMultipleOptions() {
                       />
                       <Label
                         htmlFor="angular-option"
-                        className="inline-flex w-full cursor-pointer items-center justify-between rounded-lg border-2 border-gray-200 bg-white p-2 text-gray-500 hover:bg-gray-50 hover:text-gray-600 peer-checked:border-primary-600 peer-checked:text-gray-600 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:peer-checked:text-gray-300 md:p-5"
+                        className="peer-checked:border-primary-600 inline-flex w-full cursor-pointer items-center justify-between rounded-lg border-2 border-gray-200 bg-white p-2 text-gray-500 peer-checked:text-gray-600 hover:bg-gray-50 hover:text-gray-600 md:p-5 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:peer-checked:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-gray-300"
                       >
                         <div className="block">
                           <svg

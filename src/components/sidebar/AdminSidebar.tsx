@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   Sidebar,
@@ -18,31 +18,33 @@ import {
   HiCog,
   HiDocumentReport,
   HiDatabase,
+  HiTruck,
+  HiPlus,
 } from "react-icons/hi";
 import { twMerge } from "tailwind-merge";
 
 interface AdminSidebarProps {
   isOpen?: boolean;
+  onHoverChange?: (isHovered: boolean) => void;
 }
 
-export const AdminSidebar: FC<AdminSidebarProps> = ({ isOpen = true }) => {
-  const [isMobile, setMobile] = useState(false);
+export const AdminSidebar: FC<AdminSidebarProps> = ({
+  isOpen = true,
+  onHoverChange,
+}) => {
   const [isHovered, setIsHovered] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
-  function hideSidebarOnResize() {
-    const isMobileNow = window.innerWidth < 768;
-    setMobile(isMobileNow);
-  }
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+    onHoverChange?.(true);
+  };
 
-  useEffect(() => {
-    hideSidebarOnResize();
-
-    window.addEventListener("resize", hideSidebarOnResize);
-
-    return () => window.removeEventListener("resize", hideSidebarOnResize);
-  }, []);
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    onHoverChange?.(false);
+  };
 
   const isActive = (path: string) => location.pathname === path;
   const shouldShowExpanded = isOpen || isHovered;
@@ -50,8 +52,8 @@ export const AdminSidebar: FC<AdminSidebarProps> = ({ isOpen = true }) => {
   return (
     <div
       className="fixed top-16 left-0 z-40 h-[calc(100vh-4rem)]"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       {/* Collapsed Sidebar - Always visible */}
       <Sidebar
@@ -60,7 +62,18 @@ export const AdminSidebar: FC<AdminSidebarProps> = ({ isOpen = true }) => {
       >
         <SidebarItemGroup className="[&_[role=tooltip]]:hidden [&_svg]:text-gray-400">
           <div className="mb-4 p-2">
-            <div onClick={() => navigate("/admin")} className="cursor-pointer">
+            <div
+              onClick={() => navigate("/admin")}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  navigate("/admin");
+                }
+              }}
+              className="cursor-pointer"
+              role="button"
+              tabIndex={0}
+            >
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white">
                 <span className="text-sm font-bold">A</span>
               </div>
@@ -96,6 +109,7 @@ export const AdminSidebar: FC<AdminSidebarProps> = ({ isOpen = true }) => {
             }
             onClick={() => navigate("/admin/tables")}
           />
+
           <SidebarItem
             href="/admin/reports"
             icon={HiDocumentReport}
@@ -103,6 +117,16 @@ export const AdminSidebar: FC<AdminSidebarProps> = ({ isOpen = true }) => {
               isActive("/admin/reports") ? "bg-gray-100 dark:bg-gray-700" : ""
             }
             onClick={() => navigate("/admin/reports")}
+          />
+          <SidebarItem
+            href="/admin/deliveries"
+            icon={HiTruck}
+            className={
+              isActive("/admin/deliveries") || isActive("/admin/deliveries/add")
+                ? "bg-gray-100 dark:bg-gray-700"
+                : ""
+            }
+            onClick={() => navigate("/admin/deliveries")}
           />
         </SidebarItemGroup>
       </Sidebar>
@@ -148,6 +172,36 @@ export const AdminSidebar: FC<AdminSidebarProps> = ({ isOpen = true }) => {
                   >
                     Landing Page
                   </SidebarItem>
+
+                  <SidebarCollapse label="Dostawy" icon={HiTruck}>
+                    <SidebarItem
+                      href="/admin/deliveries/add"
+                      className={twMerge(
+                        "pl-0 [&>span]:pl-12",
+                        isActive("/admin/deliveries/add")
+                          ? "bg-gray-100 dark:bg-gray-700"
+                          : "",
+                      )}
+                      onClick={() => navigate("/admin/deliveries/add")}
+                    >
+                      <div className="flex items-center">
+                        <HiPlus className="mr-2 h-4 w-4" />
+                        Dodaj Dostawę
+                      </div>
+                    </SidebarItem>
+                    <SidebarItem
+                      href="/admin/deliveries"
+                      className={twMerge(
+                        "pl-0 [&>span]:pl-12",
+                        isActive("/admin/deliveries")
+                          ? "bg-gray-100 dark:bg-gray-700"
+                          : "",
+                      )}
+                      onClick={() => navigate("/admin/deliveries")}
+                    >
+                      Wszystkie Dostawy
+                    </SidebarItem>
+                  </SidebarCollapse>
 
                   <SidebarCollapse label="E-commerce" icon={HiShoppingCart}>
                     <SidebarItem

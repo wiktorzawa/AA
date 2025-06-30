@@ -38,7 +38,7 @@ export function DoubleDashboardNavbarWithProjectDropdown() {
                   className="mr-3 h-8"
                   alt=""
                 />
-                <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
+                <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
                   Flowbite
                 </span>
               </a>
@@ -87,7 +87,7 @@ export function DoubleDashboardNavbarWithProjectDropdown() {
                         src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
                         alt=""
                       />
-                      <div className="absolute -mt-5 ml-6 flex h-5 w-5 items-center justify-center rounded-full border border-white bg-primary-700 dark:border-gray-700">
+                      <div className="bg-primary-700 absolute -mt-5 ml-6 flex h-5 w-5 items-center justify-center rounded-full border border-white dark:border-gray-700">
                         <svg
                           className="h-2 w-2 text-white"
                           aria-hidden="true"
@@ -108,7 +108,7 @@ export function DoubleDashboardNavbarWithProjectDropdown() {
                         </span>
                         : "Hey, what's up? All set for the presentation?"
                       </div>
-                      <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                      <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                         a few moments ago
                       </div>
                     </div>
@@ -146,7 +146,7 @@ export function DoubleDashboardNavbarWithProjectDropdown() {
                         </span>{" "}
                         started following you.
                       </div>
-                      <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                      <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                         10 minutes ago
                       </div>
                     </div>
@@ -185,7 +185,7 @@ export function DoubleDashboardNavbarWithProjectDropdown() {
                         </span>{" "}
                         love your story. See it and view more stories.
                       </div>
-                      <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                      <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                         44 minutes ago
                       </div>
                     </div>
@@ -218,12 +218,12 @@ export function DoubleDashboardNavbarWithProjectDropdown() {
                           Leslie Livingston
                         </span>{" "}
                         mentioned you in a comment:{" "}
-                        <span className="font-medium text-primary-700 dark:text-primary-500">
+                        <span className="text-primary-700 dark:text-primary-500 font-medium">
                           @bonnie.green
                         </span>{" "}
                         what do you say?
                       </div>
-                      <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                      <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                         1 hour ago
                       </div>
                     </div>
@@ -258,7 +258,7 @@ export function DoubleDashboardNavbarWithProjectDropdown() {
                         posted a new video: Glassmorphism - learn how to
                         implement the new design trend.
                       </div>
-                      <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                      <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                         3 hours ago
                       </div>
                     </div>
@@ -268,7 +268,7 @@ export function DoubleDashboardNavbarWithProjectDropdown() {
                   href="#"
                   className="block bg-gray-50 py-2 text-center text-base font-medium text-gray-900 hover:bg-gray-100 dark:bg-gray-700 dark:text-white dark:hover:underline"
                 >
-                  <div className="inline-flex items-center ">
+                  <div className="inline-flex items-center">
                     <svg
                       aria-hidden="true"
                       className="mr-2 h-5 w-5"
@@ -287,7 +287,7 @@ export function DoubleDashboardNavbarWithProjectDropdown() {
                   </div>
                 </a>
               </Dropdown>
-              <span className="mx-2 h-5 w-px bg-gray-200 dark:bg-gray-600 md:inline"></span>
+              <span className="mx-2 h-5 w-px bg-gray-200 md:inline dark:bg-gray-600"></span>
               <Dropdown
                 inline
                 label={
@@ -493,9 +493,9 @@ export function DoubleDashboardNavbarWithProjectDropdown() {
                   </a>
                 </div>
               </Dropdown>
-              <span className="mx-2 hidden h-5 w-px bg-gray-200 dark:bg-gray-600 md:inline"></span>
+              <span className="mx-2 hidden h-5 w-px bg-gray-200 md:inline dark:bg-gray-600"></span>
               <Tooltip content="View FAQ">
-                <button className="hidden rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:ring-4 focus:ring-gray-300 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-600 md:inline-block">
+                <button className="hidden rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:ring-4 focus:ring-gray-300 md:inline-block dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-600">
                   <span className="sr-only">View FAQ</span>
                   <svg
                     className="h-5 w-5"
@@ -508,7 +508,7 @@ export function DoubleDashboardNavbarWithProjectDropdown() {
                   </svg>
                 </button>
               </Tooltip>
-              <span className="mx-2 hidden h-5 w-px bg-gray-200 dark:bg-gray-600 md:inline"></span>
+              <span className="mx-2 hidden h-5 w-px bg-gray-200 md:inline dark:bg-gray-600"></span>
               <Dropdown
                 inline
                 label="N. Virginia"
@@ -519,7 +519,7 @@ export function DoubleDashboardNavbarWithProjectDropdown() {
                   },
                   inlineWrapper: twMerge(
                     theme.dropdown.inlineWrapper,
-                    "hidden items-center rounded-lg p-2 pl-4 pr-3 font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:ring-4 focus:ring-gray-300 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-600 md:inline-flex",
+                    "hidden items-center rounded-lg p-2 pr-3 pl-4 font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:ring-4 focus:ring-gray-300 md:inline-flex dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-600",
                   ),
                 }}
               >
@@ -610,7 +610,7 @@ export function DoubleDashboardNavbarWithProjectDropdown() {
                   </li>
                 </ul>
               </Dropdown>
-              <span className="mx-2 h-5 w-px bg-gray-200 dark:bg-gray-600 md:inline"></span>
+              <span className="mx-2 h-5 w-px bg-gray-200 md:inline dark:bg-gray-600"></span>
               <Dropdown
                 inline
                 label="Bonnie Green @ 1234-567-890"
@@ -621,7 +621,7 @@ export function DoubleDashboardNavbarWithProjectDropdown() {
                   },
                   inlineWrapper: twMerge(
                     theme.dropdown.inlineWrapper,
-                    "hidden items-center rounded-lg p-2 pl-4 pr-3 font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:ring-4 focus:ring-gray-300 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-600 md:inline-flex",
+                    "hidden items-center rounded-lg p-2 pr-3 pl-4 font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:ring-4 focus:ring-gray-300 md:inline-flex dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-600",
                   ),
                 }}
               >
@@ -702,7 +702,7 @@ export function DoubleDashboardNavbarWithProjectDropdown() {
                     >
                       <span className="flex items-center">
                         <svg
-                          className="mr-2 h-4 w-4 text-primary-600 dark:text-primary-500"
+                          className="text-primary-600 dark:text-primary-500 mr-2 h-4 w-4"
                           aria-hidden="true"
                           xmlns="http://www.w3.org/2000/svg"
                           fill="currentColor"
@@ -744,7 +744,7 @@ export function DoubleDashboardNavbarWithProjectDropdown() {
                   </li>
                 </ul>
               </Dropdown>
-              <NavbarToggle className="items-center rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:ring-4 focus:ring-gray-300 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-600 md:hidden" />
+              <NavbarToggle className="items-center rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:ring-4 focus:ring-gray-300 md:hidden dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-600" />
             </div>
           </div>
         </div>
@@ -752,7 +752,7 @@ export function DoubleDashboardNavbarWithProjectDropdown() {
           theme={{
             list: twMerge(
               theme.navbar.collapse.list,
-              "mt-0 w-full bg-white dark:bg-gray-900 md:space-x-0 md:bg-gray-50 md:px-6 md:py-3 md:dark:bg-gray-800",
+              "mt-0 w-full bg-white md:space-x-0 md:bg-gray-50 md:px-6 md:py-3 dark:bg-gray-900 md:dark:bg-gray-800",
             ),
           }}
         >
@@ -761,7 +761,7 @@ export function DoubleDashboardNavbarWithProjectDropdown() {
               <Dropdown
                 inline
                 label={
-                  <span className="flex w-full items-center justify-between text-sm font-medium text-gray-900 dark:text-white md:p-0 md:hover:underline">
+                  <span className="flex w-full items-center justify-between text-sm font-medium text-gray-900 md:p-0 md:hover:underline dark:text-white">
                     <span>
                       Account&nbsp;
                       <span className="ml-2 text-base text-gray-500 dark:text-gray-400">
@@ -838,7 +838,7 @@ export function DoubleDashboardNavbarWithProjectDropdown() {
                   <div className="flex w-full items-center justify-between">
                     <span className="flex items-center">
                       <svg
-                        className="mr-2 h-4 w-4 text-primary-600 dark:text-primary-500"
+                        className="text-primary-600 dark:text-primary-500 mr-2 h-4 w-4"
                         aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="currentColor"
@@ -882,7 +882,7 @@ export function DoubleDashboardNavbarWithProjectDropdown() {
               <Dropdown
                 inline
                 label={
-                  <span className="flex w-full items-center justify-between text-sm font-medium text-gray-900 dark:text-white md:p-0 md:hover:underline">
+                  <span className="flex w-full items-center justify-between text-sm font-medium text-gray-900 md:p-0 md:hover:underline dark:text-white">
                     <span>
                       Regions&nbsp;
                       <span className="ml-2 text-base text-gray-500 dark:text-gray-400">
@@ -987,43 +987,43 @@ export function DoubleDashboardNavbarWithProjectDropdown() {
           </div>
           <NavbarLink
             href="#"
-            className="px-4 py-2.5 text-sm font-medium hover:underline dark:text-gray-100 md:mr-8"
+            className="px-4 py-2.5 text-sm font-medium hover:underline md:mr-8 dark:text-gray-100"
           >
             Home
           </NavbarLink>
           <NavbarLink
             href="#"
-            className="px-4 py-2.5 text-sm font-medium hover:underline dark:text-gray-100 md:mr-8"
+            className="px-4 py-2.5 text-sm font-medium hover:underline md:mr-8 dark:text-gray-100"
           >
             Company
           </NavbarLink>
           <NavbarLink
             href="#"
-            className="px-4 py-2.5 text-sm font-medium hover:underline dark:text-gray-100 md:mr-8"
+            className="px-4 py-2.5 text-sm font-medium hover:underline md:mr-8 dark:text-gray-100"
           >
             Team
           </NavbarLink>
           <NavbarLink
             href="#"
-            className="px-4 py-2.5 text-sm font-medium hover:underline dark:text-gray-100 md:mr-8"
+            className="px-4 py-2.5 text-sm font-medium hover:underline md:mr-8 dark:text-gray-100"
           >
             Features
           </NavbarLink>
           <NavbarLink
             href="#"
-            className="px-4 py-2.5 text-sm font-medium hover:underline dark:text-gray-100 md:mr-8"
+            className="px-4 py-2.5 text-sm font-medium hover:underline md:mr-8 dark:text-gray-100"
           >
             Marketplace
           </NavbarLink>
           <NavbarLink
             href="#"
-            className="px-4 py-2.5 text-sm font-medium hover:underline dark:text-gray-100 md:mr-8"
+            className="px-4 py-2.5 text-sm font-medium hover:underline md:mr-8 dark:text-gray-100"
           >
             Resources
           </NavbarLink>
           <NavbarLink
             href="#"
-            className="px-4 py-2.5 text-sm font-medium hover:underline dark:text-gray-100 md:mr-8"
+            className="px-4 py-2.5 text-sm font-medium hover:underline md:mr-8 dark:text-gray-100"
           >
             Forum
           </NavbarLink>

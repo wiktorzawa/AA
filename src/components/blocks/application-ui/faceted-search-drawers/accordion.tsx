@@ -108,7 +108,7 @@ export function FacetedSearchDrawerWithAccordion() {
                   </div>
                   <a
                     href="#"
-                    className="flex items-center text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
+                    className="text-primary-600 dark:text-primary-500 flex items-center text-sm font-medium hover:underline"
                   >
                     View all
                   </a>
@@ -231,7 +231,7 @@ export function FacetedSearchDrawerWithAccordion() {
                   </ul>
                   <a
                     href="#"
-                    className="flex items-center text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
+                    className="text-primary-600 dark:text-primary-500 flex items-center text-sm font-medium hover:underline"
                   >
                     View all
                   </a>
@@ -248,7 +248,7 @@ export function FacetedSearchDrawerWithAccordion() {
                       htmlFor="blue"
                       className="ml-2 flex items-center text-sm font-medium text-gray-900 dark:text-gray-300"
                     >
-                      <div className="mr-2 h-3.5 w-3.5 rounded-full bg-primary-600"></div>
+                      <div className="bg-primary-600 mr-2 h-3.5 w-3.5 rounded-full"></div>
                       Blue
                     </Label>
                   </div>
@@ -294,7 +294,7 @@ export function FacetedSearchDrawerWithAccordion() {
                   </div>
                   <a
                     href="#"
-                    className="flex items-center text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
+                    className="text-primary-600 dark:text-primary-500 flex items-center text-sm font-medium hover:underline"
                   >
                     View all
                   </a>
@@ -536,7 +536,7 @@ export function FacetedSearchDrawerWithAccordion() {
                   </div>
                   <a
                     href="#"
-                    className="flex items-center text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
+                    className="text-primary-600 dark:text-primary-500 flex items-center text-sm font-medium hover:underline"
                   >
                     View all
                   </a>

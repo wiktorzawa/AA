@@ -38,14 +38,14 @@ export function AdvancedCreateUserModal() {
         <Button onClick={() => setShowModal(true)}>Create product</Button>
       </div>
       <Modal onClose={() => setShowModal(false)} show={showModal}>
-        <ModalBody className="relative rounded-lg bg-white p-4 shadow dark:bg-gray-800 sm:p-5">
-          <div className="mb-4 flex items-center justify-between rounded-t border-b pb-4 dark:border-gray-600 sm:mb-5">
+        <ModalBody className="relative rounded-lg bg-white p-4 shadow sm:p-5 dark:bg-gray-800">
+          <div className="mb-4 flex items-center justify-between rounded-t border-b pb-4 sm:mb-5 dark:border-gray-600">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
               Add new user
             </h3>
             <button
               onClick={() => setShowModal(false)}
-              className="absolute right-5 top-[18px] ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+              className="absolute top-[18px] right-5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
             >
               <HiX className="h-5 w-5" />
               <span className="sr-only">Close modal</span>
@@ -156,7 +156,7 @@ export function AdvancedCreateUserModal() {
                 </Label>
                 <div className="w-full rounded-lg border border-gray-200 bg-gray-50 dark:border-gray-600 dark:bg-gray-700">
                   <div className="flex items-center justify-between border-b px-3 py-2 dark:border-gray-600">
-                    <div className="flex flex-wrap items-center divide-gray-200 dark:divide-gray-600 sm:divide-x">
+                    <div className="flex flex-wrap items-center divide-gray-200 sm:divide-x dark:divide-gray-600">
                       <div className="flex items-center space-x-1 sm:pr-4">
                         <button className="cursor-pointer rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white">
                           <HiPaperClip className="h-5 w-5" />
@@ -211,7 +211,7 @@ export function AdvancedCreateUserModal() {
                       </div>
                     </div>
                     <Tooltip content="Show full screen">
-                      <button className="cursor-pointer rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white sm:ml-auto">
+                      <button className="cursor-pointer rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 sm:ml-auto dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white">
                         <svg
                           aria-hidden
                           fill="currentColor"
@@ -254,7 +254,7 @@ export function AdvancedCreateUserModal() {
                     img="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/helene-engels.png"
                     rounded
                     size="lg"
-                    className="mb-4 sm:mb-0 sm:mr-4 [&_img]:max-w-none"
+                    className="mb-4 sm:mr-4 sm:mb-0 [&_img]:max-w-none"
                   />
                   <div className="w-full">
                     <input

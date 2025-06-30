@@ -190,7 +190,7 @@ export function AdvancedFacetedSearchDrawerWithDatepicker() {
                           htmlFor="blue2"
                           className="ml-2 flex items-center text-sm font-medium text-gray-900 dark:text-gray-300"
                         >
-                          <div className="mr-2 h-3.5 w-3.5 rounded-full bg-primary-600"></div>
+                          <div className="bg-primary-600 mr-2 h-3.5 w-3.5 rounded-full"></div>
                           Blue
                         </Label>
                       </div>
@@ -340,7 +340,7 @@ export function AdvancedFacetedSearchDrawerWithDatepicker() {
                       />
                       <Label
                         htmlFor="delivery-usa"
-                        className="inline-flex w-full cursor-pointer items-center justify-between rounded-lg border border-gray-200 bg-white p-5 text-gray-500 hover:bg-gray-100 hover:text-gray-600 peer-checked:border-primary-600 peer-checked:text-primary-600 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:peer-checked:text-primary-500"
+                        className="peer-checked:border-primary-600 peer-checked:text-primary-600 dark:peer-checked:text-primary-500 inline-flex w-full cursor-pointer items-center justify-between rounded-lg border border-gray-200 bg-white p-5 text-gray-500 hover:bg-gray-100 hover:text-gray-600 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
                       >
                         <div className="block">
                           <div className="w-full text-base font-semibold">
@@ -362,7 +362,7 @@ export function AdvancedFacetedSearchDrawerWithDatepicker() {
                       />
                       <Label
                         htmlFor="delivery-europe"
-                        className="inline-flex w-full cursor-pointer items-center justify-between rounded-lg border border-gray-200 bg-white p-5 text-gray-500 hover:bg-gray-100 hover:text-gray-600 peer-checked:border-primary-600 peer-checked:text-primary-600 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:peer-checked:text-primary-500"
+                        className="peer-checked:border-primary-600 peer-checked:text-primary-600 dark:peer-checked:text-primary-500 inline-flex w-full cursor-pointer items-center justify-between rounded-lg border border-gray-200 bg-white p-5 text-gray-500 hover:bg-gray-100 hover:text-gray-600 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
                       >
                         <div className="block">
                           <div className="w-full text-base font-semibold">
@@ -385,7 +385,7 @@ export function AdvancedFacetedSearchDrawerWithDatepicker() {
                       />
                       <Label
                         htmlFor="delivery-asia"
-                        className="inline-flex w-full cursor-pointer items-center justify-between rounded-lg border border-gray-200 bg-white p-5 text-gray-500 hover:bg-gray-100 hover:text-gray-600 peer-checked:border-primary-600 peer-checked:text-primary-600 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:peer-checked:text-primary-500"
+                        className="peer-checked:border-primary-600 peer-checked:text-primary-600 dark:peer-checked:text-primary-500 inline-flex w-full cursor-pointer items-center justify-between rounded-lg border border-gray-200 bg-white p-5 text-gray-500 hover:bg-gray-100 hover:text-gray-600 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
                       >
                         <div className="block">
                           <div className="w-full text-base font-semibold">
@@ -408,7 +408,7 @@ export function AdvancedFacetedSearchDrawerWithDatepicker() {
                       />
                       <Label
                         htmlFor="delivery-australia"
-                        className="inline-flex w-full cursor-pointer items-center justify-between rounded-lg border border-gray-200 bg-white p-5 text-gray-500 hover:bg-gray-100 hover:text-gray-600 peer-checked:border-primary-600 peer-checked:text-primary-600 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:peer-checked:text-primary-500"
+                        className="peer-checked:border-primary-600 peer-checked:text-primary-600 dark:peer-checked:text-primary-500 inline-flex w-full cursor-pointer items-center justify-between rounded-lg border border-gray-200 bg-white p-5 text-gray-500 hover:bg-gray-100 hover:text-gray-600 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
                       >
                         <div className="block">
                           <div className="w-full text-base font-semibold">

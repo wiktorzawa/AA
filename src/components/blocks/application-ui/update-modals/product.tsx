@@ -1,4 +1,13 @@
-import { Button, Checkbox, Label, Modal, ModalBody, Select, Textarea, TextInput } from "flowbite-react";
+import {
+  Button,
+  Checkbox,
+  Label,
+  Modal,
+  ModalBody,
+  Select,
+  Textarea,
+  TextInput,
+} from "flowbite-react";
 import { useState } from "react";
 
 export function UpdateProductModal() {
@@ -15,14 +24,14 @@ export function UpdateProductModal() {
         show={showModal}
         size="3xl"
       >
-        <ModalBody className="relative rounded-lg bg-white p-4 shadow dark:bg-gray-800 sm:p-5">
-          <div className="mb-4 flex items-center justify-between rounded-t border-b pb-4 dark:border-gray-600 sm:mb-5">
+        <ModalBody className="relative rounded-lg bg-white p-4 shadow sm:p-5 dark:bg-gray-800">
+          <div className="mb-4 flex items-center justify-between rounded-t border-b pb-4 sm:mb-5 dark:border-gray-600">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
               Update Product
             </h3>
             <button
               onClick={() => setShowModal(false)}
-              className="absolute right-5 top-[18px] ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+              className="absolute top-[18px] right-5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
             >
               <svg
                 aria-hidden
@@ -176,7 +185,7 @@ export function UpdateProductModal() {
                 <Checkbox
                   id="inline-2-checkbox"
                   name="sellingType"
-                  className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600"
+                  className="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800"
                 />
                 <Label
                   htmlFor="inline-2-checkbox"
@@ -202,7 +211,7 @@ export function UpdateProductModal() {
             <div className="mb-4">
               <span className="mb-2 block dark:text-white">Product Images</span>
               <div className="mb-4 grid grid-cols-3 gap-4 sm:grid-cols-4">
-                <div className="relative rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-36">
+                <div className="relative rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-36 dark:bg-gray-700">
                   <img
                     alt="iMac Side"
                     src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-side-image.png"
@@ -227,7 +236,7 @@ export function UpdateProductModal() {
                     <span className="sr-only">Delete image</span>
                   </button>
                 </div>
-                <div className="relative rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-36">
+                <div className="relative rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-36 dark:bg-gray-700">
                   <img
                     alt="iMac Front"
                     src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
@@ -252,7 +261,7 @@ export function UpdateProductModal() {
                     <span className="sr-only">Delete image</span>
                   </button>
                 </div>
-                <div className="relative rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-36">
+                <div className="relative rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-36 dark:bg-gray-700">
                   <img
                     alt="iMac Back"
                     src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
@@ -277,7 +286,7 @@ export function UpdateProductModal() {
                     <span className="sr-only">Delete image</span>
                   </button>
                 </div>
-                <div className="relative rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-36">
+                <div className="relative rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-36 dark:bg-gray-700">
                   <img
                     alt="iMac Back"
                     src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
@@ -308,7 +317,7 @@ export function UpdateProductModal() {
                   htmlFor="dropzone-file"
                   className="flex h-64 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600"
                 >
-                  <div className="flex flex-col items-center justify-center pb-6 pt-5">
+                  <div className="flex flex-col items-center justify-center pt-5 pb-6">
                     <svg
                       aria-hidden
                       className="mb-3 h-10 w-10 text-gray-400"
@@ -349,7 +358,7 @@ export function UpdateProductModal() {
                       "border border-transparent bg-red-600 text-white focus:ring-4 focus:ring-red-300 enabled:hover:bg-red-600 dark:bg-red-600 dark:focus:ring-red-900 dark:enabled:hover:bg-red-600",
                   },
                   outline: {
-                    on: "flex w-full justify-center bg-white text-red-600 transition-all duration-75 ease-in group-enabled:group-hover:bg-opacity-0 group-enabled:group-hover:text-inherit dark:bg-gray-800 dark:text-red-500",
+                    on: "group-enabled:group-hover:bg-opacity-0 flex w-full justify-center bg-white text-red-600 transition-all duration-75 ease-in group-enabled:group-hover:text-inherit dark:bg-gray-800 dark:text-red-500",
                   },
                 }}
                 className="[&>span]:border-red-600 [&>span]:px-5 [&>span]:py-2.5"
@@ -358,7 +367,7 @@ export function UpdateProductModal() {
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
-                  className="-ml-1 mr-1 h-5 w-5"
+                  className="mr-1 -ml-1 h-5 w-5"
                 >
                   <path
                     fillRule="evenodd"

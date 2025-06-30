@@ -9,7 +9,7 @@ export function FooterWithSitemapLinksAndLanguageSelector() {
           <li>
             <a
               href="#"
-              className="mb-4 mr-6 inline-block text-gray-900 underline hover:no-underline dark:text-white"
+              className="mr-6 mb-4 inline-block text-gray-900 underline hover:no-underline dark:text-white"
             >
               About
             </a>
@@ -17,7 +17,7 @@ export function FooterWithSitemapLinksAndLanguageSelector() {
           <li>
             <a
               href="#"
-              className="mb-4 mr-6 inline-block text-gray-900 underline hover:no-underline dark:text-white"
+              className="mr-6 mb-4 inline-block text-gray-900 underline hover:no-underline dark:text-white"
             >
               Become an Author
             </a>
@@ -25,7 +25,7 @@ export function FooterWithSitemapLinksAndLanguageSelector() {
           <li>
             <a
               href="#"
-              className="mb-4 mr-6 inline-block text-gray-900 underline hover:no-underline dark:text-white"
+              className="mr-6 mb-4 inline-block text-gray-900 underline hover:no-underline dark:text-white"
             >
               Pricing
             </a>
@@ -33,7 +33,7 @@ export function FooterWithSitemapLinksAndLanguageSelector() {
           <li>
             <a
               href="#"
-              className="mb-4 mr-6 inline-block text-gray-900 underline hover:no-underline dark:text-white"
+              className="mr-6 mb-4 inline-block text-gray-900 underline hover:no-underline dark:text-white"
             >
               Help
             </a>
@@ -41,7 +41,7 @@ export function FooterWithSitemapLinksAndLanguageSelector() {
           <li>
             <a
               href="#"
-              className="mb-4 mr-6 inline-block text-gray-900 underline hover:no-underline dark:text-white"
+              className="mr-6 mb-4 inline-block text-gray-900 underline hover:no-underline dark:text-white"
             >
               Terms & Conditions
             </a>
@@ -49,7 +49,7 @@ export function FooterWithSitemapLinksAndLanguageSelector() {
           <li>
             <a
               href="#"
-              className="mb-4 mr-6 inline-block text-gray-900 underline hover:no-underline dark:text-white"
+              className="mr-6 mb-4 inline-block text-gray-900 underline hover:no-underline dark:text-white"
             >
               Cookies
             </a>
@@ -69,7 +69,7 @@ export function FooterWithSitemapLinksAndLanguageSelector() {
             <>
               <svg
                 aria-hidden
-                className="ml-1.5 mr-2 h-3 w-4"
+                className="mr-2 ml-1.5 h-3 w-4"
                 xmlns="http://www.w3.org/2000/svg"
                 id="flag-icon-css-us"
                 viewBox="0 0 512 512"
@@ -105,7 +105,7 @@ export function FooterWithSitemapLinksAndLanguageSelector() {
           theme={{
             inlineWrapper: twMerge(
               theme.dropdown.inlineWrapper,
-              "mx-auto flex items-center rounded-full p-1.5 text-sm font-medium text-gray-900 hover:text-primary-600 focus:ring-4 focus:ring-gray-100 dark:text-white dark:hover:text-primary-500 dark:focus:ring-gray-700 xl:mr-0",
+              "hover:text-primary-600 dark:hover:text-primary-500 mx-auto flex items-center rounded-full p-1.5 text-sm font-medium text-gray-900 focus:ring-4 focus:ring-gray-100 xl:mr-0 dark:text-white dark:focus:ring-gray-700",
             ),
           }}
         >
@@ -222,7 +222,7 @@ export function FooterWithSitemapLinksAndLanguageSelector() {
           </DropdownItem>
         </Dropdown>
       </div>
-      <p className="mt-4 text-center text-sm text-gray-500 dark:text-gray-400 xl:mt-6 xl:text-center 2xl:mt-8">
+      <p className="mt-4 text-center text-sm text-gray-500 xl:mt-6 xl:text-center 2xl:mt-8 dark:text-gray-400">
         Copyright &copy; 2022&nbsp;
         <a
           href="https://flowbite.com/"

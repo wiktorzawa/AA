@@ -38,7 +38,7 @@ export function UpdateModalAccordion() {
             </h3>
             <button
               onClick={() => setShowModal(false)}
-              className="absolute right-5 top-[18px] ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+              className="absolute top-[18px] right-5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
             >
               <svg
                 aria-hidden
@@ -79,7 +79,7 @@ export function UpdateModalAccordion() {
                         <img
                           alt="Helene avatar"
                           src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/helene-engels.png"
-                          className="mb-4 h-20 w-20 rounded-full sm:mb-0 sm:mr-4"
+                          className="mb-4 h-20 w-20 rounded-full sm:mr-4 sm:mb-0"
                         />
                         <div className="w-full">
                           <input
@@ -89,7 +89,7 @@ export function UpdateModalAccordion() {
                             type="file"
                           />
                           <p
-                            className="mb-3 mt-1 text-xs font-normal text-gray-500 dark:text-gray-300"
+                            className="mt-1 mb-3 text-xs font-normal text-gray-500 dark:text-gray-300"
                             id="file_input_help"
                           >
                             SVG, PNG, JPG or GIF (MAX. 800x400px).
@@ -100,7 +100,7 @@ export function UpdateModalAccordion() {
                               className="inline-flex [&>span]:text-xs"
                             >
                               <svg
-                                className="-ml-1 mr-1 h-4 w-4"
+                                className="mr-1 -ml-1 h-4 w-4"
                                 fill="currentColor"
                                 viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg"
@@ -548,7 +548,7 @@ export function UpdateModalAccordion() {
                       "border border-transparent bg-red-600 text-white focus:ring-4 focus:ring-red-300 enabled:hover:bg-red-600 dark:bg-red-600 dark:focus:ring-red-900 dark:enabled:hover:bg-red-600",
                   },
                   outline: {
-                    on: "flex w-full justify-center bg-white text-red-600 transition-all duration-75 ease-in group-enabled:group-hover:bg-opacity-0 group-enabled:group-hover:text-inherit dark:bg-gray-800 dark:text-red-500",
+                    on: "group-enabled:group-hover:bg-opacity-0 flex w-full justify-center bg-white text-red-600 transition-all duration-75 ease-in group-enabled:group-hover:text-inherit dark:bg-gray-800 dark:text-red-500",
                   },
                 }}
                 className="[&>span]:border-red-600 [&>span]:px-5 [&>span]:py-2.5"
@@ -557,7 +557,7 @@ export function UpdateModalAccordion() {
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
-                  className="-ml-1 mr-1 h-5 w-5"
+                  className="mr-1 -ml-1 h-5 w-5"
                 >
                   <path
                     fillRule="evenodd"

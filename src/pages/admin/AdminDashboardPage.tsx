@@ -1,5 +1,4 @@
 import type { FC } from "react";
-import { Card } from "flowbite-react";
 import { BlockBreadcrumb } from "@/components/block-breadcrumb";
 
 const AdminDashboardPage: FC = () => {

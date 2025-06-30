@@ -1,4 +1,12 @@
-import { Button, Checkbox, Label, Modal, ModalBody, ModalHeader, theme } from "flowbite-react";
+import {
+  Button,
+  Checkbox,
+  Label,
+  Modal,
+  ModalBody,
+  ModalHeader,
+  theme,
+} from "flowbite-react";
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 

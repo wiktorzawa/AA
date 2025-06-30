@@ -1,6 +1,12 @@
 "use client";
 
-import { Button, Drawer, DrawerHeader, DrawerItems, theme } from "flowbite-react";
+import {
+  Button,
+  Drawer,
+  DrawerHeader,
+  DrawerItems,
+  theme,
+} from "flowbite-react";
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 
@@ -41,16 +47,16 @@ export function ReadEventDrawer() {
         />
         <DrawerItems>
           <dl className="mt-4 sm:mt-5">
-            <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+            <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
               Details
             </dt>
-            <dd className="mb-4 font-light text-gray-500 dark:text-gray-400 sm:mb-5">
+            <dd className="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">
               The 4th Digital Transformation and Industry 4.0 Free Online
               Conference Organized by Flowbite and Themesberg, Live on Saturday
               26th Nov at 02:00 pm GMT | 04:00 pm EET on Zoom Webinars
             </dd>
             <dt className="sr-only">Date</dt>
-            <dd className="mb-4 flex items-center space-x-1.5 font-light text-gray-900 dark:text-white sm:mb-5">
+            <dd className="mb-4 flex items-center space-x-1.5 font-light text-gray-900 sm:mb-5 dark:text-white">
               <svg
                 className="mr-1.5 h-4 w-4 text-gray-400 dark:text-gray-500"
                 fill="currentColor"
@@ -63,12 +69,12 @@ export function ReadEventDrawer() {
                   clipRule="evenodd"
                 />
               </svg>
-              <span className="font-semibold leading-none text-gray-900 dark:text-white">
+              <span className="leading-none font-semibold text-gray-900 dark:text-white">
                 26th of November, 2022
               </span>
             </dd>
             <dt className="sr-only">Location</dt>
-            <dd className="mb-4 flex items-center space-x-1.5 font-light text-gray-900 dark:text-white sm:mb-5">
+            <dd className="mb-4 flex items-center space-x-1.5 font-light text-gray-900 sm:mb-5 dark:text-white">
               <svg
                 className="mr-1.5 h-4 w-4 text-gray-400 dark:text-gray-500"
                 aria-hidden
@@ -82,7 +88,7 @@ export function ReadEventDrawer() {
                   clipRule="evenodd"
                 />
               </svg>
-              <span className="font-semibold leading-none text-gray-900 dark:text-white">
+              <span className="leading-none font-semibold text-gray-900 dark:text-white">
                 California, USA
               </span>
             </dd>
@@ -91,7 +97,7 @@ export function ReadEventDrawer() {
             <Button className="inline-flex w-full">
               <svg
                 aria-hidden
-                className="-ml-1 mr-1 h-5 w-5"
+                className="mr-1 -ml-1 h-5 w-5"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
@@ -108,7 +114,7 @@ export function ReadEventDrawer() {
             <Button color="failure" className="inline-flex w-full">
               <svg
                 aria-hidden
-                className="-ml-1 mr-1.5 h-5 w-5"
+                className="mr-1.5 -ml-1 h-5 w-5"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"

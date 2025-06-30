@@ -31,10 +31,10 @@ export function DefaultCRUDLayout() {
   const [isShowDeleteModal, setShowDeleteModal] = useState(false);
 
   return (
-    <section className="bg-gray-50 p-3 dark:bg-gray-900 sm:p-5">
+    <section className="bg-gray-50 p-3 sm:p-5 dark:bg-gray-900">
       <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
-        <div className="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
-          <div className="flex flex-col items-center justify-between space-y-3 p-4 md:flex-row md:space-x-4 md:space-y-0">
+        <div className="relative overflow-hidden bg-white shadow-md sm:rounded-lg dark:bg-gray-800">
+          <div className="flex flex-col items-center justify-between space-y-3 p-4 md:flex-row md:space-y-0 md:space-x-4">
             <div className="w-full md:w-1/2">
               <form className="flex items-center">
                 <Label htmlFor="simple-search" className="sr-only">
@@ -65,7 +65,7 @@ export function DefaultCRUDLayout() {
                 />
               </form>
             </div>
-            <div className="flex w-full shrink-0 flex-col items-stretch justify-end space-y-2 md:w-auto md:flex-row md:items-center md:space-x-3 md:space-y-0">
+            <div className="flex w-full shrink-0 flex-col items-stretch justify-end space-y-2 md:w-auto md:flex-row md:items-center md:space-y-0 md:space-x-3">
               <Button onClick={() => setShowCreateModal(true)}>
                 <svg
                   className="mr-2 h-3.5 w-3.5"
@@ -88,7 +88,7 @@ export function DefaultCRUDLayout() {
                   label={
                     <>
                       <svg
-                        className="-ml-1 mr-1.5 h-5 w-5"
+                        className="mr-1.5 -ml-1 h-5 w-5"
                         fill="currentColor"
                         viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg"
@@ -277,7 +277,7 @@ export function DefaultCRUDLayout() {
               }}
               className="w-full text-left text-sm text-gray-500 dark:text-gray-400"
             >
-              <TableHead className="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
+              <TableHead className="bg-gray-50 text-xs text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
                 <TableHeadCell scope="col" className="px-5 py-4">
                   Product name
                 </TableHeadCell>
@@ -301,7 +301,7 @@ export function DefaultCRUDLayout() {
                 <TableRow className="border-b dark:border-gray-700">
                   <TableCell
                     scope="row"
-                    className="whitespace-nowrap p-5 font-medium text-gray-900 dark:text-white"
+                    className="p-5 font-medium whitespace-nowrap text-gray-900 dark:text-white"
                   >
                     Apple iMac 27&quot;
                   </TableCell>
@@ -397,7 +397,7 @@ export function DefaultCRUDLayout() {
                 <TableRow className="border-b dark:border-gray-700">
                   <TableCell
                     scope="row"
-                    className="whitespace-nowrap p-5 font-medium text-gray-900 dark:text-white"
+                    className="p-5 font-medium whitespace-nowrap text-gray-900 dark:text-white"
                   >
                     Apple iMac 20&quot;
                   </TableCell>
@@ -493,7 +493,7 @@ export function DefaultCRUDLayout() {
                 <TableRow className="border-b dark:border-gray-700">
                   <TableCell
                     scope="row"
-                    className="whitespace-nowrap p-5 font-medium text-gray-900 dark:text-white"
+                    className="p-5 font-medium whitespace-nowrap text-gray-900 dark:text-white"
                   >
                     Apple iPhone 14&quot;
                   </TableCell>
@@ -589,7 +589,7 @@ export function DefaultCRUDLayout() {
                 <TableRow className="border-b dark:border-gray-700">
                   <TableCell
                     scope="row"
-                    className="whitespace-nowrap p-5 font-medium text-gray-900 dark:text-white"
+                    className="p-5 font-medium whitespace-nowrap text-gray-900 dark:text-white"
                   >
                     Apple iPad Air
                   </TableCell>
@@ -685,7 +685,7 @@ export function DefaultCRUDLayout() {
                 <TableRow className="border-b dark:border-gray-700">
                   <TableCell
                     scope="row"
-                    className="whitespace-nowrap p-5 font-medium text-gray-900 dark:text-white"
+                    className="p-5 font-medium whitespace-nowrap text-gray-900 dark:text-white"
                   >
                     Xbox Series S
                   </TableCell>
@@ -781,7 +781,7 @@ export function DefaultCRUDLayout() {
                 <TableRow className="border-b dark:border-gray-700">
                   <TableCell
                     scope="row"
-                    className="whitespace-nowrap p-5 font-medium text-gray-900 dark:text-white"
+                    className="p-5 font-medium whitespace-nowrap text-gray-900 dark:text-white"
                   >
                     PlayStation 5
                   </TableCell>
@@ -877,7 +877,7 @@ export function DefaultCRUDLayout() {
                 <TableRow className="border-b dark:border-gray-700">
                   <TableCell
                     scope="row"
-                    className="whitespace-nowrap p-5 font-medium text-gray-900 dark:text-white"
+                    className="p-5 font-medium whitespace-nowrap text-gray-900 dark:text-white"
                   >
                     Xbox Series X
                   </TableCell>
@@ -973,7 +973,7 @@ export function DefaultCRUDLayout() {
                 <TableRow className="border-b dark:border-gray-700">
                   <TableCell
                     scope="row"
-                    className="whitespace-nowrap p-5 font-medium text-gray-900 dark:text-white"
+                    className="p-5 font-medium whitespace-nowrap text-gray-900 dark:text-white"
                   >
                     Apple Watch SE
                   </TableCell>
@@ -1069,7 +1069,7 @@ export function DefaultCRUDLayout() {
                 <TableRow className="border-b dark:border-gray-700">
                   <TableCell
                     scope="row"
-                    className="whitespace-nowrap p-5 font-medium text-gray-900 dark:text-white"
+                    className="p-5 font-medium whitespace-nowrap text-gray-900 dark:text-white"
                   >
                     NIKON D850
                   </TableCell>
@@ -1165,7 +1165,7 @@ export function DefaultCRUDLayout() {
                 <TableRow className="border-b dark:border-gray-700">
                   <TableCell
                     scope="row"
-                    className="whitespace-nowrap p-5 font-medium text-gray-900 dark:text-white"
+                    className="p-5 font-medium whitespace-nowrap text-gray-900 dark:text-white"
                   >
                     Monitor BenQ EX2710Q
                   </TableCell>
@@ -1317,14 +1317,14 @@ export function DefaultCRUDLayout() {
         show={isShowUpdateModal}
         size="2xl"
       >
-        <ModalBody className="relative rounded-lg bg-white p-4 shadow dark:bg-gray-800 sm:p-5">
-          <div className="mb-4 flex items-center justify-between rounded-t border-b pb-4 dark:border-gray-600 sm:mb-5">
+        <ModalBody className="relative rounded-lg bg-white p-4 shadow sm:p-5 dark:bg-gray-800">
+          <div className="mb-4 flex items-center justify-between rounded-t border-b pb-4 sm:mb-5 dark:border-gray-600">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
               Update Product
             </h3>
             <button
               onClick={() => setShowUpdateModal(false)}
-              className="absolute right-5 top-[18px] ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+              className="absolute top-[18px] right-5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
             >
               <svg
                 aria-hidden
@@ -1418,7 +1418,7 @@ export function DefaultCRUDLayout() {
                 className="enabled:hover:bg-red-600 dark:bg-transparent [&>span]:border-red-600 [&>span]:text-sm [&>span]:text-red-600 dark:[&>span]:bg-transparent dark:[&>span]:text-red-500"
               >
                 <svg
-                  className="-ml-1 mr-1 h-5 w-5"
+                  className="mr-1 -ml-1 h-5 w-5"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -1441,16 +1441,16 @@ export function DefaultCRUDLayout() {
         size="xl"
         show={isShowReadModal}
       >
-        <ModalBody className="relative rounded-lg bg-white p-4 shadow dark:bg-gray-800 sm:p-5">
+        <ModalBody className="relative rounded-lg bg-white p-4 shadow sm:p-5 dark:bg-gray-800">
           <div className="mb-4 flex justify-between rounded-t sm:mb-5">
-            <div className="text-lg text-gray-900 dark:text-white md:text-xl">
-              <h3 className="font-semibold ">Apple iMac 27”</h3>
+            <div className="text-lg text-gray-900 md:text-xl dark:text-white">
+              <h3 className="font-semibold">Apple iMac 27”</h3>
               <p className="font-bold">$2999</p>
             </div>
             <div>
               <button
                 onClick={() => setShowReadModal(false)}
-                className="absolute right-5 top-[18px] ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+                className="absolute top-[18px] right-5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
               >
                 <svg
                   aria-hidden
@@ -1470,19 +1470,19 @@ export function DefaultCRUDLayout() {
             </div>
           </div>
           <dl>
-            <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+            <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
               Details
             </dt>
-            <dd className="mb-4 text-gray-500 dark:text-gray-400 sm:mb-5">
+            <dd className="mb-4 text-gray-500 sm:mb-5 dark:text-gray-400">
               Standard glass, 3.8GHz 8-core 10th-generation Intel Core i7
               processor, Turbo Boost up to 5.0GHz, 16GB 2666MHz DDR4 memory,
               Radeon Pro 5500 XT with 8GB of GDDR6 memory, 256GB SSD storage,
               Gigabit Ethernet, Magic Mouse 2, Magic Keyboard - US.
             </dd>
-            <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+            <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
               Category
             </dt>
-            <dd className="mb-4 text-gray-500 dark:text-gray-400 sm:mb-5">
+            <dd className="mb-4 text-gray-500 sm:mb-5 dark:text-gray-400">
               Electronics/PC
             </dd>
           </dl>
@@ -1494,7 +1494,7 @@ export function DefaultCRUDLayout() {
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
-                  className="-ml-1 mr-1 h-5 w-5"
+                  className="mr-1 -ml-1 h-5 w-5"
                 >
                   <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path>
                   <path
@@ -1524,7 +1524,7 @@ export function DefaultCRUDLayout() {
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
-                className="-ml-1 mr-1.5 h-5 w-5"
+                className="mr-1.5 -ml-1 h-5 w-5"
               >
                 <path
                   fillRule="evenodd"
@@ -1543,10 +1543,10 @@ export function DefaultCRUDLayout() {
         size="md"
         show={isShowDeleteModal}
       >
-        <ModalBody className="relative rounded-lg bg-white p-4 text-center shadow dark:bg-gray-800 sm:p-5">
+        <ModalBody className="relative rounded-lg bg-white p-4 text-center shadow sm:p-5 dark:bg-gray-800">
           <button
             onClick={() => setShowDeleteModal(false)}
-            className="absolute right-2.5 top-2.5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+            className="absolute top-2.5 right-2.5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
           >
             <svg
               aria-hidden
@@ -1599,14 +1599,14 @@ export function DefaultCRUDLayout() {
         popup
         show={isShowCreateModal}
       >
-        <ModalBody className="relative rounded-lg bg-white p-4 shadow dark:bg-gray-800 sm:p-5">
-          <div className="mb-4 flex items-center justify-between rounded-t border-b pb-4 dark:border-gray-600 sm:mb-5">
+        <ModalBody className="relative rounded-lg bg-white p-4 shadow sm:p-5 dark:bg-gray-800">
+          <div className="mb-4 flex items-center justify-between rounded-t border-b pb-4 sm:mb-5 dark:border-gray-600">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
               Add Product
             </h3>
             <button
               onClick={() => setShowCreateModal(false)}
-              className="absolute right-5 top-[18px] ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+              className="absolute top-[18px] right-5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
             >
               <HiX className="h-5 w-5" />
               <span className="sr-only">Close modal</span>
@@ -1686,7 +1686,7 @@ export function DefaultCRUDLayout() {
               </div>
             </div>
             <Button size="lg" className="[&>span]:text-sm">
-              <HiPlus className="-ml-1 mr-2 h-4 w-4" />
+              <HiPlus className="mr-2 -ml-1 h-4 w-4" />
               Add new product
             </Button>
           </form>

@@ -12,9 +12,9 @@ export function TableHeaderWithTabs() {
   return (
     <section className="flex items-center bg-gray-50 py-6 dark:bg-gray-900">
       <div className="mx-auto w-full max-w-screen-xl px-4 lg:px-12">
-        <div className="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
+        <div className="relative overflow-hidden bg-white shadow-md sm:rounded-lg dark:bg-gray-800">
           <div className="divide-y px-4 dark:divide-gray-700">
-            <div className="flex flex-col space-y-3 py-3 md:flex-row md:items-center md:justify-between md:space-x-4 md:space-y-0">
+            <div className="flex flex-col space-y-3 py-3 md:flex-row md:items-center md:justify-between md:space-y-0 md:space-x-4">
               <div>
                 <h5 className="mb-1 font-semibold dark:text-white">
                   Bonnie Green
@@ -39,7 +39,7 @@ export function TableHeaderWithTabs() {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col space-y-3 py-4 md:flex-row md:items-center md:justify-between md:space-x-4 md:space-y-0 md:py-0">
+            <div className="flex flex-col space-y-3 py-4 md:flex-row md:items-center md:justify-between md:space-y-0 md:space-x-4 md:py-0">
               <Select
                 id="list-navigation"
                 name="list-navigation"

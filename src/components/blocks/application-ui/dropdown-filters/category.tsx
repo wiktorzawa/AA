@@ -15,7 +15,7 @@ export function DropdownFilterCategory() {
         <p className="text-sm font-medium text-gray-900 dark:text-white">
           Columns
         </p>
-        <ul className="mb-4 mt-2 space-y-2 text-sm">
+        <ul className="mt-2 mb-4 space-y-2 text-sm">
           <li className="flex w-full items-center gap-x-2 rounded-md px-1.5 py-1 text-sm font-medium text-gray-900 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600">
             <Checkbox id="intent" name="intent" />
             <Label htmlFor="intent">Intent</Label>
@@ -44,7 +44,7 @@ export function DropdownFilterCategory() {
         <p className="text-sm text-gray-900 dark:text-white">
           Additional settings
         </p>
-        <ul className="mb-4 mt-2 space-y-2 text-sm">
+        <ul className="mt-2 mb-4 space-y-2 text-sm">
           <li className="flex w-full items-center gap-x-2 rounded-md px-1.5 py-1 text-sm font-medium text-gray-900 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600">
             <Checkbox defaultChecked id="show_tags" name="show_tags" />
             <Label htmlFor="show_tags">Show tags in keywords</Label>
@@ -55,14 +55,14 @@ export function DropdownFilterCategory() {
           </li>
         </ul>
         <p className="text-sm text-gray-900 dark:text-white">Positions chart</p>
-        <ul className="mb-4 mt-2 space-y-2 text-sm">
+        <ul className="mt-2 mb-4 space-y-2 text-sm">
           <li className="flex w-full items-center gap-x-2 rounded-md px-1.5 py-1 text-sm font-medium text-gray-900 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600">
             <Checkbox id="smart_zoom" name="smart_zoom" />
             <Label htmlFor="smart_zoom">Smart zoom</Label>
           </li>
         </ul>
         <p className="text-sm text-gray-900 dark:text-white">Row height</p>
-        <ul className="mb-4 mt-2 space-y-2 text-sm">
+        <ul className="mt-2 mb-4 space-y-2 text-sm">
           <li className="flex w-full items-center gap-x-2 rounded-md px-1.5 py-1 text-sm font-medium text-gray-900 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600">
             <Radio defaultChecked id="row_height_show_tags" name="row_height" />
             <Label htmlFor="row_height_show_tags">Show tags in keywords</Label>
@@ -76,7 +76,7 @@ export function DropdownFilterCategory() {
         </ul>
         <a
           href="#"
-          className="ml-1.5 mt-4 flex items-center text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
+          className="text-primary-600 dark:text-primary-500 mt-4 ml-1.5 flex items-center text-sm font-medium hover:underline"
         >
           Apply to all projects
         </a>

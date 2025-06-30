@@ -1,3 +1,63 @@
+# 🚨 **WAŻNE OSTRZEŻENIE PRZED ROZPOCZĘCIEM** 🚨
+
+## ⚠️ **UWAGA: Konfiguracja środowiska wymagana!**
+
+**Przed uruchomieniem aplikacji po sklonowaniu z GitHub:**
+
+1. **Pliki `.env` NIE SĄ w repozytorium** (ze względów bezpieczeństwa)
+2. **Musisz je stworzyć lokalnie** z własnymi danymi AWS i bazy danych
+3. **Bez nich aplikacja NIE BĘDZIE DZIAŁAĆ**
+
+### 🔧 **Wymagane pliki konfiguracyjne:**
+
+```
+backend/.env        - Konfiguracja backendu (AWS, baza produkcyjna)
+backend/.env.test   - Konfiguracja testów (baza testowa)
+.env               - Konfiguracja frontendu (jeśli potrzebna)
+```
+
+### 📋 **Minimalna zawartość backend/.env:**
+
+```env
+# Database
+DB_HOST=your-rds-endpoint
+DB_PASSWORD=your-password
+# AWS
+AWS_ACCESS_KEY_ID=your-key
+AWS_SECRET_ACCESS_KEY=your-secret
+# Security
+JWT_SECRET=your-jwt-secret
+```
+
+### 📋 **Minimalna zawartość backend/.env.test:**
+
+```env
+# Test Database (WAŻNE: inna baza niż produkcyjna!)
+DB_HOST=127.0.0.1
+DB_USER=root
+DB_PASSWORD=your-test-password
+DB_NAME=msbox_test_db
+JWT_SECRET=your-jwt-secret
+```
+
+**💡 Zobacz `SYSTEM_UPLOAD_DOKUMENTACJA.md` dla pełnych instrukcji konfiguracji**
+
+---
+
+# MSBOX - System Zarządzania Dostawami
+
+System React + TypeScript + Node.js z integracją AWS do zarządzania dostawami Excel.
+
+## Funkcjonalności
+
+- ✅ Upload plików Excel (.xlsx, .xls, .xlsm)
+- ✅ Integracja AWS S3 + RDS
+- ✅ Autoryzacja JWT (supplier, staff, admin)
+- ✅ Inteligentne mapowanie kolumn Excel
+- ✅ Walidacja plików i ochrona przed duplikatami
+
+---
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

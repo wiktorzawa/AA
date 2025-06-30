@@ -37,7 +37,7 @@ export default function CryptoSidenav() {
         <DrawerItems className="h-full">
           <Sidebar
             aria-label="Crypto sidenav"
-            className="w-full [&>div]:bg-transparent [&>div]:p-0 [&_*]:font-medium"
+            className="w-full [&_*]:font-medium [&>div]:bg-transparent [&>div]:p-0"
           >
             <SidebarItems className="py-1">
               <SidebarItemGroup>
@@ -114,7 +114,7 @@ export default function CryptoSidenav() {
                           />
                         </svg>
                         <div className="font-medium">Bitcoin</div>
-                        <span className="text-sm uppercase text-gray-500 dark:text-gray-400">
+                        <span className="text-sm text-gray-500 uppercase dark:text-gray-400">
                           Btc
                         </span>
                       </span>
@@ -160,7 +160,7 @@ export default function CryptoSidenav() {
                           />
                         </svg>
                         <div className="font-medium">Ethereum</div>
-                        <span className="text-sm uppercase text-gray-500 dark:text-gray-400">
+                        <span className="text-sm text-gray-500 uppercase dark:text-gray-400">
                           Eth
                         </span>
                       </span>
@@ -190,7 +190,7 @@ export default function CryptoSidenav() {
                           />
                         </svg>
                         <div className="font-medium">Tether</div>
-                        <span className="text-sm uppercase text-gray-500 dark:text-gray-400">
+                        <span className="text-sm text-gray-500 uppercase dark:text-gray-400">
                           Usdt
                         </span>
                       </span>
@@ -231,7 +231,7 @@ export default function CryptoSidenav() {
                           />
                         </svg>
                         <div className="font-medium">Binance</div>
-                        <span className="text-sm uppercase text-gray-500 dark:text-gray-400">
+                        <span className="text-sm text-gray-500 uppercase dark:text-gray-400">
                           Bnb
                         </span>
                       </span>
@@ -300,7 +300,7 @@ export default function CryptoSidenav() {
                           </defs>
                         </svg>
                         <div className="font-medium">Solana</div>
-                        <span className="text-sm uppercase text-gray-500 dark:text-gray-400">
+                        <span className="text-sm text-gray-500 uppercase dark:text-gray-400">
                           Sol
                         </span>
                       </span>
@@ -326,7 +326,7 @@ export default function CryptoSidenav() {
                           />
                         </svg>
                         <div className="font-medium">Cardano</div>
-                        <span className="text-sm uppercase text-gray-500 dark:text-gray-400">
+                        <span className="text-sm text-gray-500 uppercase dark:text-gray-400">
                           Ada
                         </span>
                       </span>
@@ -356,7 +356,7 @@ export default function CryptoSidenav() {
                           />
                         </svg>
                         <div className="font-medium">Ripple</div>
-                        <span className="text-sm uppercase text-gray-500 dark:text-gray-400">
+                        <span className="text-sm text-gray-500 uppercase dark:text-gray-400">
                           Xrp
                         </span>
                       </span>
@@ -394,7 +394,7 @@ export default function CryptoSidenav() {
                           />
                         </svg>
                         <div className="font-medium">USD</div>
-                        <span className="text-sm uppercase text-gray-500 dark:text-gray-400">
+                        <span className="text-sm text-gray-500 uppercase dark:text-gray-400">
                           USDC
                         </span>
                       </span>
@@ -420,7 +420,7 @@ export default function CryptoSidenav() {
                           />
                         </svg>
                         <div className="font-medium">Polkadot</div>
-                        <span className="text-sm uppercase text-gray-500 dark:text-gray-400">
+                        <span className="text-sm text-gray-500 uppercase dark:text-gray-400">
                           Dot
                         </span>
                       </span>
@@ -440,7 +440,7 @@ export default function CryptoSidenav() {
                 </Button>
               </SidebarItemGroup>
               <SidebarItemGroup>
-                <div className="mb-4 mt-2 flex items-center justify-between text-sm font-medium text-gray-500 dark:text-gray-400">
+                <div className="mt-2 mb-4 flex items-center justify-between text-sm font-medium text-gray-500 dark:text-gray-400">
                   <h3>Trending</h3>
                   <Dropdown
                     arrowIcon={false}
@@ -541,7 +541,7 @@ export default function CryptoSidenav() {
                           />
                         </svg>
                         <div className="font-medium">Cosmos</div>
-                        <span className="text-sm uppercase text-gray-500 dark:text-gray-400">
+                        <span className="text-sm text-gray-500 uppercase dark:text-gray-400">
                           Atom
                         </span>
                       </span>
@@ -610,7 +610,7 @@ export default function CryptoSidenav() {
                           </defs>
                         </svg>
                         <div className="font-medium">Solana</div>
-                        <span className="text-sm uppercase text-gray-500 dark:text-gray-400">
+                        <span className="text-sm text-gray-500 uppercase dark:text-gray-400">
                           Sol
                         </span>
                       </span>
@@ -644,7 +644,7 @@ export default function CryptoSidenav() {
                           />
                         </svg>
                         <div className="font-medium">Litecoin</div>
-                        <span className="text-sm uppercase text-gray-500 dark:text-gray-400">
+                        <span className="text-sm text-gray-500 uppercase dark:text-gray-400">
                           Ltc
                         </span>
                       </span>
@@ -670,7 +670,7 @@ export default function CryptoSidenav() {
                           />
                         </svg>
                         <div className="font-medium">Chainlink</div>
-                        <span className="text-sm uppercase text-gray-500 dark:text-gray-400">
+                        <span className="text-sm text-gray-500 uppercase dark:text-gray-400">
                           Link
                         </span>
                       </span>
@@ -700,7 +700,7 @@ export default function CryptoSidenav() {
                           />
                         </svg>
                         <div className="font-medium">Polygon</div>
-                        <span className="text-sm uppercase text-gray-500 dark:text-gray-400">
+                        <span className="text-sm text-gray-500 uppercase dark:text-gray-400">
                           Matic
                         </span>
                       </span>
@@ -730,7 +730,7 @@ export default function CryptoSidenav() {
                           />
                         </svg>
                         <div className="font-medium">THETA</div>
-                        <span className="text-sm uppercase text-gray-500 dark:text-gray-400">
+                        <span className="text-sm text-gray-500 uppercase dark:text-gray-400">
                           Theta
                         </span>
                       </span>
@@ -756,7 +756,7 @@ export default function CryptoSidenav() {
                           />
                         </svg>
                         <div className="font-medium">Tron</div>
-                        <span className="text-sm uppercase text-gray-500 dark:text-gray-400">
+                        <span className="text-sm text-gray-500 uppercase dark:text-gray-400">
                           Trx
                         </span>
                       </span>

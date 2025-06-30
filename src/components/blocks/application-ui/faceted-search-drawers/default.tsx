@@ -97,7 +97,7 @@ export function DefaultFacetedSearchDrawer() {
                 </div>
                 <a
                   href="#"
-                  className="flex items-center text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
+                  className="text-primary-600 dark:text-primary-500 flex items-center text-sm font-medium hover:underline"
                 >
                   View all
                 </a>

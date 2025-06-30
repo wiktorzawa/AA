@@ -18,8 +18,8 @@ export function TableHeaderWithBreadcrumb() {
   return (
     <section className="flex items-center bg-gray-50 py-6 dark:bg-gray-900">
       <div className="mx-auto w-full max-w-screen-xl px-4 lg:px-12">
-        <div className="relative overflow-hidden bg-white px-4 shadow-md dark:bg-gray-800 sm:rounded-lg">
-          <div className="flex flex-col space-y-3 py-3 md:flex-row md:items-center md:justify-between md:space-x-4 md:space-y-0">
+        <div className="relative overflow-hidden bg-white px-4 shadow-md sm:rounded-lg dark:bg-gray-800">
+          <div className="flex flex-col space-y-3 py-3 md:flex-row md:items-center md:justify-between md:space-y-0 md:space-x-4">
             <div>
               <Breadcrumb className="mb-2 rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-gray-700 dark:border-gray-600 dark:bg-gray-700">
                 <BreadcrumbItem href="#">Dashboard</BreadcrumbItem>
@@ -30,9 +30,9 @@ export function TableHeaderWithBreadcrumb() {
                 <span className="dark:text-white">View list of products</span>
               </h5>
             </div>
-            <div className="flex shrink-0 flex-col items-start space-y-3 md:flex-row md:items-center md:space-x-3 md:space-y-0 lg:justify-end">
+            <div className="flex shrink-0 flex-col items-start space-y-3 md:flex-row md:items-center md:space-y-0 md:space-x-3 lg:justify-end">
               <Button>
-                <HiPlus className="-ml-1 mr-1.5 h-3.5 w-3.5" />
+                <HiPlus className="mr-1.5 -ml-1 h-3.5 w-3.5" />
                 Add new product
               </Button>
             </div>
@@ -79,9 +79,9 @@ export function TableHeaderWithBreadcrumb() {
               <option value="no-returns">No returns</option>
             </Select>
           </div>
-          <div className="block w-full items-center justify-between border-t py-3 dark:border-gray-700 md:flex">
+          <div className="block w-full items-center justify-between border-t py-3 md:flex dark:border-gray-700">
             <div className="mb-4 flex flex-wrap md:mb-0">
-              <div className="mb-2 mr-4 flex w-full items-center text-sm font-medium text-gray-900 dark:text-white md:mb-0 md:w-auto">
+              <div className="mr-4 mb-2 flex w-full items-center text-sm font-medium text-gray-900 md:mb-0 md:w-auto dark:text-white">
                 Show by:
               </div>
               <fieldset className="flex flex-wrap">

@@ -1,16 +1,17 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
 import { Button, Card, Checkbox, Label, TextInput } from "flowbite-react";
 import type { FC } from "react";
 import { useNavigate } from "react-router-dom";
-import { zaloguj, DaneLogowania } from "@api/login_auth_data.api"; // Import funkcji API
+import { zaloguj, DaneLogowania } from "@api/authApi"; // Import funkcji API
+import { useAuth } from "@/contexts/AuthContext";
 
 const SignInPage: FC = function () {
+  const navigate = useNavigate();
+  const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,24 +26,36 @@ const SignInPage: FC = function () {
     try {
       const data = await zaloguj(credentials);
 
-      if (data.success && data.userRole) {
-        // Zapisz rolę użytkownika i email w localStorage
-        localStorage.setItem("userRole", data.userRole);
-        localStorage.setItem("username", email); // Zapisz email do wyświetlenia w navbarze
+      if (
+        data.success &&
+        data.userRole &&
+        data.token &&
+        data.refresh_token &&
+        data.userId
+      ) {
+        // Użyj AuthContext do logowania
+        const userData = {
+          id_logowania: data.userId,
+          id_uzytkownika: data.userId,
+          adres_email: email,
+          rola_uzytkownika: data.userRole,
+        };
 
-        // Bezpośrednie przekierowanie z odświeżeniem strony
+        login(data.token, data.refresh_token, userData);
+
+        // Przekierowanie na podstawie roli
         switch (data.userRole) {
           case "admin":
-            window.location.href = "/admin";
+            navigate("/admin");
             break;
           case "staff":
-            window.location.href = "/staff";
+            navigate("/staff");
             break;
           case "supplier":
-            window.location.href = "/supplier";
+            navigate("/supplier");
             break;
           default:
-            window.location.href = "/"; // Domyślne przekierowanie
+            navigate("/");
             break;
         }
       } else {

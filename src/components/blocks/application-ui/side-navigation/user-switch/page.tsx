@@ -67,7 +67,7 @@ export default function SidenavWithUserSwitch() {
                           size="sm"
                           className="space-x-0 text-left [&_img]:mr-3"
                         >
-                          <div className="mb-0.5 text-base font-semibold leading-none text-gray-900 dark:text-white">
+                          <div className="mb-0.5 text-base leading-none font-semibold text-gray-900 dark:text-white">
                             Bonnie Green
                           </div>
                           <div className="text-sm text-gray-500 dark:text-gray-400">
@@ -92,7 +92,7 @@ export default function SidenavWithUserSwitch() {
                       arrowIcon: "hidden",
                       inlineWrapper: twMerge(
                         theme.dropdown.inlineWrapper,
-                        "w-full rounded-lg p-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700",
+                        "w-full rounded-lg p-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus:ring-4 focus:ring-gray-200 focus:outline-none dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700",
                       ),
                       content: twMerge(theme.dropdown.content, "py-0"),
                       floating: {
@@ -107,7 +107,7 @@ export default function SidenavWithUserSwitch() {
                         size="sm"
                         className="space-x-0 text-left [&_img]:mr-3"
                       >
-                        <div className="mb-0.5 text-base font-semibold leading-none text-gray-900 dark:text-white">
+                        <div className="mb-0.5 text-base leading-none font-semibold text-gray-900 dark:text-white">
                           Michael Gough
                         </div>
                         <div className="text-sm text-gray-500 dark:text-gray-400">
@@ -122,7 +122,7 @@ export default function SidenavWithUserSwitch() {
                         size="sm"
                         className="space-x-0 text-left [&_img]:mr-3"
                       >
-                        <div className="mb-0.5 text-base font-semibold leading-none text-gray-900 dark:text-white">
+                        <div className="mb-0.5 text-base leading-none font-semibold text-gray-900 dark:text-white">
                           Roberta Casas
                         </div>
                         <div className="text-sm text-gray-500 dark:text-gray-400">
@@ -152,11 +152,11 @@ export default function SidenavWithUserSwitch() {
                 </SidebarItem>
               </SidebarItemGroup>
               <SidebarItemGroup>
-                <div className="mb-2 flex items-center justify-between pl-2 text-sm font-medium uppercase text-gray-500 dark:border-gray-700 dark:text-gray-400">
+                <div className="mb-2 flex items-center justify-between pl-2 text-sm font-medium text-gray-500 uppercase dark:border-gray-700 dark:text-gray-400">
                   <h3>Collections</h3>
                   <a
                     href="#"
-                    className="mr-1 inline-flex rounded-lg p-2.5 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
+                    className="mr-1 inline-flex rounded-lg p-2.5 text-sm text-gray-500 hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 focus:outline-none dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
                   >
                     <svg
                       className="h-5 w-5"
@@ -196,7 +196,7 @@ export default function SidenavWithUserSwitch() {
                 <SidebarItem
                   href="#"
                   icon={HiPlus}
-                  className="text-gray-500 hover:text-gray-900  dark:text-gray-400 dark:hover:text-white"
+                  className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
                 >
                   Add collection
                 </SidebarItem>

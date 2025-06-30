@@ -76,14 +76,14 @@ export default function DoubleSidebarLayoutWithNavbar() {
     <div className="bg-gray-50 dark:bg-gray-900">
       <Navbar
         fluid
-        className="fixed top-0 z-50 w-full border-b border-gray-200 bg-white p-0 dark:border-gray-700 dark:bg-gray-800 sm:p-0"
+        className="fixed top-0 z-50 w-full border-b border-gray-200 bg-white p-0 sm:p-0 dark:border-gray-700 dark:bg-gray-800"
       >
         <div className="w-full p-3 pr-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <button
                 onClick={() => setSidebarOpen(!isSidebarOpen)}
-                className="mr-3 cursor-pointer rounded p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:hidden"
+                className="mr-3 cursor-pointer rounded p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 md:hidden dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
               >
                 <span className="sr-only">Toggle sidebar</span>
                 <div className="lg:hidden">
@@ -101,7 +101,7 @@ export default function DoubleSidebarLayoutWithNavbar() {
                   width={32}
                   height={32}
                 />
-                <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
+                <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
                   Flowbite
                 </span>
               </NavbarBrand>
@@ -124,7 +124,7 @@ export default function DoubleSidebarLayoutWithNavbar() {
               <div className="flex items-center">
                 <button
                   onClick={() => setSidebarOpen(true)}
-                  className="cursor-pointer rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:bg-gray-700 dark:focus:ring-gray-700 lg:hidden"
+                  className="cursor-pointer rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 lg:hidden dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:bg-gray-700 dark:focus:ring-gray-700"
                 >
                   <span className="sr-only">Search</span>
                   <HiSearch className="h-6 w-6" />
@@ -158,7 +158,7 @@ export default function DoubleSidebarLayoutWithNavbar() {
                             width={44}
                             className="rounded-full"
                           />
-                          <div className="absolute -mt-5 ml-6 flex h-5 w-5 items-center justify-center rounded-full border border-white bg-primary-700 dark:border-gray-700">
+                          <div className="bg-primary-700 absolute -mt-5 ml-6 flex h-5 w-5 items-center justify-center rounded-full border border-white dark:border-gray-700">
                             <svg
                               className="h-3 w-3 text-white"
                               fill="currentColor"
@@ -179,7 +179,7 @@ export default function DoubleSidebarLayoutWithNavbar() {
                             : &quot;Hey, what&apos;s up? All set for the
                             presentation?&quot;
                           </div>
-                          <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                          <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                             a few moments ago
                           </div>
                         </div>
@@ -218,7 +218,7 @@ export default function DoubleSidebarLayoutWithNavbar() {
                             </span>
                             &nbsp;started following you.
                           </div>
-                          <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                          <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                             10 minutes ago
                           </div>
                         </div>
@@ -261,7 +261,7 @@ export default function DoubleSidebarLayoutWithNavbar() {
                             </span>
                             &nbsp;love your story. See it and view more stories.
                           </div>
-                          <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                          <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                             44 minutes ago
                           </div>
                         </div>
@@ -299,12 +299,12 @@ export default function DoubleSidebarLayoutWithNavbar() {
                               Leslie Livingston
                             </span>
                             &nbsp;mentioned you in a comment:&nbsp;
-                            <span className="font-medium text-primary-700 dark:text-primary-500">
+                            <span className="text-primary-700 dark:text-primary-500 font-medium">
                               @bonnie.green
                             </span>
                             &nbsp;what do you say?
                           </div>
-                          <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                          <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                             1 hour ago
                           </div>
                         </div>
@@ -340,7 +340,7 @@ export default function DoubleSidebarLayoutWithNavbar() {
                             &nbsp;posted a new video: Glassmorphism - learn how
                             to implement the new design trend.
                           </div>
-                          <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                          <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                             3 hours ago
                           </div>
                         </div>
@@ -516,7 +516,7 @@ export default function DoubleSidebarLayoutWithNavbar() {
                       <span className="flex items-center">
                         <svg
                           aria-hidden
-                          className="mr-2 h-5 w-5 text-primary-600 dark:text-primary-500"
+                          className="text-primary-600 dark:text-primary-500 mr-2 h-5 w-5"
                           fill="currentColor"
                           viewBox="0 0 20 20"
                           xmlns="http://www.w3.org/2000/svg"
@@ -601,10 +601,7 @@ export default function DoubleSidebarLayoutWithNavbar() {
                         <Badge className="rounded-full">12</Badge>
                       </div>
                     </SidebarItem>
-                    <SidebarCollapse
-                      icon={HiLockClosed}
-                      label="Authentication"
-                    >
+                    <SidebarCollapse icon={HiLockClosed} label="Authentication">
                       <SidebarItem href="#">Sign In</SidebarItem>
                       <SidebarItem href="#">Sign Up</SidebarItem>
                       <SidebarItem href="#">Forgot Password</SidebarItem>
@@ -625,7 +622,7 @@ export default function DoubleSidebarLayoutWithNavbar() {
               </div>
               <div
                 hidden={isMobile}
-                className="absolute bottom-0 left-0 z-20 hidden w-full justify-center space-x-4 bg-white p-4 dark:bg-gray-800 lg:flex"
+                className="absolute bottom-0 left-0 z-20 hidden w-full justify-center space-x-4 bg-white p-4 lg:flex dark:bg-gray-800"
               >
                 <button className="inline-flex cursor-pointer justify-center rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-700 dark:hover:text-white">
                   <span className="sr-only">Tweaks</span>
@@ -842,30 +839,30 @@ export default function DoubleSidebarLayoutWithNavbar() {
           </Sidebar>
         </DrawerItems>
       </Drawer>
-      <div className="min-h-full bg-gray-50 p-4 pt-20 dark:bg-gray-900 md:ml-64 lg:mr-16">
+      <div className="min-h-full bg-gray-50 p-4 pt-20 md:ml-64 lg:mr-16 dark:bg-gray-900">
         <div className="mb-4 grid grid-cols-3 gap-4">
-          <div className="h-32 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 lg:h-64"></div>
-          <div className="h-32 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 lg:h-64"></div>
-          <div className="h-32 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 lg:h-64"></div>
+          <div className="h-32 rounded-lg border-2 border-dashed border-gray-300 lg:h-64 dark:border-gray-600"></div>
+          <div className="h-32 rounded-lg border-2 border-dashed border-gray-300 lg:h-64 dark:border-gray-600"></div>
+          <div className="h-32 rounded-lg border-2 border-dashed border-gray-300 lg:h-64 dark:border-gray-600"></div>
         </div>
         <div className="mb-4 h-96 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600"></div>
         <div className="mb-4 grid grid-cols-2 gap-4">
-          <div className="h-48 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 lg:h-72"></div>
-          <div className="h-48 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 lg:h-72"></div>
-          <div className="h-48 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 lg:h-72"></div>
-          <div className="h-48 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 lg:h-72"></div>
+          <div className="h-48 rounded-lg border-2 border-dashed border-gray-300 lg:h-72 dark:border-gray-600"></div>
+          <div className="h-48 rounded-lg border-2 border-dashed border-gray-300 lg:h-72 dark:border-gray-600"></div>
+          <div className="h-48 rounded-lg border-2 border-dashed border-gray-300 lg:h-72 dark:border-gray-600"></div>
+          <div className="h-48 rounded-lg border-2 border-dashed border-gray-300 lg:h-72 dark:border-gray-600"></div>
         </div>
         <div className="mb-4 h-96 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600"></div>
         <div className="grid grid-cols-2 gap-4">
-          <div className="h-48 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 lg:h-72"></div>
-          <div className="h-48 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 lg:h-72"></div>
-          <div className="h-48 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 lg:h-72"></div>
-          <div className="h-48 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 lg:h-72"></div>
+          <div className="h-48 rounded-lg border-2 border-dashed border-gray-300 lg:h-72 dark:border-gray-600"></div>
+          <div className="h-48 rounded-lg border-2 border-dashed border-gray-300 lg:h-72 dark:border-gray-600"></div>
+          <div className="h-48 rounded-lg border-2 border-dashed border-gray-300 lg:h-72 dark:border-gray-600"></div>
+          <div className="h-48 rounded-lg border-2 border-dashed border-gray-300 lg:h-72 dark:border-gray-600"></div>
         </div>
       </div>
       <Sidebar
         collapsed
-        className="invisible right-0 top-16 border-l dark:border-gray-700 lg:visible lg:fixed [&>div]:bg-white [&_[role=tooltip]]:px-0"
+        className="invisible top-16 right-0 border-l lg:visible lg:fixed dark:border-gray-700 [&_[role=tooltip]]:px-0 [&>div]:bg-white"
       >
         <SidebarItemGroup>
           <SidebarItem href="#" icon={HiCalendar} label="Calendar">

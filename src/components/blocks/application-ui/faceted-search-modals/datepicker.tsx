@@ -71,7 +71,7 @@ export function FacetedSearchModalWithDatepicker() {
                   />
                   <Label
                     htmlFor="hours-1"
-                    className="inline-flex w-full cursor-pointer items-center justify-center rounded-lg border-2 border-primary-600 bg-white p-2 text-center text-sm font-medium text-primary-600 hover:bg-primary-500 hover:text-white peer-checked:border-primary-600 peer-checked:bg-primary-600 peer-checked:text-white dark:border-primary-500 dark:bg-gray-800 dark:text-primary-500 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:hover:text-white dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-500"
+                    className="border-primary-600 text-primary-600 hover:bg-primary-500 peer-checked:border-primary-600 peer-checked:bg-primary-600 dark:border-primary-500 dark:text-primary-500 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-500 inline-flex w-full cursor-pointer items-center justify-center rounded-lg border-2 bg-white p-2 text-center text-sm font-medium peer-checked:text-white hover:text-white dark:bg-gray-800 dark:hover:text-white"
                   >
                     1 hour
                   </Label>
@@ -84,7 +84,7 @@ export function FacetedSearchModalWithDatepicker() {
                   />
                   <Label
                     htmlFor="hours-2"
-                    className="inline-flex w-full cursor-pointer items-center justify-center rounded-lg border-2 border-primary-600 bg-white p-2 text-center text-sm font-medium text-primary-600 hover:bg-primary-500 hover:text-white peer-checked:border-primary-600 peer-checked:bg-primary-600 peer-checked:text-white dark:border-primary-500 dark:bg-gray-800 dark:text-primary-500 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:hover:text-white dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-500"
+                    className="border-primary-600 text-primary-600 hover:bg-primary-500 peer-checked:border-primary-600 peer-checked:bg-primary-600 dark:border-primary-500 dark:text-primary-500 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-500 inline-flex w-full cursor-pointer items-center justify-center rounded-lg border-2 bg-white p-2 text-center text-sm font-medium peer-checked:text-white hover:text-white dark:bg-gray-800 dark:hover:text-white"
                   >
                     <div className="block">
                       <div className="w-full text-sm">2 hours</div>
@@ -100,7 +100,7 @@ export function FacetedSearchModalWithDatepicker() {
                   />
                   <Label
                     htmlFor="hours-3"
-                    className="inline-flex w-full cursor-pointer items-center justify-center rounded-lg border-2 border-primary-600 bg-white p-2 text-center text-sm font-medium text-primary-600 hover:bg-primary-500 hover:text-white peer-checked:border-primary-600 peer-checked:bg-primary-600 peer-checked:text-white dark:border-primary-500 dark:bg-gray-800 dark:text-primary-500 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:hover:text-white dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-500"
+                    className="border-primary-600 text-primary-600 hover:bg-primary-500 peer-checked:border-primary-600 peer-checked:bg-primary-600 dark:border-primary-500 dark:text-primary-500 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-500 inline-flex w-full cursor-pointer items-center justify-center rounded-lg border-2 bg-white p-2 text-center text-sm font-medium peer-checked:text-white hover:text-white dark:bg-gray-800 dark:hover:text-white"
                   >
                     <div className="block">
                       <div className="w-full text-sm">3 hours</div>
@@ -115,7 +115,7 @@ export function FacetedSearchModalWithDatepicker() {
                   />
                   <Label
                     htmlFor="hours-4"
-                    className="inline-flex w-full cursor-pointer items-center justify-center rounded-lg border-2 border-primary-600 bg-white p-2 text-center text-sm font-medium text-primary-600 hover:bg-primary-500 hover:text-white peer-checked:border-primary-600 peer-checked:bg-primary-600 peer-checked:text-white dark:border-primary-500 dark:bg-gray-800 dark:text-primary-500 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:hover:text-white dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-500"
+                    className="border-primary-600 text-primary-600 hover:bg-primary-500 peer-checked:border-primary-600 peer-checked:bg-primary-600 dark:border-primary-500 dark:text-primary-500 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-500 inline-flex w-full cursor-pointer items-center justify-center rounded-lg border-2 bg-white p-2 text-center text-sm font-medium peer-checked:text-white hover:text-white dark:bg-gray-800 dark:hover:text-white"
                   >
                     <div className="block">
                       <div className="w-full text-sm">4 hours</div>
@@ -131,7 +131,7 @@ export function FacetedSearchModalWithDatepicker() {
                   />
                   <Label
                     htmlFor="hours-57"
-                    className="inline-flex w-full cursor-pointer items-center justify-center rounded-lg border-2 border-primary-600 bg-white p-2 text-center text-sm font-medium text-primary-600 hover:bg-primary-500 hover:text-white peer-checked:border-primary-600 peer-checked:bg-primary-600 peer-checked:text-white dark:border-primary-500 dark:bg-gray-800 dark:text-primary-500 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:hover:text-white dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-500"
+                    className="border-primary-600 text-primary-600 hover:bg-primary-500 peer-checked:border-primary-600 peer-checked:bg-primary-600 dark:border-primary-500 dark:text-primary-500 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-500 inline-flex w-full cursor-pointer items-center justify-center rounded-lg border-2 bg-white p-2 text-center text-sm font-medium peer-checked:text-white hover:text-white dark:bg-gray-800 dark:hover:text-white"
                   >
                     <div className="block">
                       <div className="w-full text-sm">5-7 hours</div>
@@ -146,7 +146,7 @@ export function FacetedSearchModalWithDatepicker() {
                   />
                   <Label
                     htmlFor="hours-all"
-                    className="inline-flex w-full cursor-pointer items-center justify-center rounded-lg border-2 border-primary-600 bg-white p-2 text-center text-sm font-medium text-primary-600 hover:bg-primary-500 hover:text-white peer-checked:border-primary-600 peer-checked:bg-primary-600 peer-checked:text-white dark:border-primary-500 dark:bg-gray-800 dark:text-primary-500 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:hover:text-white dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-500"
+                    className="border-primary-600 text-primary-600 hover:bg-primary-500 peer-checked:border-primary-600 peer-checked:bg-primary-600 dark:border-primary-500 dark:text-primary-500 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-500 inline-flex w-full cursor-pointer items-center justify-center rounded-lg border-2 bg-white p-2 text-center text-sm font-medium peer-checked:text-white hover:text-white dark:bg-gray-800 dark:hover:text-white"
                   >
                     <div className="block">
                       <div className="w-full text-sm">All day</div>

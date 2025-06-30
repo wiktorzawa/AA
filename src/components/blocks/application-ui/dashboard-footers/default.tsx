@@ -4,7 +4,7 @@ import { FaDribbble, FaFacebookF, FaGithub, FaTwitter } from "react-icons/fa";
 export function DefaultDashboardFooter() {
   return (
     <Footer container>
-      <p className="mb-4 text-center text-sm text-gray-500 dark:text-gray-400 sm:mb-0">
+      <p className="mb-4 text-center text-sm text-gray-500 sm:mb-0 dark:text-gray-400">
         &copy; 2019-2022&nbsp;
         <a
           href="https://flowbite.com/"

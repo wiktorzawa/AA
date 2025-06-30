@@ -1,4 +1,10 @@
-import { Dropdown, DropdownDivider, DropdownHeader, DropdownItem, theme } from "flowbite-react";
+import {
+  Dropdown,
+  DropdownDivider,
+  DropdownHeader,
+  DropdownItem,
+  theme,
+} from "flowbite-react";
 import { HiChevronRight } from "react-icons/hi";
 import { twMerge } from "tailwind-merge";
 
@@ -40,7 +46,7 @@ export function TableFooterWithDropdownAndLink() {
             </Dropdown>
             <a
               href="#"
-              className="inline-flex items-center rounded-lg p-2 text-xs font-medium uppercase text-primary-700 hover:bg-gray-100 dark:text-primary-500 dark:hover:bg-gray-700 sm:text-sm"
+              className="text-primary-700 dark:text-primary-500 inline-flex items-center rounded-lg p-2 text-xs font-medium uppercase hover:bg-gray-100 sm:text-sm dark:hover:bg-gray-700"
             >
               Transactions Report
               <HiChevronRight className="ml-2 h-5 w-5" />

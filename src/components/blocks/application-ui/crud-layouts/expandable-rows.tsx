@@ -29,10 +29,10 @@ export function CRUDLayoutWithExpandableRows() {
   const [isShowAddNewProductModal, setShowAddNewProductModal] = useState(false);
 
   return (
-    <section className="bg-gray-50 py-3 dark:bg-gray-900 sm:py-5">
+    <section className="bg-gray-50 py-3 sm:py-5 dark:bg-gray-900">
       <div className="mx-auto max-w-screen-2xl px-4 lg:px-12">
-        <div className="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
-          <div className="flex flex-col items-center justify-between space-y-3 border-b p-4 dark:border-gray-700 md:flex-row md:space-x-4 md:space-y-0">
+        <div className="relative overflow-hidden bg-white shadow-md sm:rounded-lg dark:bg-gray-800">
+          <div className="flex flex-col items-center justify-between space-y-3 border-b p-4 md:flex-row md:space-y-0 md:space-x-4 dark:border-gray-700">
             <div className="flex w-full items-center space-x-3">
               <h5 className="font-semibold dark:text-white">
                 Flowbite Products
@@ -80,14 +80,14 @@ export function CRUDLayoutWithExpandableRows() {
                 show={isShowAddNewProductModal}
                 size="3xl"
               >
-                <ModalBody className="relative rounded-lg bg-white p-4 shadow dark:bg-gray-800 sm:p-5">
-                  <div className="mb-4 flex items-center justify-between rounded-t border-b pb-4 dark:border-gray-600 sm:mb-5">
+                <ModalBody className="relative rounded-lg bg-white p-4 shadow sm:p-5 dark:bg-gray-800">
+                  <div className="mb-4 flex items-center justify-between rounded-t border-b pb-4 sm:mb-5 dark:border-gray-600">
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                       Add Product
                     </h3>
                     <button
                       onClick={() => setShowAddNewProductModal(false)}
-                      className="absolute right-5 top-[18px] ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+                      className="absolute top-[18px] right-5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
                     >
                       <HiX className="h-5 w-5" />
                       <span className="sr-only">Close modal</span>
@@ -276,7 +276,7 @@ export function CRUDLayoutWithExpandableRows() {
                           htmlFor="dropzone-file"
                           className="flex h-64 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600"
                         >
-                          <div className="flex flex-col items-center justify-center pb-6 pt-5">
+                          <div className="flex flex-col items-center justify-center pt-5 pb-6">
                             <HiCloudUpload className="mb-3 h-10 w-10 text-gray-400" />
                             <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
                               <span className="font-semibold">
@@ -296,7 +296,7 @@ export function CRUDLayoutWithExpandableRows() {
                         </Label>
                       </div>
                     </div>
-                    <div className="items-center space-y-4 sm:flex sm:space-x-4 sm:space-y-0">
+                    <div className="items-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
                       <Button
                         type="submit"
                         size="lg"
@@ -308,16 +308,16 @@ export function CRUDLayoutWithExpandableRows() {
                         size="lg"
                         className="w-full md:w-fit [&>span]:text-sm"
                       >
-                        <HiCalendar className="-ml-1 mr-1 h-5 w-5" />
+                        <HiCalendar className="mr-1 -ml-1 h-5 w-5" />
                         Schedule
                       </Button>
                       <Button
                         color="gray"
                         onClick={() => setShowAddNewProductModal(false)}
                         size="lg"
-                        className="w-full dark:bg-gray-700 dark:enabled:hover:bg-gray-600 md:w-fit [&>span]:text-sm [&>span]:text-gray-200 hover:[&>span]:text-gray-900 dark:[&>span]:enabled:hover:text-white"
+                        className="w-full md:w-fit dark:bg-gray-700 dark:enabled:hover:bg-gray-600 [&>span]:text-sm [&>span]:text-gray-200 hover:[&>span]:text-gray-900 dark:[&>span]:enabled:hover:text-white"
                       >
-                        <HiX className="-ml-1 mr-1 h-5 w-5" />
+                        <HiX className="mr-1 -ml-1 h-5 w-5" />
                         Discard
                       </Button>
                     </div>
@@ -375,7 +375,7 @@ export function CRUDLayoutWithExpandableRows() {
                       </Label>
                     </li>
                   </ul>
-                  <h6 className="mb-2 mt-4 text-sm font-medium text-gray-900 dark:text-white">
+                  <h6 className="mt-4 mb-2 text-sm font-medium text-gray-900 dark:text-white">
                     Additional settings
                   </h6>
                   <ul className="space-y-1 text-sm">
@@ -403,7 +403,7 @@ export function CRUDLayoutWithExpandableRows() {
                       </Label>
                     </li>
                   </ul>
-                  <h6 className="mb-2 mt-4 text-sm font-medium text-gray-900 dark:text-white">
+                  <h6 className="mt-4 mb-2 text-sm font-medium text-gray-900 dark:text-white">
                     Export
                   </h6>
                   <ul className="space-y-1 text-sm">
@@ -414,7 +414,7 @@ export function CRUDLayoutWithExpandableRows() {
                       </Label>
                     </li>
                   </ul>
-                  <h6 className="mb-2 mt-4 text-sm font-medium text-gray-900 dark:text-white">
+                  <h6 className="mt-4 mb-2 text-sm font-medium text-gray-900 dark:text-white">
                     Row height
                   </h6>
                   <ul className="space-y-1 text-sm">
@@ -433,7 +433,7 @@ export function CRUDLayoutWithExpandableRows() {
                   </ul>
                   <a
                     href="#"
-                    className="ml-1.5 mt-4 flex items-center text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
+                    className="text-primary-600 dark:text-primary-500 mt-4 ml-1.5 flex items-center text-sm font-medium hover:underline"
                   >
                     Apply to all
                   </a>
@@ -441,14 +441,14 @@ export function CRUDLayoutWithExpandableRows() {
               </Dropdown>
             </div>
           </div>
-          <div className="flex flex-col-reverse items-start justify-between border-b p-4 dark:border-gray-700 md:flex-row md:items-center md:space-x-4">
+          <div className="flex flex-col-reverse items-start justify-between border-b p-4 md:flex-row md:items-center md:space-x-4 dark:border-gray-700">
             <div className="mt-3 md:mt-0">
               <Dropdown
                 color="gray"
                 label={
                   <>
                     <svg
-                      className="-ml-1 mr-1.5 h-5 w-5"
+                      className="mr-1.5 -ml-1 h-5 w-5"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                       xmlns="http://www.w3.org/2000/svg"
@@ -486,7 +486,7 @@ export function CRUDLayoutWithExpandableRows() {
                   theme={{
                     field: {
                       select: {
-                        base: "peer block w-full appearance-none border-0 border-b-2 border-gray-200 focus:border-blue-600 focus:outline-none focus:ring-0 dark:border-gray-600 dark:text-white dark:focus:border-blue-500",
+                        base: "peer block w-full appearance-none border-0 border-b-2 border-gray-200 focus:border-blue-600 focus:ring-0 focus:outline-none dark:border-gray-600 dark:text-white dark:focus:border-blue-500",
                         colors: {
                           gray: "bg-transparent text-gray-500",
                         },
@@ -517,7 +517,7 @@ export function CRUDLayoutWithExpandableRows() {
                   theme={{
                     field: {
                       select: {
-                        base: "peer block w-full appearance-none border-0 border-b-2 border-gray-200 focus:border-blue-600 focus:outline-none focus:ring-0 dark:border-gray-600 dark:text-white dark:focus:border-blue-500",
+                        base: "peer block w-full appearance-none border-0 border-b-2 border-gray-200 focus:border-blue-600 focus:ring-0 focus:outline-none dark:border-gray-600 dark:text-white dark:focus:border-blue-500",
                         colors: {
                           gray: "bg-transparent text-gray-500",
                         },
@@ -548,7 +548,7 @@ export function CRUDLayoutWithExpandableRows() {
                   theme={{
                     field: {
                       select: {
-                        base: "peer block w-full appearance-none border-0 border-b-2 border-gray-200 focus:border-blue-600 focus:outline-none focus:ring-0 dark:border-gray-600 dark:text-white dark:focus:border-blue-500",
+                        base: "peer block w-full appearance-none border-0 border-b-2 border-gray-200 focus:border-blue-600 focus:ring-0 focus:outline-none dark:border-gray-600 dark:text-white dark:focus:border-blue-500",
                         colors: {
                           gray: "bg-transparent text-gray-500",
                         },
@@ -579,7 +579,7 @@ export function CRUDLayoutWithExpandableRows() {
                   theme={{
                     field: {
                       select: {
-                        base: "peer block w-full appearance-none border-0 border-b-2 border-gray-200 focus:border-blue-600 focus:outline-none focus:ring-0 dark:border-gray-600 dark:text-white dark:focus:border-blue-500",
+                        base: "peer block w-full appearance-none border-0 border-b-2 border-gray-200 focus:border-blue-600 focus:ring-0 focus:outline-none dark:border-gray-600 dark:text-white dark:focus:border-blue-500",
                         colors: {
                           gray: "bg-transparent text-gray-500",
                         },
@@ -610,7 +610,7 @@ export function CRUDLayoutWithExpandableRows() {
                     <Checkbox
                       id="checkbox-all"
                       name="checkbox-all"
-                      className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600"
+                      className="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800"
                     />
                     <Label htmlFor="checkbox-all" className="sr-only">
                       Select all products
@@ -737,7 +737,7 @@ export function CRUDLayoutWithExpandableRows() {
                         id="checkbox-table-search-1"
                         name="checkbox-table-search-1"
                         onClick={(event) => event.stopPropagation()}
-                        className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600"
+                        className="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800"
                       />
                       <Label
                         htmlFor="checkbox-table-search-1"
@@ -765,7 +765,7 @@ export function CRUDLayoutWithExpandableRows() {
                   </TableCell>
                   <TableCell
                     scope="row"
-                    className="flex items-center whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white"
+                    className="flex items-center px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white"
                   >
                     <img
                       src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
@@ -775,19 +775,19 @@ export function CRUDLayoutWithExpandableRows() {
                     Apple iMac 27&#34;
                   </TableCell>
                   <TableCell className="px-4 py-3">PC</TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     Apple
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     $2999
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     200
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     245
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3">
+                  <TableCell className="px-4 py-3 whitespace-nowrap">
                     <Badge color="success" className="w-fit">
                       Active
                     </Badge>
@@ -803,28 +803,28 @@ export function CRUDLayoutWithExpandableRows() {
                     colSpan={9}
                   >
                     <div className="mb-4 grid grid-cols-4 gap-4">
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
                           alt="iMac Front"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-side-image.png"
                           alt="iMac Side"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
                           alt="iMac Back"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
                           alt="iMac Back"
@@ -833,7 +833,7 @@ export function CRUDLayoutWithExpandableRows() {
                       </div>
                     </div>
                     <div>
-                      <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                      <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                         Details
                       </h6>
                       <div className="max-w-screen-md text-base text-gray-500 dark:text-gray-400">
@@ -846,7 +846,7 @@ export function CRUDLayoutWithExpandableRows() {
                     </div>
                     <div className="mt-4 grid grid-cols-4 gap-4">
                       <div className="relative flex flex-col items-start justify-between rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Product State
                         </h6>
                         <Badge className="flex">
@@ -863,7 +863,7 @@ export function CRUDLayoutWithExpandableRows() {
                         </Badge>
                       </div>
                       <div className="relative flex flex-col justify-between rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Shipping
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -884,20 +884,20 @@ export function CRUDLayoutWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Colors
                         </h6>
                         <div className="flex items-center space-x-2">
                           <div className="h-6 w-6 rounded-full bg-purple-600"></div>
                           <div className="h-6 w-6 rounded-full bg-indigo-400"></div>
-                          <div className="h-6 w-6 rounded-full bg-primary-600"></div>
+                          <div className="bg-primary-600 h-6 w-6 rounded-full"></div>
                           <div className="h-6 w-6 rounded-full bg-pink-400"></div>
                           <div className="h-6 w-6 rounded-full bg-teal-300"></div>
                           <div className="h-6 w-6 rounded-full bg-green-300"></div>
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Brand
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -905,7 +905,7 @@ export function CRUDLayoutWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Sold by
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -913,7 +913,7 @@ export function CRUDLayoutWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Ships from
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -921,7 +921,7 @@ export function CRUDLayoutWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Dimensions (cm)
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -929,7 +929,7 @@ export function CRUDLayoutWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Item weight
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -960,7 +960,7 @@ export function CRUDLayoutWithExpandableRows() {
                         id="checkbox-table-search-1"
                         name="checkbox-table-search-1"
                         onClick={(event) => event.stopPropagation()}
-                        className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600"
+                        className="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800"
                       />
                       <Label
                         htmlFor="checkbox-table-search-1"
@@ -988,7 +988,7 @@ export function CRUDLayoutWithExpandableRows() {
                   </TableCell>
                   <TableCell
                     scope="row"
-                    className="flex items-center whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white"
+                    className="flex items-center px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white"
                   >
                     <img
                       src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
@@ -998,19 +998,19 @@ export function CRUDLayoutWithExpandableRows() {
                     Apple iMac 20&quot;
                   </TableCell>
                   <TableCell className="px-4 py-3">PC</TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     Apple
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     $1499
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     1237
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     2000
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3">
+                  <TableCell className="px-4 py-3 whitespace-nowrap">
                     <Badge color="success" className="w-fit">
                       Active
                     </Badge>
@@ -1026,28 +1026,28 @@ export function CRUDLayoutWithExpandableRows() {
                     colSpan={9}
                   >
                     <div className="mb-4 grid grid-cols-4 gap-4">
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
                           alt="iMac Front"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-side-image.png"
                           alt="iMac Side"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
                           alt="iMac Back"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
                           alt="iMac Back"
@@ -1056,7 +1056,7 @@ export function CRUDLayoutWithExpandableRows() {
                       </div>
                     </div>
                     <div>
-                      <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                      <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                         Details
                       </h6>
                       <div className="max-w-screen-md text-base text-gray-500 dark:text-gray-400">
@@ -1069,7 +1069,7 @@ export function CRUDLayoutWithExpandableRows() {
                     </div>
                     <div className="mt-4 grid grid-cols-4 gap-4">
                       <div className="relative flex flex-col items-start justify-between rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Product State
                         </h6>
                         <Badge className="flex">
@@ -1086,7 +1086,7 @@ export function CRUDLayoutWithExpandableRows() {
                         </Badge>
                       </div>
                       <div className="relative flex flex-col justify-between rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Shipping
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1107,20 +1107,20 @@ export function CRUDLayoutWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Colors
                         </h6>
                         <div className="flex items-center space-x-2">
                           <div className="h-6 w-6 rounded-full bg-purple-600"></div>
                           <div className="h-6 w-6 rounded-full bg-indigo-400"></div>
-                          <div className="h-6 w-6 rounded-full bg-primary-600"></div>
+                          <div className="bg-primary-600 h-6 w-6 rounded-full"></div>
                           <div className="h-6 w-6 rounded-full bg-pink-400"></div>
                           <div className="h-6 w-6 rounded-full bg-teal-300"></div>
                           <div className="h-6 w-6 rounded-full bg-green-300"></div>
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Brand
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1128,7 +1128,7 @@ export function CRUDLayoutWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Sold by
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1136,7 +1136,7 @@ export function CRUDLayoutWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Ships from
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1144,7 +1144,7 @@ export function CRUDLayoutWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Dimensions (cm)
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1152,7 +1152,7 @@ export function CRUDLayoutWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Item weight
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1183,7 +1183,7 @@ export function CRUDLayoutWithExpandableRows() {
                         id="checkbox-table-search-1"
                         name="checkbox-table-search-1"
                         onClick={(event) => event.stopPropagation()}
-                        className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600"
+                        className="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800"
                       />
                       <Label
                         htmlFor="checkbox-table-search-1"
@@ -1211,7 +1211,7 @@ export function CRUDLayoutWithExpandableRows() {
                   </TableCell>
                   <TableCell
                     scope="row"
-                    className="flex items-center whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white"
+                    className="flex items-center px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white"
                   >
                     <img
                       src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
@@ -1221,19 +1221,19 @@ export function CRUDLayoutWithExpandableRows() {
                     Apple iPhone 14
                   </TableCell>
                   <TableCell className="px-4 py-3">Phone</TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     Apple
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     $999
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     300
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     466
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3">
+                  <TableCell className="px-4 py-3 whitespace-nowrap">
                     <Badge color="success" className="w-fit">
                       Active
                     </Badge>
@@ -1249,28 +1249,28 @@ export function CRUDLayoutWithExpandableRows() {
                     colSpan={9}
                   >
                     <div className="mb-4 grid grid-cols-4 gap-4">
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
                           alt="iMac Front"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-side-image.png"
                           alt="iMac Side"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
                           alt="iMac Back"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
                           alt="iMac Back"
@@ -1279,7 +1279,7 @@ export function CRUDLayoutWithExpandableRows() {
                       </div>
                     </div>
                     <div>
-                      <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                      <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                         Details
                       </h6>
                       <div className="max-w-screen-md text-base text-gray-500 dark:text-gray-400">
@@ -1292,7 +1292,7 @@ export function CRUDLayoutWithExpandableRows() {
                     </div>
                     <div className="mt-4 grid grid-cols-4 gap-4">
                       <div className="relative flex flex-col items-start justify-between rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Product State
                         </h6>
                         <Badge className="flex">
@@ -1309,7 +1309,7 @@ export function CRUDLayoutWithExpandableRows() {
                         </Badge>
                       </div>
                       <div className="relative flex flex-col justify-between rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Shipping
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1330,20 +1330,20 @@ export function CRUDLayoutWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Colors
                         </h6>
                         <div className="flex items-center space-x-2">
                           <div className="h-6 w-6 rounded-full bg-purple-600"></div>
                           <div className="h-6 w-6 rounded-full bg-indigo-400"></div>
-                          <div className="h-6 w-6 rounded-full bg-primary-600"></div>
+                          <div className="bg-primary-600 h-6 w-6 rounded-full"></div>
                           <div className="h-6 w-6 rounded-full bg-pink-400"></div>
                           <div className="h-6 w-6 rounded-full bg-teal-300"></div>
                           <div className="h-6 w-6 rounded-full bg-green-300"></div>
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Brand
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1351,7 +1351,7 @@ export function CRUDLayoutWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Sold by
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1359,7 +1359,7 @@ export function CRUDLayoutWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Ships from
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1367,7 +1367,7 @@ export function CRUDLayoutWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Dimensions (cm)
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1375,7 +1375,7 @@ export function CRUDLayoutWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Item weight
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1406,7 +1406,7 @@ export function CRUDLayoutWithExpandableRows() {
                         id="checkbox-table-search-1"
                         name="checkbox-table-search-1"
                         onClick={(event) => event.stopPropagation()}
-                        className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600"
+                        className="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800"
                       />
                       <Label
                         htmlFor="checkbox-table-search-1"
@@ -1434,7 +1434,7 @@ export function CRUDLayoutWithExpandableRows() {
                   </TableCell>
                   <TableCell
                     scope="row"
-                    className="flex items-center whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white"
+                    className="flex items-center px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white"
                   >
                     <img
                       src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
@@ -1444,19 +1444,19 @@ export function CRUDLayoutWithExpandableRows() {
                     Apple iPad Air
                   </TableCell>
                   <TableCell className="px-4 py-3">Tablet</TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     Apple
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     $1199
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     4576
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     90
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3">
+                  <TableCell className="px-4 py-3 whitespace-nowrap">
                     <Badge color="success" className="w-fit">
                       Active
                     </Badge>
@@ -1472,28 +1472,28 @@ export function CRUDLayoutWithExpandableRows() {
                     colSpan={9}
                   >
                     <div className="mb-4 grid grid-cols-4 gap-4">
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
                           alt="iMac Front"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-side-image.png"
                           alt="iMac Side"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
                           alt="iMac Back"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
                           alt="iMac Back"
@@ -1502,7 +1502,7 @@ export function CRUDLayoutWithExpandableRows() {
                       </div>
                     </div>
                     <div>
-                      <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                      <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                         Details
                       </h6>
                       <div className="max-w-screen-md text-base text-gray-500 dark:text-gray-400">
@@ -1515,7 +1515,7 @@ export function CRUDLayoutWithExpandableRows() {
                     </div>
                     <div className="mt-4 grid grid-cols-4 gap-4">
                       <div className="relative flex flex-col items-start justify-between rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Product State
                         </h6>
                         <Badge className="flex">
@@ -1532,7 +1532,7 @@ export function CRUDLayoutWithExpandableRows() {
                         </Badge>
                       </div>
                       <div className="relative flex flex-col justify-between rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Shipping
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1553,20 +1553,20 @@ export function CRUDLayoutWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Colors
                         </h6>
                         <div className="flex items-center space-x-2">
                           <div className="h-6 w-6 rounded-full bg-purple-600"></div>
                           <div className="h-6 w-6 rounded-full bg-indigo-400"></div>
-                          <div className="h-6 w-6 rounded-full bg-primary-600"></div>
+                          <div className="bg-primary-600 h-6 w-6 rounded-full"></div>
                           <div className="h-6 w-6 rounded-full bg-pink-400"></div>
                           <div className="h-6 w-6 rounded-full bg-teal-300"></div>
                           <div className="h-6 w-6 rounded-full bg-green-300"></div>
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Brand
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1574,7 +1574,7 @@ export function CRUDLayoutWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Sold by
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1582,7 +1582,7 @@ export function CRUDLayoutWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Ships from
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1590,7 +1590,7 @@ export function CRUDLayoutWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Dimensions (cm)
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1598,7 +1598,7 @@ export function CRUDLayoutWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Item weight
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1629,7 +1629,7 @@ export function CRUDLayoutWithExpandableRows() {
                         id="checkbox-table-search-1"
                         name="checkbox-table-search-1"
                         onClick={(event) => event.stopPropagation()}
-                        className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600"
+                        className="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800"
                       />
                       <Label
                         htmlFor="checkbox-table-search-1"
@@ -1657,7 +1657,7 @@ export function CRUDLayoutWithExpandableRows() {
                   </TableCell>
                   <TableCell
                     scope="row"
-                    className="flex items-center whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white"
+                    className="flex items-center px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white"
                   >
                     <img
                       src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
@@ -1667,19 +1667,19 @@ export function CRUDLayoutWithExpandableRows() {
                     Xbox Series S
                   </TableCell>
                   <TableCell className="px-4 py-3">Gaming/Console</TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     Microsoft
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     $299
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     56
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     3087
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3">
+                  <TableCell className="px-4 py-3 whitespace-nowrap">
                     <Badge color="success" className="w-fit">
                       Active
                     </Badge>
@@ -1695,28 +1695,28 @@ export function CRUDLayoutWithExpandableRows() {
                     colSpan={9}
                   >
                     <div className="mb-4 grid grid-cols-4 gap-4">
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
                           alt="iMac Front"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-side-image.png"
                           alt="iMac Side"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
                           alt="iMac Back"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
                           alt="iMac Back"
@@ -1725,7 +1725,7 @@ export function CRUDLayoutWithExpandableRows() {
                       </div>
                     </div>
                     <div>
-                      <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                      <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                         Details
                       </h6>
                       <div className="max-w-screen-md text-base text-gray-500 dark:text-gray-400">
@@ -1738,7 +1738,7 @@ export function CRUDLayoutWithExpandableRows() {
                     </div>
                     <div className="mt-4 grid grid-cols-4 gap-4">
                       <div className="relative flex flex-col items-start justify-between rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Product State
                         </h6>
                         <Badge className="flex">
@@ -1755,7 +1755,7 @@ export function CRUDLayoutWithExpandableRows() {
                         </Badge>
                       </div>
                       <div className="relative flex flex-col justify-between rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Shipping
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1776,20 +1776,20 @@ export function CRUDLayoutWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Colors
                         </h6>
                         <div className="flex items-center space-x-2">
                           <div className="h-6 w-6 rounded-full bg-purple-600"></div>
                           <div className="h-6 w-6 rounded-full bg-indigo-400"></div>
-                          <div className="h-6 w-6 rounded-full bg-primary-600"></div>
+                          <div className="bg-primary-600 h-6 w-6 rounded-full"></div>
                           <div className="h-6 w-6 rounded-full bg-pink-400"></div>
                           <div className="h-6 w-6 rounded-full bg-teal-300"></div>
                           <div className="h-6 w-6 rounded-full bg-green-300"></div>
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Brand
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1797,7 +1797,7 @@ export function CRUDLayoutWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Sold by
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1805,7 +1805,7 @@ export function CRUDLayoutWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Ships from
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1813,7 +1813,7 @@ export function CRUDLayoutWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Dimensions (cm)
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1821,7 +1821,7 @@ export function CRUDLayoutWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Item weight
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1852,7 +1852,7 @@ export function CRUDLayoutWithExpandableRows() {
                         id="checkbox-table-search-1"
                         name="checkbox-table-search-1"
                         onClick={(event) => event.stopPropagation()}
-                        className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600"
+                        className="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800"
                       />
                       <Label
                         htmlFor="checkbox-table-search-1"
@@ -1880,7 +1880,7 @@ export function CRUDLayoutWithExpandableRows() {
                   </TableCell>
                   <TableCell
                     scope="row"
-                    className="flex items-center whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white"
+                    className="flex items-center px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white"
                   >
                     <img
                       src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
@@ -1890,19 +1890,19 @@ export function CRUDLayoutWithExpandableRows() {
                     PlayStation 5
                   </TableCell>
                   <TableCell className="px-4 py-3">Gaming/Console</TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     Sony
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     $799
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     78
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     2999
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3">
+                  <TableCell className="px-4 py-3 whitespace-nowrap">
                     <Badge color="success" className="w-fit">
                       Active
                     </Badge>
@@ -1918,28 +1918,28 @@ export function CRUDLayoutWithExpandableRows() {
                     colSpan={9}
                   >
                     <div className="mb-4 grid grid-cols-4 gap-4">
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
                           alt="iMac Front"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-side-image.png"
                           alt="iMac Side"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
                           alt="iMac Back"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
                           alt="iMac Back"
@@ -1948,7 +1948,7 @@ export function CRUDLayoutWithExpandableRows() {
                       </div>
                     </div>
                     <div>
-                      <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                      <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                         Details
                       </h6>
                       <div className="max-w-screen-md text-base text-gray-500 dark:text-gray-400">
@@ -1961,7 +1961,7 @@ export function CRUDLayoutWithExpandableRows() {
                     </div>
                     <div className="mt-4 grid grid-cols-4 gap-4">
                       <div className="relative flex flex-col items-start justify-between rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Product State
                         </h6>
                         <Badge className="flex">
@@ -1978,7 +1978,7 @@ export function CRUDLayoutWithExpandableRows() {
                         </Badge>
                       </div>
                       <div className="relative flex flex-col justify-between rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Shipping
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1999,20 +1999,20 @@ export function CRUDLayoutWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Colors
                         </h6>
                         <div className="flex items-center space-x-2">
                           <div className="h-6 w-6 rounded-full bg-purple-600"></div>
                           <div className="h-6 w-6 rounded-full bg-indigo-400"></div>
-                          <div className="h-6 w-6 rounded-full bg-primary-600"></div>
+                          <div className="bg-primary-600 h-6 w-6 rounded-full"></div>
                           <div className="h-6 w-6 rounded-full bg-pink-400"></div>
                           <div className="h-6 w-6 rounded-full bg-teal-300"></div>
                           <div className="h-6 w-6 rounded-full bg-green-300"></div>
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Brand
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -2020,7 +2020,7 @@ export function CRUDLayoutWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Sold by
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -2028,7 +2028,7 @@ export function CRUDLayoutWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Ships from
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -2036,7 +2036,7 @@ export function CRUDLayoutWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Dimensions (cm)
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -2044,7 +2044,7 @@ export function CRUDLayoutWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Item weight
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -2075,7 +2075,7 @@ export function CRUDLayoutWithExpandableRows() {
                         id="checkbox-table-search-1"
                         name="checkbox-table-search-1"
                         onClick={(event) => event.stopPropagation()}
-                        className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600"
+                        className="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800"
                       />
                       <Label
                         htmlFor="checkbox-table-search-1"
@@ -2103,7 +2103,7 @@ export function CRUDLayoutWithExpandableRows() {
                   </TableCell>
                   <TableCell
                     scope="row"
-                    className="flex items-center whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white"
+                    className="flex items-center px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white"
                   >
                     <img
                       src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
@@ -2113,19 +2113,19 @@ export function CRUDLayoutWithExpandableRows() {
                     Xbox Series X
                   </TableCell>
                   <TableCell className="px-4 py-3">Gaming/Console</TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     Microsoft
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     $699
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     200
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     1870
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3">
+                  <TableCell className="px-4 py-3 whitespace-nowrap">
                     <Badge color="success" className="w-fit">
                       Active
                     </Badge>
@@ -2141,28 +2141,28 @@ export function CRUDLayoutWithExpandableRows() {
                     colSpan={9}
                   >
                     <div className="mb-4 grid grid-cols-4 gap-4">
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
                           alt="iMac Front"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-side-image.png"
                           alt="iMac Side"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
                           alt="iMac Back"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
                           alt="iMac Back"
@@ -2171,7 +2171,7 @@ export function CRUDLayoutWithExpandableRows() {
                       </div>
                     </div>
                     <div>
-                      <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                      <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                         Details
                       </h6>
                       <div className="max-w-screen-md text-base text-gray-500 dark:text-gray-400">
@@ -2184,7 +2184,7 @@ export function CRUDLayoutWithExpandableRows() {
                     </div>
                     <div className="mt-4 grid grid-cols-4 gap-4">
                       <div className="relative flex flex-col items-start justify-between rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Product State
                         </h6>
                         <Badge className="flex">
@@ -2201,7 +2201,7 @@ export function CRUDLayoutWithExpandableRows() {
                         </Badge>
                       </div>
                       <div className="relative flex flex-col justify-between rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Shipping
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -2222,20 +2222,20 @@ export function CRUDLayoutWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Colors
                         </h6>
                         <div className="flex items-center space-x-2">
                           <div className="h-6 w-6 rounded-full bg-purple-600"></div>
                           <div className="h-6 w-6 rounded-full bg-indigo-400"></div>
-                          <div className="h-6 w-6 rounded-full bg-primary-600"></div>
+                          <div className="bg-primary-600 h-6 w-6 rounded-full"></div>
                           <div className="h-6 w-6 rounded-full bg-pink-400"></div>
                           <div className="h-6 w-6 rounded-full bg-teal-300"></div>
                           <div className="h-6 w-6 rounded-full bg-green-300"></div>
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Brand
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -2243,7 +2243,7 @@ export function CRUDLayoutWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Sold by
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -2251,7 +2251,7 @@ export function CRUDLayoutWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Ships from
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -2259,7 +2259,7 @@ export function CRUDLayoutWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Dimensions (cm)
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -2267,7 +2267,7 @@ export function CRUDLayoutWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Item weight
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -2286,7 +2286,7 @@ export function CRUDLayoutWithExpandableRows() {
             </Table>
           </div>
           <div
-            className="flex flex-col items-start justify-between space-y-3 px-4 pb-4 pt-3 md:flex-row md:items-center md:space-y-0"
+            className="flex flex-col items-start justify-between space-y-3 px-4 pt-3 pb-4 md:flex-row md:items-center md:space-y-0"
             aria-label="Table navigation"
           >
             <div className="flex items-center space-x-5 text-xs">
@@ -2304,10 +2304,10 @@ export function CRUDLayoutWithExpandableRows() {
               </div>
             </div>
             <div className="flex items-center space-x-4">
-              <button className="flex items-center rounded-lg py-1.5 text-center text-sm font-medium text-primary-700 hover:text-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:text-primary-500 dark:hover:text-primary-600 dark:focus:ring-primary-800">
+              <button className="text-primary-700 hover:text-primary-800 focus:ring-primary-300 dark:text-primary-500 dark:hover:text-primary-600 dark:focus:ring-primary-800 flex items-center rounded-lg py-1.5 text-center text-sm font-medium focus:ring-4 focus:outline-none">
                 Print barcodes
               </button>
-              <button className="flex items-center rounded-lg py-1.5 text-center text-sm font-medium text-primary-700 hover:text-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:text-primary-500 dark:hover:text-primary-600 dark:focus:ring-primary-800">
+              <button className="text-primary-700 hover:text-primary-800 focus:ring-primary-300 dark:text-primary-500 dark:hover:text-primary-600 dark:focus:ring-primary-800 flex items-center rounded-lg py-1.5 text-center text-sm font-medium focus:ring-4 focus:outline-none">
                 Duplicate
               </button>
               <Button size="sm" className="[&_span]:text-xs">
@@ -2349,14 +2349,14 @@ function EditProductModal() {
         show={isShowModal}
         size="3xl"
       >
-        <ModalBody className="relative rounded-lg bg-white p-4 shadow dark:bg-gray-800 sm:p-5">
-          <div className="mb-4 flex items-center justify-between rounded-t border-b pb-4 dark:border-gray-600 sm:mb-5">
+        <ModalBody className="relative rounded-lg bg-white p-4 shadow sm:p-5 dark:bg-gray-800">
+          <div className="mb-4 flex items-center justify-between rounded-t border-b pb-4 sm:mb-5 dark:border-gray-600">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
               Update Product
             </h3>
             <button
               onClick={() => setShowModal(false)}
-              className="absolute right-5 top-[18px] ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+              className="absolute top-[18px] right-5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
             >
               <svg
                 aria-hidden
@@ -2510,7 +2510,7 @@ function EditProductModal() {
                 <Checkbox
                   id="inline-2-checkbox"
                   name="sellingType"
-                  className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600"
+                  className="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800"
                 />
                 <Label
                   htmlFor="inline-2-checkbox"
@@ -2536,7 +2536,7 @@ function EditProductModal() {
             <div className="mb-4">
               <span className="mb-2 block dark:text-white">Product Images</span>
               <div className="mb-4 grid grid-cols-3 gap-4 sm:grid-cols-4">
-                <div className="relative rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-36">
+                <div className="relative rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-36 dark:bg-gray-700">
                   <img
                     alt="iMac Side"
                     src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-side-image.png"
@@ -2561,7 +2561,7 @@ function EditProductModal() {
                     <span className="sr-only">Delete image</span>
                   </button>
                 </div>
-                <div className="relative rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-36">
+                <div className="relative rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-36 dark:bg-gray-700">
                   <img
                     alt="iMac Front"
                     src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
@@ -2586,7 +2586,7 @@ function EditProductModal() {
                     <span className="sr-only">Delete image</span>
                   </button>
                 </div>
-                <div className="relative rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-36">
+                <div className="relative rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-36 dark:bg-gray-700">
                   <img
                     alt="iMac Back"
                     src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
@@ -2611,7 +2611,7 @@ function EditProductModal() {
                     <span className="sr-only">Delete image</span>
                   </button>
                 </div>
-                <div className="relative rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-36">
+                <div className="relative rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-36 dark:bg-gray-700">
                   <img
                     alt="iMac Back"
                     src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
@@ -2642,7 +2642,7 @@ function EditProductModal() {
                   htmlFor="dropzone-file"
                   className="flex h-64 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600"
                 >
-                  <div className="flex flex-col items-center justify-center pb-6 pt-5">
+                  <div className="flex flex-col items-center justify-center pt-5 pb-6">
                     <svg
                       aria-hidden
                       className="mb-3 h-10 w-10 text-gray-400"
@@ -2681,7 +2681,7 @@ function EditProductModal() {
                 className="enabled:hover:bg-red-600 [&>span]:border-red-600 [&>span]:text-sm [&>span]:text-red-600"
               >
                 <svg
-                  className="-ml-1 mr-1 h-5 w-5"
+                  className="mr-1 -ml-1 h-5 w-5"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -2716,16 +2716,16 @@ function PreviewProductModal() {
         size="3xl"
         show={isShowModal}
       >
-        <ModalBody className="relative rounded-lg bg-white p-4 shadow dark:bg-gray-800 sm:p-5">
+        <ModalBody className="relative rounded-lg bg-white p-4 shadow sm:p-5 dark:bg-gray-800">
           <div className="mb-4 flex justify-between rounded-t sm:mb-5">
-            <div className="text-lg text-gray-900 dark:text-white md:text-xl">
-              <h3 className="font-semibold ">Apple iMac 27”</h3>
+            <div className="text-lg text-gray-900 md:text-xl dark:text-white">
+              <h3 className="font-semibold">Apple iMac 27”</h3>
               <p className="font-bold">$2999</p>
             </div>
             <div>
               <button
                 onClick={() => setShowModal(false)}
-                className="absolute right-5 top-[18px] ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+                className="absolute top-[18px] right-5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
               >
                 <svg
                   aria-hidden
@@ -2745,25 +2745,25 @@ function PreviewProductModal() {
             </div>
           </div>
           <div className="mb-4 grid grid-cols-3 gap-4 sm:mb-5 sm:grid-cols-4">
-            <div className="rounded-lg bg-gray-100 p-2 dark:bg-gray-700 md:h-36 md:w-36">
+            <div className="rounded-lg bg-gray-100 p-2 md:h-36 md:w-36 dark:bg-gray-700">
               <img
                 alt="iMac Side"
                 src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-side-image.png"
               />
             </div>
-            <div className="rounded-lg bg-gray-100 p-2 dark:bg-gray-700 md:h-36 md:w-36">
+            <div className="rounded-lg bg-gray-100 p-2 md:h-36 md:w-36 dark:bg-gray-700">
               <img
                 alt="iMac Front"
                 src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
               />
             </div>
-            <div className="rounded-lg bg-gray-100 p-2 dark:bg-gray-700 md:h-36 md:w-36">
+            <div className="rounded-lg bg-gray-100 p-2 md:h-36 md:w-36 dark:bg-gray-700">
               <img
                 alt="iMac Back"
                 src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
               />
             </div>
-            <div className="rounded-lg bg-gray-100 p-2 dark:bg-gray-700 md:h-36 md:w-36">
+            <div className="rounded-lg bg-gray-100 p-2 md:h-36 md:w-36 dark:bg-gray-700">
               <img
                 alt="iMac Back"
                 src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
@@ -2771,22 +2771,22 @@ function PreviewProductModal() {
             </div>
           </div>
           <dl className="sm:mb-5">
-            <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+            <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
               Details
             </dt>
-            <dd className="mb-4 text-gray-500 dark:text-gray-400 sm:mb-5">
+            <dd className="mb-4 text-gray-500 sm:mb-5 dark:text-gray-400">
               Standard glass ,3.8GHz 8-core 10th-generation Intel Core i7
               processor, Turbo Boost up to 5.0GHz, 16GB 2666MHz DDR4 memory,
               Radeon Pro 5500 XT with 8GB of GDDR6 memory, 256GB SSD storage,
               Gigabit Ethernet, Magic Mouse 2, Magic Keyboard - US.
             </dd>
-            <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+            <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
               Colors
             </dt>
             <dd className="mb-4 flex items-center space-x-2 text-gray-500 dark:text-gray-400">
               <div className="h-6 w-6 rounded-full bg-purple-600"></div>
               <div className="h-6 w-6 rounded-full bg-indigo-400"></div>
-              <div className="h-6 w-6 rounded-full bg-primary-600"></div>
+              <div className="bg-primary-600 h-6 w-6 rounded-full"></div>
               <div className="h-6 w-6 rounded-full bg-pink-400"></div>
               <div className="h-6 w-6 rounded-full bg-teal-300"></div>
               <div className="h-6 w-6 rounded-full bg-green-300"></div>
@@ -2794,19 +2794,19 @@ function PreviewProductModal() {
           </dl>
           <dl className="mb-4 grid grid-cols-2 gap-4 sm:mb-5 sm:grid-cols-3">
             <div className="rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-              <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+              <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
                 Sold by
               </dt>
               <dd className="text-gray-500 dark:text-gray-400">Flowbite</dd>
             </div>
             <div className="rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-              <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+              <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
                 Ships from
               </dt>
               <dd className="text-gray-500 dark:text-gray-400">Flowbite</dd>
             </div>
             <div className="rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-              <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+              <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
                 Product State
               </dt>
               <dd className="text-gray-500 dark:text-gray-400">
@@ -2825,7 +2825,7 @@ function PreviewProductModal() {
               </dd>
             </div>
             <div className="rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-              <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+              <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
                 Shipping
               </dt>
               <dd className="flex items-center text-gray-500 dark:text-gray-400">
@@ -2846,7 +2846,7 @@ function PreviewProductModal() {
               </dd>
             </div>
             <div className="rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-              <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+              <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
                 Dimensions (cm)
               </dt>
               <dd className="text-gray-500 dark:text-gray-400">
@@ -2854,7 +2854,7 @@ function PreviewProductModal() {
               </dd>
             </div>
             <div className="rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-              <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+              <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
                 Item weight
               </dt>
               <dd className="text-gray-500 dark:text-gray-400">12kg</dd>
@@ -2868,7 +2868,7 @@ function PreviewProductModal() {
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
-                  className="-ml-1 mr-1 h-5 w-5"
+                  className="mr-1 -ml-1 h-5 w-5"
                 >
                   <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path>
                   <path
@@ -2898,7 +2898,7 @@ function PreviewProductModal() {
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
-                className="-ml-1 mr-1.5 h-5 w-5"
+                className="mr-1.5 -ml-1 h-5 w-5"
               >
                 <path
                   fillRule="evenodd"
@@ -2942,10 +2942,10 @@ function DeleteProductModal() {
         size="md"
         show={isShowModal}
       >
-        <ModalBody className="relative rounded-lg bg-white p-4 text-center shadow dark:bg-gray-800 sm:p-5">
+        <ModalBody className="relative rounded-lg bg-white p-4 text-center shadow sm:p-5 dark:bg-gray-800">
           <button
             onClick={() => setShowModal(false)}
-            className="absolute right-2.5 top-2.5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+            className="absolute top-2.5 right-2.5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
           >
             <svg
               aria-hidden

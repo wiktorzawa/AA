@@ -10,7 +10,7 @@ export function FooterWithProgressBar() {
             7.2 GB of 15 GB used
           </div>
         </div>
-        <p className="order-3 text-sm text-gray-500 dark:text-gray-400 lg:order-2 xl:flex">
+        <p className="order-3 text-sm text-gray-500 lg:order-2 xl:flex dark:text-gray-400">
           Copyright &copy; 2022&nbsp;
           <a
             href="https://flowbite.com/"
@@ -22,7 +22,7 @@ export function FooterWithProgressBar() {
           </a>
           . All rights reserved.
         </p>
-        <div className="order-2 mb-4 text-sm text-gray-500 dark:text-gray-400 lg:order-3 lg:mb-0 lg:text-right">
+        <div className="order-2 mb-4 text-sm text-gray-500 lg:order-3 lg:mb-0 lg:text-right dark:text-gray-400">
           <p>Last account activity: 12 hours ago</p>
           <a href="#" className="font-medium underline hover:no-underline">
             Details

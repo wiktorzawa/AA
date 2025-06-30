@@ -57,7 +57,7 @@ export default function SidenavWithNotifications() {
                         className="mr-3 h-6 sm:h-8"
                         alt="Flowbite"
                       />
-                      <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
+                      <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
                         Flowbite
                       </span>
                     </Link>
@@ -82,10 +82,7 @@ export default function SidenavWithNotifications() {
                     >
                       Messages
                     </SidebarItem>
-                    <SidebarCollapse
-                      icon={HiLockClosed}
-                      label="Authentication"
-                    >
+                    <SidebarCollapse icon={HiLockClosed} label="Authentication">
                       <SidebarItem href="#">Sign In</SidebarItem>
                       <SidebarItem href="#">Sign Up</SidebarItem>
                       <SidebarItem href="#">Forgot Password</SidebarItem>
@@ -107,7 +104,7 @@ export default function SidenavWithNotifications() {
                   <Alert
                     additionalContent={
                       <>
-                        <div className="mb-3 mt-1 text-sm text-gray-700 dark:text-gray-300">
+                        <div className="mt-1 mb-3 text-sm text-gray-700 dark:text-gray-300">
                           A new system update is available today.
                         </div>
                         <Link
@@ -151,12 +148,12 @@ export default function SidenavWithNotifications() {
                   <Alert
                     additionalContent={
                       <>
-                        <div className="mb-3 mt-1 text-sm text-gray-700 dark:text-gray-300">
+                        <div className="mt-1 mb-3 text-sm text-gray-700 dark:text-gray-300">
                           Flowbite Widget Generator is now ready.
                         </div>
                         <a
                           href="#"
-                          className="inline-flex items-center text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
+                          className="text-primary-600 dark:text-primary-500 inline-flex items-center text-sm font-medium hover:underline"
                         >
                           Download
                           <svg

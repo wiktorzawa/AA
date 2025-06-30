@@ -1,4 +1,12 @@
-import { Checkbox, Dropdown, Label, TabItem, Tabs, TextInput, theme } from "flowbite-react";
+import {
+  Checkbox,
+  Dropdown,
+  Label,
+  TabItem,
+  Tabs,
+  TextInput,
+  theme,
+} from "flowbite-react";
 import { twMerge } from "tailwind-merge";
 
 export function DropdownFilterTabsOptions() {

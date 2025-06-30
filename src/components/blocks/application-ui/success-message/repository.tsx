@@ -15,14 +15,14 @@ export function SuccessMessageWithRepository() {
         size="lg"
         show={showModal}
       >
-        <ModalBody className="relative rounded-lg bg-white p-4 text-center shadow dark:bg-gray-800 sm:p-5">
+        <ModalBody className="relative rounded-lg bg-white p-4 text-center shadow sm:p-5 dark:bg-gray-800">
           <div className="mb-3 flex items-center justify-between">
-            <h3 className="text-lg font-semibold leading-none text-gray-900 dark:text-white">
+            <h3 className="text-lg leading-none font-semibold text-gray-900 dark:text-white">
               Awesome!
             </h3>
             <button
               onClick={() => setShowModal(false)}
-              className="absolute right-2.5 top-2.5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+              className="absolute top-2.5 right-2.5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
             >
               <svg
                 aria-hidden
@@ -43,7 +43,7 @@ export function SuccessMessageWithRepository() {
           <p className="text-left text-gray-500 dark:text-gray-400">
             The following repositories have been successfully deleted:
           </p>
-          <div className="mb-4 mt-2 flex items-center space-x-1.5 border-y border-green-200 bg-green-100 p-4 text-green-700 dark:border-gray-600 dark:bg-gray-700 dark:text-green-300 sm:mb-5">
+          <div className="mt-2 mb-4 flex items-center space-x-1.5 border-y border-green-200 bg-green-100 p-4 text-green-700 sm:mb-5 dark:border-gray-600 dark:bg-gray-700 dark:text-green-300">
             <svg
               aria-hidden
               fill="currentColor"
@@ -57,7 +57,7 @@ export function SuccessMessageWithRepository() {
                 clipRule="evenodd"
               />
             </svg>
-            <p className="font-medium leading-none">
+            <p className="leading-none font-medium">
               bergside/flowbite-library
             </p>
           </div>

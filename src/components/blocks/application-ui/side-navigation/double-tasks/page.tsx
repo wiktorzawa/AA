@@ -74,7 +74,7 @@ export default function DoubleSidenavWithTasks() {
                           size="sm"
                           className="text-left"
                         >
-                          <div className="mb-0.5 text-base font-semibold leading-none text-gray-900 dark:text-white">
+                          <div className="mb-0.5 text-base leading-none font-semibold text-gray-900 dark:text-white">
                             Tasks
                           </div>
                           <div className="text-sm text-gray-500 dark:text-gray-400">
@@ -106,7 +106,7 @@ export default function DoubleSidenavWithTasks() {
                       },
                       inlineWrapper: twMerge(
                         theme.dropdown.inlineWrapper,
-                        "w-full rounded-lg p-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700",
+                        "w-full rounded-lg p-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus:ring-4 focus:ring-gray-200 focus:outline-none dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700",
                       ),
                     }}
                   >
@@ -125,7 +125,7 @@ export default function DoubleSidenavWithTasks() {
                         ></path>
                       </svg>
                       <div className="text-left">
-                        <div className="mb-0.5 font-semibold leading-none text-gray-900 dark:text-white">
+                        <div className="mb-0.5 leading-none font-semibold text-gray-900 dark:text-white">
                           Calendar
                         </div>
                         <div className="text-sm text-gray-500 dark:text-gray-400">
@@ -149,7 +149,7 @@ export default function DoubleSidenavWithTasks() {
                         ></path>
                       </svg>
                       <div className="text-left">
-                        <div className="mb-0.5 font-semibold leading-none text-gray-900 dark:text-white">
+                        <div className="mb-0.5 leading-none font-semibold text-gray-900 dark:text-white">
                           Collections
                         </div>
                         <div className="text-sm text-gray-500 dark:text-gray-400">
@@ -164,7 +164,7 @@ export default function DoubleSidenavWithTasks() {
                 <div className="mb-4 flex items-center justify-between">
                   <a
                     href="#"
-                    className="inline-flex items-center font-medium text-primary-600 hover:underline dark:text-primary-500"
+                    className="text-primary-600 dark:text-primary-500 inline-flex items-center font-medium hover:underline"
                   >
                     <svg
                       aria-hidden="true"

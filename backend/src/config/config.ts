@@ -1,5 +1,5 @@
-import dotenv from "dotenv";
-import path from "path";
+import * as dotenv from "dotenv";
+import * as path from "path";
 
 // Wczytaj główny .env z katalogu nadrzędnego (jeśli tam jest globalna konfiguracja)
 // __dirname w backend/src/config/config.ts to app_flow_react/backend/src/config

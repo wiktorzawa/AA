@@ -1,6 +1,13 @@
 "use client";
 
-import { Dropdown, DropdownItem, Navbar, NavbarCollapse, NavbarLink, theme } from "flowbite-react";
+import {
+  Dropdown,
+  DropdownItem,
+  Navbar,
+  NavbarCollapse,
+  NavbarLink,
+  theme,
+} from "flowbite-react";
 import { HiEllipsisHorizontal } from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";
 
@@ -30,7 +37,7 @@ export default function StackedLayoutWithSecondaryNavbar() {
                   className="mr-3 h-8"
                   alt=""
                 />
-                <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
+                <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
                   Flowbite
                 </span>
               </a>
@@ -56,49 +63,49 @@ export default function StackedLayoutWithSecondaryNavbar() {
           theme={{
             list: twMerge(
               theme.navbar.collapse.list,
-              "mt-0 hidden w-full bg-white dark:bg-gray-900 md:space-x-0 md:bg-gray-50 md:px-6 md:py-2 md:dark:bg-gray-700 lg:flex",
+              "mt-0 hidden w-full bg-white md:space-x-0 md:bg-gray-50 md:px-6 md:py-2 lg:flex dark:bg-gray-900 md:dark:bg-gray-700",
             ),
           }}
         >
           <NavbarLink
             href="#"
-            className="rounded-lg text-sm font-medium dark:text-gray-100 md:px-3 md:py-2.5 lg:hover:bg-gray-100 lg:hover:text-gray-900 lg:dark:hover:bg-gray-600"
+            className="rounded-lg text-sm font-medium md:px-3 md:py-2.5 lg:hover:bg-gray-100 lg:hover:text-gray-900 dark:text-gray-100 lg:dark:hover:bg-gray-600"
           >
             Overview
           </NavbarLink>
           <NavbarLink
             href="#"
-            className="rounded-lg text-sm font-medium dark:text-gray-100 md:px-3 md:py-2.5 lg:hover:bg-gray-100 lg:hover:text-gray-900 lg:dark:hover:bg-gray-600"
+            className="rounded-lg text-sm font-medium md:px-3 md:py-2.5 lg:hover:bg-gray-100 lg:hover:text-gray-900 dark:text-gray-100 lg:dark:hover:bg-gray-600"
           >
             Sales
           </NavbarLink>
           <NavbarLink
             href="#"
-            className="rounded-lg text-sm font-medium dark:text-gray-100 md:px-3 md:py-2.5 lg:hover:bg-gray-100 lg:hover:text-gray-900 lg:dark:hover:bg-gray-600"
+            className="rounded-lg text-sm font-medium md:px-3 md:py-2.5 lg:hover:bg-gray-100 lg:hover:text-gray-900 dark:text-gray-100 lg:dark:hover:bg-gray-600"
           >
             Billing
           </NavbarLink>
           <NavbarLink
             href="#"
-            className="rounded-lg text-sm font-medium dark:text-gray-100 md:px-3 md:py-2.5 lg:hover:bg-gray-100 lg:hover:text-gray-900 lg:dark:hover:bg-gray-600"
+            className="rounded-lg text-sm font-medium md:px-3 md:py-2.5 lg:hover:bg-gray-100 lg:hover:text-gray-900 dark:text-gray-100 lg:dark:hover:bg-gray-600"
           >
             Team
           </NavbarLink>
           <NavbarLink
             href="#"
-            className="rounded-lg text-sm font-medium dark:text-gray-100 md:px-3 md:py-2.5 lg:hover:bg-gray-100 lg:hover:text-gray-900 lg:dark:hover:bg-gray-600"
+            className="rounded-lg text-sm font-medium md:px-3 md:py-2.5 lg:hover:bg-gray-100 lg:hover:text-gray-900 dark:text-gray-100 lg:dark:hover:bg-gray-600"
           >
             Resources
           </NavbarLink>
           <NavbarLink
             href="#"
-            className="rounded-lg text-sm font-medium dark:text-gray-100 md:px-3 md:py-2.5 lg:hover:bg-gray-100 lg:hover:text-gray-900 lg:dark:hover:bg-gray-600"
+            className="rounded-lg text-sm font-medium md:px-3 md:py-2.5 lg:hover:bg-gray-100 lg:hover:text-gray-900 dark:text-gray-100 lg:dark:hover:bg-gray-600"
           >
             Messages
           </NavbarLink>
           <NavbarLink
             href="#"
-            className="rounded-lg text-sm font-medium dark:text-gray-100 md:px-3 md:py-2.5 lg:hover:bg-gray-100 lg:hover:text-gray-900 lg:dark:hover:bg-gray-600"
+            className="rounded-lg text-sm font-medium md:px-3 md:py-2.5 lg:hover:bg-gray-100 lg:hover:text-gray-900 dark:text-gray-100 lg:dark:hover:bg-gray-600"
           >
             Support
           </NavbarLink>
@@ -161,20 +168,20 @@ export default function StackedLayoutWithSecondaryNavbar() {
       <div className="flex-1 space-y-4 p-4">
         <div className="grid grid-cols-1 gap-0 lg:grid-cols-3 lg:gap-4">
           <div className="col-span-1 mb-4 grid gap-4 lg:mb-0">
-            <div className="flex h-32 items-center justify-center rounded-xl border-2 border-dashed border-gray-200 dark:border-gray-600 lg:h-48"></div>
-            <div className="flex h-32 items-center justify-center rounded-xl border-2 border-dashed border-gray-200 dark:border-gray-600 lg:h-48"></div>
-            <div className="flex h-32 items-center justify-center rounded-xl border-2 border-dashed border-gray-200 dark:border-gray-600 lg:h-48"></div>
-            <div className="flex h-32 items-center justify-center rounded-xl border-2 border-dashed border-gray-200 dark:border-gray-600 lg:h-48"></div>
+            <div className="flex h-32 items-center justify-center rounded-xl border-2 border-dashed border-gray-200 lg:h-48 dark:border-gray-600"></div>
+            <div className="flex h-32 items-center justify-center rounded-xl border-2 border-dashed border-gray-200 lg:h-48 dark:border-gray-600"></div>
+            <div className="flex h-32 items-center justify-center rounded-xl border-2 border-dashed border-gray-200 lg:h-48 dark:border-gray-600"></div>
+            <div className="flex h-32 items-center justify-center rounded-xl border-2 border-dashed border-gray-200 lg:h-48 dark:border-gray-600"></div>
           </div>
           <div className="col-span-2 flex flex-col gap-4">
-            <div className="flex h-32 items-center justify-center rounded-xl border-2 border-dashed border-gray-200 dark:border-gray-600 lg:h-64"></div>
-            <div className="flex h-32 items-center justify-center rounded-xl border-2 border-dashed border-gray-200 dark:border-gray-600 lg:h-64"></div>
-            <div className="flex h-32 items-center justify-center rounded-xl border-2 border-dashed border-gray-200 dark:border-gray-600 lg:h-64"></div>
+            <div className="flex h-32 items-center justify-center rounded-xl border-2 border-dashed border-gray-200 lg:h-64 dark:border-gray-600"></div>
+            <div className="flex h-32 items-center justify-center rounded-xl border-2 border-dashed border-gray-200 lg:h-64 dark:border-gray-600"></div>
+            <div className="flex h-32 items-center justify-center rounded-xl border-2 border-dashed border-gray-200 lg:h-64 dark:border-gray-600"></div>
           </div>
         </div>
         <div className="grid gap-4">
-          <div className="flex h-32 w-full flex-1 items-center justify-center rounded-xl border-2 border-dashed border-gray-200 dark:border-gray-600 lg:h-64"></div>
-          <div className="flex h-32 w-full flex-1 items-center justify-center rounded-xl border-2 border-dashed border-gray-200 dark:border-gray-600 lg:h-64"></div>
+          <div className="flex h-32 w-full flex-1 items-center justify-center rounded-xl border-2 border-dashed border-gray-200 lg:h-64 dark:border-gray-600"></div>
+          <div className="flex h-32 w-full flex-1 items-center justify-center rounded-xl border-2 border-dashed border-gray-200 lg:h-64 dark:border-gray-600"></div>
         </div>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import "express-session";
 import { UserTokenData } from "../services/allegroService"; // Upewnij się, że ścieżka jest poprawna
+import { TokenPayload } from "./auth.types"; // Importuj TokenPayload
 
 declare module "express-session" {
   interface SessionData {
@@ -13,9 +14,12 @@ declare module "express-session" {
   }
 }
 
-// Opcjonalnie, jeśli chcesz mieć req.session zawsze zdefiniowane w typach (wymaga ostrożności):
-// declare module "express" {
-//   interface Request {
-//     session: session.Session & Partial<session.SessionData>;
-//   }
-// }
+declare global {
+  namespace Express {
+    interface Request {
+      user?: TokenPayload; // Dodaj właściwość 'user' do obiektu Request
+    }
+  }
+}
+
+export {};

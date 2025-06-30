@@ -51,7 +51,7 @@ export function UpdateProductDrawer() {
                   </Label>
                   <div className="mb-4 w-full rounded-lg border border-gray-200 bg-gray-100 dark:border-gray-600 dark:bg-gray-700">
                     <div className="flex items-center justify-between border-b px-3 py-2 dark:border-gray-600">
-                      <div className="flex flex-wrap items-center divide-gray-200 dark:divide-gray-600 sm:divide-x">
+                      <div className="flex flex-wrap items-center divide-gray-200 sm:divide-x dark:divide-gray-600">
                         <div className="flex items-center space-x-1 sm:pr-4">
                           <button className="cursor-pointer rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white">
                             <svg
@@ -176,7 +176,7 @@ export function UpdateProductDrawer() {
                         </div>
                       </div>
                       <Tooltip content="Show full screen">
-                        <button className="cursor-pointer rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white sm:ml-auto">
+                        <button className="cursor-pointer rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 sm:ml-auto dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white">
                           <svg
                             aria-hidden
                             className="h-5 w-5"
@@ -213,7 +213,7 @@ export function UpdateProductDrawer() {
                   </Label>
                   <div className="flex w-full items-center justify-center">
                     <div className="mb-4 grid w-full grid-cols-3 gap-4">
-                      <div className="relative rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-36">
+                      <div className="relative rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-36 dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-side-image.png"
                           alt="imac"
@@ -238,7 +238,7 @@ export function UpdateProductDrawer() {
                           <span className="sr-only">Remove image</span>
                         </button>
                       </div>
-                      <div className="relative rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-36">
+                      <div className="relative rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-36 dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
                           alt="imac"
@@ -263,7 +263,7 @@ export function UpdateProductDrawer() {
                           <span className="sr-only">Remove image</span>
                         </button>
                       </div>
-                      <div className="relative rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-36">
+                      <div className="relative rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-36 dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
                           alt="imac"
@@ -288,7 +288,7 @@ export function UpdateProductDrawer() {
                           <span className="sr-only">Remove image</span>
                         </button>
                       </div>
-                      <div className="relative rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-36">
+                      <div className="relative rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-36 dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-side-image.png"
                           alt="imac"
@@ -319,7 +319,7 @@ export function UpdateProductDrawer() {
                     htmlFor="dropzone-file"
                     className="flex h-64 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600"
                   >
-                    <div className="flex flex-col items-center justify-center pb-6 pt-5">
+                    <div className="flex flex-col items-center justify-center pt-5 pb-6">
                       <svg
                         aria-hidden
                         className="mb-3 h-10 w-10 text-gray-400"
@@ -454,7 +454,7 @@ export function UpdateProductDrawer() {
               >
                 <svg
                   aria-hidden
-                  className="-ml-1 mr-1 h-5 w-5"
+                  className="mr-1 -ml-1 h-5 w-5"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"

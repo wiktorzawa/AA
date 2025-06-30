@@ -5,7 +5,7 @@ export function TableHeaderWithDateRangePickerFilter() {
   return (
     <section className="flex items-center bg-gray-50 py-6 dark:bg-gray-900">
       <div className="mx-auto w-full max-w-screen-xl px-4 lg:px-12">
-        <div className="relative bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
+        <div className="relative bg-white shadow-md sm:rounded-lg dark:bg-gray-800">
           <div className="divide-y px-4 dark:divide-gray-700">
             <div className="flex items-center justify-between py-3">
               <div className="flex flex-1 items-center space-x-2">

@@ -41,14 +41,14 @@ export function CreateEventModal() {
         show={showModal}
         size="xl"
       >
-        <ModalBody className="relative rounded-lg bg-white p-4 shadow dark:bg-gray-800 sm:p-5">
+        <ModalBody className="relative rounded-lg bg-white p-4 shadow sm:p-5 dark:bg-gray-800">
           <div className="mb-2 flex items-center justify-between pb-4">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
               Add new event
             </h3>
             <button
               onClick={() => setShowModal(false)}
-              className="absolute right-5 top-4 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+              className="absolute top-4 right-5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
             >
               <HiX className="h-5 w-5" />
               <span className="sr-only">Close modal</span>
@@ -96,7 +96,7 @@ export function CreateEventModal() {
                 </Label>
                 <div className="w-full rounded-lg border border-gray-200 bg-gray-50 dark:border-gray-600 dark:bg-gray-700">
                   <div className="flex items-center justify-between border-b px-3 py-2 dark:border-gray-600">
-                    <div className="flex flex-wrap items-center divide-gray-200 dark:divide-gray-600 sm:divide-x">
+                    <div className="flex flex-wrap items-center divide-gray-200 sm:divide-x dark:divide-gray-600">
                       <div className="flex items-center space-x-1 sm:pr-4">
                         <button className="cursor-pointer rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white">
                           <HiPaperClip className="h-5 w-5" />
@@ -153,7 +153,7 @@ export function CreateEventModal() {
                     <Tooltip content="Show full screen">
                       <button
                         data-tooltip-target="tooltip-fullscreen"
-                        className="cursor-pointer rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white sm:ml-auto"
+                        className="cursor-pointer rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 sm:ml-auto dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
                       >
                         <svg
                           aria-hidden
@@ -241,7 +241,7 @@ export function CreateEventModal() {
                     fill="currentColor"
                     viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg"
-                    className="-ml-1 mr-1 h-4 w-4"
+                    className="mr-1 -ml-1 h-4 w-4"
                   >
                     <path
                       fillRule="evenodd"
@@ -259,7 +259,7 @@ export function CreateEventModal() {
                 <div className="flex items-center space-x-2">
                   <button className="h-6 w-6 rounded-sm bg-purple-500"></button>
                   <button className="h-6 w-6 rounded-sm bg-indigo-500"></button>
-                  <button className="h-6 w-6 rounded-sm bg-primary-600"></button>
+                  <button className="bg-primary-600 h-6 w-6 rounded-sm"></button>
                   <button className="h-6 w-6 rounded-sm bg-pink-500"></button>
                   <button className="h-6 w-6 rounded-sm bg-teal-400"></button>
                   <button className="h-6 w-6 rounded-sm bg-green-400"></button>

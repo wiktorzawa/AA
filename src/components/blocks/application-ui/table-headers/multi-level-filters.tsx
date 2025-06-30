@@ -17,7 +17,7 @@ export function MultiLevelTableHeadersWithFilters() {
   return (
     <section className="flex items-center bg-gray-50 py-6 dark:bg-gray-900">
       <div className="mx-auto w-full max-w-screen-xl px-4 lg:px-12">
-        <div className="relative bg-white px-4 shadow-md dark:bg-gray-800 sm:rounded-lg">
+        <div className="relative bg-white px-4 shadow-md sm:rounded-lg dark:bg-gray-800">
           <div className="flex items-center justify-between pt-4 md:pb-4">
             <div className="flex flex-1 items-center space-x-2">
               <h5>
@@ -138,17 +138,17 @@ export function MultiLevelTableHeadersWithFilters() {
             </div>
             <div className="flex w-full shrink-0 flex-col items-stretch justify-end pb-4 md:w-auto md:flex-row md:items-center md:space-x-3 md:pb-0">
               <Button>
-                <HiPlus className="-ml-1 mr-1.5 h-3.5 w-3.5" />
+                <HiPlus className="mr-1.5 -ml-1 h-3.5 w-3.5" />
                 Add new product
               </Button>
             </div>
           </div>
-          <div className="flex flex-wrap border-t pb-4 pt-1 dark:border-gray-700">
-            <div className="mr-4 mt-3 hidden items-center text-sm font-medium text-gray-900 dark:text-white md:flex">
+          <div className="flex flex-wrap border-t pt-1 pb-4 dark:border-gray-700">
+            <div className="mt-3 mr-4 hidden items-center text-sm font-medium text-gray-900 md:flex dark:text-white">
               Show only:
             </div>
             <fieldset className="flex flex-wrap">
-              <div className="mr-4 mt-3 flex items-center">
+              <div className="mt-3 mr-4 flex items-center">
                 <Radio id="all-products" name="show-only" />
                 <Label
                   htmlFor="all-products"
@@ -157,7 +157,7 @@ export function MultiLevelTableHeadersWithFilters() {
                   All
                 </Label>
               </div>
-              <div className="mr-4 mt-3 flex items-center">
+              <div className="mt-3 mr-4 flex items-center">
                 <Radio id="active" name="show-only" />
                 <Label
                   htmlFor="active"
@@ -166,7 +166,7 @@ export function MultiLevelTableHeadersWithFilters() {
                   Active products
                 </Label>
               </div>
-              <div className="mr-4 mt-3 flex items-center">
+              <div className="mt-3 mr-4 flex items-center">
                 <Radio id="pending" name="show-only" />
                 <Label
                   htmlFor="pending"
@@ -175,7 +175,7 @@ export function MultiLevelTableHeadersWithFilters() {
                   Pending products
                 </Label>
               </div>
-              <div className="mr-4 mt-3 flex items-center">
+              <div className="mt-3 mr-4 flex items-center">
                 <Radio id="inactive" name="show-only" />
                 <Label
                   htmlFor="inactive"

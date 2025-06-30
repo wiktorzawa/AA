@@ -1,4 +1,12 @@
-import { Button, Label, Modal, ModalBody, Select, Textarea, TextInput } from "flowbite-react";
+import {
+  Button,
+  Label,
+  Modal,
+  ModalBody,
+  Select,
+  Textarea,
+  TextInput,
+} from "flowbite-react";
 import { useState } from "react";
 
 export function DefaultUpdateModal() {
@@ -15,14 +23,14 @@ export function DefaultUpdateModal() {
         show={showModal}
         size="2xl"
       >
-        <ModalBody className="relative rounded-lg bg-white p-4 shadow dark:bg-gray-800 sm:p-5">
-          <div className="mb-4 flex items-center justify-between rounded-t border-b pb-4 dark:border-gray-600 sm:mb-5">
+        <ModalBody className="relative rounded-lg bg-white p-4 shadow sm:p-5 dark:bg-gray-800">
+          <div className="mb-4 flex items-center justify-between rounded-t border-b pb-4 sm:mb-5 dark:border-gray-600">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
               Update Product
             </h3>
             <button
               onClick={() => setShowModal(false)}
-              className="absolute right-5 top-[18px] ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+              className="absolute top-[18px] right-5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
             >
               <svg
                 aria-hidden
@@ -118,7 +126,7 @@ export function DefaultUpdateModal() {
                       "border border-transparent bg-red-600 text-white focus:ring-4 focus:ring-red-300 enabled:hover:bg-red-600 dark:bg-red-600 dark:focus:ring-red-900 dark:enabled:hover:bg-red-600",
                   },
                   outline: {
-                    on: "flex w-full justify-center bg-white text-red-600 transition-all duration-75 ease-in group-enabled:group-hover:bg-opacity-0 group-enabled:group-hover:text-inherit dark:bg-gray-800 dark:text-red-500",
+                    on: "group-enabled:group-hover:bg-opacity-0 flex w-full justify-center bg-white text-red-600 transition-all duration-75 ease-in group-enabled:group-hover:text-inherit dark:bg-gray-800 dark:text-red-500",
                   },
                 }}
                 className="[&>span]:border-red-600 [&>span]:px-5 [&>span]:py-2.5"
@@ -127,7 +135,7 @@ export function DefaultUpdateModal() {
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
-                  className="-ml-1 mr-1 h-5 w-5"
+                  className="mr-1 -ml-1 h-5 w-5"
                 >
                   <path
                     fillRule="evenodd"

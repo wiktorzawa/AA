@@ -19,7 +19,7 @@ export function CenteredDoubleDashboardNavbarWithCTAButtonsAndSearchInput() {
         fluid
         theme={{
           root: {
-            base: "border-b border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900 ",
+            base: "border-b border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900",
             inner: {
               base: "",
             },
@@ -35,13 +35,13 @@ export function CenteredDoubleDashboardNavbarWithCTAButtonsAndSearchInput() {
                   className="mr-3 h-8"
                   alt=""
                 />
-                <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
+                <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
                   Flowbite
                 </span>
               </a>
             </div>
-            <ul className="mt-0 hidden w-full flex-col justify-center text-sm font-medium text-gray-500 dark:text-gray-400 md:flex md:flex-row">
-              <li className="block border-b dark:border-gray-700 md:inline md:border-b-0">
+            <ul className="mt-0 hidden w-full flex-col justify-center text-sm font-medium text-gray-500 md:flex md:flex-row dark:text-gray-400">
+              <li className="block border-b md:inline md:border-b-0 dark:border-gray-700">
                 <a
                   href="#"
                   className="block rounded-lg px-4 py-3 hover:text-gray-900 dark:hover:text-white"
@@ -49,7 +49,7 @@ export function CenteredDoubleDashboardNavbarWithCTAButtonsAndSearchInput() {
                   Home
                 </a>
               </li>
-              <li className="block border-b dark:border-gray-700 md:inline md:border-b-0">
+              <li className="block border-b md:inline md:border-b-0 dark:border-gray-700">
                 <a
                   href="#"
                   className="block rounded-lg px-4 py-3 hover:text-gray-900 dark:hover:text-white"
@@ -57,7 +57,7 @@ export function CenteredDoubleDashboardNavbarWithCTAButtonsAndSearchInput() {
                   Clients
                 </a>
               </li>
-              <li className="block border-b dark:border-gray-700 md:inline md:border-b-0">
+              <li className="block border-b md:inline md:border-b-0 dark:border-gray-700">
                 <a
                   href="#"
                   className="block rounded-lg px-4 py-3 hover:text-gray-900 dark:hover:text-white"
@@ -65,7 +65,7 @@ export function CenteredDoubleDashboardNavbarWithCTAButtonsAndSearchInput() {
                   Marketing
                 </a>
               </li>
-              <li className="block border-b dark:border-gray-700 md:inline md:border-b-0">
+              <li className="block border-b md:inline md:border-b-0 dark:border-gray-700">
                 <a
                   href="#"
                   className="block rounded-lg px-4 py-3 hover:text-gray-900 dark:hover:text-white"
@@ -77,7 +77,7 @@ export function CenteredDoubleDashboardNavbarWithCTAButtonsAndSearchInput() {
             <div className="ml-4 flex shrink-0 items-center justify-between lg:order-2">
               <Button className="mr-3 hidden md:inline">
                 <svg
-                  className="-ml-1 mr-1 h-5 w-5"
+                  className="mr-1 -ml-1 h-5 w-5"
                   aria-hidden
                   fill="currentColor"
                   viewBox="0 0 20 20"
@@ -134,7 +134,7 @@ export function CenteredDoubleDashboardNavbarWithCTAButtonsAndSearchInput() {
                         src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
                         alt=""
                       />
-                      <div className="absolute -mt-5 ml-6 flex h-5 w-5 items-center justify-center rounded-full border border-white bg-primary-700 dark:border-gray-700">
+                      <div className="bg-primary-700 absolute -mt-5 ml-6 flex h-5 w-5 items-center justify-center rounded-full border border-white dark:border-gray-700">
                         <svg
                           className="h-2 w-2 text-white"
                           aria-hidden
@@ -155,7 +155,7 @@ export function CenteredDoubleDashboardNavbarWithCTAButtonsAndSearchInput() {
                         </span>
                         : "Hey, what's up? All set for the presentation?"
                       </div>
-                      <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                      <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                         a few moments ago
                       </div>
                     </div>
@@ -193,7 +193,7 @@ export function CenteredDoubleDashboardNavbarWithCTAButtonsAndSearchInput() {
                         </span>
                         &nbsp;started following you.
                       </div>
-                      <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                      <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                         10 minutes ago
                       </div>
                     </div>
@@ -231,7 +231,7 @@ export function CenteredDoubleDashboardNavbarWithCTAButtonsAndSearchInput() {
                         </span>
                         &nbsp;love your story. See it and view more stories.
                       </div>
-                      <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                      <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                         44 minutes ago
                       </div>
                     </div>
@@ -264,12 +264,12 @@ export function CenteredDoubleDashboardNavbarWithCTAButtonsAndSearchInput() {
                           Leslie Livingston
                         </span>
                         &nbsp;mentioned you in a comment:&nbsp;
-                        <span className="font-medium text-primary-700 dark:text-primary-500">
+                        <span className="text-primary-700 dark:text-primary-500 font-medium">
                           @bonnie.green
                         </span>
                         &nbsp;what do you say?
                       </div>
-                      <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                      <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                         1 hour ago
                       </div>
                     </div>
@@ -304,7 +304,7 @@ export function CenteredDoubleDashboardNavbarWithCTAButtonsAndSearchInput() {
                         &nbsp;posted a new video: Glassmorphism - learn how to
                         implement the new design trend.
                       </div>
-                      <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                      <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                         3 hours ago
                       </div>
                     </div>
@@ -314,7 +314,7 @@ export function CenteredDoubleDashboardNavbarWithCTAButtonsAndSearchInput() {
                   href="#"
                   className="block border-t border-gray-200 bg-gray-50 py-2 text-center text-base font-medium text-gray-900 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:hover:underline"
                 >
-                  <div className="inline-flex items-center ">
+                  <div className="inline-flex items-center">
                     <svg
                       aria-hidden
                       className="mr-2 h-5 w-5"
@@ -600,7 +600,7 @@ export function CenteredDoubleDashboardNavbarWithCTAButtonsAndSearchInput() {
                   <div className="flex w-full items-center justify-between">
                     <span className="flex items-center">
                       <svg
-                        className="mr-2 h-4 w-4 text-primary-600 dark:text-primary-500"
+                        className="text-primary-600 dark:text-primary-500 mr-2 h-4 w-4"
                         aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="currentColor"
@@ -643,13 +643,13 @@ export function CenteredDoubleDashboardNavbarWithCTAButtonsAndSearchInput() {
             </div>
           </div>
         </div>
-        <NavbarCollapse className="order-3 border-t bg-white px-4 py-2.5 shadow-sm dark:border-gray-800 dark:bg-gray-900 md:order-2 lg:px-6">
+        <NavbarCollapse className="order-3 border-t bg-white px-4 py-2.5 shadow-sm md:order-2 lg:px-6 dark:border-gray-800 dark:bg-gray-900">
           <div className="flex w-full flex-col items-center justify-between md:flex-row">
-            <ul className="order-2 mt-0 flex w-full flex-col rounded-lg border border-gray-200 bg-gray-50 text-sm font-medium dark:border-gray-700 dark:bg-gray-800 md:order-1 md:flex-row md:rounded-none md:border-0 md:bg-white dark:md:bg-gray-900">
+            <ul className="order-2 mt-0 flex w-full flex-col rounded-lg border border-gray-200 bg-gray-50 text-sm font-medium md:order-1 md:flex-row md:rounded-none md:border-0 md:bg-white dark:border-gray-700 dark:bg-gray-800 dark:md:bg-gray-900">
               <li>
                 <a
                   href="#"
-                  className="block rounded-lg px-4 py-3 text-primary-600 hover:bg-gray-50 hover:text-primary-700 focus:ring-4 focus:ring-gray-200 dark:text-primary-500 dark:hover:bg-gray-800 dark:focus:ring-gray-700"
+                  className="text-primary-600 hover:text-primary-700 dark:text-primary-500 block rounded-lg px-4 py-3 hover:bg-gray-50 focus:ring-4 focus:ring-gray-200 dark:hover:bg-gray-800 dark:focus:ring-gray-700"
                   aria-current="page"
                 >
                   Projects

@@ -194,8 +194,8 @@ export function AdvancedFacetedSearchModal() {
               <h6 className="mb-2 text-sm font-medium text-black dark:text-white">
                 Account type
               </h6>
-              <ul className="flex w-full flex-col items-center rounded-lg border border-gray-200 bg-white text-sm font-medium text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white md:flex-row">
-                <li className="w-full border-b border-gray-200 dark:border-gray-600 md:border-b-0 md:border-r">
+              <ul className="flex w-full flex-col items-center rounded-lg border border-gray-200 bg-white text-sm font-medium text-gray-900 md:flex-row dark:border-gray-600 dark:bg-gray-700 dark:text-white">
+                <li className="w-full border-b border-gray-200 md:border-r md:border-b-0 dark:border-gray-600">
                   <div className="flex items-center pl-3">
                     <Radio defaultChecked id="account-all" name="list-radio" />
                     <Label
@@ -206,7 +206,7 @@ export function AdvancedFacetedSearchModal() {
                     </Label>
                   </div>
                 </li>
-                <li className="w-full border-b border-gray-200 dark:border-gray-600 md:border-b-0 md:border-r">
+                <li className="w-full border-b border-gray-200 md:border-r md:border-b-0 dark:border-gray-600">
                   <div className="flex items-center pl-3">
                     <Radio id="account-administrator" name="list-radio" />
                     <Label
@@ -217,7 +217,7 @@ export function AdvancedFacetedSearchModal() {
                     </Label>
                   </div>
                 </li>
-                <li className="w-full border-b border-gray-200 dark:border-gray-600 md:border-b-0 md:border-r">
+                <li className="w-full border-b border-gray-200 md:border-r md:border-b-0 dark:border-gray-600">
                   <div className="flex items-center pl-3">
                     <Radio id="account-moderator" name="list-radio" />
                     <Label
@@ -254,7 +254,7 @@ export function AdvancedFacetedSearchModal() {
                   />
                   <Label
                     htmlFor="frontend-developer"
-                    className="inline-flex w-full cursor-pointer items-center justify-center rounded-lg border-2 border-primary-600 bg-white p-2 text-center text-sm font-medium text-primary-600 hover:bg-primary-500 hover:text-white peer-checked:border-primary-600 peer-checked:bg-primary-600 peer-checked:text-white dark:border-primary-500 dark:bg-gray-800 dark:text-primary-500 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:hover:text-white dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-500"
+                    className="border-primary-600 text-primary-600 hover:bg-primary-500 peer-checked:border-primary-600 peer-checked:bg-primary-600 dark:border-primary-500 dark:text-primary-500 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-500 inline-flex w-full cursor-pointer items-center justify-center rounded-lg border-2 bg-white p-2 text-center text-sm font-medium peer-checked:text-white hover:text-white dark:bg-gray-800 dark:hover:text-white"
                   >
                     Frontend developer
                   </Label>
@@ -267,7 +267,7 @@ export function AdvancedFacetedSearchModal() {
                   />
                   <Label
                     htmlFor="ui-ux-designer"
-                    className="inline-flex w-full cursor-pointer items-center justify-center rounded-lg border-2 border-primary-600 bg-white p-2 text-center text-sm font-medium text-primary-600 hover:bg-primary-500 hover:text-white peer-checked:border-primary-600 peer-checked:bg-primary-600 peer-checked:text-white dark:border-primary-500 dark:bg-gray-800 dark:text-primary-500 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:hover:text-white dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-500"
+                    className="border-primary-600 text-primary-600 hover:bg-primary-500 peer-checked:border-primary-600 peer-checked:bg-primary-600 dark:border-primary-500 dark:text-primary-500 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-500 inline-flex w-full cursor-pointer items-center justify-center rounded-lg border-2 bg-white p-2 text-center text-sm font-medium peer-checked:text-white hover:text-white dark:bg-gray-800 dark:hover:text-white"
                   >
                     UI/UX Designer
                   </Label>
@@ -281,7 +281,7 @@ export function AdvancedFacetedSearchModal() {
                   />
                   <Label
                     htmlFor="react-developer"
-                    className="inline-flex w-full cursor-pointer items-center justify-center rounded-lg border-2 border-primary-600 bg-white p-2 text-center text-sm font-medium text-primary-600 hover:bg-primary-500 hover:text-white peer-checked:border-primary-600 peer-checked:bg-primary-600 peer-checked:text-white dark:border-primary-500 dark:bg-gray-800 dark:text-primary-500 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:hover:text-white dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-500"
+                    className="border-primary-600 text-primary-600 hover:bg-primary-500 peer-checked:border-primary-600 peer-checked:bg-primary-600 dark:border-primary-500 dark:text-primary-500 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-500 inline-flex w-full cursor-pointer items-center justify-center rounded-lg border-2 bg-white p-2 text-center text-sm font-medium peer-checked:text-white hover:text-white dark:bg-gray-800 dark:hover:text-white"
                   >
                     React Developer
                   </Label>
@@ -294,7 +294,7 @@ export function AdvancedFacetedSearchModal() {
                   />
                   <Label
                     htmlFor="php-developer"
-                    className="inline-flex w-full cursor-pointer items-center justify-center rounded-lg border-2 border-primary-600 bg-white p-2 text-center text-sm font-medium text-primary-600 hover:bg-primary-500 hover:text-white peer-checked:border-primary-600 peer-checked:bg-primary-600 peer-checked:text-white dark:border-primary-500 dark:bg-gray-800 dark:text-primary-500 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:hover:text-white dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-500"
+                    className="border-primary-600 text-primary-600 hover:bg-primary-500 peer-checked:border-primary-600 peer-checked:bg-primary-600 dark:border-primary-500 dark:text-primary-500 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-500 inline-flex w-full cursor-pointer items-center justify-center rounded-lg border-2 bg-white p-2 text-center text-sm font-medium peer-checked:text-white hover:text-white dark:bg-gray-800 dark:hover:text-white"
                   >
                     PHP Developer
                   </Label>
@@ -308,7 +308,7 @@ export function AdvancedFacetedSearchModal() {
                   />
                   <Label
                     htmlFor="engineer"
-                    className="inline-flex w-full cursor-pointer items-center justify-center rounded-lg border-2 border-primary-600 bg-white p-2 text-center text-sm font-medium text-primary-600 hover:bg-primary-500 hover:text-white peer-checked:border-primary-600 peer-checked:bg-primary-600 peer-checked:text-white dark:border-primary-500 dark:bg-gray-800 dark:text-primary-500 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:hover:text-white dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-500"
+                    className="border-primary-600 text-primary-600 hover:bg-primary-500 peer-checked:border-primary-600 peer-checked:bg-primary-600 dark:border-primary-500 dark:text-primary-500 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-500 inline-flex w-full cursor-pointer items-center justify-center rounded-lg border-2 bg-white p-2 text-center text-sm font-medium peer-checked:text-white hover:text-white dark:bg-gray-800 dark:hover:text-white"
                   >
                     Engineer
                   </Label>
@@ -321,7 +321,7 @@ export function AdvancedFacetedSearchModal() {
                   />
                   <Label
                     htmlFor="marketing"
-                    className="inline-flex w-full cursor-pointer items-center justify-center rounded-lg border-2 border-primary-600 bg-white p-2 text-center text-sm font-medium text-primary-600 hover:bg-primary-500 hover:text-white peer-checked:border-primary-600 peer-checked:bg-primary-600 peer-checked:text-white dark:border-primary-500 dark:bg-gray-800 dark:text-primary-500 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:hover:text-white dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-500"
+                    className="border-primary-600 text-primary-600 hover:bg-primary-500 peer-checked:border-primary-600 peer-checked:bg-primary-600 dark:border-primary-500 dark:text-primary-500 dark:hover:border-primary-600 dark:hover:bg-primary-600 dark:peer-checked:border-primary-500 dark:peer-checked:bg-primary-500 inline-flex w-full cursor-pointer items-center justify-center rounded-lg border-2 bg-white p-2 text-center text-sm font-medium peer-checked:text-white hover:text-white dark:bg-gray-800 dark:hover:text-white"
                   >
                     Marketing
                   </Label>
@@ -428,7 +428,7 @@ export function AdvancedFacetedSearchModal() {
               </div>
               <a
                 href="#"
-                className="flex items-center text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
+                className="text-primary-600 dark:text-primary-500 flex items-center text-sm font-medium hover:underline"
               >
                 <svg
                   aria-hidden

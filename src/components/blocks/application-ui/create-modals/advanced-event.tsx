@@ -30,14 +30,14 @@ export function AdvancedCreateEventModal() {
         show={showModal}
         size="5xl"
       >
-        <ModalBody className="relative rounded-lg bg-white p-4 shadow dark:bg-gray-800 sm:p-5">
+        <ModalBody className="relative rounded-lg bg-white p-4 shadow sm:p-5 dark:bg-gray-800">
           <div className="mb-2 flex items-center justify-between pb-4">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
               Add new event
             </h3>
             <button
               onClick={() => setShowModal(false)}
-              className="absolute right-5 top-4 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+              className="absolute top-4 right-5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
             >
               <HiX className="h-5 w-5" />
               <span className="sr-only">Close modal</span>
@@ -125,17 +125,17 @@ export function AdvancedCreateEventModal() {
                   <Button
                     color="gray"
                     outline
-                    className="mr-3 inline-flex dark:border-gray-600 sm:mr-0 [&>span]:text-xs [&>span]:text-gray-400 hover:[&>span]:text-gray-900 [&>span]:dark:bg-gray-800 dark:[&>span]:text-gray-400 dark:[&>span]:enabled:hover:bg-gray-700"
+                    className="mr-3 inline-flex sm:mr-0 dark:border-gray-600 [&>span]:text-xs [&>span]:text-gray-400 hover:[&>span]:text-gray-900 [&>span]:dark:bg-gray-800 dark:[&>span]:text-gray-400 dark:[&>span]:enabled:hover:bg-gray-700"
                   >
-                    <HiPlus className="-ml-1 mr-1 h-4 w-4" />
+                    <HiPlus className="mr-1 -ml-1 h-4 w-4" />
                     Add member
                   </Button>
                   <Button
                     color="gray"
                     outline
-                    className="mr-3 inline-flex dark:border-gray-600 sm:mr-0 [&>span]:text-xs [&>span]:text-gray-400 hover:[&>span]:text-gray-900 [&>span]:dark:bg-gray-800 dark:[&>span]:text-gray-400 dark:[&>span]:enabled:hover:bg-gray-700"
+                    className="mr-3 inline-flex sm:mr-0 dark:border-gray-600 [&>span]:text-xs [&>span]:text-gray-400 hover:[&>span]:text-gray-900 [&>span]:dark:bg-gray-800 dark:[&>span]:text-gray-400 dark:[&>span]:enabled:hover:bg-gray-700"
                   >
-                    <HiClock className="-ml-1 mr-1 h-4 w-4" />
+                    <HiClock className="mr-1 -ml-1 h-4 w-4" />
                     Find a time
                   </Button>
                 </div>
@@ -188,7 +188,7 @@ export function AdvancedCreateEventModal() {
                 </div>
                 <div>
                   <div className="mb-2 flex items-center">
-                    <button className="rounded-lg bg-[#4285F4] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#4285F4]/90 focus:outline-none focus:ring-4 focus:ring-[#4285F4]/50">
+                    <button className="rounded-lg bg-[#4285F4] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#4285F4]/90 focus:ring-4 focus:ring-[#4285F4]/50 focus:outline-none">
                       Add Google Meet video conference
                     </button>
                   </div>
@@ -200,7 +200,7 @@ export function AdvancedCreateEventModal() {
                   <div className="flex items-center space-x-2">
                     <button className="h-6 w-6 rounded-sm bg-purple-500"></button>
                     <button className="h-6 w-6 rounded-sm bg-indigo-500"></button>
-                    <button className="h-6 w-6 rounded-sm bg-primary-600"></button>
+                    <button className="bg-primary-600 h-6 w-6 rounded-sm"></button>
                     <button className="h-6 w-6 rounded-sm bg-pink-500"></button>
                     <button className="h-6 w-6 rounded-sm bg-teal-400"></button>
                     <button className="h-6 w-6 rounded-sm bg-green-400"></button>
@@ -219,7 +219,7 @@ export function AdvancedCreateEventModal() {
                 </Label>
                 <div className="mb-4 w-full rounded-lg border border-gray-200 bg-gray-100 dark:border-gray-600 dark:bg-gray-600">
                   <div className="flex items-center justify-between border-b px-3 py-2 dark:border-gray-600">
-                    <div className="flex flex-wrap items-center divide-gray-200 dark:divide-gray-600 sm:divide-x">
+                    <div className="flex flex-wrap items-center divide-gray-200 sm:divide-x dark:divide-gray-600">
                       <div className="flex items-center space-x-1 sm:pr-4">
                         <button className="cursor-pointer rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white">
                           <svg
@@ -338,7 +338,7 @@ export function AdvancedCreateEventModal() {
                       </div>
                     </div>
                     <Tooltip content="Show full screen">
-                      <button className="cursor-pointer rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white sm:ml-auto">
+                      <button className="cursor-pointer rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 sm:ml-auto dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white">
                         <svg
                           aria-hidden
                           className="h-5 w-5"
@@ -371,7 +371,7 @@ export function AdvancedCreateEventModal() {
                   <div className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
                     Reminder
                   </div>
-                  <div className="space-y-4 sm:flex sm:space-x-4 sm:space-y-0">
+                  <div className="space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
                     <div className="w-full">
                       <Label htmlFor="reminder-type" className="sr-only">
                         Reminder type

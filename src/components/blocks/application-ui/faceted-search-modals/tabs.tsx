@@ -82,7 +82,7 @@ export function FacetedSearchModalWithTabs() {
                 <TabItem active title="Brand">
                   <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
                     <div className="space-y-2">
-                      <h5 className="text-lg font-medium uppercase text-black dark:text-white">
+                      <h5 className="text-lg font-medium text-black uppercase dark:text-white">
                         A
                       </h5>
                       <div className="flex items-center">
@@ -150,7 +150,7 @@ export function FacetedSearchModalWithTabs() {
                       </div>
                     </div>
                     <div className="space-y-2">
-                      <h5 className="text-lg font-medium uppercase text-black dark:text-white">
+                      <h5 className="text-lg font-medium text-black uppercase dark:text-white">
                         B
                       </h5>
                       <div className="flex items-center">
@@ -195,7 +195,7 @@ export function FacetedSearchModalWithTabs() {
                           type="checkbox"
                           value=""
                           checked
-                          className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600"
+                          className="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800"
                         />
                         <Label
                           htmlFor="brother"
@@ -242,7 +242,7 @@ export function FacetedSearchModalWithTabs() {
                       </div>
                     </div>
                     <div className="space-y-2">
-                      <h5 className="text-lg font-medium uppercase text-black dark:text-white">
+                      <h5 className="text-lg font-medium text-black uppercase dark:text-white">
                         C
                       </h5>
                       <div className="flex items-center">
@@ -301,7 +301,7 @@ export function FacetedSearchModalWithTabs() {
                       </div>
                     </div>
                     <div className="space-y-2">
-                      <h5 className="text-lg font-medium uppercase text-black dark:text-white">
+                      <h5 className="text-lg font-medium text-black uppercase dark:text-white">
                         D
                       </h5>
                       <div className="flex items-center">
@@ -351,7 +351,7 @@ export function FacetedSearchModalWithTabs() {
                       </div>
                     </div>
                     <div className="space-y-2">
-                      <h5 className="text-lg font-medium uppercase text-black dark:text-white">
+                      <h5 className="text-lg font-medium text-black uppercase dark:text-white">
                         E
                       </h5>
                       <div className="flex items-center">
@@ -396,7 +396,7 @@ export function FacetedSearchModalWithTabs() {
                           type="checkbox"
                           value=""
                           checked
-                          className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600"
+                          className="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800"
                         />
                         <Label
                           htmlFor="emi"
@@ -416,7 +416,7 @@ export function FacetedSearchModalWithTabs() {
                       </div>
                     </div>
                     <div className="space-y-2">
-                      <h5 className="text-lg font-medium uppercase text-black dark:text-white">
+                      <h5 className="text-lg font-medium text-black uppercase dark:text-white">
                         F
                       </h5>
                       <div className="flex items-center">
@@ -604,7 +604,7 @@ export function FacetedSearchModalWithTabs() {
                               htmlFor="blue"
                               className="ml-2 flex items-center text-sm font-medium text-gray-900 dark:text-gray-300"
                             >
-                              <div className="mr-2 h-3.5 w-3.5 rounded-full bg-primary-600"></div>
+                              <div className="bg-primary-600 mr-2 h-3.5 w-3.5 rounded-full"></div>
                               Blue
                             </Label>
                           </div>
@@ -805,7 +805,7 @@ export function FacetedSearchModalWithTabs() {
                           />
                           <Label
                             htmlFor="delivery-usa"
-                            className="inline-flex w-full cursor-pointer items-center justify-between rounded-lg border border-gray-200 bg-white p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-600 peer-checked:border-primary-600 peer-checked:text-primary-600 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:peer-checked:text-primary-500 md:p-5"
+                            className="peer-checked:border-primary-600 peer-checked:text-primary-600 dark:peer-checked:text-primary-500 inline-flex w-full cursor-pointer items-center justify-between rounded-lg border border-gray-200 bg-white p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-600 md:p-5 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
                           >
                             <div className="block">
                               <div className="w-full text-lg font-semibold">
@@ -826,7 +826,7 @@ export function FacetedSearchModalWithTabs() {
                           />
                           <Label
                             htmlFor="delivery-europe"
-                            className="inline-flex w-full cursor-pointer items-center justify-between rounded-lg border border-gray-200 bg-white p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-600 peer-checked:border-primary-600 peer-checked:text-primary-600 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:peer-checked:text-primary-500 md:p-5"
+                            className="peer-checked:border-primary-600 peer-checked:text-primary-600 dark:peer-checked:text-primary-500 inline-flex w-full cursor-pointer items-center justify-between rounded-lg border border-gray-200 bg-white p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-600 md:p-5 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
                           >
                             <div className="block">
                               <div className="w-full text-lg font-semibold">
@@ -848,7 +848,7 @@ export function FacetedSearchModalWithTabs() {
                           />
                           <Label
                             htmlFor="delivery-asia"
-                            className="inline-flex w-full cursor-pointer items-center justify-between rounded-lg border border-gray-200 bg-white p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-600 peer-checked:border-primary-600 peer-checked:text-primary-600 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:peer-checked:text-primary-500 md:p-5"
+                            className="peer-checked:border-primary-600 peer-checked:text-primary-600 dark:peer-checked:text-primary-500 inline-flex w-full cursor-pointer items-center justify-between rounded-lg border border-gray-200 bg-white p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-600 md:p-5 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
                           >
                             <div className="block">
                               <div className="w-full text-lg font-semibold">
@@ -869,7 +869,7 @@ export function FacetedSearchModalWithTabs() {
                           />
                           <Label
                             htmlFor="delivery-australia"
-                            className="inline-flex w-full cursor-pointer items-center justify-between rounded-lg border border-gray-200 bg-white p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-600 peer-checked:border-primary-600 peer-checked:text-primary-600 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:peer-checked:text-primary-500 md:p-5"
+                            className="peer-checked:border-primary-600 peer-checked:text-primary-600 dark:peer-checked:text-primary-500 inline-flex w-full cursor-pointer items-center justify-between rounded-lg border border-gray-200 bg-white p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-600 md:p-5 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
                           >
                             <div className="block">
                               <div className="w-full text-lg font-semibold">

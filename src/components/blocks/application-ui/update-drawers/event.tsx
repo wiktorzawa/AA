@@ -143,7 +143,7 @@ export function UpdateEventDrawer() {
                     >
                       <svg
                         aria-hidden
-                        className="-ml-0.5 mr-0.5 h-4 w-4"
+                        className="mr-0.5 -ml-0.5 h-4 w-4"
                         fill="currentColor"
                         viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg"
@@ -159,7 +159,7 @@ export function UpdateEventDrawer() {
                   )}
                   type="search"
                 />
-                <div className="mb-5 mt-3 flex space-x-1">
+                <div className="mt-3 mb-5 flex space-x-1">
                   <div className="relative">
                     <Avatar
                       alt="helene avatar"
@@ -170,7 +170,7 @@ export function UpdateEventDrawer() {
                     />
                     <a
                       href="#"
-                      className="absolute left-5 top-0 flex h-3.5 w-3.5  items-center justify-center rounded-full border-2 border-white bg-gray-400 hover:bg-gray-500 dark:border-gray-800"
+                      className="absolute top-0 left-5 flex h-3.5 w-3.5 items-center justify-center rounded-full border-2 border-white bg-gray-400 hover:bg-gray-500 dark:border-gray-800"
                     >
                       <svg
                         aria-hidden
@@ -198,7 +198,7 @@ export function UpdateEventDrawer() {
                     />
                     <button
                       type="button"
-                      className="absolute left-5 top-0 flex h-3.5 w-3.5  items-center justify-center rounded-full border-2 border-white bg-gray-400 hover:bg-gray-500 dark:border-gray-800"
+                      className="absolute top-0 left-5 flex h-3.5 w-3.5 items-center justify-center rounded-full border-2 border-white bg-gray-400 hover:bg-gray-500 dark:border-gray-800"
                     >
                       <svg
                         aria-hidden
@@ -226,7 +226,7 @@ export function UpdateEventDrawer() {
                     />
                     <button
                       type="button"
-                      className="absolute left-5 top-0 flex h-3.5 w-3.5  items-center justify-center rounded-full border-2 border-white bg-gray-400 hover:bg-gray-500 dark:border-gray-800"
+                      className="absolute top-0 left-5 flex h-3.5 w-3.5 items-center justify-center rounded-full border-2 border-white bg-gray-400 hover:bg-gray-500 dark:border-gray-800"
                     >
                       <svg
                         aria-hidden
@@ -254,7 +254,7 @@ export function UpdateEventDrawer() {
                     />
                     <button
                       type="button"
-                      className="absolute left-5 top-0 flex h-3.5 w-3.5  items-center justify-center rounded-full border-2 border-white bg-gray-400 hover:bg-gray-500 dark:border-gray-800"
+                      className="absolute top-0 left-5 flex h-3.5 w-3.5 items-center justify-center rounded-full border-2 border-white bg-gray-400 hover:bg-gray-500 dark:border-gray-800"
                     >
                       <svg
                         aria-hidden
@@ -291,7 +291,7 @@ export function UpdateEventDrawer() {
                   ></button>
                   <button
                     type="button"
-                    className="h-6 w-6 rounded-sm bg-primary-600"
+                    className="bg-primary-600 h-6 w-6 rounded-sm"
                   ></button>
                   <button
                     type="button"
@@ -378,7 +378,7 @@ export function UpdateEventDrawer() {
               >
                 <svg
                   aria-hidden
-                  className="-ml-1 mr-1 h-5 w-5"
+                  className="mr-1 -ml-1 h-5 w-5"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"

@@ -15,7 +15,7 @@ export function AdvancedCreateUserForm() {
     <section className="bg-white dark:bg-gray-900">
       <div className="mx-auto max-w-2xl px-4 py-8 lg:py-16">
         <form>
-          <h2 className="mb-4 text-xl font-semibold leading-none text-gray-900 dark:text-white">
+          <h2 className="mb-4 text-xl leading-none font-semibold text-gray-900 dark:text-white">
             General Information
           </h2>
           <div className="mb-4 grid gap-4 sm:mb-8 md:grid-cols-2 md:gap-6">
@@ -32,7 +32,7 @@ export function AdvancedCreateUserForm() {
                   img="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/helene-engels.png"
                   rounded
                   size="lg"
-                  className="mb-4 justify-start sm:mb-0 sm:mr-4 sm:justify-center [&_img]:max-w-none"
+                  className="mb-4 justify-start sm:mr-4 sm:mb-0 sm:justify-center [&_img]:max-w-none"
                 />
                 <div className="w-full">
                   <FileInput
@@ -275,7 +275,7 @@ export function AdvancedCreateUserForm() {
               </Label>
               <div className="w-full rounded-lg border border-gray-200 bg-gray-50 dark:border-gray-600 dark:bg-gray-700">
                 <div className="flex items-center justify-between border-b px-3 py-2 dark:border-gray-600">
-                  <div className="flex flex-wrap items-center divide-gray-200 dark:divide-gray-600 sm:divide-x">
+                  <div className="flex flex-wrap items-center divide-gray-200 sm:divide-x dark:divide-gray-600">
                     <div className="flex items-center space-x-1 sm:pr-4">
                       <button className="cursor-pointer rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white">
                         <svg
@@ -426,7 +426,7 @@ export function AdvancedCreateUserForm() {
                     </div>
                   </div>
                   <Tooltip content="Show full screen">
-                    <button className="cursor-pointer rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white sm:ml-auto">
+                    <button className="cursor-pointer rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 sm:ml-auto dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white">
                       <svg
                         aria-hidden
                         className="h-5 w-5"
@@ -493,7 +493,7 @@ export function AdvancedCreateUserForm() {
               </div>
             </div>
           </div>
-          <h2 className="mb-4 text-xl font-semibold leading-none text-gray-900 dark:text-white">
+          <h2 className="mb-4 text-xl leading-none font-semibold text-gray-900 dark:text-white">
             Additional Information
           </h2>
           <div className="mb-4 grid gap-4 sm:mb-8 md:grid-cols-2 md:gap-6">

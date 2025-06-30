@@ -1,6 +1,12 @@
 "use client";
 
-import { Button, Drawer, DrawerHeader, DrawerItems, theme } from "flowbite-react";
+import {
+  Button,
+  Drawer,
+  DrawerHeader,
+  DrawerItems,
+  theme,
+} from "flowbite-react";
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 
@@ -33,19 +39,19 @@ export function DefaultReadDrawer() {
             $2999
           </p>
           <dl>
-            <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+            <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
               Details
             </dt>
-            <dd className="mb-4 font-light text-gray-500 dark:text-gray-400 sm:mb-5">
+            <dd className="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">
               Standard glass ,3.8GHz 8-core 10th-generation Intel Core i7
               processor, Turbo Boost up to 5.0GHz, 16GB 2666MHz DDR4 memory,
               Radeon Pro 5500 XT with 8GB of GDDR6 memory, 256GB SSD storage,
               Gigabit Ethernet, Magic Mouse 2, Magic Keyboard - US.
             </dd>
-            <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+            <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
               Category
             </dt>
-            <dd className="mb-4 font-light text-gray-500 dark:text-gray-400 sm:mb-5">
+            <dd className="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">
               Electronics/PC
             </dd>
           </dl>
@@ -53,7 +59,7 @@ export function DefaultReadDrawer() {
             <Button className="inline-flex w-full">
               <svg
                 aria-hidden
-                className="-ml-1 mr-1 h-5 w-5"
+                className="mr-1 -ml-1 h-5 w-5"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
@@ -70,7 +76,7 @@ export function DefaultReadDrawer() {
             <Button color="failure" className="inline-flex w-full">
               <svg
                 aria-hidden
-                className="-ml-1 mr-1.5 h-5 w-5"
+                className="mr-1.5 -ml-1 h-5 w-5"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"

@@ -3,3 +3,118 @@
 @source "../.flowbite-react/class-list.json";
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+/* Neon Glow Effects */
+.glow-text-cyan {
+  text-shadow:
+    0 0 5px #00ffff,
+    0 0 10px #00ffff,
+    0 0 15px #00ffff;
+}
+
+.glow-text-magenta {
+  text-shadow:
+    0 0 5px #ff00ff,
+    0 0 10px #ff00ff,
+    0 0 15px #ff00ff;
+}
+
+.glow-text-green {
+  text-shadow:
+    0 0 5px #00ff00,
+    0 0 10px #00ff00,
+    0 0 15px #00ff00;
+}
+
+.glow-text-purple {
+  text-shadow:
+    0 0 5px #8b5cf6,
+    0 0 10px #8b5cf6,
+    0 0 15px #8b5cf6;
+}
+
+/* Neon Border Effects */
+.neon-border-cyan {
+  border: 1px solid #00ffff;
+  box-shadow:
+    0 0 5px #00ffff,
+    inset 0 0 5px #00ffff;
+}
+
+.neon-border-magenta {
+  border: 1px solid #ff00ff;
+  box-shadow:
+    0 0 5px #ff00ff,
+    inset 0 0 5px #ff00ff;
+}
+
+.neon-border-green {
+  border: 1px solid #00ff00;
+  box-shadow:
+    0 0 5px #00ff00,
+    inset 0 0 5px #00ff00;
+}
+
+.neon-border-purple {
+  border: 1px solid #8b5cf6;
+  box-shadow:
+    0 0 5px #8b5cf6,
+    inset 0 0 5px #8b5cf6;
+}
+
+/* Neon Animations */
+@keyframes neon-pulse {
+  0%,
+  100% {
+    text-shadow:
+      0 0 5px currentColor,
+      0 0 10px currentColor,
+      0 0 15px currentColor;
+  }
+  50% {
+    text-shadow:
+      0 0 2px currentColor,
+      0 0 5px currentColor,
+      0 0 8px currentColor;
+  }
+}
+
+@keyframes neon-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 5px currentColor,
+      0 0 10px currentColor,
+      0 0 15px currentColor;
+  }
+  50% {
+    box-shadow:
+      0 0 10px currentColor,
+      0 0 20px currentColor,
+      0 0 30px currentColor;
+  }
+}
+
+.neon-pulse {
+  animation: neon-pulse 2s ease-in-out infinite;
+}
+
+.neon-glow {
+  animation: neon-glow 2s ease-in-out infinite;
+}
+
+/* Dark theme background with subtle neon accents */
+.dark .neon-bg {
+  background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+}
+
+.dark .neon-card {
+  background: rgba(15, 15, 35, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+.dark .neon-card:hover {
+  border-color: rgba(0, 255, 255, 0.4);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+}

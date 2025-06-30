@@ -1,4 +1,4 @@
-// import { S3Client } from "@aws-sdk/client-s3";
+import { S3Client } from "@aws-sdk/client-s3";
 
 // Konfiguracja AWS
 export const awsConfig = {
@@ -10,8 +10,7 @@ export const awsConfig = {
 };
 
 // Konfiguracja S3
-// export const s3Client = new S3Client(awsConfig);
-export const s3Client = {}; // Pusta implementacja zamiast S3Client
+export const s3Client = new S3Client(awsConfig);
 
 // Konfiguracja S3
 export const s3Config = {

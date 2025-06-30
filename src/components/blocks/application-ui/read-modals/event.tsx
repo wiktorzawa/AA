@@ -15,15 +15,15 @@ export function ReadEventModal() {
         size="md"
         show={showModal}
       >
-        <ModalBody className="relative rounded-lg bg-white p-4 shadow dark:bg-gray-800 sm:p-5">
-          <div className="mb-4 flex items-center justify-between rounded-t border-b border-gray-200 pb-4 dark:border-gray-700 sm:mb-5">
+        <ModalBody className="relative rounded-lg bg-white p-4 shadow sm:p-5 dark:bg-gray-800">
+          <div className="mb-4 flex items-center justify-between rounded-t border-b border-gray-200 pb-4 sm:mb-5 dark:border-gray-700">
             <h3 className="font-semibold text-gray-900 dark:text-white">
               The 4th Digital Transformation
             </h3>
             <div>
               <button
                 onClick={() => setShowModal(false)}
-                className="absolute right-5 top-4 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+                className="absolute top-4 right-5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
               >
                 <svg
                   aria-hidden
@@ -63,7 +63,7 @@ export function ReadEventModal() {
               </span>
             </dd>
             <dt className="sr-only">Location</dt>
-            <dd className="mb-4 flex items-center text-gray-500 dark:text-gray-400 sm:mb-5">
+            <dd className="mb-4 flex items-center text-gray-500 sm:mb-5 dark:text-gray-400">
               <svg
                 className="mr-1.5 h-4 w-4 text-gray-400 dark:text-gray-500"
                 aria-hidden="true"
@@ -81,7 +81,7 @@ export function ReadEventModal() {
                 California, USA
               </span>
             </dd>
-            <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+            <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
               Details
             </dt>
             <dd className="text-gray-500 dark:text-gray-400">
@@ -98,7 +98,7 @@ export function ReadEventModal() {
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
-                  className="-ml-1 mr-1 h-5 w-5"
+                  className="mr-1 -ml-1 h-5 w-5"
                 >
                   <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path>
                   <path
@@ -119,7 +119,7 @@ export function ReadEventModal() {
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
-                  className="-ml-1 mr-1.5 h-5 w-5"
+                  className="mr-1.5 -ml-1 h-5 w-5"
                 >
                   <path
                     fillRule="evenodd"

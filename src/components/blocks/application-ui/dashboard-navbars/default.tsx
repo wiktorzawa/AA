@@ -18,7 +18,7 @@ export function DefaultDashboardNavbar() {
           <div className="flex items-center justify-start">
             <button
               id="toggleSidebar"
-              className="mr-3 hidden cursor-pointer rounded p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:inline"
+              className="mr-3 hidden cursor-pointer rounded p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 lg:inline dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
             >
               <svg
                 className="h-5 w-5"
@@ -37,7 +37,7 @@ export function DefaultDashboardNavbar() {
               </svg>
               <span className="sr-only">Toggle sidebar</span>
             </button>
-            <button className="mr-2 cursor-pointer rounded-lg p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:bg-gray-700 dark:focus:ring-gray-700 lg:hidden">
+            <button className="mr-2 cursor-pointer rounded-lg p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 lg:hidden dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:bg-gray-700 dark:focus:ring-gray-700">
               <svg
                 className="h-[18px] w-[18px]"
                 aria-hidden
@@ -61,7 +61,7 @@ export function DefaultDashboardNavbar() {
                 className="mr-3 h-8"
                 alt=""
               />
-              <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
+              <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
                 Flowbite
               </span>
             </a>
@@ -99,7 +99,7 @@ export function DefaultDashboardNavbar() {
             <Button size="sm" className="hidden md:block [&_span]:text-xs">
               <svg
                 aria-hidden
-                className="-ml-1 mr-1 h-5 w-5"
+                className="mr-1 -ml-1 h-5 w-5"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
@@ -115,7 +115,7 @@ export function DefaultDashboardNavbar() {
             <button
               id="toggleSidebarMobileSearch"
               type="button"
-              className="rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:hidden"
+              className="rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 md:hidden dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
             >
               <span className="sr-only">Search</span>
               <svg
@@ -177,7 +177,7 @@ export function DefaultDashboardNavbar() {
                       src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
                       alt=""
                     />
-                    <div className="absolute -mt-5 ml-6 flex h-5 w-5 items-center justify-center rounded-full border border-white bg-primary-700 dark:border-gray-700">
+                    <div className="bg-primary-700 absolute -mt-5 ml-6 flex h-5 w-5 items-center justify-center rounded-full border border-white dark:border-gray-700">
                       <svg
                         className="h-2 w-2 text-white"
                         aria-hidden
@@ -198,7 +198,7 @@ export function DefaultDashboardNavbar() {
                       </span>
                       : "Hey, what's up? All set for the presentation?"
                     </div>
-                    <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                    <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                       a few moments ago
                     </div>
                   </div>
@@ -236,7 +236,7 @@ export function DefaultDashboardNavbar() {
                       </span>
                       &nbsp;started following you.
                     </div>
-                    <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                    <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                       10 minutes ago
                     </div>
                   </div>
@@ -274,7 +274,7 @@ export function DefaultDashboardNavbar() {
                       </span>
                       &nbsp;love your story. See it and view more stories.
                     </div>
-                    <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                    <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                       44 minutes ago
                     </div>
                   </div>
@@ -307,12 +307,12 @@ export function DefaultDashboardNavbar() {
                         Leslie Livingston
                       </span>
                       &nbsp;mentioned you in a comment:&nbsp;
-                      <span className="font-medium text-primary-700 dark:text-primary-500">
+                      <span className="text-primary-700 dark:text-primary-500 font-medium">
                         @bonnie.green
                       </span>
                       &nbsp;what do you say?
                     </div>
-                    <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                    <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                       1 hour ago
                     </div>
                   </div>
@@ -347,7 +347,7 @@ export function DefaultDashboardNavbar() {
                       &nbsp;posted a new video: Glassmorphism - learn how to
                       implement the new design trend.
                     </div>
-                    <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                    <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                       3 hours ago
                     </div>
                   </div>
@@ -357,7 +357,7 @@ export function DefaultDashboardNavbar() {
                 href="#"
                 className="block border-t border-gray-200 bg-gray-50 py-2 text-center text-base font-medium text-gray-900 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:hover:underline"
               >
-                <div className="inline-flex items-center ">
+                <div className="inline-flex items-center">
                   <svg
                     aria-hidden
                     className="mr-2 h-5 w-5"
@@ -647,7 +647,7 @@ export function DefaultDashboardNavbar() {
                 <div className="flex w-full items-center justify-between">
                   <span className="flex items-center">
                     <svg
-                      className="mr-2 h-4 w-4 text-primary-600 dark:text-primary-500"
+                      className="text-primary-600 dark:text-primary-500 mr-2 h-4 w-4"
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="currentColor"

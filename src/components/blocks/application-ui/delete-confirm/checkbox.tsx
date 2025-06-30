@@ -15,10 +15,10 @@ export function ConfirmDeleteWithCheckbox() {
         size="md"
         show={showModal}
       >
-        <ModalBody className="relative rounded-lg bg-white p-4 shadow dark:bg-gray-800 sm:p-5">
+        <ModalBody className="relative rounded-lg bg-white p-4 shadow sm:p-5 dark:bg-gray-800">
           <button
             onClick={() => setShowModal(false)}
-            className="absolute right-2.5 top-2.5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+            className="absolute top-2.5 right-2.5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
           >
             <svg
               aria-hidden
@@ -44,13 +44,13 @@ export function ConfirmDeleteWithCheckbox() {
             on Flowbite.
           </p>
           <div
-            className="mb-4 rounded-lg bg-gray-100 p-4 text-left text-sm text-gray-500 dark:bg-gray-700 dark:text-gray-400 sm:mb-5"
+            className="mb-4 rounded-lg bg-gray-100 p-4 text-left text-sm text-gray-500 sm:mb-5 dark:bg-gray-700 dark:text-gray-400"
             role="alert"
           >
             <div className="flex">
               <Checkbox
                 id="confirm-checkbox"
-                className="mt-1 h-4 w-4 rounded border-gray-300 bg-gray-50 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-500 dark:bg-gray-600 dark:ring-offset-gray-700 dark:focus:ring-primary-600"
+                className="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 mt-1 h-4 w-4 rounded border-gray-300 bg-gray-50 focus:ring-2 dark:border-gray-500 dark:bg-gray-600 dark:ring-offset-gray-700"
                 required
               />
               <Label
@@ -83,7 +83,7 @@ export function ConfirmDeleteWithCheckbox() {
             >
               <svg
                 aria-hidden
-                className="-ml-1 mr-1.5 h-4 w-4"
+                className="mr-1.5 -ml-1 h-4 w-4"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"

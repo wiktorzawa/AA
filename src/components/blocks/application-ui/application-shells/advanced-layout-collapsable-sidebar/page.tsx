@@ -72,14 +72,14 @@ export default function AdvancedLayoutWithCollapsableSidebar() {
     <div className="bg-gray-50 dark:bg-gray-900">
       <Navbar
         fluid
-        className="fixed top-0 z-50 w-full border-b border-gray-200 bg-white p-0 dark:border-gray-700 dark:bg-gray-800 sm:p-0"
+        className="fixed top-0 z-50 w-full border-b border-gray-200 bg-white p-0 sm:p-0 dark:border-gray-700 dark:bg-gray-800"
       >
         <div className="w-full p-3 pr-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <button
                 onClick={() => setSidebarOpen(!isSidebarOpen)}
-                className="mr-3 cursor-pointer rounded p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:hidden"
+                className="mr-3 cursor-pointer rounded p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 md:hidden dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
               >
                 <span className="sr-only">Toggle sidebar</span>
                 <div className="lg:hidden">
@@ -97,7 +97,7 @@ export default function AdvancedLayoutWithCollapsableSidebar() {
                   width={32}
                   height={32}
                 />
-                <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
+                <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
                   Flowbite
                 </span>
               </NavbarBrand>
@@ -120,7 +120,7 @@ export default function AdvancedLayoutWithCollapsableSidebar() {
               <div className="flex items-center">
                 <button
                   onClick={() => setSidebarOpen(!isSidebarOpen)}
-                  className="cursor-pointer rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:bg-gray-700 dark:focus:ring-gray-700 lg:hidden"
+                  className="cursor-pointer rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 lg:hidden dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:bg-gray-700 dark:focus:ring-gray-700"
                 >
                   <span className="sr-only">Search</span>
                   <HiSearch className="h-6 w-6" />
@@ -154,7 +154,7 @@ export default function AdvancedLayoutWithCollapsableSidebar() {
                             width={44}
                             className="rounded-full"
                           />
-                          <div className="absolute -mt-5 ml-6 flex h-5 w-5 items-center justify-center rounded-full border border-white bg-primary-700 dark:border-gray-700">
+                          <div className="bg-primary-700 absolute -mt-5 ml-6 flex h-5 w-5 items-center justify-center rounded-full border border-white dark:border-gray-700">
                             <svg
                               className="h-3 w-3 text-white"
                               fill="currentColor"
@@ -175,7 +175,7 @@ export default function AdvancedLayoutWithCollapsableSidebar() {
                             : &quot;Hey, what&apos;s up? All set for the
                             presentation?&quot;
                           </div>
-                          <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                          <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                             a few moments ago
                           </div>
                         </div>
@@ -214,7 +214,7 @@ export default function AdvancedLayoutWithCollapsableSidebar() {
                             </span>
                             &nbsp;started following you.
                           </div>
-                          <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                          <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                             10 minutes ago
                           </div>
                         </div>
@@ -257,7 +257,7 @@ export default function AdvancedLayoutWithCollapsableSidebar() {
                             </span>
                             &nbsp;love your story. See it and view more stories.
                           </div>
-                          <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                          <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                             44 minutes ago
                           </div>
                         </div>
@@ -295,12 +295,12 @@ export default function AdvancedLayoutWithCollapsableSidebar() {
                               Leslie Livingston
                             </span>
                             &nbsp;mentioned you in a comment:&nbsp;
-                            <span className="font-medium text-primary-700 dark:text-primary-500">
+                            <span className="text-primary-700 dark:text-primary-500 font-medium">
                               @bonnie.green
                             </span>
                             &nbsp;what do you say?
                           </div>
-                          <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                          <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                             1 hour ago
                           </div>
                         </div>
@@ -336,7 +336,7 @@ export default function AdvancedLayoutWithCollapsableSidebar() {
                             &nbsp;posted a new video: Glassmorphism - learn how
                             to implement the new design trend.
                           </div>
-                          <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                          <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                             3 hours ago
                           </div>
                         </div>
@@ -344,7 +344,7 @@ export default function AdvancedLayoutWithCollapsableSidebar() {
                     </div>
                     <Link
                       href="#"
-                      className="block rounded-b-xl border-t  border-gray-100 bg-gray-50 py-2 text-center text-base font-normal text-gray-900 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-600 dark:text-white dark:hover:underline"
+                      className="block rounded-b-xl border-t border-gray-100 bg-gray-50 py-2 text-center text-base font-normal text-gray-900 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-600 dark:text-white dark:hover:underline"
                     >
                       <div className="inline-flex items-center gap-x-2">
                         <HiEye className="h-5 w-5" />
@@ -512,7 +512,7 @@ export default function AdvancedLayoutWithCollapsableSidebar() {
                       <span className="flex items-center">
                         <svg
                           aria-hidden
-                          className="mr-2 h-5 w-5 text-primary-600 dark:text-primary-500"
+                          className="text-primary-600 dark:text-primary-500 mr-2 h-5 w-5"
                           fill="currentColor"
                           viewBox="0 0 20 20"
                           xmlns="http://www.w3.org/2000/svg"
@@ -570,7 +570,7 @@ export default function AdvancedLayoutWithCollapsableSidebar() {
         open={isSidebarOpen}
         onClose={() => setSidebarOpen(false)}
         className={twMerge(
-          "left-16 top-16 max-h-[calc(100vh-4.2rem)] w-64 border-r px-2 py-1 dark:border-gray-700",
+          "top-16 left-16 max-h-[calc(100vh-4.2rem)] w-64 border-r px-2 py-1 dark:border-gray-700",
           !isSidebarOpen && "-left-16",
         )}
       >
@@ -612,10 +612,7 @@ export default function AdvancedLayoutWithCollapsableSidebar() {
                     <p className="mx-2 pt-6 text-sm font-medium text-gray-500">
                       REPORTS
                     </p>
-                    <SidebarCollapse
-                      label="Realtime"
-                      className="[&>span]:ml-0"
-                    >
+                    <SidebarCollapse label="Realtime" className="[&>span]:ml-0">
                       <SidebarItem href="#" className="pl-0 [&>span]:pl-2">
                         Overview
                       </SidebarItem>
@@ -646,10 +643,7 @@ export default function AdvancedLayoutWithCollapsableSidebar() {
                         Events
                       </SidebarItem>
                     </SidebarCollapse>
-                    <SidebarCollapse
-                      label="Audience"
-                      className="[&>span]:ml-0"
-                    >
+                    <SidebarCollapse label="Audience" className="[&>span]:ml-0">
                       <SidebarItem href="#" className="pl-0 [&>span]:pl-2">
                         Overview
                       </SidebarItem>
@@ -663,10 +657,7 @@ export default function AdvancedLayoutWithCollapsableSidebar() {
                         Events
                       </SidebarItem>
                     </SidebarCollapse>
-                    <SidebarCollapse
-                      label="Behavior"
-                      className="[&>span]:ml-0"
-                    >
+                    <SidebarCollapse label="Behavior" className="[&>span]:ml-0">
                       <SidebarItem href="#" className="pl-0 [&>span]:pl-2">
                         Overview
                       </SidebarItem>
@@ -694,7 +685,7 @@ export default function AdvancedLayoutWithCollapsableSidebar() {
                   </SidebarItemGroup>
                 </SidebarItems>
               </div>
-              <div className="absolute bottom-0 right-0 z-50 hidden justify-center space-x-4 bg-white p-4 dark:bg-gray-800 lg:flex">
+              <div className="absolute right-0 bottom-0 z-50 hidden justify-center space-x-4 bg-white p-4 lg:flex dark:bg-gray-800">
                 <button
                   onClick={() => setSidebarOpen(!isSidebarOpen)}
                   className="inline-flex cursor-pointer justify-end rounded-full p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-700 dark:hover:text-white"
@@ -722,7 +713,7 @@ export default function AdvancedLayoutWithCollapsableSidebar() {
       </Drawer>
       <button
         onClick={() => setSidebarOpen(!isSidebarOpen)}
-        className="absolute bottom-4 left-20 hidden cursor-pointer rounded-full bg-white p-2 text-gray-500 hover:bg-gray-200 hover:text-gray-900 dark:bg-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:inline-flex"
+        className="absolute bottom-4 left-20 hidden cursor-pointer rounded-full bg-white p-2 text-gray-500 hover:bg-gray-200 hover:text-gray-900 lg:inline-flex dark:bg-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
       >
         <svg
           className="h-6 w-6"
@@ -737,30 +728,30 @@ export default function AdvancedLayoutWithCollapsableSidebar() {
           ></path>
         </svg>
       </button>
-      <div className="mt-16 h-full space-y-4 bg-gray-50 p-4 dark:bg-gray-900 md:ml-80 lg:mr-16">
+      <div className="mt-16 h-full space-y-4 bg-gray-50 p-4 md:ml-80 lg:mr-16 dark:bg-gray-900">
         <div className="mt-2 grid h-1/6 grid-cols-2 gap-4 md:grid-cols-4">
-          <div className="h-32 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600 md:h-64"></div>
-          <div className="h-32 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600 md:h-64"></div>
+          <div className="h-32 rounded-xl border-2 border-dashed border-gray-300 md:h-64 dark:border-gray-600"></div>
+          <div className="h-32 rounded-xl border-2 border-dashed border-gray-300 md:h-64 dark:border-gray-600"></div>
           <div className="rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600"></div>
-          <div className="h-32 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600 md:h-64"></div>
+          <div className="h-32 rounded-xl border-2 border-dashed border-gray-300 md:h-64 dark:border-gray-600"></div>
         </div>
         <div className="grid h-1/4 grid-cols-2 gap-4">
-          <div className="h-48 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600 md:h-96"></div>
-          <div className="h-48 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600 md:h-96"></div>
+          <div className="h-48 rounded-xl border-2 border-dashed border-gray-300 md:h-96 dark:border-gray-600"></div>
+          <div className="h-48 rounded-xl border-2 border-dashed border-gray-300 md:h-96 dark:border-gray-600"></div>
         </div>
         <div className="grid h-1/4 grid-cols-3 gap-4">
-          <div className="h-32 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600 md:h-64"></div>
-          <div className="h-32 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600 md:h-64"></div>
-          <div className="h-32 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600 md:h-64"></div>
+          <div className="h-32 rounded-xl border-2 border-dashed border-gray-300 md:h-64 dark:border-gray-600"></div>
+          <div className="h-32 rounded-xl border-2 border-dashed border-gray-300 md:h-64 dark:border-gray-600"></div>
+          <div className="h-32 rounded-xl border-2 border-dashed border-gray-300 md:h-64 dark:border-gray-600"></div>
         </div>
         <div className="grid h-1/4 grid-cols-2 gap-4">
-          <div className="h-48 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600 md:h-96"></div>
-          <div className="h-48 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600 md:h-96"></div>
+          <div className="h-48 rounded-xl border-2 border-dashed border-gray-300 md:h-96 dark:border-gray-600"></div>
+          <div className="h-48 rounded-xl border-2 border-dashed border-gray-300 md:h-96 dark:border-gray-600"></div>
         </div>
       </div>
       <Sidebar
         collapsed
-        className="fixed right-0 top-[4.2rem] hidden border-l dark:border-gray-700 lg:flex [&>div]:bg-white [&_[role=tooltip]]:px-0"
+        className="fixed top-[4.2rem] right-0 hidden border-l lg:flex dark:border-gray-700 [&_[role=tooltip]]:px-0 [&>div]:bg-white"
       >
         <SidebarItemGroup>
           <SidebarItem href="#" icon={HiCalendar} label="Calendar">

@@ -1,6 +1,14 @@
 "use client";
 
-import { Avatar, Badge, Button, Drawer, DrawerItems, theme, Tooltip } from "flowbite-react";
+import {
+  Avatar,
+  Badge,
+  Button,
+  Drawer,
+  DrawerItems,
+  theme,
+  Tooltip,
+} from "flowbite-react";
 import { useState } from "react";
 
 export function AdvancedReadUserDrawer() {
@@ -27,7 +35,7 @@ export function AdvancedReadUserDrawer() {
             className="mb-4 w-fit sm:mb-5"
           >
             <div>
-              <h4 className="mb-1 text-xl font-bold leading-none text-gray-900 dark:text-white">
+              <h4 className="mb-1 text-xl leading-none font-bold text-gray-900 dark:text-white">
                 Helene Engels
               </h4>
               <p className="text-gray-500 dark:text-gray-400">
@@ -37,7 +45,7 @@ export function AdvancedReadUserDrawer() {
           </Avatar>
           <button
             onClick={() => setOpen(false)}
-            className="absolute right-2.5 top-2.5 inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+            className="absolute top-2.5 right-2.5 inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
           >
             <svg
               aria-hidden
@@ -55,15 +63,15 @@ export function AdvancedReadUserDrawer() {
             <span className="sr-only">Close menu</span>
           </button>
           <dl>
-            <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+            <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
               Biography
             </dt>
-            <dd className="mb-4 font-light text-gray-500 dark:text-gray-400 sm:mb-5">
+            <dd className="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">
               Hello, I'm Helene Engels, USA Designer, Creating things that stand
               out, Featured by Adobe, Figma, Webflow and others, Daily design
               tips & resources, Exploring Web3.
             </dd>
-            <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+            <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
               Social
             </dt>
             <dd className="mb-4 inline-flex items-center space-x-1 sm:mb-5">
@@ -148,7 +156,7 @@ export function AdvancedReadUserDrawer() {
                 </a>
               </Tooltip>
             </dd>
-            <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+            <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
               Role
             </dt>
             <dd className="mb-4 sm:mb-5">
@@ -170,10 +178,10 @@ export function AdvancedReadUserDrawer() {
                 Moderator
               </Badge>
             </dd>
-            <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+            <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
               Location
             </dt>
-            <dd className="mb-4 flex items-center font-light text-gray-500 dark:text-gray-400 sm:mb-5">
+            <dd className="mb-4 flex items-center font-light text-gray-500 sm:mb-5 dark:text-gray-400">
               <svg
                 className="mr-1.5 h-4 w-4 text-gray-400 dark:text-gray-500"
                 aria-hidden="true"
@@ -189,10 +197,10 @@ export function AdvancedReadUserDrawer() {
               </svg>
               United States of America
             </dd>
-            <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+            <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
               Job Title
             </dt>
-            <dd className="mb-4 flex items-center font-light text-gray-500 dark:text-gray-400 sm:mb-5">
+            <dd className="mb-4 flex items-center font-light text-gray-500 sm:mb-5 dark:text-gray-400">
               <svg
                 className="mr-1.5 h-4 w-4 text-gray-400 dark:text-gray-500"
                 aria-hidden="true"
@@ -209,20 +217,20 @@ export function AdvancedReadUserDrawer() {
               </svg>
               Frontend Developer
             </dd>
-            <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+            <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
               Home Adress
             </dt>
-            <dd className="mb-4 font-light text-gray-500 dark:text-gray-400 sm:mb-5">
+            <dd className="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">
               92 Miles Drive, Newark, NJ 07103, California, United States of
               America
             </dd>
-            <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+            <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
               Phone Number
             </dt>
-            <dd className="mb-4 font-light text-gray-500 dark:text-gray-400 sm:mb-5">
+            <dd className="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">
               +1234 567 890 / +12 345 678
             </dd>
-            <dt className="mb-2.5 font-semibold leading-none text-gray-900 dark:text-white">
+            <dt className="mb-2.5 leading-none font-semibold text-gray-900 dark:text-white">
               Software Skills
             </dt>
             <dd className="mb-4 flex items-center space-x-1 sm:mb-5">
@@ -409,10 +417,10 @@ export function AdvancedReadUserDrawer() {
                 </a>
               </Tooltip>
             </dd>
-            <dt className="mb-2 font-semibold leading-none text-gray-900 dark:text-white">
+            <dt className="mb-2 leading-none font-semibold text-gray-900 dark:text-white">
               Languages
             </dt>
-            <dd className="mb-4 font-light text-gray-500 dark:text-gray-400 sm:mb-5">
+            <dd className="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">
               English, French, Spanish
             </dd>
           </dl>
@@ -420,7 +428,7 @@ export function AdvancedReadUserDrawer() {
             <Button className="inline-flex w-full">
               <svg
                 aria-hidden="true"
-                className="-ml-1 mr-1 h-5 w-5"
+                className="mr-1 -ml-1 h-5 w-5"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
@@ -444,7 +452,7 @@ export function AdvancedReadUserDrawer() {
             <Button color="failure" className="inline-flex w-full">
               <svg
                 aria-hidden="true"
-                className="-ml-1 mr-1.5 h-5 w-5"
+                className="mr-1.5 -ml-1 h-5 w-5"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"

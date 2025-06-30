@@ -51,7 +51,7 @@ export function UpdateFormWithAccordion() {
                         required
                       />
                     </div>
-                    <div className="space-y-4 sm:flex sm:space-x-4 sm:space-y-0">
+                    <div className="space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
                       <div className="w-full">
                         <Label
                           htmlFor="brand"
@@ -82,7 +82,7 @@ export function UpdateFormWithAccordion() {
                         />
                       </div>
                     </div>
-                    <div className="space-y-4 sm:flex sm:space-x-4 sm:space-y-0">
+                    <div className="space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
                       <div className="w-full">
                         <Label
                           htmlFor="category"
@@ -114,7 +114,7 @@ export function UpdateFormWithAccordion() {
                         </Select>
                       </div>
                     </div>
-                    <div className="space-y-4 sm:flex sm:space-x-4 sm:space-y-0">
+                    <div className="space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
                       <div className="w-full">
                         <Label
                           htmlFor="shipping"
@@ -144,7 +144,7 @@ export function UpdateFormWithAccordion() {
                         />
                       </div>
                     </div>
-                    <div className="space-y-4 sm:flex sm:space-x-4 sm:space-y-0">
+                    <div className="space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
                       <div className="w-full">
                         <Label
                           htmlFor="import-fees"
@@ -182,7 +182,7 @@ export function UpdateFormWithAccordion() {
                       </Label>
                       <div className="mb-4 w-full rounded-lg border border-gray-200 bg-gray-100 dark:border-gray-600 dark:bg-gray-700">
                         <div className="flex items-center justify-between border-b px-3 py-2 dark:border-gray-600">
-                          <div className="flex flex-wrap items-center divide-gray-200 dark:divide-gray-600 sm:divide-x">
+                          <div className="flex flex-wrap items-center divide-gray-200 sm:divide-x dark:divide-gray-600">
                             <div className="flex items-center space-x-1 sm:pr-4">
                               <button className="cursor-pointer rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white">
                                 <svg
@@ -301,7 +301,7 @@ export function UpdateFormWithAccordion() {
                             </div>
                           </div>
                           <Tooltip content="Show full screen">
-                            <button className="cursor-pointer rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white sm:ml-auto">
+                            <button className="cursor-pointer rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 sm:ml-auto dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white">
                               <svg
                                 aria-hidden
                                 className="h-5 w-5"
@@ -375,7 +375,7 @@ export function UpdateFormWithAccordion() {
                         type="number"
                       />
                     </div>
-                    <div className="space-y-4 sm:flex sm:space-x-4 sm:space-y-0">
+                    <div className="space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
                       <div className="w-full">
                         <Label
                           htmlFor="length"
@@ -430,7 +430,7 @@ export function UpdateFormWithAccordion() {
                         Product Images
                       </Label>
                       <div className="mb-4 grid grid-cols-3 gap-4">
-                        <div className="relative rounded-lg bg-gray-100 p-2 dark:bg-gray-700 xl:h-36 xl:w-36">
+                        <div className="relative rounded-lg bg-gray-100 p-2 xl:h-36 xl:w-36 dark:bg-gray-700">
                           <img
                             src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-side-image.png"
                             alt="iMac"
@@ -455,7 +455,7 @@ export function UpdateFormWithAccordion() {
                             <span className="sr-only">Remove image</span>
                           </button>
                         </div>
-                        <div className="relative rounded-lg bg-gray-100 p-2 dark:bg-gray-700 xl:h-36 xl:w-36">
+                        <div className="relative rounded-lg bg-gray-100 p-2 xl:h-36 xl:w-36 dark:bg-gray-700">
                           <img
                             alt="iMac"
                             src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
@@ -477,7 +477,7 @@ export function UpdateFormWithAccordion() {
                             <span className="sr-only">Remove image</span>
                           </button>
                         </div>
-                        <div className="relative rounded-lg bg-gray-100 p-2 dark:bg-gray-700 xl:h-36 xl:w-36">
+                        <div className="relative rounded-lg bg-gray-100 p-2 xl:h-36 xl:w-36 dark:bg-gray-700">
                           <img
                             alt="iMac"
                             src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
@@ -499,7 +499,7 @@ export function UpdateFormWithAccordion() {
                             <span className="sr-only">Remove image</span>
                           </button>
                         </div>
-                        <div className="relative rounded-lg bg-gray-100 p-2 dark:bg-gray-700 xl:h-36 xl:w-36">
+                        <div className="relative rounded-lg bg-gray-100 p-2 xl:h-36 xl:w-36 dark:bg-gray-700">
                           <img
                             alt="iMac"
                             src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-side-image.png"
@@ -530,7 +530,7 @@ export function UpdateFormWithAccordion() {
                           htmlFor="dropzone-file"
                           className="flex h-64 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600"
                         >
-                          <div className="flex flex-col items-center justify-center pb-6 pt-5">
+                          <div className="flex flex-col items-center justify-center pt-5 pb-6">
                             <svg
                               aria-hidden
                               fill="none"
@@ -583,7 +583,7 @@ export function UpdateFormWithAccordion() {
               <AccordionContent className="px-0 pb-0">
                 <div className="grid gap-4 md:grid-cols-2 md:gap-6">
                   <div className="space-y-4 sm:space-y-6">
-                    <div className="space-y-4 sm:flex sm:space-x-4 sm:space-y-0">
+                    <div className="space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
                       <div className="w-full">
                         <Label
                           htmlFor="discount"
@@ -694,7 +694,7 @@ export function UpdateFormWithAccordion() {
                     >
                       Offer Validity Period
                     </Label>
-                    <div className="w-full items-center space-y-4 sm:flex sm:space-x-4 sm:space-y-0">
+                    <div className="w-full items-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
                       <div className="relative w-full">
                         <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                           <svg
@@ -764,7 +764,7 @@ export function UpdateFormWithAccordion() {
                     "border border-transparent bg-red-600 text-white focus:ring-4 focus:ring-red-300 enabled:hover:bg-red-600 dark:bg-red-600 dark:focus:ring-red-900 dark:enabled:hover:bg-red-500",
                 },
                 outline: {
-                  on: "flex w-full justify-center bg-white text-red-600 transition-all duration-75 ease-in group-enabled:group-hover:bg-opacity-0 group-enabled:group-hover:text-inherit dark:bg-gray-900 dark:text-red-500",
+                  on: "group-enabled:group-hover:bg-opacity-0 flex w-full justify-center bg-white text-red-600 transition-all duration-75 ease-in group-enabled:group-hover:text-inherit dark:bg-gray-900 dark:text-red-500",
                 },
               }}
               className="[&>span]:border-red-600 [&>span]:px-5 [&>span]:py-2.5"
@@ -773,7 +773,7 @@ export function UpdateFormWithAccordion() {
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
-                className="-ml-1 mr-1 h-5 w-5"
+                className="mr-1 -ml-1 h-5 w-5"
               >
                 <path
                   fillRule="evenodd"

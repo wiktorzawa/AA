@@ -70,14 +70,14 @@ export default function ShellLayoutWithUserProfileSidebar() {
     <div className="bg-gray-50 dark:bg-gray-900">
       <Navbar
         fluid
-        className="fixed top-0 z-50 w-full border-b border-gray-200 bg-white p-0 dark:border-gray-700 dark:bg-gray-800 sm:p-0 lg:hidden"
+        className="fixed top-0 z-50 w-full border-b border-gray-200 bg-white p-0 sm:p-0 lg:hidden dark:border-gray-700 dark:bg-gray-800"
       >
         <div className="w-full p-3 pr-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <button
                 onClick={() => setSidebarOpen(!isSidebarOpen)}
-                className="mr-3 cursor-pointer rounded p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:hidden"
+                className="mr-3 cursor-pointer rounded p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 lg:hidden dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
               >
                 <span className="sr-only">Toggle sidebar</span>
                 <div className="lg:hidden">
@@ -95,7 +95,7 @@ export default function ShellLayoutWithUserProfileSidebar() {
                   width={32}
                   height={32}
                 />
-                <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
+                <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
                   Flowbite
                 </span>
               </NavbarBrand>
@@ -131,7 +131,7 @@ export default function ShellLayoutWithUserProfileSidebar() {
                             width={44}
                             className="rounded-full"
                           />
-                          <div className="absolute -mt-5 ml-6 flex h-5 w-5 items-center justify-center rounded-full border border-white bg-primary-700 dark:border-gray-700">
+                          <div className="bg-primary-700 absolute -mt-5 ml-6 flex h-5 w-5 items-center justify-center rounded-full border border-white dark:border-gray-700">
                             <svg
                               className="h-3 w-3 text-white"
                               fill="currentColor"
@@ -152,7 +152,7 @@ export default function ShellLayoutWithUserProfileSidebar() {
                             : &quot;Hey, what&apos;s up? All set for the
                             presentation?&quot;
                           </div>
-                          <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                          <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                             a few moments ago
                           </div>
                         </div>
@@ -191,7 +191,7 @@ export default function ShellLayoutWithUserProfileSidebar() {
                             </span>
                             &nbsp;started following you.
                           </div>
-                          <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                          <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                             10 minutes ago
                           </div>
                         </div>
@@ -234,7 +234,7 @@ export default function ShellLayoutWithUserProfileSidebar() {
                             </span>
                             &nbsp;love your story. See it and view more stories.
                           </div>
-                          <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                          <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                             44 minutes ago
                           </div>
                         </div>
@@ -272,12 +272,12 @@ export default function ShellLayoutWithUserProfileSidebar() {
                               Leslie Livingston
                             </span>
                             &nbsp;mentioned you in a comment:&nbsp;
-                            <span className="font-medium text-primary-700 dark:text-primary-500">
+                            <span className="text-primary-700 dark:text-primary-500 font-medium">
                               @bonnie.green
                             </span>
                             &nbsp;what do you say?
                           </div>
-                          <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                          <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                             1 hour ago
                           </div>
                         </div>
@@ -313,7 +313,7 @@ export default function ShellLayoutWithUserProfileSidebar() {
                             &nbsp;posted a new video: Glassmorphism - learn how
                             to implement the new design trend.
                           </div>
-                          <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                          <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                             3 hours ago
                           </div>
                         </div>
@@ -348,14 +348,14 @@ export default function ShellLayoutWithUserProfileSidebar() {
           backdrop={isMobile}
           open={isSidebarOpen}
           onClose={() => isMobile && setSidebarOpen(false)}
-          className="top-16 max-h-[calc(100vh-4rem)] w-64 border-r px-2 py-1 dark:border-gray-700 lg:top-0 lg:max-h-screen"
+          className="top-16 max-h-[calc(100vh-4rem)] w-64 border-r px-2 py-1 lg:top-0 lg:max-h-screen dark:border-gray-700"
         >
           <DrawerItems className="h-full">
             <Sidebar
               aria-label="Sidebar with multi-level dropdown example"
-              className="w-full [&>div]:bg-transparent [&>div]:p-0 [&_*]:font-medium"
+              className="w-full [&_*]:font-medium [&>div]:bg-transparent [&>div]:p-0"
             >
-              <div className="hidden items-center px-2 lg:mb-4 lg:mt-3 lg:flex">
+              <div className="hidden items-center px-2 lg:mt-3 lg:mb-4 lg:flex">
                 <img
                   className="mr-3 h-8"
                   alt=""
@@ -363,7 +363,7 @@ export default function ShellLayoutWithUserProfileSidebar() {
                   width={32}
                   height={32}
                 />
-                <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
+                <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
                   Flowbite
                 </span>
               </div>
@@ -416,7 +416,7 @@ export default function ShellLayoutWithUserProfileSidebar() {
                 </div>
                 <div
                   hidden={isMobile}
-                  className="absolute bottom-0 left-0 z-20 hidden w-full justify-center space-x-4 bg-white p-4 dark:bg-gray-800 lg:flex"
+                  className="absolute bottom-0 left-0 z-20 hidden w-full justify-center space-x-4 bg-white p-4 lg:flex dark:bg-gray-800"
                 >
                   <button className="inline-flex cursor-pointer justify-center rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-700 dark:hover:text-white">
                     <span className="sr-only">Tweaks</span>
@@ -633,7 +633,7 @@ export default function ShellLayoutWithUserProfileSidebar() {
             </Sidebar>
           </DrawerItems>
         </Drawer>
-        <div className="flex h-full w-full flex-1 flex-col items-stretch space-y-4 p-4 pt-20 dark:bg-gray-900 md:pt-4 lg:mx-64">
+        <div className="flex h-full w-full flex-1 flex-col items-stretch space-y-4 p-4 pt-20 md:pt-4 lg:mx-64 dark:bg-gray-900">
           <div className="h-96 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600"></div>
           <div className="h-96 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600"></div>
           <div className="h-96 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600"></div>
@@ -645,7 +645,7 @@ export default function ShellLayoutWithUserProfileSidebar() {
           open={isUserSidebarOpen}
           onClose={() => isMobile && setUserSidebarOpen(false)}
           position="right"
-          className="top-16 max-h-[calc(100vh-4rem)] w-64 overflow-visible border-l px-0 py-1 dark:border-gray-700 lg:top-0 lg:max-h-screen"
+          className="top-16 max-h-[calc(100vh-4rem)] w-64 overflow-visible border-l px-0 py-1 lg:top-0 lg:max-h-screen dark:border-gray-700"
         >
           <Sidebar id="user-sidebar" className="[&>div]:bg-white">
             <div className="flex flex-col items-center">
@@ -663,7 +663,7 @@ export default function ShellLayoutWithUserProfileSidebar() {
               </div>
               <button
                 type="button"
-                className="my-5 flex w-full items-center justify-center rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
+                className="hover:text-primary-700 my-5 flex w-full items-center justify-center rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-sm font-medium text-gray-900 hover:bg-gray-100 focus:z-10 focus:ring-4 focus:ring-gray-200 focus:outline-none dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -810,7 +810,7 @@ export default function ShellLayoutWithUserProfileSidebar() {
                             width={44}
                             className="rounded-full"
                           />
-                          <div className="absolute -mt-5 ml-6 flex h-5 w-5 items-center justify-center rounded-full border border-white bg-primary-700 dark:border-gray-700">
+                          <div className="bg-primary-700 absolute -mt-5 ml-6 flex h-5 w-5 items-center justify-center rounded-full border border-white dark:border-gray-700">
                             <svg
                               className="h-3 w-3 text-white"
                               fill="currentColor"
@@ -831,7 +831,7 @@ export default function ShellLayoutWithUserProfileSidebar() {
                             : &quot;Hey, what&apos;s up? All set for the
                             presentation?&quot;
                           </div>
-                          <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                          <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                             a few moments ago
                           </div>
                         </div>
@@ -870,7 +870,7 @@ export default function ShellLayoutWithUserProfileSidebar() {
                             </span>
                             &nbsp;started following you.
                           </div>
-                          <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                          <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                             10 minutes ago
                           </div>
                         </div>
@@ -913,7 +913,7 @@ export default function ShellLayoutWithUserProfileSidebar() {
                             </span>
                             &nbsp;love your story. See it and view more stories.
                           </div>
-                          <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                          <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                             44 minutes ago
                           </div>
                         </div>
@@ -951,12 +951,12 @@ export default function ShellLayoutWithUserProfileSidebar() {
                               Leslie Livingston
                             </span>
                             &nbsp;mentioned you in a comment:&nbsp;
-                            <span className="font-medium text-primary-700 dark:text-primary-500">
+                            <span className="text-primary-700 dark:text-primary-500 font-medium">
                               @bonnie.green
                             </span>
                             &nbsp;what do you say?
                           </div>
-                          <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                          <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                             1 hour ago
                           </div>
                         </div>
@@ -992,7 +992,7 @@ export default function ShellLayoutWithUserProfileSidebar() {
                             &nbsp;posted a new video: Glassmorphism - learn how
                             to implement the new design trend.
                           </div>
-                          <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                          <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                             3 hours ago
                           </div>
                         </div>
@@ -1035,7 +1035,7 @@ export default function ShellLayoutWithUserProfileSidebar() {
                           <div className="mb-1.5 text-sm font-normal text-gray-500 dark:text-gray-400">
                             Learn how to create new projects
                           </div>
-                          <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                          <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                             Read more &rarr;
                           </div>
                         </div>
@@ -1048,7 +1048,7 @@ export default function ShellLayoutWithUserProfileSidebar() {
                           <div className="mb-1.5 text-sm font-normal text-gray-500 dark:text-gray-400">
                             Invite your coworkers
                           </div>
-                          <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                          <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                             Read more &rarr;
                           </div>
                         </div>
@@ -1061,7 +1061,7 @@ export default function ShellLayoutWithUserProfileSidebar() {
                           <div className="mb-1.5 text-sm font-normal text-gray-500 dark:text-gray-400">
                             Become a pro user
                           </div>
-                          <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                          <div className="text-primary-700 dark:text-primary-400 text-xs font-medium">
                             Read more &rarr;
                           </div>
                         </div>

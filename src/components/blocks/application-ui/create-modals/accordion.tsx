@@ -40,7 +40,7 @@ export function CreateModalWithAccordion() {
             </h3>
             <button
               onClick={() => setShowModal(false)}
-              className="absolute right-5 top-[18px] ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+              className="absolute top-[18px] right-5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
             >
               <HiX className="h-5 w-5" />
               <span className="sr-only">Close modal</span>
@@ -69,7 +69,7 @@ export function CreateModalWithAccordion() {
                         <img
                           alt="Helene avatar"
                           src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/helene-engels.png"
-                          className="mb-4 h-20 w-20 rounded-full sm:mb-0 sm:mr-4"
+                          className="mb-4 h-20 w-20 rounded-full sm:mr-4 sm:mb-0"
                         />
                         <div className="w-full">
                           <input
@@ -79,7 +79,7 @@ export function CreateModalWithAccordion() {
                             type="file"
                           />
                           <p
-                            className="mb-3 mt-1 text-xs font-normal text-gray-500 dark:text-gray-300"
+                            className="mt-1 mb-3 text-xs font-normal text-gray-500 dark:text-gray-300"
                             id="file_input_help"
                           >
                             SVG, PNG, JPG or GIF (MAX. 800x400px).

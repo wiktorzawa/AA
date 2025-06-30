@@ -6,7 +6,7 @@ export function FooterWithLanguageSelectorAndOptions() {
   return (
     <Footer container>
       <div className="mb-4 md:mb-0 xl:flex xl:items-center xl:space-x-3">
-        <p className="mb-4 text-center text-sm text-gray-500 dark:text-gray-400 xl:mb-0">
+        <p className="mb-4 text-center text-sm text-gray-500 xl:mb-0 dark:text-gray-400">
           &copy; 2022&nbsp;
           <a
             href="https://flowbite.com/"
@@ -88,7 +88,7 @@ export function FooterWithLanguageSelectorAndOptions() {
           theme={{
             inlineWrapper: twMerge(
               theme.dropdown.inlineWrapper,
-              "flex items-center rounded-full p-1.5 text-sm font-medium text-gray-900 hover:text-primary-600 focus:ring-4 focus:ring-gray-100 dark:text-white dark:hover:text-primary-500 dark:focus:ring-gray-700 md:mr-0",
+              "hover:text-primary-600 dark:hover:text-primary-500 flex items-center rounded-full p-1.5 text-sm font-medium text-gray-900 focus:ring-4 focus:ring-gray-100 md:mr-0 dark:text-white dark:focus:ring-gray-700",
             ),
           }}
         >

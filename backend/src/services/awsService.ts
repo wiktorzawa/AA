@@ -1,5 +1,5 @@
-// import { PutObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3";
-// import { s3Client, s3Config } from "../config/aws";
+import { PutObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3";
+import { s3Client, s3Config } from "../config/aws";
 
 // Serwis do obsługi RDS
 export const rdsService = {
@@ -29,35 +29,34 @@ export const rdsService = {
 };
 
 // Serwis do obsługi S3 - tymczasowo zakomentowany
-export const s3Service = {
-  async uploadFile(file: File, key: string) {
-    // Tymczasowo usunięto funkcjonalność AWS S3
-    console.log("Funkcja uploadFile tymczasowo wyłączona");
-    return { status: "mock", key };
+export const awsService = {
+  async uploadFile(
+    fileBuffer: Buffer,
+    key: string,
+  ): Promise<{ Location: string }> {
+    console.log(`🚀 S3 Upload: ${key}, size: ${fileBuffer.length} bytes`);
 
-    /*
     const command = new PutObjectCommand({
       Bucket: s3Config.bucketName,
       Key: key,
-      Body: file,
+      Body: fileBuffer,
+      ContentType: "application/octet-stream",
     });
 
     try {
       const response = await s3Client.send(command);
-      return response;
+      const location = `https://${s3Config.bucketName}.s3.${s3Config.region}.amazonaws.com/${key}`;
+      console.log(`✅ S3 Upload completed: ${location}`);
+      return { Location: location };
     } catch (error) {
-      console.error("Error uploading file to S3:", error);
+      console.error("❌ Error uploading file to S3:", error);
       throw error;
     }
-    */
   },
 
   async getFile(key: string) {
-    // Tymczasowo usunięto funkcjonalność AWS S3
-    console.log("Funkcja getFile tymczasowo wyłączona");
-    return { status: "mock", key };
+    console.log(`🔍 S3 GetFile: ${key}`);
 
-    /*
     const command = new GetObjectCommand({
       Bucket: s3Config.bucketName,
       Key: key,
@@ -65,11 +64,14 @@ export const s3Service = {
 
     try {
       const response = await s3Client.send(command);
+      console.log(`✅ S3 GetFile completed: ${key}`);
       return response;
     } catch (error) {
-      console.error("Error getting file from S3:", error);
+      console.error("❌ Error getting file from S3:", error);
       throw error;
     }
-    */
   },
 };
+
+// Zachowaj kompatybilność wsteczną
+export const s3Service = awsService;

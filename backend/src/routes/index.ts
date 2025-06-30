@@ -1,7 +1,8 @@
 import express from "express";
-import authRoutes from "./login_auth_data.routes";
-import staffRoutes from "./login_table_staff.routes";
-import supplierRoutes from "./login_table_suppliers.routes";
+import authRoutes from "./auth/authRoutes";
+import staffRoutes from "./auth/staffRoutes";
+import supplierRoutes from "./auth/supplierRoutes";
+import deliveryRoutes from "./deliveryRoutes";
 import allegroRoutes from "./allegroRoutes";
 import adsPowerRoutes from "./adsPowerRoutes";
 import brightDataRoutes from "./brightDataRoutes";
@@ -16,6 +17,9 @@ router.use("/staff", staffRoutes);
 
 // Trasy dla dostawców
 router.use("/suppliers", supplierRoutes);
+
+// Trasy dla dostaw
+router.use("/deliveries", deliveryRoutes);
 
 // Trasy dla Allegro
 router.use("/allegro", allegroRoutes);
