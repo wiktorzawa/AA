@@ -1,5 +1,24 @@
-// Import modeli auth i delivery
-import AuthModels, { setupAuthAssociations } from "./auth";
+// Importuj i re-eksportuj wszystko z modułu 'auth'
+export * from "./auth";
+
+// Importuj i re-eksportuj wszystko z modułu 'deliveries'
+export * from "./deliveries";
+
+// AmazonProduct model został usunięty (nie był używany)
+
+// --- GŁÓWNA FUNKCJA INICJALIZUJĄCA ---
+
+import {
+  AuthDaneAutoryzacji,
+  AuthPracownicy,
+  AuthDostawcy,
+  AuthHistoriaLogowan,
+  initAuthDaneAutoryzacji,
+  initAuthPracownicy,
+  initAuthDostawcy,
+  initAuthHistoriaLogowan,
+  setupAuthAssociations,
+} from "./auth";
 import {
   DostNowaDostawa,
   DostDostawyProdukty,
@@ -10,102 +29,33 @@ import {
   initDostFakturyDostawcow,
   initDostFinanseDostaw,
 } from "./deliveries";
-import {
-  initAuthDaneAutoryzacji,
-  initAuthPracownicy,
-  initAuthDostawcy,
-  initAuthHistoriaLogowan,
-} from "./auth";
 
 /**
- * Funkcja konfiguracji relacji dla wszystkich modeli
- */
-const setupAllAssociations = () => {
-  // Konfiguracja relacji dla modułu auth
-  setupAuthAssociations();
-
-  // Konfiguracja relacji dla modułu delivery
-  setupDeliveryAssociations();
-};
-
-/**
- * Funkcja konfiguracji relacji dla modeli dostaw
- */
-const setupDeliveryAssociations = () => {
-  // DostNowaDostawa -> AuthDostawcy
-  DostNowaDostawa.belongsTo(AuthModels.AuthDostawcy, {
-    foreignKey: "id_dostawcy",
-    as: "dostawca",
-  });
-
-  // DostDostawyProdukty -> DostNowaDostawa
-  DostDostawyProdukty.belongsTo(DostNowaDostawa, {
-    foreignKey: "id_dostawy",
-    as: "dostawa",
-  });
-
-  // DostNowaDostawa -> DostDostawyProdukty (hasMany)
-  DostNowaDostawa.hasMany(DostDostawyProdukty, {
-    foreignKey: "id_dostawy",
-    as: "products",
-  });
-
-  // DostFakturyDostawcow -> AuthDostawcy
-  DostFakturyDostawcow.belongsTo(AuthModels.AuthDostawcy, {
-    foreignKey: "id_dostawcy",
-    as: "dostawca",
-  });
-
-  // DostFakturyDostawcow -> DostNowaDostawa
-  DostFakturyDostawcow.belongsTo(DostNowaDostawa, {
-    foreignKey: "id_dostawy",
-    as: "dostawa",
-  });
-
-  // DostFinanseDostaw -> DostNowaDostawa
-  DostFinanseDostaw.belongsTo(DostNowaDostawa, {
-    foreignKey: "id_dostawy",
-    as: "dostawa",
-  });
-
-  // DostNowaDostawa -> DostFinanseDostaw (hasOne)
-  DostNowaDostawa.hasOne(DostFinanseDostaw, {
-    foreignKey: "id_dostawy",
-    as: "finances",
-  });
-
-  // DostNowaDostawa -> DostFakturyDostawcow (hasMany)
-  DostNowaDostawa.hasMany(DostFakturyDostawcow, {
-    foreignKey: "id_dostawy",
-    as: "invoices",
-  });
-};
-
-/**
- * Funkcja inicjalizacji wszystkich modeli
+ * Funkcja inicjalizacji wszystkich modeli i ich relacji
  */
 export const initializeAllModels = () => {
-  // Najpierw inicjalizuj modele auth
+  // Najpierw inicjalizuj wszystkie modele
   initAuthDaneAutoryzacji();
   initAuthPracownicy();
   initAuthDostawcy();
   initAuthHistoriaLogowan();
-
-  // Następnie inicjalizuj modele dostaw
   initDostNowaDostawa();
   initDostDostawyProdukty();
   initDostFakturyDostawcow();
   initDostFinanseDostaw();
 
-  // Na końcu konfiguruj relacje
-  setupAllAssociations();
+  // Na końcu skonfiguruj wszystkie relacje
+  setupAuthAssociations();
+  // setupDeliveryAssociations(); // Ta funkcja zostanie dodana później, jeśli będzie potrzebna
 };
 
 // Eksport modeli auth
-export const AuthDaneAutoryzacji = AuthModels.AuthDaneAutoryzacji;
-export const AuthPracownicy = AuthModels.AuthPracownicy;
-export const AuthDostawcy = AuthModels.AuthDostawcy;
-export const AuthHistoriaLogowan = AuthModels.AuthHistoriaLogowan;
+export {
+  AuthDaneAutoryzacji,
+  AuthPracownicy,
+  AuthDostawcy,
+  AuthHistoriaLogowan,
+};
 
 // Eksport modeli delivery
 export {
@@ -116,19 +66,15 @@ export {
 };
 
 // Setup functions
-export {
-  setupAllAssociations,
-  setupAuthAssociations,
-  setupDeliveryAssociations,
-};
+export { setupAuthAssociations };
 
 // Domyślny eksport obiektu z wszystkimi modelami
 export default {
   // Auth
-  AuthDaneAutoryzacji: AuthModels.AuthDaneAutoryzacji,
-  AuthPracownicy: AuthModels.AuthPracownicy,
-  AuthDostawcy: AuthModels.AuthDostawcy,
-  AuthHistoriaLogowan: AuthModels.AuthHistoriaLogowan,
+  AuthDaneAutoryzacji,
+  AuthPracownicy,
+  AuthDostawcy,
+  AuthHistoriaLogowan,
 
   // Delivery
   DostNowaDostawa,
@@ -137,6 +83,5 @@ export default {
   DostFinanseDostaw,
 
   // Setup function
-  setupAssociations: setupAllAssociations,
   initializeAllModels,
 };

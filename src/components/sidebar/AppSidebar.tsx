@@ -19,6 +19,7 @@ import {
   HiCollection,
   HiTable,
 } from "react-icons/hi";
+import { logger } from "../../utils/logger";
 
 interface AppSidebarProps {
   userRole?: "admin" | "staff" | "supplier";
@@ -36,10 +37,12 @@ const AppSidebar: FC<AppSidebarProps> = function ({ userRole }) {
     const roleFromStorage = localStorage.getItem("userRole");
     const finalRole = userRole || roleFromStorage;
 
-    console.log("AppSidebar - userRole prop:", userRole);
-    console.log("AppSidebar - roleFromStorage:", roleFromStorage);
-    console.log("AppSidebar - finalRole:", finalRole);
-    console.log("AppSidebar - currentPage:", newPage);
+    logger.debug("AppSidebar role resolution", {
+      userRoleProp: userRole,
+      roleFromStorage,
+      finalRole,
+      currentPage: newPage,
+    });
 
     setActualUserRole(finalRole);
   }, [userRole, currentPage]);
@@ -50,58 +53,42 @@ const AppSidebar: FC<AppSidebarProps> = function ({ userRole }) {
       <SidebarItem
         href="/admin/dashboard"
         icon={HiChartPie}
-        className={
-          "/admin/dashboard" === currentPage
-            ? "bg-gray-100 dark:bg-gray-700"
-            : ""
-        }
+        active={"/admin/dashboard" === currentPage}
       >
         Dashboard
       </SidebarItem>
       <SidebarItem
         href="/admin/landing"
         icon={HiCollection}
-        className={
-          "/admin/landing" === currentPage ? "bg-gray-100 dark:bg-gray-700" : ""
-        }
+        active={"/admin/landing" === currentPage}
       >
         Landing Page
       </SidebarItem>
       <SidebarItem
         href="/admin/tables"
         icon={HiTable}
-        className={
-          "/admin/tables" === currentPage ? "bg-gray-100 dark:bg-gray-700" : ""
-        }
+        active={"/admin/tables" === currentPage}
       >
         Advanced Tables
       </SidebarItem>
       <SidebarItem
         href="/admin/users"
         icon={HiUsers}
-        className={
-          "/admin/users" === currentPage ? "bg-gray-100 dark:bg-gray-700" : ""
-        }
+        active={"/admin/users" === currentPage}
       >
         Zarządzanie Użytkownikami
       </SidebarItem>
       <SidebarItem
         href="/admin/staff"
         icon={HiClipboard}
-        className={
-          "/admin/staff" === currentPage ? "bg-gray-100 dark:bg-gray-700" : ""
-        }
+        active={"/admin/staff" === currentPage}
       >
         Zarządzanie Personelem
       </SidebarItem>
       <SidebarItem
         href="/admin/suppliers"
         icon={HiTruck}
-        className={
-          "/admin/suppliers" === currentPage
-            ? "bg-gray-100 dark:bg-gray-700"
-            : ""
-        }
+        active={"/admin/suppliers" === currentPage}
       >
         Zarządzanie Dostawcami
       </SidebarItem>
@@ -113,20 +100,14 @@ const AppSidebar: FC<AppSidebarProps> = function ({ userRole }) {
       <SidebarItem
         href="/admin/reports"
         icon={HiDocumentReport}
-        className={
-          "/admin/reports" === currentPage ? "bg-gray-100 dark:bg-gray-700" : ""
-        }
+        active={"/admin/reports" === currentPage}
       >
         Raporty
       </SidebarItem>
       <SidebarItem
         href="/admin/settings"
         icon={HiCog}
-        className={
-          "/admin/settings" === currentPage
-            ? "bg-gray-100 dark:bg-gray-700"
-            : ""
-        }
+        active={"/admin/settings" === currentPage}
       >
         Ustawienia Systemu
       </SidebarItem>
@@ -139,20 +120,14 @@ const AppSidebar: FC<AppSidebarProps> = function ({ userRole }) {
       <SidebarItem
         href="/staff/dashboard"
         icon={HiChartPie}
-        className={
-          "/staff/dashboard" === currentPage
-            ? "bg-gray-100 dark:bg-gray-700"
-            : ""
-        }
+        active={"/staff/dashboard" === currentPage}
       >
         Dashboard
       </SidebarItem>
       <SidebarItem
         href="/staff/tasks"
         icon={HiClipboard}
-        className={
-          "/staff/tasks" === currentPage ? "bg-gray-100 dark:bg-gray-700" : ""
-        }
+        active={"/staff/tasks" === currentPage}
       >
         Moje Zadania
       </SidebarItem>
@@ -164,20 +139,14 @@ const AppSidebar: FC<AppSidebarProps> = function ({ userRole }) {
       <SidebarItem
         href="/staff/inventory"
         icon={HiCollection}
-        className={
-          "/staff/inventory" === currentPage
-            ? "bg-gray-100 dark:bg-gray-700"
-            : ""
-        }
+        active={"/staff/inventory" === currentPage}
       >
         Magazyn
       </SidebarItem>
       <SidebarItem
         href="/staff/reports"
         icon={HiDocumentReport}
-        className={
-          "/staff/reports" === currentPage ? "bg-gray-100 dark:bg-gray-700" : ""
-        }
+        active={"/staff/reports" === currentPage}
       >
         Raporty
       </SidebarItem>
@@ -190,22 +159,14 @@ const AppSidebar: FC<AppSidebarProps> = function ({ userRole }) {
       <SidebarItem
         href="/supplier/dashboard"
         icon={HiChartPie}
-        className={
-          "/supplier/dashboard" === currentPage
-            ? "bg-gray-100 dark:bg-gray-700"
-            : ""
-        }
+        active={"/supplier/dashboard" === currentPage}
       >
         Dashboard
       </SidebarItem>
       <SidebarItem
         href="/supplier/deliveries"
         icon={HiTruck}
-        className={
-          "/supplier/deliveries" === currentPage
-            ? "bg-gray-100 dark:bg-gray-700"
-            : ""
-        }
+        active={"/supplier/deliveries" === currentPage}
       >
         Moje Dostawy
       </SidebarItem>
@@ -217,22 +178,14 @@ const AppSidebar: FC<AppSidebarProps> = function ({ userRole }) {
       <SidebarItem
         href="/supplier/orders"
         icon={HiClipboard}
-        className={
-          "/supplier/orders" === currentPage
-            ? "bg-gray-100 dark:bg-gray-700"
-            : ""
-        }
+        active={"/supplier/orders" === currentPage}
       >
         Zamówienia
       </SidebarItem>
       <SidebarItem
         href="/supplier/invoices"
         icon={HiDocumentReport}
-        className={
-          "/supplier/invoices" === currentPage
-            ? "bg-gray-100 dark:bg-gray-700"
-            : ""
-        }
+        active={"/supplier/invoices" === currentPage}
       >
         Faktury
       </SidebarItem>
@@ -242,33 +195,36 @@ const AppSidebar: FC<AppSidebarProps> = function ({ userRole }) {
   // Menu domyślne (gdy brak roli lub ogólny dashboard)
   const renderDefaultMenu = () => (
     <>
-      <SidebarItem
-        href="/"
-        icon={HiChartPie}
-        className={"/" === currentPage ? "bg-gray-100 dark:bg-gray-700" : ""}
-      >
+      <SidebarItem href="/" icon={HiChartPie} active={"/" === currentPage}>
         Dashboard
       </SidebarItem>
-      <SidebarItem href="/authentication/sign-in" icon={HiInformationCircle}>
+      <SidebarItem href="/authentication/sign-in" icon={HiUsers}>
         Zaloguj się
+      </SidebarItem>
+      <SidebarItem href="/authentication/sign-up" icon={HiUsers}>
+        Zarejestruj się
       </SidebarItem>
     </>
   );
 
   return (
-    <Sidebar aria-label="Sidebar with multi-level dropdown example">
-      <div className="flex h-full flex-col justify-between py-2">
-        <div>
-          <SidebarItems>
-            <SidebarItemGroup>
-              {actualUserRole === "admin" && renderAdminMenu()}
-              {actualUserRole === "staff" && renderStaffMenu()}
-              {actualUserRole === "supplier" && renderSupplierMenu()}
-              {!actualUserRole && renderDefaultMenu()}
-            </SidebarItemGroup>
-          </SidebarItems>
-        </div>
-      </div>
+    <Sidebar
+      aria-label="Sidebar with multi-level dropdown example"
+      className="h-full bg-gray-50 dark:bg-gray-900"
+    >
+      <SidebarItems>
+        <SidebarItemGroup>
+          {actualUserRole === "admin" && renderAdminMenu()}
+          {actualUserRole === "staff" && renderStaffMenu()}
+          {actualUserRole === "supplier" && renderSupplierMenu()}
+          {!actualUserRole && renderDefaultMenu()}
+        </SidebarItemGroup>
+        <SidebarItemGroup>
+          <SidebarItem href="#" icon={HiInformationCircle}>
+            Help
+          </SidebarItem>
+        </SidebarItemGroup>
+      </SidebarItems>
     </Sidebar>
   );
 };

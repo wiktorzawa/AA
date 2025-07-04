@@ -1,3 +1,3 @@
-import { requireRole } from './requireRole.middleware';
+import { requireRole } from "./requireRole.middleware";
 
-export const requireAdmin = requireRole('admin');
+export const requireAdmin = requireRole("admin");

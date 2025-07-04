@@ -1,8 +1,34 @@
 import axiosInstance from "./axios";
+import { logger } from "../utils/logger";
+// Definicja typu produktu dostawy z backend
+export interface DeliveryProduct {
+  id_produktu_dostawy: number;
+  id_dostawy?: string;
+  nr_palety?: string;
+  LPN?: string;
+  kod_ean?: string;
+  kod_asin?: string;
+  nazwa_produktu: string;
+  ilosc: number;
+  cena_produktu_spec?: number;
+  stan_produktu?: string;
+  kraj_pochodzenia?: string;
+  kategoria_produktu?: string;
+  status_weryfikacji: string;
+  uwagi_weryfikacji?: string;
+  data_utworzenia: string;
+}
+
+interface ApiResponse<T> {
+  success: boolean;
+  data: T;
+  message?: string;
+}
 
 // Interfejsy dla delivery API
 export interface DeliveryUploadRequest {
   file: File;
+  supplierId: string;
   confirmDeliveryNumber?: string;
 }
 
@@ -54,24 +80,17 @@ export interface DeliveryPreviewResponse {
 export const uploadDeliveryFile = async (
   data: DeliveryUploadRequest,
 ): Promise<DeliveryUploadResponse> => {
-  console.log("🚀 [deliveryApi] uploadDeliveryFile called with:", {
+  logger.info("Uploading delivery file", {
     fileName: data.file.name,
     fileSize: data.file.size,
+    supplierId: data.supplierId,
     confirmDeliveryNumber: data.confirmDeliveryNumber,
   });
 
   try {
-    // Pobierz token z localStorage
-    const token = localStorage.getItem("token");
-    if (!token) {
-      return {
-        success: false,
-        error: "Token uwierzytelnienia nie został podany.",
-      };
-    }
-
     const formData = new FormData();
     formData.append("deliveryFile", data.file);
+    formData.append("id_dostawcy", data.supplierId); // Dodajemy ID dostawcy
 
     if (data.confirmDeliveryNumber) {
       formData.append("confirmDeliveryNumber", data.confirmDeliveryNumber);
@@ -80,7 +99,6 @@ export const uploadDeliveryFile = async (
     const response = await axiosInstance.post("/deliveries/upload", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${token}`,
       },
       // Zwiększony timeout dla uploadów
       timeout: 60000, // 60 sekund
@@ -88,7 +106,7 @@ export const uploadDeliveryFile = async (
 
     return response.data;
   } catch (error: unknown) {
-    console.error("❌ [deliveryApi]: Błąd uploadu:", error);
+    logger.error("Failed to upload delivery file", { error });
 
     if (error && typeof error === "object" && "response" in error) {
       const axiosError = error as {
@@ -115,29 +133,19 @@ export const previewDeliveryFile = async (
   file: File,
 ): Promise<DeliveryPreviewResponse> => {
   try {
-    // Pobierz token z localStorage
-    const token = localStorage.getItem("token");
-    if (!token) {
-      return {
-        success: false,
-        error: "Token uwierzytelnienia nie został podany.",
-      };
-    }
-
     const formData = new FormData();
     formData.append("deliveryFile", file);
 
     const response = await axiosInstance.post("/deliveries/preview", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${token}`,
       },
       timeout: 30000, // 30 sekund
     });
 
     return response.data;
   } catch (error: unknown) {
-    console.error("❌ [deliveryApi]: Błąd podglądu:", error);
+    logger.error("Failed to preview delivery file", { error });
 
     if (error && typeof error === "object" && "response" in error) {
       const axiosError = error as {
@@ -161,23 +169,10 @@ export const previewDeliveryFile = async (
  */
 export const getDeliveries = async () => {
   try {
-    // Pobierz token z localStorage
-    const token = localStorage.getItem("token");
-    if (!token) {
-      return {
-        success: false,
-        error: "Token uwierzytelnienia nie został podany.",
-      };
-    }
-
-    const response = await axiosInstance.get("/deliveries", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await axiosInstance.get("/deliveries");
     return response.data;
   } catch (error: unknown) {
-    console.error("❌ [deliveryApi]: Błąd pobierania dostaw:", error);
+    logger.error("Failed to fetch deliveries", { error });
 
     if (error && typeof error === "object" && "response" in error) {
       const axiosError = error as { response?: { data?: unknown } };
@@ -190,5 +185,30 @@ export const getDeliveries = async () => {
       success: false,
       error: "Błąd podczas pobierania listy dostaw",
     };
+  }
+};
+
+/**
+ * Pobiera produkty dla konkretnej dostawy.
+ * @param deliveryId - ID dostawy, dla której mają zostać pobrane produkty.
+ * @returns Obiekt z danymi produktów zgodny z oczekiwaniami komponentu
+ */
+export const getProductsByDeliveryId = async (
+  deliveryId: string,
+): Promise<ApiResponse<DeliveryProduct[]>> => {
+  try {
+    const response = await axiosInstance.get<ApiResponse<DeliveryProduct[]>>(
+      `/deliveries/${deliveryId}/products`,
+    );
+
+    // Zwracamy cały obiekt response.data (zawiera success, data, message)
+    return response.data;
+  } catch (error) {
+    logger.error("Błąd podczas pobierania produktów dla dostawy:", {
+      deliveryId,
+      error,
+    });
+    // Rzucenie błędu dalej pozwoli react-query na odpowiednie zarządzanie stanem błędu
+    throw error;
   }
 };

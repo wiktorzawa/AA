@@ -1,40 +1,14 @@
 import { PutObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3";
 import { s3Client, s3Config } from "../config/aws";
+import { logger } from "../utils/logger";
 
-// Serwis do obsługi RDS
-export const rdsService = {
-  async executeQuery(
-    sql: string,
-    parameters: (string | number | boolean | null)[] = [],
-  ) {
-    try {
-      const response = await fetch("http://localhost:3000/api/query", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ sql, parameters }),
-      });
-
-      const data = await response.json();
-      if (!data.success) {
-        throw new Error(data.error);
-      }
-      return data.data;
-    } catch (error) {
-      console.error("Error executing RDS query:", error);
-      throw error;
-    }
-  },
-};
-
-// Serwis do obsługi S3 - tymczasowo zakomentowany
+// Serwis do obsługi S3
 export const awsService = {
   async uploadFile(
     fileBuffer: Buffer,
     key: string,
   ): Promise<{ Location: string }> {
-    console.log(`🚀 S3 Upload: ${key}, size: ${fileBuffer.length} bytes`);
+    logger.info("S3 Upload started", { key, size: fileBuffer.length });
 
     const command = new PutObjectCommand({
       Bucket: s3Config.bucketName,
@@ -44,18 +18,18 @@ export const awsService = {
     });
 
     try {
-      const response = await s3Client.send(command);
+      await s3Client.send(command);
       const location = `https://${s3Config.bucketName}.s3.${s3Config.region}.amazonaws.com/${key}`;
-      console.log(`✅ S3 Upload completed: ${location}`);
+      logger.info("S3 Upload completed", { location });
       return { Location: location };
     } catch (error) {
-      console.error("❌ Error uploading file to S3:", error);
+      logger.error("Error uploading file to S3", { error });
       throw error;
     }
   },
 
   async getFile(key: string) {
-    console.log(`🔍 S3 GetFile: ${key}`);
+    logger.info("S3 GetFile started", { key });
 
     const command = new GetObjectCommand({
       Bucket: s3Config.bucketName,
@@ -64,14 +38,14 @@ export const awsService = {
 
     try {
       const response = await s3Client.send(command);
-      console.log(`✅ S3 GetFile completed: ${key}`);
+      logger.info("S3 GetFile completed", { key });
       return response;
     } catch (error) {
-      console.error("❌ Error getting file from S3:", error);
+      logger.error("Error getting file from S3", { error, key });
       throw error;
     }
   },
 };
 
-// Zachowaj kompatybilność wsteczną
+// Zachowaj kompatybilność wsteczną, jeśli inne części systemu używają s3Service
 export const s3Service = awsService;

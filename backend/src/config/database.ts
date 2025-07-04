@@ -1,36 +1,21 @@
-import { Sequelize } from "sequelize";
+import { Sequelize, Dialect } from "sequelize";
 import { config } from "./config";
+import { logger } from "../utils/logger";
 
-// Debug: sprawdź zmienne środowiskowe bazy danych
-console.log("🔍 [database]: Debug zmiennych środowiskowych bazy danych:");
-console.log("  DB_HOST:", process.env.DB_HOST);
-console.log("  DB_PORT:", process.env.DB_PORT);
-console.log("  DB_USER:", process.env.DB_USER);
-console.log(
-  "  DB_PASSWORD:",
-  process.env.DB_PASSWORD ? "***USTAWIONE***" : "BRAK",
-);
-console.log("  DB_NAME:", process.env.DB_NAME);
-console.log("🔍 [database]: Config z config.ts:");
-console.log("  dbHost:", config.dbHost);
-console.log("  dbPort:", config.dbPort);
-console.log("  dbUsername:", config.dbUsername);
-console.log("  dbPassword:", config.dbPassword ? "***USTAWIONE***" : "BRAK");
-console.log("  dbName:", config.dbName);
-
+// Stworzenie instancji Sequelize z użyciem scentralizowanej konfiguracji
 export const sequelize = new Sequelize({
-  dialect: config.dbDialect as any,
+  dialect: config.dbDialect as Dialect,
   host: config.dbHost,
   port: config.dbPort,
   username: config.dbUsername,
   password: config.dbPassword,
   database: config.dbName,
-  logging: false,
-  timezone: "+02:00", // Polska strefa czasowa (CEST)
+  logging: false, // Wyłącz logowanie zapytań SQL w konsoli
+  timezone: "+02:00",
   pool: {
     max: 5,
     min: 0,
-    acquire: 60000, // Zwiększone do 60s dla AWS
+    acquire: 60000,
     idle: 10000,
   },
   define: {
@@ -38,52 +23,40 @@ export const sequelize = new Sequelize({
     underscored: true,
   },
   dialectOptions: {
-    connectTimeout: 60000, // 60s timeout połączenia
-    acquireTimeout: 60000, // 60s timeout acquire
-    timeout: 60000, // 60s query timeout
+    connectTimeout: 60000,
     ssl: {
-      require: false, // Nie wymagaj SSL
+      require: false,
       rejectUnauthorized: false,
     },
-    timezone: "+02:00", // Także w dialectOptions dla MySQL
   },
   retry: {
-    max: 3, // Maksymalnie 3 próby
+    max: 3,
   },
 });
 
-// Inicjalizacja modeli
+// Funkcja do inicjalizacji modeli i połączenia z bazą
 export const initializeDatabase = async () => {
   try {
-    // Dynamiczne importy i inicjalizacja modeli
-    const { initAuthDaneAutoryzacji } = await import(
-      "../models/auth/AuthDaneAutoryzacji"
-    );
-    const { initAuthPracownicy } = await import(
-      "../models/auth/AuthPracownicy"
-    );
-    const { initAuthDostawcy } = await import("../models/auth/AuthDostawcy");
-    const { initAuthHistoriaLogowan } = await import(
-      "../models/auth/AuthHistoriaLogowan"
-    );
-
-    initAuthDaneAutoryzacji();
-    initAuthPracownicy();
-    initAuthDostawcy();
-    initAuthHistoriaLogowan();
-
+    // Dynamiczne importowanie i inicjalizacja wszystkich modeli
+    logger.info("Ładowanie modeli Sequelize...");
     const { initializeAllModels } = await import("../models");
     initializeAllModels();
+    logger.info("Modele załadowane.");
 
-    await sequelize.authenticate();
-    console.log(
-      "✅ [database]: Połączenie z bazą danych zostało nawiązane pomyślnie.",
-    );
+    logger.info("Uwierzytelnianie w bazie danych...");
+    await sequelize.authenticate({
+      logging: (msg) => logger.debug(`[Sequelize Auth] ${msg}`),
+    });
+    logger.info("✅ Połączenie z bazą danych zostało nawiązane pomyślnie");
   } catch (error) {
-    console.error(
-      "❌ [database]: Błąd podczas inicjalizacji bazy danych:",
-      error,
-    );
-    throw error;
+    logger.error("❌ KRYTYCZNY BŁĄD PODCZAS INICJALIZACJI BAZY DANYCH ❌");
+    if (error instanceof Error) {
+      logger.error(`Treść błędu: ${error.message}`);
+      logger.error(`Stack trace: ${error.stack}`);
+    } else {
+      logger.error("Wystąpił nieznany błąd", { error });
+    }
+    // Upewniamy się, że proces zostanie zakończony z błędem
+    process.exit(1);
   }
 };

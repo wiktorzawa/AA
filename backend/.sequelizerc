@@ -1,8 +1,10 @@
 const path = require("path");
 
+// Konfiguracja dla Sequelize-CLI, aby wiedziało gdzie szukać modeli i migracji.
+// Ścieżka do konfiguracji wskazuje na plik, który wczytuje zmienne środowiskowe.
 module.exports = {
-  config: path.resolve("config", "config.js"),
-  "models-path": path.resolve("src", "models"),
-  "seeders-path": path.resolve("seeders"),
-  "migrations-path": path.resolve("src", "database", "migrations"),
+  config: path.resolve(__dirname, "dist/config/config.js"), // Wskazuje na skompilowany plik konfiguracyjny
+  "models-path": path.resolve(__dirname, "src", "models"),
+  "seeders-path": path.resolve(__dirname, "seeders"),
+  "migrations-path": path.resolve(__dirname, "src", "database", "migrations"),
 };

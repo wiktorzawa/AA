@@ -7,7 +7,43 @@ import {
   DeliveryFilters,
   PaginationParams,
 } from "../types/delivery.types";
-import { AuthenticatedRequest } from "../types/auth.types";
+import { AppError } from "../utils/AppError";
+import { logger } from "../utils/logger";
+import { DELIVERY_STATUS, DeliveryStatus } from "../constants";
+
+const isValidDeliveryStatus = (status: unknown): status is DeliveryStatus => {
+  return Object.values(DELIVERY_STATUS).includes(status as DeliveryStatus);
+};
+
+const parseDeliveryQueryParams = (
+  query: Record<string, unknown>,
+): Partial<DeliveryFilters & PaginationParams> => {
+  const {
+    page,
+    limit,
+    sortBy,
+    sortOrder,
+    id_dostawcy,
+    status_weryfikacji,
+    data_od,
+    data_do,
+    nazwa_pliku,
+  } = query;
+
+  return {
+    page: page ? parseInt(String(page), 10) : undefined,
+    limit: limit ? parseInt(String(limit), 10) : undefined,
+    sortBy: sortBy ? String(sortBy) : undefined,
+    sortOrder: sortOrder === "ASC" || sortOrder === "DESC" ? sortOrder : "DESC",
+    id_dostawcy: id_dostawcy ? String(id_dostawcy) : undefined,
+    status_weryfikacji: isValidDeliveryStatus(status_weryfikacji)
+      ? status_weryfikacji
+      : undefined,
+    data_od: data_od ? String(data_od) : undefined,
+    data_do: data_do ? String(data_do) : undefined,
+    nazwa_pliku: nazwa_pliku ? String(nazwa_pliku) : undefined,
+  };
+};
 
 export class DeliveryController {
   private deliveryService = new DeliveryService();
@@ -17,42 +53,13 @@ export class DeliveryController {
    */
   public getAllDeliveries = asyncHandler(
     async (req: Request, res: Response): Promise<void> => {
-      try {
-        // Parsuj filtry z query params
-        const filters: DeliveryFilters = {
-          id_dostawcy: req.query.id_dostawcy as string,
-          status_weryfikacji: req.query.status_weryfikacji as any,
-          data_od: req.query.data_od as string,
-          data_do: req.query.data_do as string,
-          nazwa_pliku: req.query.nazwa_pliku as string,
-        };
+      const queryParams = parseDeliveryQueryParams(req.query);
+      const result = await this.deliveryService.getDeliveries(queryParams);
 
-        // Parsuj parametry paginacji
-        const pagination: PaginationParams = {
-          page: req.query.page ? parseInt(req.query.page as string) : undefined,
-          limit: req.query.limit
-            ? parseInt(req.query.limit as string)
-            : undefined,
-          sortBy: req.query.sortBy as string,
-          sortOrder: req.query.sortOrder as "ASC" | "DESC",
-        };
-
-        const result = await this.deliveryService.getDeliveries(
-          filters,
-          pagination,
-        );
-
-        res.json({
-          success: true,
-          ...result,
-        });
-      } catch (error) {
-        console.error("Błąd podczas pobierania dostaw:", error);
-        res.status(500).json({
-          success: false,
-          error: "Błąd serwera",
-        });
-      }
+      res.json({
+        success: true,
+        ...result,
+      });
     },
   );
 
@@ -64,36 +71,32 @@ export class DeliveryController {
       const { id } = req.params;
       const includeRelations = req.query.include !== "false";
 
-      try {
-        const delivery = await this.deliveryService.getDeliveryById(
-          id,
-          includeRelations,
-        );
+      const delivery = await this.deliveryService.getDeliveryById(
+        id,
+        includeRelations,
+      );
 
-        res.json({
-          success: true,
-          data: delivery,
-        });
-      } catch (error: unknown) {
-        console.error(`Błąd podczas pobierania dostawy o ID ${id}:`, error);
+      res.json({
+        success: true,
+        data: delivery,
+      });
+    },
+  );
 
-        if (
-          error &&
-          typeof error === "object" &&
-          "statusCode" in error &&
-          "message" in error
-        ) {
-          res.status(error.statusCode as number).json({
-            success: false,
-            error: error.message as string,
-          });
-        } else {
-          res.status(500).json({
-            success: false,
-            error: "Błąd serwera",
-          });
-        }
-      }
+  /**
+   * Pobiera produkty dla konkretnej dostawy
+   */
+  public getProductsByDeliveryId = asyncHandler(
+    async (req: Request, res: Response): Promise<void> => {
+      const { deliveryId } = req.params;
+
+      const products =
+        await this.deliveryService.getProductsByDeliveryId(deliveryId);
+
+      res.json({
+        success: true,
+        data: products,
+      });
     },
   );
 
@@ -110,41 +113,15 @@ export class DeliveryController {
         !deliveryData.nazwa_pliku ||
         !deliveryData.url_pliku_S3
       ) {
-        res.status(400).json({
-          success: false,
-          error: "Wszystkie wymagane pola muszą być wypełnione",
-        });
-        return;
+        throw new AppError("Wszystkie wymagane pola muszą być wypełnione", 400);
       }
 
-      try {
-        const delivery =
-          await this.deliveryService.createDelivery(deliveryData);
+      const delivery = await this.deliveryService.createDelivery(deliveryData);
 
-        res.status(201).json({
-          success: true,
-          data: delivery,
-        });
-      } catch (error: unknown) {
-        console.error("Błąd podczas tworzenia dostawy:", error);
-
-        if (
-          error &&
-          typeof error === "object" &&
-          "statusCode" in error &&
-          "message" in error
-        ) {
-          res.status(error.statusCode as number).json({
-            success: false,
-            error: error.message as string,
-          });
-        } else {
-          res.status(500).json({
-            success: false,
-            error: "Błąd serwera",
-          });
-        }
-      }
+      res.status(201).json({
+        success: true,
+        data: delivery,
+      });
     },
   );
 
@@ -157,46 +134,18 @@ export class DeliveryController {
       const statusData = req.body as UpdateDeliveryStatusRequest;
 
       if (!statusData.status_weryfikacji) {
-        res.status(400).json({
-          success: false,
-          error: "Status weryfikacji jest wymagany",
-        });
-        return;
+        throw new AppError("Status weryfikacji jest wymagany", 400);
       }
 
-      try {
-        const delivery = await this.deliveryService.updateDeliveryStatus(
-          id,
-          statusData,
-        );
+      const delivery = await this.deliveryService.updateDeliveryStatus(
+        id,
+        statusData,
+      );
 
-        res.json({
-          success: true,
-          data: delivery,
-        });
-      } catch (error: unknown) {
-        console.error(
-          `Błąd podczas aktualizacji statusu dostawy o ID ${id}:`,
-          error,
-        );
-
-        if (
-          error &&
-          typeof error === "object" &&
-          "statusCode" in error &&
-          "message" in error
-        ) {
-          res.status(error.statusCode as number).json({
-            success: false,
-            error: error.message as string,
-          });
-        } else {
-          res.status(500).json({
-            success: false,
-            error: "Błąd serwera",
-          });
-        }
-      }
+      res.json({
+        success: true,
+        data: delivery,
+      });
     },
   );
 
@@ -207,33 +156,12 @@ export class DeliveryController {
     async (req: Request, res: Response): Promise<void> => {
       const { id } = req.params;
 
-      try {
-        await this.deliveryService.deleteDelivery(id);
+      await this.deliveryService.deleteDelivery(id);
 
-        res.json({
-          success: true,
-          message: "Dostawa została usunięta",
-        });
-      } catch (error: unknown) {
-        console.error(`Błąd podczas usuwania dostawy o ID ${id}:`, error);
-
-        if (
-          error &&
-          typeof error === "object" &&
-          "statusCode" in error &&
-          "message" in error
-        ) {
-          res.status(error.statusCode as number).json({
-            success: false,
-            error: error.message as string,
-          });
-        } else {
-          res.status(500).json({
-            success: false,
-            error: "Błąd serwera",
-          });
-        }
-      }
+      res.json({
+        success: true,
+        message: "Dostawa została usunięta",
+      });
     },
   );
 
@@ -242,20 +170,12 @@ export class DeliveryController {
    */
   public getDeliveryStats = asyncHandler(
     async (req: Request, res: Response): Promise<void> => {
-      try {
-        const stats = await this.deliveryService.getDeliveryStats();
+      const stats = await this.deliveryService.getDeliveryStats();
 
-        res.json({
-          success: true,
-          data: stats,
-        });
-      } catch (error) {
-        console.error("Błąd podczas pobierania statystyk dostaw:", error);
-        res.status(500).json({
-          success: false,
-          error: "Błąd serwera",
-        });
-      }
+      res.json({
+        success: true,
+        data: stats,
+      });
     },
   );
 
@@ -266,32 +186,17 @@ export class DeliveryController {
     async (req: Request, res: Response): Promise<void> => {
       const { supplierId } = req.params;
 
-      try {
-        const filters: DeliveryFilters = { id_dostawcy: supplierId };
-        const pagination: PaginationParams = {
-          page: req.query.page ? parseInt(req.query.page as string) : 1,
-          limit: req.query.limit ? parseInt(req.query.limit as string) : 20,
-        };
+      const queryParams = parseDeliveryQueryParams({
+        ...req.query,
+        id_dostawcy: supplierId,
+      });
 
-        const result = await this.deliveryService.getDeliveries(
-          filters,
-          pagination,
-        );
+      const result = await this.deliveryService.getDeliveries(queryParams);
 
-        res.json({
-          success: true,
-          ...result,
-        });
-      } catch (error) {
-        console.error(
-          `Błąd podczas pobierania dostaw dla dostawcy ${supplierId}:`,
-          error,
-        );
-        res.status(500).json({
-          success: false,
-          error: "Błąd serwera",
-        });
-      }
+      res.json({
+        success: true,
+        ...result,
+      });
     },
   );
 
@@ -302,32 +207,17 @@ export class DeliveryController {
     async (req: Request, res: Response): Promise<void> => {
       const { status } = req.params;
 
-      try {
-        const filters: DeliveryFilters = { status_weryfikacji: status as any };
-        const pagination: PaginationParams = {
-          page: req.query.page ? parseInt(req.query.page as string) : 1,
-          limit: req.query.limit ? parseInt(req.query.limit as string) : 20,
-        };
+      const queryParams = parseDeliveryQueryParams({
+        ...req.query,
+        status_weryfikacji: status,
+      });
 
-        const result = await this.deliveryService.getDeliveries(
-          filters,
-          pagination,
-        );
+      const result = await this.deliveryService.getDeliveries(queryParams);
 
-        res.json({
-          success: true,
-          ...result,
-        });
-      } catch (error) {
-        console.error(
-          `Błąd podczas pobierania dostaw o statusie ${status}:`,
-          error,
-        );
-        res.status(500).json({
-          success: false,
-          error: "Błąd serwera",
-        });
-      }
+      res.json({
+        success: true,
+        ...result,
+      });
     },
   );
 
@@ -335,89 +225,37 @@ export class DeliveryController {
    * Przesyła i przetwarza plik dostawy
    */
   public uploadDeliveryFile = asyncHandler(
-    async (req: AuthenticatedRequest, res: Response): Promise<void> => {
-      console.log("🚀 [DeliveryController]: uploadDeliveryFile wywołane");
-      console.log("📝 [DeliveryController]: Body:", Object.keys(req.body));
-      console.log(
-        "📎 [DeliveryController]: Files:",
-        req.files ? Object.keys(req.files) : "brak",
+    async (req: Request, res: Response): Promise<void> => {
+      logger.info("DeliveryController uploadDeliveryFile called", {
+        bodyKeys: Object.keys(req.body),
+        filesKeys: req.files ? Object.keys(req.files) : "none",
+      });
+
+      // Plik, dane i uprawnienia są już zwalidowane przez middleware
+      const files = req.files as {
+        [fieldname: string]: Express.Multer.File[];
+      };
+      const file = files?.deliveryFile?.[0] || files?.file?.[0];
+
+      // ID dostawcy jest już zwalidowane i ustawione przez middleware
+      const supplierId = req.body.id_dostawcy;
+
+      // Sprawdź potwierdzenie numeru dostawy (opcjonalne dla kompatybilności wstecznej)
+      const confirmDeliveryNumber = req.body.confirmDeliveryNumber;
+
+      const result = await this.deliveryService.uploadAndProcessFile(
+        file!,
+        supplierId,
+        confirmDeliveryNumber,
       );
 
-      try {
-        // Obsługa zarówno 'deliveryFile' jak i 'file' dla kompatybilności
-        const files = req.files as {
-          [fieldname: string]: Express.Multer.File[];
-        };
-        const file = files?.deliveryFile?.[0] || files?.file?.[0];
-
-        if (!file) {
-          res.status(400).json({
-            success: false,
-            error: "Brak pliku do przesłania",
-          });
-          return;
-        }
-
-        // Określ ID dostawcy - obsługa różnych nazw pól dla kompatybilności
-        let supplierId = req.body.id_dostawcy || req.body.supplierId;
-        if (!supplierId && req.user?.rola_uzytkownika === "supplier") {
-          supplierId = req.user.id_uzytkownika;
-        }
-
-        if (!supplierId) {
-          res.status(400).json({
-            success: false,
-            error: "ID dostawcy jest wymagane",
-          });
-          return;
-        }
-
-        // Sprawdź potwierdzenie numeru dostawy (opcjonalne dla kompatybilności wstecznej)
-        const confirmDeliveryNumber = req.body.confirmDeliveryNumber;
-
-        const result = await this.deliveryService.uploadAndProcessFile(
-          file,
-          supplierId,
-          confirmDeliveryNumber,
-        );
-
-        console.log("✅ [DeliveryController]: Wysyłam response 201");
-        res.status(201).json({
-          success: true,
-          message: "Plik został pomyślnie przesłany i przetworzony",
-          data: result,
-        });
-        console.log("🎉 [DeliveryController]: Response wysłany");
-      } catch (error: unknown) {
-        console.error(
-          "❌ [DeliveryController]: Błąd podczas przesyłania pliku:",
-          error,
-        );
-
-        if (
-          error &&
-          typeof error === "object" &&
-          "statusCode" in error &&
-          "message" in error
-        ) {
-          console.log(
-            "🔴 [DeliveryController]: Wysyłam error response",
-            error.statusCode,
-            error.message,
-          );
-          res.status(error.statusCode as number).json({
-            success: false,
-            error: error.message as string,
-          });
-        } else {
-          console.log("🔴 [DeliveryController]: Wysyłam error response 500");
-          res.status(500).json({
-            success: false,
-            error: "Błąd serwera podczas przesyłania pliku",
-          });
-        }
-        console.log("💥 [DeliveryController]: Error response wysłany");
-      }
+      logger.info("DeliveryController sending response", { statusCode: 201 });
+      res.status(201).json({
+        success: true,
+        message: "Plik został pomyślnie przesłany i przetworzony",
+        data: result,
+      });
+      logger.info("DeliveryController response sent successfully");
     },
   );
 
@@ -426,52 +264,74 @@ export class DeliveryController {
    */
   public previewDeliveryFile = asyncHandler(
     async (req: Request, res: Response): Promise<void> => {
-      // Obsługa zarówno 'deliveryFile' jak i 'file' dla kompatybilności
+      // Plik i uprawnienia są już zwalidowane przez middleware
       const files = req.files as {
         [fieldname: string]: Express.Multer.File[];
       };
       const file = files?.deliveryFile?.[0] || files?.file?.[0] || req.file;
 
-      if (!file) {
-        res.status(400).json({
-          success: false,
-          error: "Brak pliku do przetworzenia",
-        });
-        return;
-      }
+      const preview = await this.deliveryService.previewFile(file!);
 
-      try {
-        const preview = await this.deliveryService.previewFile(file);
+      res.json({
+        success: true,
+        data: preview,
+      });
+    },
+  );
 
-        res.json({
-          success: true,
-          data: {
-            detectedDeliveryNumber: preview.detectedDeliveryNumber,
-            fileName: preview.fileName,
-            totalProducts: preview.totalProducts,
-            estimatedValue: preview.estimatedValue,
-            productSample: preview.productSample,
-          },
-        });
-      } catch (error: unknown) {
-        console.error("Błąd podczas generowania podglądu:", error);
-        if (
-          error &&
-          typeof error === "object" &&
-          "statusCode" in error &&
-          "message" in error
-        ) {
-          res.status(error.statusCode as number).json({
-            success: false,
-            error: error.message as string,
-          });
-        } else {
-          res.status(500).json({
-            success: false,
-            error: "Błąd serwera podczas generowania podglądu",
-          });
-        }
-      }
+  /**
+   * ✅ Potwierdza i zapisuje dostawę po weryfikacji
+   */
+  public confirmDelivery = asyncHandler(
+    async (req: Request, res: Response): Promise<void> => {
+      logger.info("DeliveryController confirmDelivery called", {
+        bodyKeys: Object.keys(req.body),
+        filesKeys: req.files ? Object.keys(req.files) : "none",
+      });
+
+      // Plik, dane i uprawnienia są już zwalidowane przez middleware
+      const files = req.files as {
+        [fieldname: string]: Express.Multer.File[];
+      };
+      const file = files?.deliveryFile?.[0] || files?.file?.[0];
+
+      // ID dostawcy jest już zwalidowane i ustawione przez middleware
+      const supplierId = req.body.id_dostawcy;
+
+      // Dane potwierdzenia są już zwalidowane przez middleware
+      const confirmationData = {
+        fileName: req.body.fileName,
+        detectedDeliveryNumber: req.body.detectedDeliveryNumber,
+        confirmedDeliveryNumber: req.body.confirmedDeliveryNumber,
+        detectedPaletteNumbers: req.body.detectedPaletteNumbers
+          ? JSON.parse(req.body.detectedPaletteNumbers)
+          : undefined,
+        confirmedPaletteNumbers: req.body.confirmedPaletteNumbers
+          ? JSON.parse(req.body.confirmedPaletteNumbers)
+          : undefined,
+        productCorrections: req.body.productCorrections
+          ? JSON.parse(req.body.productCorrections)
+          : undefined,
+        bypassValidation: req.body.bypassValidation === "true",
+      };
+
+      const result = await this.deliveryService.confirmAndSaveDelivery(
+        file!,
+        supplierId,
+        confirmationData,
+      );
+
+      logger.info("DeliveryController confirmDelivery sending response", {
+        statusCode: 201,
+      });
+      res.status(201).json({
+        success: true,
+        message: "Dostawa została pomyślnie potwierdzona i zapisana",
+        data: result,
+      });
+      logger.info(
+        "DeliveryController confirmDelivery response sent successfully",
+      );
     },
   );
 }

@@ -1,37 +1,38 @@
-import { Op } from "sequelize";
+import { Op, WhereOptions } from "sequelize";
 import { sequelize } from "../config/database";
 import {
   DostNowaDostawa,
   DostDostawyProdukty,
   DostFakturyDostawcow,
   DostFinanseDostaw,
+  DostDostawyProduktyAttributes,
 } from "../models/deliveries";
 import {
   CreateDeliveryRequest,
-  CreateProductRequest,
-  CreateInvoiceRequest,
-  CreateFinancesRequest,
+  DeliveryResponse,
   UpdateDeliveryStatusRequest,
-  UpdateProductStatusRequest,
   DeliveryFilters,
   PaginationParams,
   PaginatedResponse,
-  DeliveryResponse,
-  ProductResponse,
-  InvoiceResponse,
-  FinancesResponse,
-  DeliveryStatsResponse,
   FileUploadResponse,
   FilePreviewResponse,
   ProcessedExcelData,
   ColumnMapping,
   PreviewProduct,
   PreviewStatus,
+  ConfirmDeliveryRequest,
+  ConfirmDeliveryResponse,
+  ValidationDetails,
+  ValidationError,
+  ProductResponse,
+  InvoiceResponse,
+  FinancesResponse,
+  DeliveryStatsResponse,
 } from "../types/delivery.types";
 import { AppError } from "../utils/AppError";
 import * as XLSX from "xlsx";
 import { awsService } from "./awsService";
-import { request } from "express";
+import { logger } from "../utils/logger";
 
 export class DeliveryService {
   /**
@@ -108,17 +109,15 @@ export class DeliveryService {
 
       await transaction.commit();
 
-      console.log(
-        `✅ [DeliveryService]: Utworzono dostawę ${dostawa.id_dostawy} dla dostawcy ${data.id_dostawcy}`,
-      );
+      logger.info("Dostawa utworzona", {
+        id_dostawy: dostawa.id_dostawy,
+        id_dostawcy: data.id_dostawcy,
+      });
 
       return this.formatDeliveryResponse(dostawa);
     } catch (error) {
       await transaction.rollback();
-      console.error(
-        "❌ [DeliveryService]: Błąd podczas tworzenia dostawy:",
-        error,
-      );
+      logger.error("Błąd podczas tworzenia dostawy", { error });
 
       if (error instanceof AppError) {
         throw error;
@@ -131,9 +130,24 @@ export class DeliveryService {
    * 🆕 Pobiera dostawy z filtrami i paginacją
    */
   async getDeliveries(
-    filters: DeliveryFilters = {},
-    pagination: PaginationParams = {},
+    queryParams: Partial<DeliveryFilters & PaginationParams> = {},
   ): Promise<PaginatedResponse<DeliveryResponse>> {
+    // Parsuj filtry z query params
+    const filters: DeliveryFilters = {
+      id_dostawcy: queryParams.id_dostawcy,
+      status_weryfikacji: queryParams.status_weryfikacji,
+      data_od: queryParams.data_od,
+      data_do: queryParams.data_do,
+      nazwa_pliku: queryParams.nazwa_pliku,
+    };
+
+    // Parsuj parametry paginacji
+    const pagination: PaginationParams = {
+      page: queryParams.page ? Number(queryParams.page) : undefined,
+      limit: queryParams.limit ? Number(queryParams.limit) : undefined,
+      sortBy: queryParams.sortBy,
+      sortOrder: queryParams.sortOrder,
+    };
     try {
       const {
         page = 1,
@@ -144,21 +158,26 @@ export class DeliveryService {
       const offset = (page - 1) * limit;
 
       // Buduj warunki where
-      const whereConditions: Record<string, any> = {};
+      const whereConditions: WhereOptions = {};
 
-      if (filters.id_dostawcy)
+      if (filters.id_dostawcy) {
         whereConditions.id_dostawcy = filters.id_dostawcy;
-      if (filters.status_weryfikacji)
+      }
+      if (filters.status_weryfikacji) {
         whereConditions.status_weryfikacji = filters.status_weryfikacji;
+      }
       if (filters.nazwa_pliku) {
         whereConditions.nazwa_pliku = { [Op.like]: `%${filters.nazwa_pliku}%` };
       }
       if (filters.data_od || filters.data_do) {
-        whereConditions.data_utworzenia = {};
-        if (filters.data_od)
-          whereConditions.data_utworzenia[Op.gte] = new Date(filters.data_od);
-        if (filters.data_do)
-          whereConditions.data_utworzenia[Op.lte] = new Date(filters.data_do);
+        const dateCondition: Record<symbol, Date> = {};
+        if (filters.data_od) {
+          dateCondition[Op.gte] = new Date(filters.data_od);
+        }
+        if (filters.data_do) {
+          dateCondition[Op.lte] = new Date(filters.data_do);
+        }
+        whereConditions["data_utworzenia"] = dateCondition;
       }
 
       const { count, rows } = await DostNowaDostawa.findAndCountAll({
@@ -166,9 +185,12 @@ export class DeliveryService {
         limit,
         offset,
         order: [[sortBy, sortOrder]],
+        distinct: true,
       });
 
-      const deliveries = rows.map(this.formatDeliveryResponse);
+      const deliveries = rows.map((dostawa) =>
+        this.formatDeliveryResponse(dostawa),
+      );
 
       return {
         data: deliveries,
@@ -180,10 +202,7 @@ export class DeliveryService {
         },
       };
     } catch (error) {
-      console.error(
-        "❌ [DeliveryService]: Błąd podczas pobierania dostaw:",
-        error,
-      );
+      logger.error("Błąd podczas pobierania dostaw", { error });
       throw new AppError("Błąd podczas pobierania dostaw", 500);
     }
   }
@@ -222,10 +241,7 @@ export class DeliveryService {
 
       return response;
     } catch (error) {
-      console.error(
-        `❌ [DeliveryService]: Błąd podczas pobierania dostawy ${id_dostawy}:`,
-        error,
-      );
+      logger.error("Błąd podczas pobierania dostawy", { id_dostawy, error });
 
       if (error instanceof AppError) {
         throw error;
@@ -252,10 +268,10 @@ export class DeliveryService {
 
       return this.formatDeliveryResponse(dostawa);
     } catch (error) {
-      console.error(
-        `❌ [DeliveryService]: Błąd podczas aktualizacji statusu dostawy ${id_dostawy}:`,
+      logger.error("Błąd podczas aktualizacji statusu dostawy", {
+        id_dostawy,
         error,
-      );
+      });
 
       if (error instanceof AppError) {
         throw error;
@@ -284,13 +300,10 @@ export class DeliveryService {
 
       await transaction.commit();
 
-      console.log(`✅ [DeliveryService]: Usunięto dostawę ${id_dostawy}`);
+      logger.info("Dostawa usunięta", { id_dostawy });
     } catch (error) {
       await transaction.rollback();
-      console.error(
-        `❌ [DeliveryService]: Błąd podczas usuwania dostawy ${id_dostawy}:`,
-        error,
-      );
+      logger.error("Błąd podczas usuwania dostawy", { id_dostawy, error });
 
       if (error instanceof AppError) {
         throw error;
@@ -302,156 +315,6 @@ export class DeliveryService {
   /**
    * 🆕 Zarządzanie produktami w dostawach
    */
-  async addProductToDelivery(
-    id_dostawy: string,
-    productData: CreateProductRequest,
-  ): Promise<ProductResponse> {
-    try {
-      // Sprawdź czy dostawa istnieje
-      const dostawa = await DostNowaDostawa.findByPk(id_dostawy);
-      if (!dostawa) {
-        throw new AppError("Dostawa nie została znaleziona", 404);
-      }
-
-      const product = await DostDostawyProdukty.create({
-        id_dostawy,
-        ...productData,
-      });
-
-      return this.formatProductResponse(product);
-    } catch (error) {
-      console.error(
-        `❌ [DeliveryService]: Błąd podczas dodawania produktu do dostawy ${id_dostawy}:`,
-        error,
-      );
-
-      if (error instanceof AppError) {
-        throw error;
-      }
-      throw new AppError("Błąd podczas dodawania produktu", 500);
-    }
-  }
-
-  async updateProductStatus(
-    id_produktu: number,
-    data: UpdateProductStatusRequest,
-  ): Promise<ProductResponse> {
-    try {
-      const product = await DostDostawyProdukty.findByPk(id_produktu);
-
-      if (!product) {
-        throw new AppError("Produkt nie został znaleziony", 404);
-      }
-
-      await product.updateStatus(
-        data.status_weryfikacji,
-        data.uwagi_weryfikacji,
-      );
-
-      return this.formatProductResponse(product);
-    } catch (error) {
-      console.error(
-        `❌ [DeliveryService]: Błąd podczas aktualizacji statusu produktu ${id_produktu}:`,
-        error,
-      );
-
-      if (error instanceof AppError) {
-        throw error;
-      }
-      throw new AppError("Błąd podczas aktualizacji statusu produktu", 500);
-    }
-  }
-
-  /**
-   * 🆕 Zarządzanie fakturami
-   */
-  async createInvoice(data: CreateInvoiceRequest): Promise<InvoiceResponse> {
-    try {
-      // Walidacja
-      if (!data.id_dostawcy || !data.numer_faktury) {
-        throw new AppError("Wszystkie wymagane pola muszą być wypełnione", 400);
-      }
-
-      // Sprawdź czy numer faktury już istnieje
-      const existingInvoice = await DostFakturyDostawcow.findByNumerFaktury(
-        data.numer_faktury,
-      );
-      if (existingInvoice) {
-        throw new AppError("Faktura o podanym numerze już istnieje", 409);
-      }
-
-      const invoice = await DostFakturyDostawcow.create({
-        ...data,
-        data_faktury: new Date(data.data_faktury),
-        data_platnosci: new Date(data.data_platnosci),
-      });
-
-      return this.formatInvoiceResponse(invoice);
-    } catch (error) {
-      console.error(
-        "❌ [DeliveryService]: Błąd podczas tworzenia faktury:",
-        error,
-      );
-
-      if (error instanceof AppError) {
-        throw error;
-      }
-      throw new AppError("Błąd podczas tworzenia faktury", 500);
-    }
-  }
-
-  /**
-   * 🆕 Zarządzanie finansami dostaw
-   */
-  async createOrUpdateFinances(
-    data: CreateFinancesRequest,
-  ): Promise<FinancesResponse> {
-    try {
-      // Sprawdź czy dostawa istnieje
-      const dostawa = await DostNowaDostawa.findByPk(data.id_dostawy);
-      if (!dostawa) {
-        throw new AppError("Dostawa nie została znaleziona", 404);
-      }
-
-      // Oblicz dane finansowe
-      const calculated = DostFinanseDostaw.calculateFinances(
-        data.suma_produktow,
-        data.wartosc_produktow_spec,
-        data.procent_wartosci,
-        data.kurs_wymiany,
-        data.stawka_vat,
-      );
-
-      // Sprawdź czy już istnieją finanse dla tej dostawy
-      let finances = await DostFinanseDostaw.findByDostawa(data.id_dostawy);
-
-      if (finances) {
-        // Aktualizuj istniejące
-        await finances.update({
-          ...data,
-          ...calculated,
-        });
-      } else {
-        // Utwórz nowe
-        finances = await DostFinanseDostaw.create({
-          ...data,
-          ...calculated,
-        });
-      }
-
-      return this.formatFinancesResponse(finances);
-    } catch (error) {
-      console.error(
-        "❌ [DeliveryService]: Błąd podczas zarządzania finansami:",
-        error,
-      );
-
-      if (error instanceof AppError) {
-        throw error;
-      }
-      throw new AppError("Błąd podczas zarządzania finansami", 500);
-    }
-  }
 
   /**
    * 🆕 Statystyki dostaw
@@ -480,15 +343,12 @@ export class DeliveryService {
         ),
         recent_deliveries: deliveries
           .slice(0, 10)
-          .map(this.formatDeliveryResponse),
+          .map((dostawa) => this.formatDeliveryResponse(dostawa)),
       };
 
       return stats;
     } catch (error) {
-      console.error(
-        "❌ [DeliveryService]: Błąd podczas pobierania statystyk:",
-        error,
-      );
+      logger.error("Błąd podczas pobierania statystyk", { error });
       throw new AppError("Błąd podczas pobierania statystyk", 500);
     }
   }
@@ -504,8 +364,7 @@ export class DeliveryService {
     const transaction = await sequelize.transaction();
 
     try {
-      // 1. Walidacja pliku
-      this.validateFileFormat(file);
+      // 1. Plik jest już zwalidowany przez middleware
 
       // 2. Przetwórz plik Excel
       const processedData = this.processExcelFile(file);
@@ -544,13 +403,14 @@ export class DeliveryService {
 
       // 5. Prześlij plik do S3
       const s3Key = `deliveries/${id_dostawcy}/${deliveryId}/${file.originalname}`;
-      console.log("📤 [DeliveryService]: Rozpoczynam upload do S3...");
+      logger.info("Rozpoczynam upload do S3", { s3Key });
       const s3Result = await awsService.uploadFile(file.buffer, s3Key);
-      console.log("✅ [DeliveryService]: Upload do S3 zakończony pomyślnie");
-      console.log("🔗 [DeliveryService]: S3 URL:", s3Result.Location);
+      logger.info("Upload do S3 zakończony pomyślnie", {
+        location: s3Result.Location,
+      });
 
       // 6. Utwórz dostawę w bazie danych
-      console.log("💾 [DeliveryService]: Rozpoczynam zapis do bazy danych...");
+      logger.info("Rozpoczynam zapis do bazy danych");
       const dostawa = await DostNowaDostawa.create(
         {
           id_dostawy: deliveryId,
@@ -601,14 +461,15 @@ export class DeliveryService {
         ),
       );
 
-      console.log("✅ [DeliveryService]: Dodano produkty do bazy danych");
-      console.log("🔒 [DeliveryService]: Commituję transakcję...");
+      logger.info("Dodano produkty do bazy danych");
+      logger.info("Commituję transakcję");
       await transaction.commit();
-      console.log("✅ [DeliveryService]: Transakcja zatwierdzona");
+      logger.info("Transakcja zatwierdzona");
 
-      console.log(
-        `🎉 [DeliveryService]: Przesłano i przetworzono plik ${file.originalname} dla dostawy ${dostawa.id_dostawy}`,
-      );
+      logger.info("Przetwarzanie pliku zakończone pomyślnie", {
+        filename: file.originalname,
+        id_dostawy: dostawa.id_dostawy,
+      });
 
       return {
         id_dostawy: dostawa.id_dostawy,
@@ -623,131 +484,12 @@ export class DeliveryService {
       };
     } catch (error) {
       await transaction.rollback();
-      console.error(
-        "❌ [DeliveryService]: Błąd podczas przesyłania pliku:",
-        error,
-      );
+      logger.error("Błąd podczas przesyłania pliku", { error });
 
       if (error instanceof AppError) {
         throw error;
       }
       throw new AppError("Błąd podczas przesyłania pliku", 500);
-    }
-  }
-
-  /**
-   * 📤 Tworzy dostawę z pliku (dla testów jednostkowych)
-   */
-  async createDeliveryFromFile(
-    file: Express.Multer.File,
-    id_dostawcy: string,
-  ): Promise<FileUploadResponse> {
-    const transaction = await sequelize.transaction();
-
-    try {
-      // 1. Walidacja pliku
-      this.validateFileFormat(file);
-
-      // 2. Przetwórz plik Excel
-      const processedData = this.processExcelFile(file);
-      if (!processedData.deliveryNumber) {
-        throw new AppError(
-          "Nie można wyodrębnić numeru dostawy z nazwy pliku.",
-          400,
-        );
-      }
-
-      // 3. Sprawdź czy dostawa już istnieje
-      const deliveryId = DostNowaDostawa.generateDeliveryId(
-        processedData.deliveryNumber,
-      );
-      const existingDelivery = await DostNowaDostawa.findByPk(deliveryId);
-      if (existingDelivery) {
-        throw new AppError(`Dostawa o numerze ${deliveryId} już istnieje`, 409);
-      }
-
-      // 4. Mock S3 URL dla testów
-      const mockS3Url = `https://test-bucket.s3.amazonaws.com/${file.originalname}`;
-
-      // 5. Utwórz dostawę w bazie danych
-      const dostawa = await DostNowaDostawa.create(
-        {
-          id_dostawy: deliveryId,
-          id_dostawcy,
-          id_pliku: "", // Zostanie wygenerowane
-          nazwa_pliku: file.originalname,
-          url_pliku_S3: mockS3Url,
-          nr_palet_dostawy: this.formatPaletteNumbers(
-            processedData.paletteNumbers,
-          ),
-          status_weryfikacji: "nowa",
-        },
-        { transaction },
-      );
-
-      // 6. Wygeneruj i zaktualizuj ID pliku
-      const liczba_plikow = await DostNowaDostawa.count({
-        where: { id_dostawcy },
-        transaction,
-      });
-
-      const id_pliku = DostNowaDostawa.generateIdPliku(
-        liczba_plikow,
-        dostawa.id_dostawy,
-      );
-      await dostawa.update({ id_pliku }, { transaction });
-
-      // 7. Dodaj produkty
-      const products = await Promise.all(
-        processedData.products.map((product) =>
-          DostDostawyProdukty.create(
-            {
-              id_dostawy: dostawa.id_dostawy,
-              nr_palety: product.nr_palety,
-              nazwa_produktu: product.nazwa_produktu,
-              kod_ean: product.kod_ean,
-              kod_asin: product.kod_asin,
-              LPN: product.lpn,
-              ilosc: product.ilosc,
-              cena_produktu_spec: product.cena_produktu_spec,
-              stan_produktu: product.stan_produktu,
-              kraj_pochodzenia: product.kraj_pochodzenia,
-              kategoria_produktu: product.kategoria_produktu,
-              status_weryfikacji: "nowy",
-            },
-            { transaction },
-          ),
-        ),
-      );
-
-      await transaction.commit();
-
-      console.log(
-        `✅ [DeliveryService]: Utworzono dostawę ${dostawa.id_dostawy} z pliku ${file.originalname}`,
-      );
-
-      return {
-        id_dostawy: dostawa.id_dostawy,
-        id_dostawcy: dostawa.id_dostawcy,
-        nazwa_pliku: dostawa.nazwa_pliku,
-        nr_palet_dostawy: dostawa.nr_palet_dostawy || undefined,
-        status_weryfikacji: dostawa.status_weryfikacji,
-        liczba_produktow: products.length,
-        wartosc_calkowita: processedData.totalValue,
-        url_pliku_S3: dostawa.url_pliku_S3,
-        data_utworzenia: dostawa.data_utworzenia.toISOString(),
-      };
-    } catch (error) {
-      await transaction.rollback();
-      console.error(
-        "❌ [DeliveryService]: Błąd podczas tworzenia dostawy z pliku:",
-        error,
-      );
-
-      if (error instanceof AppError) {
-        throw error;
-      }
-      throw new AppError("Błąd podczas tworzenia dostawy z pliku", 500);
     }
   }
 
@@ -769,6 +511,13 @@ export class DeliveryService {
         missingFields.push("paletteNumber");
       }
 
+      // Enhanced validation
+      const validationDetails = this.performEnhancedValidation(
+        products,
+        deliveryNumber,
+        paletteNumbers,
+      );
+
       const status: PreviewStatus =
         missingFields.length > 0 ? "requires_manual_input" : "success";
 
@@ -783,16 +532,196 @@ export class DeliveryService {
         productSample: products.slice(0, 10),
         columnMapping: processedData.columnMapping,
         validationWarnings: this.validateProductData(products),
+        validationDetails,
       };
     } catch (error) {
       if (error instanceof AppError) {
         throw error;
       }
-      console.error(
-        `❌ [DeliveryService]: Błąd podczas tworzenia podglądu pliku:`,
-        error,
-      );
+      logger.error("Błąd podczas tworzenia podglądu pliku", { error });
       throw new AppError("Błąd podczas przetwarzania pliku", 500);
+    }
+  }
+
+  /**
+   * ✅ Potwierdza i zapisuje dostawę po weryfikacji
+   */
+  async confirmAndSaveDelivery(
+    file: Express.Multer.File,
+    id_dostawcy: string,
+    confirmationData: ConfirmDeliveryRequest,
+  ): Promise<ConfirmDeliveryResponse> {
+    const transaction = await sequelize.transaction();
+
+    try {
+      // 1. Plik jest już zwalidowany przez middleware
+
+      // 2. Przetwórz plik Excel ponownie
+      const processedData = this.processExcelFile(file);
+
+      // 3. Określ ostateczny numer dostawy
+      const finalDeliveryNumber =
+        confirmationData.confirmedDeliveryNumber ||
+        confirmationData.detectedDeliveryNumber ||
+        processedData.deliveryNumber;
+
+      if (!finalDeliveryNumber) {
+        throw new AppError("Numer dostawy musi być określony", 400);
+      }
+
+      // 4. Sprawdź czy dostawa już istnieje
+      const deliveryId =
+        DostNowaDostawa.generateDeliveryId(finalDeliveryNumber);
+      const existingDelivery = await DostNowaDostawa.findByPk(deliveryId);
+      if (existingDelivery) {
+        throw new AppError(`Dostawa o numerze ${deliveryId} już istnieje`, 409);
+      }
+
+      // 5. Określ ostateczne numery palet
+      const finalPaletteNumbers =
+        confirmationData.confirmedPaletteNumbers ||
+        confirmationData.detectedPaletteNumbers ||
+        processedData.paletteNumbers;
+
+      // 6. Zastosuj poprawki produktów
+      const products = [...processedData.products];
+      let appliedCorrections = 0;
+
+      if (confirmationData.productCorrections) {
+        confirmationData.productCorrections.forEach((correction) => {
+          if (correction.index < products.length) {
+            products[correction.index] = {
+              ...products[correction.index],
+              ...correction.corrections,
+            };
+            appliedCorrections++;
+          }
+        });
+      }
+
+      // 7. Walidacja końcowa (tylko jeśli nie jest pomijana)
+      let validationResult;
+      if (!confirmationData.bypassValidation) {
+        validationResult = this.performEnhancedValidation(
+          products,
+          finalDeliveryNumber,
+          finalPaletteNumbers,
+        );
+
+        // Sprawdź czy są błędy krytyczne
+        if (validationResult.criticalErrors.length > 0) {
+          throw new AppError(
+            `Dostawa zawiera błędy krytyczne: ${validationResult.criticalErrors.map((e) => e.message).join(", ")}`,
+            400,
+          );
+        }
+      }
+
+      // 8. Prześlij plik do S3
+      const s3Key = `deliveries/${id_dostawcy}/${deliveryId}/${file.originalname}`;
+      logger.info("Rozpoczynam upload do S3", { s3Key });
+      const s3Result = await awsService.uploadFile(file.buffer, s3Key);
+      logger.info("Upload do S3 zakończony pomyślnie", {
+        location: s3Result.Location,
+      });
+
+      // 9. Utwórz dostawę w bazie danych
+      logger.info("Rozpoczynam zapis do bazy danych");
+      const dostawa = await DostNowaDostawa.create(
+        {
+          id_dostawy: deliveryId,
+          id_dostawcy,
+          id_pliku: "", // Zostanie wygenerowane
+          nazwa_pliku: file.originalname,
+          url_pliku_S3: s3Result.Location,
+          nr_palet_dostawy: this.formatPaletteNumbers(finalPaletteNumbers),
+          status_weryfikacji:
+            validationResult?.warnings && validationResult.warnings.length > 0
+              ? "trwa weryfikacja"
+              : "nowa",
+        },
+        { transaction },
+      );
+
+      // 10. Wygeneruj i zaktualizuj ID pliku
+      const liczba_plikow = await DostNowaDostawa.count({
+        where: { id_dostawcy },
+        transaction,
+      });
+
+      const id_pliku = DostNowaDostawa.generateIdPliku(
+        liczba_plikow,
+        dostawa.id_dostawy,
+      );
+      await dostawa.update({ id_pliku }, { transaction });
+
+      // 11. Dodaj produkty
+      const savedProducts = await Promise.all(
+        products.map((product) =>
+          DostDostawyProdukty.create(
+            {
+              id_dostawy: dostawa.id_dostawy,
+              nr_palety: product.nr_palety,
+              nazwa_produktu: product.nazwa_produktu,
+              kod_ean: product.kod_ean,
+              kod_asin: product.kod_asin,
+              LPN: product.lpn,
+              ilosc: product.ilosc,
+              cena_produktu_spec: product.cena_produktu_spec,
+              stan_produktu: product.stan_produktu,
+              kraj_pochodzenia: product.kraj_pochodzenia,
+              kategoria_produktu: product.kategoria_produktu,
+              status_weryfikacji: "nowy",
+            },
+            { transaction },
+          ),
+        ),
+      );
+
+      logger.info("Dodano produkty do bazy danych");
+      logger.info("Commituję transakcję");
+      await transaction.commit();
+      logger.info("Transakcja zatwierdzona");
+
+      logger.info("Potwierdzenie i zapis dostawy zakończone pomyślnie", {
+        filename: file.originalname,
+        id_dostawy: dostawa.id_dostawy,
+        appliedCorrections,
+      });
+
+      // Oblicz wartość całkowitą z poprawionymi produktami
+      const finalTotalValue = products.reduce(
+        (sum, product) =>
+          sum + (product.cena_produktu_spec || 0) * product.ilosc,
+        0,
+      );
+
+      return {
+        id_dostawy: dostawa.id_dostawy,
+        id_dostawcy: dostawa.id_dostawcy,
+        nazwa_pliku: dostawa.nazwa_pliku,
+        nr_palet_dostawy: dostawa.nr_palet_dostawy || undefined,
+        status_weryfikacji: dostawa.status_weryfikacji,
+        liczba_produktow: savedProducts.length,
+        wartosc_calkowita: finalTotalValue,
+        url_pliku_S3: dostawa.url_pliku_S3,
+        data_utworzenia: dostawa.data_utworzenia.toISOString(),
+        validationSummary: {
+          totalWarnings: validationResult?.warnings.length || 0,
+          totalErrors: validationResult?.criticalErrors.length || 0,
+          appliedCorrections,
+        },
+      };
+    } catch (error) {
+      await transaction.rollback();
+      logger.error("Błąd podczas potwierdzania i zapisywania dostawy", {
+        error,
+      });
+
+      if (error instanceof AppError) {
+        throw error;
+      }
+      throw new AppError("Błąd podczas zapisywania dostawy", 500);
     }
   }
 
@@ -801,7 +730,10 @@ export class DeliveryService {
    */
   private processExcelFile(file: Express.Multer.File): ProcessedExcelData {
     try {
-      this.validateFileFormat(file);
+      // Plik jest już zwalidowany przez middleware, ale sprawdzamy dla bezpieczeństwa
+      if (!file.buffer || file.buffer.length === 0) {
+        throw new AppError("Plik jest pusty", 400);
+      }
 
       // 1. Wczytaj plik Excela
       const workbook = XLSX.read(file.buffer, {
@@ -823,7 +755,7 @@ export class DeliveryService {
       const jsonData = XLSX.utils.sheet_to_json(worksheet, {
         header: 1,
         defval: "",
-      }) as any[][];
+      }) as (string | number)[][];
 
       if (jsonData.length < 2) {
         throw new AppError(
@@ -834,19 +766,18 @@ export class DeliveryService {
 
       // 3. Wykryj mapowanie kolumn
       const rawHeaders = jsonData[0] || [];
-      console.log("🔍 Raw headers z Excel:", rawHeaders);
-      console.log(
-        "🔍 Types of headers:",
-        rawHeaders.map((h: any) => typeof h),
-      );
+      logger.debug("Processing Excel headers", {
+        rawHeaders,
+        headerTypes: rawHeaders.map((h: string | number) => typeof h),
+      });
 
-      const headers: string[] = rawHeaders.map((header: any) =>
+      const headers: string[] = rawHeaders.map((header: string | number) =>
         header && typeof header === "string" ? header : String(header || ""),
       );
-      console.log("🔍 Processed headers:", headers);
+      logger.debug("Processed headers", { headers });
 
       const columnMapping = this.detectColumnMapping(headers);
-      console.log("🔍 Column mapping:", columnMapping);
+      logger.debug("Column mapping detected", { columnMapping });
 
       // 4. Wyodrębnij numer dostawy z nazwy pliku
       const deliveryNumber = DostNowaDostawa.extractDeliveryNumberFromFilename(
@@ -888,7 +819,7 @@ export class DeliveryService {
       if (error instanceof AppError) {
         throw error;
       }
-      console.error("Błąd przetwarzania pliku Excel:", error);
+      logger.error("Błąd przetwarzania pliku Excel", { error });
       throw new AppError("Nie można przetworzyć pliku Excel", 500);
     }
   }
@@ -896,7 +827,7 @@ export class DeliveryService {
   /**
    * 🔎 Wykrywa mapowanie kolumn na podstawie nagłówków
    */
-  public detectColumnMapping(headers: string[]): ColumnMapping {
+  private detectColumnMapping(headers: string[]): ColumnMapping {
     const mapping: ColumnMapping = {};
 
     const headerMap: Record<string, keyof ColumnMapping> = {
@@ -957,7 +888,7 @@ export class DeliveryService {
     };
 
     // Mapuj nagłówki (case-insensitive) z priorytetami
-    headers.forEach((header, index) => {
+    headers.forEach((header) => {
       // Sprawdź czy header jest stringiem
       if (typeof header !== "string" || !header) {
         return; // Pomiń null, undefined, liczby itp.
@@ -989,7 +920,7 @@ export class DeliveryService {
       }
     });
 
-    console.log("🔧 Final mapping after priorities:", mapping);
+    logger.debug("Final mapping after priorities", { mapping });
     return mapping;
   }
 
@@ -997,12 +928,14 @@ export class DeliveryService {
    * 🔄 Mapuje wiersz danych na obiekt produktu
    */
   private mapRowToProduct(
-    row: any[],
+    row: (string | number)[],
     headers: string[],
     columnMapping: ColumnMapping,
   ): PreviewProduct | null {
     try {
-      const getColumnValue = (field: keyof ColumnMapping): any => {
+      const getColumnValue = (
+        field: keyof ColumnMapping,
+      ): string | number | undefined => {
         const columnName = columnMapping[field as keyof typeof columnMapping];
         if (!columnName) return undefined;
         const columnIndex = headers.indexOf(columnName as string);
@@ -1044,10 +977,10 @@ export class DeliveryService {
           );
           if (priceIndex >= 0 && row[priceIndex] && row[priceIndex] !== "") {
             priceValue = row[priceIndex];
-            console.log(
-              `💰 Found price in column '${headers[priceIndex]}':`,
-              priceValue,
-            );
+            logger.debug("Found price in column", {
+              column: headers[priceIndex],
+              value: priceValue,
+            });
             break;
           }
         }
@@ -1073,7 +1006,7 @@ export class DeliveryService {
           getColumnValue("department")?.toString(),
       };
     } catch (error) {
-      console.error("Błąd mapowania wiersza na produkt:", error);
+      logger.error("Błąd mapowania wiersza na produkt", { error });
       return null;
     }
   }
@@ -1081,7 +1014,7 @@ export class DeliveryService {
   /**
    * 🔍 Sprawdza czy wartość wygląda jak EAN/UPC/SKU
    */
-  private looksLikeEAN(value: any): boolean {
+  private looksLikeEAN(value: string | number | undefined): boolean {
     if (!value) return false;
     const str = value.toString().trim();
 
@@ -1100,7 +1033,7 @@ export class DeliveryService {
   /**
    * 💰 Sprawdza czy wartość wygląda jak cena
    */
-  private looksLikePrice(value: any): boolean {
+  private looksLikePrice(value: string | number | undefined): boolean {
     if (!value) return false;
     const str = value.toString().trim();
 
@@ -1133,7 +1066,7 @@ export class DeliveryService {
   /**
    * 🔢 Parsuje liczby z różnych formatów
    */
-  private parseNumber(value: any): number | null {
+  private parseNumber(value: string | number | undefined): number | null {
     if (value === null || value === undefined || value === "") {
       return null;
     }
@@ -1157,7 +1090,7 @@ export class DeliveryService {
   /**
    * 📊 Normalizuje kod EAN
    */
-  private normalizeEAN(value: any): string | undefined {
+  private normalizeEAN(value: string | number | undefined): string | undefined {
     if (!value) return undefined;
 
     let ean = value.toString().trim();
@@ -1187,34 +1120,6 @@ export class DeliveryService {
   }
 
   /**
-   * ✅ Waliduje format pliku
-   */
-  private validateFileFormat(file: Express.Multer.File): void {
-    const allowedMimeTypes = [
-      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", // .xlsx
-      "application/vnd.ms-excel", // .xls
-      "application/vnd.ms-excel.sheet.macroEnabled.12", // .xlsm (stara wersja)
-      "application/vnd.ms-excel.sheet.macroenabled.12", // .xlsm (nowa wersja - mała litera)
-    ];
-
-    if (!allowedMimeTypes.includes(file.mimetype)) {
-      throw new AppError(
-        "Nieprawidłowy format pliku. Obsługiwane formaty: .xlsx, .xls, .xlsm",
-        400,
-      );
-    }
-
-    // Sprawdź rozmiar pliku (10MB limit)
-    const maxSize = 10 * 1024 * 1024; // 10MB
-    if (file.size > maxSize) {
-      throw new AppError(
-        "Plik jest zbyt duży. Maksymalny rozmiar to 10MB",
-        413,
-      );
-    }
-  }
-
-  /**
    * 🚨 Waliduje krytyczne błędy danych produktów - rzuca błąd przy poważnych problemach
    */
   private validateCriticalProductData(products: PreviewProduct[]): void {
@@ -1229,7 +1134,7 @@ export class DeliveryService {
     let emptyProducts = 0;
     let invalidQuantities = 0;
 
-    products.forEach((product, index) => {
+    products.forEach((product) => {
       // Sprawdź pusty produkty (bez nazwy)
       if (!product.nazwa_produktu || product.nazwa_produktu.trim() === "") {
         emptyProducts++;
@@ -1276,7 +1181,7 @@ export class DeliveryService {
     let missingASIN = 0;
     let missingPrice = 0;
     let invalidQuantity = 0;
-    let totalProducts = products.length;
+    const totalProducts = products.length;
 
     products.forEach((product) => {
       if (!product.kod_ean) missingEAN++;
@@ -1327,7 +1232,7 @@ export class DeliveryService {
    * 🔧 Pomocnicze metody formatowania
    */
   private formatDeliveryResponse(dostawa: DostNowaDostawa): DeliveryResponse {
-    return {
+    const response: DeliveryResponse = {
       id_dostawy: dostawa.id_dostawy,
       id_dostawcy: dostawa.id_dostawcy,
       id_pliku: dostawa.id_pliku,
@@ -1337,6 +1242,161 @@ export class DeliveryService {
       status_weryfikacji: dostawa.status_weryfikacji,
       data_utworzenia: dostawa.data_utworzenia.toISOString(),
       data_aktualizacji: dostawa.data_aktualizacji.toISOString(),
+    };
+
+    return response;
+  }
+
+  /**
+   * 🔍 Performs enhanced validation for delivery data
+   */
+  private performEnhancedValidation(
+    products: PreviewProduct[],
+    deliveryNumber: string | null,
+    paletteNumbers: string[],
+  ): ValidationDetails {
+    const criticalErrors: ValidationError[] = [];
+    const warnings: ValidationError[] = [];
+
+    // Critical errors
+    if (!deliveryNumber) {
+      criticalErrors.push({
+        type: "critical",
+        code: "MISSING_DELIVERY_NUMBER",
+        message: "Brak numeru dostawy - wymagany do utworzenia ID dostawy",
+      });
+    }
+
+    if (products.length === 0) {
+      criticalErrors.push({
+        type: "critical",
+        code: "NO_PRODUCTS",
+        message: "Brak produktów w pliku dostawy",
+      });
+    }
+
+    // Count missing data
+    let productsWithoutPalette = 0;
+    let productsWithoutEAN = 0;
+    let productsWithoutPrice = 0;
+    let productsWithoutQuantity = 0;
+
+    products.forEach((product, index) => {
+      const rowNumber = index + 2; // Assuming header row + 0-based index
+
+      // Check for missing palette numbers
+      if (!product.nr_palety || product.nr_palety.trim() === "") {
+        productsWithoutPalette++;
+        warnings.push({
+          type: "warning",
+          code: "MISSING_PALETTE",
+          message: `Produkt bez numeru palety`,
+          field: "nr_palety",
+          rowNumber,
+        });
+      }
+
+      // Check for missing EAN
+      if (!product.kod_ean || product.kod_ean.trim() === "") {
+        productsWithoutEAN++;
+        warnings.push({
+          type: "warning",
+          code: "MISSING_EAN",
+          message: `Produkt bez kodu EAN`,
+          field: "kod_ean",
+          rowNumber,
+        });
+      }
+
+      // Check for missing price
+      if (!product.cena_produktu_spec || product.cena_produktu_spec <= 0) {
+        productsWithoutPrice++;
+        warnings.push({
+          type: "warning",
+          code: "MISSING_PRICE",
+          message: `Produkt bez ceny lub z ceną zero`,
+          field: "cena_produktu_spec",
+          rowNumber,
+        });
+      }
+
+      // Check for missing or invalid quantity
+      if (!product.ilosc || product.ilosc <= 0) {
+        productsWithoutQuantity++;
+        criticalErrors.push({
+          type: "critical",
+          code: "INVALID_QUANTITY",
+          message: `Produkt z nieprawidłową ilością`,
+          field: "ilosc",
+          rowNumber,
+        });
+      }
+
+      // Check for missing product name
+      if (!product.nazwa_produktu || product.nazwa_produktu.trim() === "") {
+        criticalErrors.push({
+          type: "critical",
+          code: "MISSING_PRODUCT_NAME",
+          message: `Produkt bez nazwy`,
+          field: "nazwa_produktu",
+          rowNumber,
+        });
+      }
+    });
+
+    // Palette number validation
+    if (paletteNumbers.length === 0) {
+      warnings.push({
+        type: "warning",
+        code: "NO_PALETTE_NUMBERS",
+        message: "Nie wykryto numerów palet z nagłówków lub nazwy pliku",
+      });
+    }
+
+    // Calculate data quality score (0-100)
+    const totalPossiblePoints = products.length * 4; // 4 points per product (palette, EAN, price, quantity)
+    const missingPoints =
+      productsWithoutPalette +
+      productsWithoutEAN +
+      productsWithoutPrice +
+      productsWithoutQuantity;
+    const dataQualityScore =
+      totalPossiblePoints > 0
+        ? Math.max(
+            0,
+            Math.round(
+              ((totalPossiblePoints - missingPoints) / totalPossiblePoints) *
+                100,
+            ),
+          )
+        : 0;
+
+    // Determine recommended action
+    let recommendedAction:
+      | "proceed"
+      | "review_required"
+      | "manual_correction_needed";
+
+    if (criticalErrors.length > 0) {
+      recommendedAction = "manual_correction_needed";
+    } else if (warnings.length > products.length * 0.3) {
+      // More than 30% of products have warnings
+      recommendedAction = "review_required";
+    } else {
+      recommendedAction = "proceed";
+    }
+
+    return {
+      criticalErrors,
+      warnings,
+      missingDataSummary: {
+        productsWithoutPalette,
+        productsWithoutEAN,
+        productsWithoutPrice,
+        productsWithoutQuantity,
+      },
+      dataQualityScore,
+      recommendedAction,
     };
   }
 
@@ -1405,5 +1465,23 @@ export class DeliveryService {
       margin: finances.getMargin(),
       profit_pln: finances.getProfitPLN(),
     };
+  }
+
+  public async getProductsByDeliveryId(
+    deliveryId: string,
+  ): Promise<DostDostawyProduktyAttributes[]> {
+    try {
+      const products = await DostDostawyProdukty.findByDostawa(deliveryId);
+      return products.map((p) => p.get({ plain: true }));
+    } catch (error) {
+      logger.error("Błąd podczas pobierania produktów dla dostawy w serwisie", {
+        deliveryId,
+        error,
+      });
+      throw new AppError(
+        "Wystąpił błąd podczas pobierania produktów dla dostawy.",
+        500,
+      );
+    }
   }
 }

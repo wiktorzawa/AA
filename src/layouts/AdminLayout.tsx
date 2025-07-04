@@ -20,14 +20,14 @@ export const AdminLayout: FC<PropsWithChildren> = ({ children }) => {
     isSidebarOpen || (!isSidebarOpen && isSidebarHovered);
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen">
       <AdminSidebar
         isOpen={isSidebarOpen}
         onHoverChange={handleSidebarHoverChange}
       />
       <DashboardNavbar onToggleSidebar={handleToggleSidebar} />
       <main
-        className={`pt-16 transition-all duration-300 ${
+        className={`min-h-screen bg-gray-50 p-4 pt-16 transition-all duration-300 dark:bg-gray-900 ${
           sidebarIsExpanded ? "ml-80" : "ml-16"
         } min-h-screen`}
       >

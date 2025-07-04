@@ -13,7 +13,11 @@ export {
   validateNewDeliveryData,
   validateDeliveryStatusUpdate,
   validateDeliveryId,
+  validateConfirmDeliveryData,
   checkSupplierDeliveryAccess,
   checkDeliveryModifyPermissions,
   checkDeliveryDeletePermissions,
+  checkDeliveryViewAccess,
+  validateDeliveryFile,
+  validateConfirmConsistency,
 } from "./deliveries";

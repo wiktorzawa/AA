@@ -1,20 +1,26 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { Op } from "sequelize";
 import { sequelize } from "../../config/database";
+import { USER_ROLES, ERROR_MESSAGES } from "../../constants";
+
+// --- BEZPOŚREDNIE IMPORTY MODELI I TYPÓW ---
 import {
   AuthDaneAutoryzacji,
   type AuthDaneAutoryzacjiAttributes,
-  type AuthDaneAutoryzacjiCreationAttributes,
 } from "../../models/auth/AuthDaneAutoryzacji";
 import {
   AuthPracownicy,
   type AuthPracownicyAttributes,
+  type AuthPracownicyCreationAttributes,
 } from "../../models/auth/AuthPracownicy";
 import {
   AuthDostawcy,
   type AuthDostawcyAttributes,
+  type AuthDostawcyCreationAttributes,
 } from "../../models/auth/AuthDostawcy";
+import { AuthHistoriaLogowan } from "../../models/auth/AuthHistoriaLogowan";
+import { getUserWithDetails } from "../../models/auth";
+
 import {
   type TokenPayload,
   type LoginRequest,
@@ -23,8 +29,10 @@ import {
   type CreateDostawcaData,
 } from "../../types/auth.types";
 import { AppError } from "../../utils/AppError";
+import { logger } from "../../utils/logger";
+import { config } from "../../config/config";
 
-// 🔄 ZAKTUALIZOWANE RESPONSE INTERFACES Z PRAWIDŁOWYMI TYPAMI
+// Interfejsy dla odpowiedzi z serwisu
 export interface CreatePracownikResponseTyped {
   pracownik: AuthPracownicyAttributes;
   daneAutoryzacji: AuthDaneAutoryzacjiAttributes;
@@ -38,15 +46,11 @@ export interface CreateDostawcaResponseTyped {
 }
 
 export class AuthService {
-  private readonly JWT_SECRET = process.env.JWT_SECRET || "msbox-secret-key";
-  private readonly JWT_REFRESH_SECRET =
-    process.env.JWT_REFRESH_SECRET || "msbox-refresh-secret";
-  private readonly TOKEN_EXPIRY = "15m"; // Token główny na 15 minut
-  private readonly REFRESH_TOKEN_EXPIRY = "7d"; // Refresh token na 7 dni
+  private readonly JWT_SECRET = config.jwtSecret;
+  private readonly JWT_REFRESH_SECRET = config.jwtRefreshSecret;
+  private readonly TOKEN_EXPIRY = "15m";
+  private readonly REFRESH_TOKEN_EXPIRY = "7d";
 
-  /**
-   * 🆕 Generuje bezpieczne hasło
-   */
   private generateSecurePassword(): string {
     const chars =
       "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
@@ -57,40 +61,19 @@ export class AuthService {
     return password;
   }
 
-  /**
-   * 🆕 Tworzy nowego pracownika z pełną kontrolą transakcji
-   */
+  // --- ZARZĄDZANIE PRACOWNIKAMI ---
+
   async utworzPracownika(
     data: CreatePracownikData,
   ): Promise<CreatePracownikResponseTyped> {
     const transaction = await sequelize.transaction();
-
     try {
-      // 1. Walidacja danych wejściowych
       if (!data.imie || !data.nazwisko || !data.rola || !data.adres_email) {
         throw new AppError("Wszystkie wymagane pola muszą być wypełnione", 400);
       }
-
-      if (data.rola !== "admin" && data.rola !== "staff") {
-        throw new AppError(
-          'Nieprawidłowa rola. Dozwolone wartości to "admin" lub "staff"',
-          400,
-        );
+      if (data.rola !== USER_ROLES.ADMIN && data.rola !== USER_ROLES.STAFF) {
+        throw new AppError(ERROR_MESSAGES.INVALID_ROLE, 400);
       }
-
-      // 2. Sprawdź czy email już istnieje
-      const existingStaffByEmail = await AuthPracownicy.findOne({
-        where: { adres_email: data.adres_email },
-        transaction,
-      });
-
-      if (existingStaffByEmail) {
-        throw new AppError(
-          "Pracownik o podanym adresie email już istnieje",
-          409,
-        );
-      }
-
       const existingAuthByEmail = await AuthDaneAutoryzacji.findByEmail(
         data.adres_email,
       );
@@ -98,28 +81,15 @@ export class AuthService {
         throw new AppError("Adres email jest już używany w systemie", 409);
       }
 
-      // 3. Generuj unikalny ID pracownika
       const id_pracownika = await AuthPracownicy.generateUniqueId(data.rola);
-
-      // 4. Przygotuj hasło
       const haslo = data.haslo || this.generateSecurePassword();
       const wygenerowane_haslo = !data.haslo ? haslo : undefined;
       const hash_hasla = await bcrypt.hash(haslo, 12);
 
-      // 5. Utwórz pracownika
       const pracownik = await AuthPracownicy.create(
-        {
-          id_pracownika,
-          imie: data.imie,
-          nazwisko: data.nazwisko,
-          rola: data.rola,
-          adres_email: data.adres_email,
-          telefon: data.telefon,
-        },
+        { id_pracownika, ...data } as AuthPracownicyCreationAttributes,
         { transaction },
       );
-
-      // 6. Utwórz dane autoryzacji
       const id_logowania = AuthDaneAutoryzacji.generateLoginId(id_pracownika);
       const daneAutoryzacji = await AuthDaneAutoryzacji.create(
         {
@@ -128,17 +98,11 @@ export class AuthService {
           adres_email: data.adres_email,
           hash_hasla,
           rola_uzytkownika: data.rola,
-          nieudane_proby_logowania: 0,
         },
         { transaction },
       );
 
       await transaction.commit();
-
-      console.log(
-        `✅ [AuthService]: Utworzono pracownika ${id_pracownika} z rolą ${data.rola}`,
-      );
-
       return {
         pracownik: pracownik.toJSON(),
         daneAutoryzacji: daneAutoryzacji.toJSON(),
@@ -146,45 +110,66 @@ export class AuthService {
       };
     } catch (error) {
       await transaction.rollback();
-      console.error(
-        "❌ [AuthService]: Błąd podczas tworzenia pracownika:",
-        error,
-      );
-
-      if (error instanceof AppError) {
-        throw error;
-      }
+      if (error instanceof AppError) throw error;
       throw new AppError("Błąd podczas tworzenia pracownika", 500);
     }
   }
 
-  /**
-   * 🆕 Tworzy nowego dostawcę z pełną kontrolą transakcji
-   */
+  async aktualizujPracownika(
+    id_pracownika: string,
+    data: Partial<CreatePracownikData>,
+  ): Promise<AuthPracownicyAttributes> {
+    const pracownik = await AuthPracownicy.findByPk(id_pracownika);
+    if (!pracownik) throw new AppError("Pracownik nie znaleziony", 404);
+    await pracownik.update(data);
+    return pracownik.toJSON();
+  }
+
+  async usunPracownika(id_pracownika: string): Promise<void> {
+    const pracownik = await AuthPracownicy.findByPk(id_pracownika);
+    if (!pracownik) throw new AppError("Pracownik nie znaleziony", 404);
+    await AuthDaneAutoryzacji.destroy({
+      where: { id_uzytkownika: id_pracownika },
+    });
+    await pracownik.destroy();
+  }
+
+  async pobierzWszystkichPracownikow(): Promise<AuthPracownicyAttributes[]> {
+    const pracownicy = await AuthPracownicy.findAll({
+      order: [["data_utworzenia", "DESC"]],
+    });
+    return pracownicy.map((p: AuthPracownicy) => p.toJSON());
+  }
+
+  async pobierzPracownika(
+    id_pracownika: string,
+  ): Promise<AuthPracownicyAttributes | null> {
+    const pracownik = await AuthPracownicy.findByPk(id_pracownika);
+    return pracownik ? pracownik.toJSON() : null;
+  }
+
+  // --- ZARZĄDZANIE DOSTAWCAMI ---
+
   async utworzDostawce(
     data: CreateDostawcaData,
   ): Promise<CreateDostawcaResponseTyped> {
     const transaction = await sequelize.transaction();
-
     try {
-      // 1. Walidacja danych wejściowych
       if (
         !data.nazwa_firmy ||
         !data.imie_kontaktu ||
         !data.nazwisko_kontaktu ||
         !data.numer_nip ||
-        !data.adres_email ||
-        !data.telefon ||
-        !data.adres_ulica ||
-        !data.adres_numer_budynku ||
-        !data.adres_miasto ||
-        !data.adres_kod_pocztowy ||
-        !data.adres_kraj
+        !data.adres_email
       ) {
-        throw new AppError("Wszystkie wymagane pola muszą być wypełnione", 400);
+        throw new AppError("Kluczowe pola dostawcy muszą być wypełnione", 400);
       }
-
-      // 2. Sprawdź czy NIP już istnieje
+      const existingAuthByEmail = await AuthDaneAutoryzacji.findByEmail(
+        data.adres_email,
+      );
+      if (existingAuthByEmail) {
+        throw new AppError("Adres email jest już używany w systemie", 409);
+      }
       const existingSupplierByNip = await AuthDostawcy.findByNip(
         data.numer_nip,
       );
@@ -192,54 +177,15 @@ export class AuthService {
         throw new AppError("Dostawca o podanym NIP już istnieje", 409);
       }
 
-      // 3. Sprawdź czy email już istnieje
-      const existingSupplierByEmail = await AuthDostawcy.findByEmail(
-        data.adres_email,
-      );
-      if (existingSupplierByEmail) {
-        throw new AppError(
-          "Dostawca o podanym adresie email już istnieje",
-          409,
-        );
-      }
-
-      const existingAuthByEmail = await AuthDaneAutoryzacji.findByEmail(
-        data.adres_email,
-      );
-      if (existingAuthByEmail) {
-        throw new AppError("Adres email jest już używany w systemie", 409);
-      }
-
-      // 4. Generuj unikalny ID dostawcy
       const id_dostawcy = await AuthDostawcy.generateUniqueId();
-
-      // 5. Przygotuj hasło
       const haslo = data.haslo || this.generateSecurePassword();
       const wygenerowane_haslo = !data.haslo ? haslo : undefined;
       const hash_hasla = await bcrypt.hash(haslo, 12);
 
-      // 6. Utwórz dostawcę
       const dostawca = await AuthDostawcy.create(
-        {
-          id_dostawcy,
-          nazwa_firmy: data.nazwa_firmy,
-          imie_kontaktu: data.imie_kontaktu,
-          nazwisko_kontaktu: data.nazwisko_kontaktu,
-          numer_nip: data.numer_nip,
-          adres_email: data.adres_email,
-          telefon: data.telefon,
-          strona_www: data.strona_www,
-          adres_ulica: data.adres_ulica,
-          adres_numer_budynku: data.adres_numer_budynku,
-          adres_numer_lokalu: data.adres_numer_lokalu,
-          adres_miasto: data.adres_miasto,
-          adres_kod_pocztowy: data.adres_kod_pocztowy,
-          adres_kraj: data.adres_kraj,
-        },
+        { id_dostawcy, ...data } as AuthDostawcyCreationAttributes,
         { transaction },
       );
-
-      // 7. Utwórz dane autoryzacji
       const id_logowania = AuthDaneAutoryzacji.generateLoginId(id_dostawcy);
       const daneAutoryzacji = await AuthDaneAutoryzacji.create(
         {
@@ -247,18 +193,12 @@ export class AuthService {
           id_uzytkownika: id_dostawcy,
           adres_email: data.adres_email,
           hash_hasla,
-          rola_uzytkownika: "supplier",
-          nieudane_proby_logowania: 0,
+          rola_uzytkownika: USER_ROLES.SUPPLIER,
         },
         { transaction },
       );
 
       await transaction.commit();
-
-      console.log(
-        `✅ [AuthService]: Utworzono dostawcę ${id_dostawcy} (${data.nazwa_firmy})`,
-      );
-
       return {
         dostawca: dostawca.toJSON(),
         daneAutoryzacji: daneAutoryzacji.toJSON(),
@@ -266,231 +206,93 @@ export class AuthService {
       };
     } catch (error) {
       await transaction.rollback();
-      console.error(
-        "❌ [AuthService]: Błąd podczas tworzenia dostawcy:",
-        error,
-      );
-
-      if (error instanceof AppError) {
-        throw error;
-      }
+      if (error instanceof AppError) throw error;
       throw new AppError("Błąd podczas tworzenia dostawcy", 500);
     }
   }
 
-  /**
-   * 🆕 Aktualizuje dane pracownika
-   */
-  async aktualizujPracownika(
-    id_pracownika: string,
-    data: Partial<CreatePracownikData>,
-  ): Promise<AuthPracownicyAttributes> {
-    const transaction = await sequelize.transaction();
-
-    try {
-      // 1. Sprawdź czy pracownik istnieje
-      const existingStaff = await AuthPracownicy.findByPk(id_pracownika, {
-        transaction,
-      });
-      if (!existingStaff) {
-        throw new AppError("Pracownik nie został znaleziony", 404);
-      }
-
-      // 2. Jeśli zmieniamy email, sprawdź czy nowy email jest dostępny
-      if (data.adres_email && data.adres_email !== existingStaff.adres_email) {
-        const existingStaffByEmail = await AuthPracownicy.findOne({
-          where: { adres_email: data.adres_email },
-          transaction,
-        });
-        if (
-          existingStaffByEmail &&
-          existingStaffByEmail.id_pracownika !== id_pracownika
-        ) {
-          throw new AppError(
-            "Pracownik o podanym adresie email już istnieje",
-            409,
-          );
-        }
-      }
-
-      // 3. Aktualizuj dane pracownika
-      await existingStaff.update(
-        {
-          imie: data.imie || existingStaff.imie,
-          nazwisko: data.nazwisko || existingStaff.nazwisko,
-          rola: data.rola || existingStaff.rola,
-          adres_email: data.adres_email || existingStaff.adres_email,
-          telefon:
-            data.telefon !== undefined ? data.telefon : existingStaff.telefon,
-        },
-        { transaction },
-      );
-
-      // 4. Aktualizuj dane autoryzacji jeśli potrzeba
-      if (data.adres_email || data.rola) {
-        await AuthDaneAutoryzacji.update(
-          {
-            ...(data.adres_email && { adres_email: data.adres_email }),
-            ...(data.rola && { rola_uzytkownika: data.rola }),
-          },
-          {
-            where: { id_uzytkownika: id_pracownika },
-            transaction,
-          },
-        );
-      }
-
-      await transaction.commit();
-
-      const updatedStaff = await AuthPracownicy.findByPk(id_pracownika);
-      return updatedStaff!.toJSON();
-    } catch (error) {
-      await transaction.rollback();
-      console.error(
-        `❌ [AuthService]: Błąd podczas aktualizacji pracownika ${id_pracownika}:`,
-        error,
-      );
-
-      if (error instanceof AppError) {
-        throw error;
-      }
-      throw new AppError("Błąd podczas aktualizacji pracownika", 500);
-    }
+  async aktualizujDostawce(
+    id_dostawcy: string,
+    data: Partial<CreateDostawcaData>,
+  ): Promise<AuthDostawcyAttributes> {
+    const dostawca = await AuthDostawcy.findByPk(id_dostawcy);
+    if (!dostawca) throw new AppError("Dostawca nie znaleziony", 404);
+    await dostawca.update(data);
+    return dostawca.toJSON();
   }
 
-  /**
-   * 🆕 Usuwa pracownika i powiązane dane autoryzacji
-   */
-  async usunPracownika(id_pracownika: string): Promise<void> {
-    const transaction = await sequelize.transaction();
-
-    try {
-      // 1. Sprawdź czy pracownik istnieje
-      const existingStaff = await AuthPracownicy.findByPk(id_pracownika, {
-        transaction,
-      });
-      if (!existingStaff) {
-        throw new AppError("Pracownik nie został znaleziony", 404);
-      }
-
-      // 2. Usuń dane autoryzacji
-      await AuthDaneAutoryzacji.destroy({
-        where: { id_uzytkownika: id_pracownika },
-        transaction,
-      });
-
-      // 3. Usuń pracownika
-      await existingStaff.destroy({ transaction });
-
-      await transaction.commit();
-
-      console.log(`✅ [AuthService]: Usunięto pracownika ${id_pracownika}`);
-    } catch (error) {
-      await transaction.rollback();
-      console.error(
-        `❌ [AuthService]: Błąd podczas usuwania pracownika ${id_pracownika}:`,
-        error,
-      );
-
-      if (error instanceof AppError) {
-        throw error;
-      }
-      throw new AppError("Błąd podczas usuwania pracownika", 500);
-    }
-  }
-
-  /**
-   * 🆕 Usuwa dostawcę i powiązane dane autoryzacji
-   */
   async usunDostawce(id_dostawcy: string): Promise<void> {
-    const transaction = await sequelize.transaction();
-
-    try {
-      // 1. Sprawdź czy dostawca istnieje
-      const existingSupplier = await AuthDostawcy.findByPk(id_dostawcy, {
-        transaction,
-      });
-      if (!existingSupplier) {
-        throw new AppError("Dostawca nie został znaleziony", 404);
-      }
-
-      // 2. Usuń dane autoryzacji
-      await AuthDaneAutoryzacji.destroy({
-        where: { id_uzytkownika: id_dostawcy },
-        transaction,
-      });
-
-      // 3. Usuń dostawcę
-      await existingSupplier.destroy({ transaction });
-
-      await transaction.commit();
-
-      console.log(`✅ [AuthService]: Usunięto dostawcę ${id_dostawcy}`);
-    } catch (error) {
-      await transaction.rollback();
-      console.error(
-        `❌ [AuthService]: Błąd podczas usuwania dostawcy ${id_dostawcy}:`,
-        error,
-      );
-
-      if (error instanceof AppError) {
-        throw error;
-      }
-      throw new AppError("Błąd podczas usuwania dostawcy", 500);
-    }
+    const dostawca = await AuthDostawcy.findByPk(id_dostawcy);
+    if (!dostawca) throw new AppError("Dostawca nie znaleziony", 404);
+    await AuthDaneAutoryzacji.destroy({
+      where: { id_uzytkownika: id_dostawcy },
+    });
+    await dostawca.destroy();
   }
 
-  /**
-   * Logowanie użytkownika
-   */
+  async pobierzWszystkichDostawcow(): Promise<AuthDostawcyAttributes[]> {
+    const dostawcy = await AuthDostawcy.findAll({
+      order: [["data_utworzenia", "DESC"]],
+    });
+    return dostawcy.map((d: AuthDostawcy) => d.toJSON());
+  }
+
+  async pobierzDostawce(
+    id_dostawcy: string,
+  ): Promise<AuthDostawcyAttributes | null> {
+    const dostawca = await AuthDostawcy.findByPk(id_dostawcy);
+    return dostawca ? dostawca.toJSON() : null;
+  }
+
+  async sprawdzDostepnoscNIP(nip: string): Promise<boolean> {
+    const dostawca = await AuthDostawcy.findByNip(nip);
+    return !dostawca;
+  }
+
+  async sprawdzDostepnoscEmail(email: string): Promise<boolean> {
+    const uzytkownik = await AuthDaneAutoryzacji.findByEmail(email);
+    return !uzytkownik;
+  }
+
+  // --- LOGIKA AUTORYZACJI ---
+
   async zalogujUzytkownika(requestData: LoginRequest): Promise<LoginResponse> {
+    if (!this.JWT_SECRET || !this.JWT_REFRESH_SECRET) {
+      throw new AppError("Błąd konfiguracji serwera: brak kluczy JWT", 500);
+    }
     const { adres_email, haslo } = requestData;
-
-    // Znajdź użytkownika po emailu
+    if (!adres_email || !haslo) {
+      throw new AppError(ERROR_MESSAGES.MISSING_CREDENTIALS, 400);
+    }
     const uzytkownik = await AuthDaneAutoryzacji.findByEmail(adres_email);
-
     if (!uzytkownik) {
       throw new AppError("Nieprawidłowy email lub hasło", 401);
     }
-
-    // Sprawdź czy konto nie jest zablokowane
     if (uzytkownik.isAccountLocked()) {
-      throw new AppError(
-        "Konto zostało tymczasowo zablokowane. Spróbuj ponownie później.",
-        423,
-      );
+      throw new AppError("Konto zostało tymczasowo zablokowane.", 423);
     }
-
-    // Weryfikuj hasło
     const hasloPoprawne = await bcrypt.compare(haslo, uzytkownik.hash_hasla);
-
     if (!hasloPoprawne) {
-      // Zwiększ liczbę nieudanych prób
       uzytkownik.incrementFailedAttempts();
       await uzytkownik.save();
-
+      await AuthHistoriaLogowan.logujNieudaneLogowanie(uzytkownik.id_logowania);
       throw new AppError("Nieprawidłowy email lub hasło", 401);
     }
-
-    // Resetuj nieudane próby i zaktualizuj ostatnie logowanie
     uzytkownik.resetFailedAttempts();
     await uzytkownik.save();
-
-    // Generuj tokeny
+    await AuthHistoriaLogowan.logujUdaneLogowanie(uzytkownik.id_logowania);
     const tokenPayload: TokenPayload = {
       id_logowania: uzytkownik.id_logowania,
       id_uzytkownika: uzytkownik.id_uzytkownika,
       adres_email: uzytkownik.adres_email,
       rola_uzytkownika: uzytkownik.rola_uzytkownika,
     };
-
     const token = jwt.sign(tokenPayload, this.JWT_SECRET, {
       expiresIn: this.TOKEN_EXPIRY,
     });
     const refresh_token = jwt.sign(tokenPayload, this.JWT_REFRESH_SECRET, {
       expiresIn: this.REFRESH_TOKEN_EXPIRY,
     });
-
     return {
       token,
       refresh_token,
@@ -504,36 +306,30 @@ export class AuthService {
     };
   }
 
-  /**
-   * Odświeżenie tokenu
-   */
   async odswiezToken(
     refresh_token: string,
   ): Promise<{ token: string; refresh_token: string }> {
+    if (!this.JWT_SECRET || !this.JWT_REFRESH_SECRET) {
+      throw new AppError("Błąd konfiguracji serwera: brak kluczy JWT", 500);
+    }
     try {
       const decoded = jwt.verify(
         refresh_token,
         this.JWT_REFRESH_SECRET,
       ) as TokenPayload;
 
-      // Sprawdź czy użytkownik nadal istnieje
-      const uzytkownik = await AuthDaneAutoryzacji.findByPk(
+      const daneAutoryzacji = await AuthDaneAutoryzacji.findByPk(
         decoded.id_logowania,
       );
-      if (!uzytkownik) {
-        throw new AppError("Użytkownik nie istnieje", 401);
-      }
-
-      // Sprawdź czy konto nie jest zablokowane
-      if (uzytkownik.isAccountLocked()) {
-        throw new AppError("Konto zostało zablokowane", 423);
+      if (!daneAutoryzacji || daneAutoryzacji.isAccountLocked()) {
+        throw new AppError(ERROR_MESSAGES.INVALID_REFRESH_TOKEN, 401);
       }
 
       const tokenPayload: TokenPayload = {
-        id_logowania: uzytkownik.id_logowania,
-        id_uzytkownika: uzytkownik.id_uzytkownika,
-        adres_email: uzytkownik.adres_email,
-        rola_uzytkownika: uzytkownik.rola_uzytkownika,
+        id_logowania: daneAutoryzacji.id_logowania,
+        id_uzytkownika: daneAutoryzacji.id_uzytkownika,
+        adres_email: daneAutoryzacji.adres_email,
+        rola_uzytkownika: daneAutoryzacji.rola_uzytkownika,
       };
 
       const newToken = jwt.sign(tokenPayload, this.JWT_SECRET, {
@@ -543,232 +339,44 @@ export class AuthService {
         expiresIn: this.REFRESH_TOKEN_EXPIRY,
       });
 
-      return {
-        token: newToken,
-        refresh_token: newRefreshToken,
-      };
+      return { token: newToken, refresh_token: newRefreshToken };
     } catch {
       throw new AppError("Nieprawidłowy refresh token", 401);
     }
   }
 
-  /**
-   * Weryfikacja tokenu
-   */
-  async weryfikujToken(token: string): Promise<TokenPayload> {
+  async wylogujUzytkownika(id_logowania: string): Promise<void> {
     try {
-      const decoded = jwt.verify(token, this.JWT_SECRET) as TokenPayload;
-
-      // Sprawdź czy użytkownik nadal istnieje
-      const uzytkownik = await AuthDaneAutoryzacji.findByPk(
-        decoded.id_logowania,
-      );
-      if (!uzytkownik) {
-        throw new AppError("Użytkownik nie istnieje", 401);
+      const ostatniaSesja = await AuthHistoriaLogowan.findOne({
+        where: {
+          id_logowania: id_logowania,
+          status_logowania: "success",
+          koniec_sesji: null,
+        },
+        order: [["data_proby_logowania", "DESC"]],
+      });
+      if (ostatniaSesja) {
+        await ostatniaSesja.zakonczSesje();
       }
-
-      return decoded;
-    } catch {
-      throw new AppError("Nieprawidłowy token", 401);
+    } catch (error) {
+      logger.error("Błąd serwera podczas kończenia sesji", { error });
+      // Nie rzucamy błędu, bo wylogowanie na frontendzie jest ważniejsze
     }
   }
 
-  /**
-   * Tworzenie nowego konta użytkownika
-   */
-  async utworzKonto(
-    daneKonta: AuthDaneAutoryzacjiCreationAttributes & { haslo: string },
-  ): Promise<AuthDaneAutoryzacjiAttributes> {
-    const { haslo, ...pozostaleDane } = daneKonta;
-
-    // Sprawdź czy email już istnieje
-    const istniejacyUzytkownik = await AuthDaneAutoryzacji.findByEmail(
-      pozostaleDane.adres_email,
-    );
-
-    if (istniejacyUzytkownik) {
-      throw new AppError("Użytkownik z tym adresem email już istnieje", 409);
-    }
-
-    // Sprawdź czy id_uzytkownika już istnieje
-    if (pozostaleDane.id_uzytkownika) {
-      const istniejacyId = await AuthDaneAutoryzacji.findByUserId(
-        pozostaleDane.id_uzytkownika,
-      );
-      if (istniejacyId) {
-        throw new AppError("Użytkownik z tym ID już istnieje", 409);
-      }
-    }
-
-    // Zahashuj hasło
-    const hash_hasla = await bcrypt.hash(haslo, 12);
-
-    // Utwórz konto
-    const id_logowania = AuthDaneAutoryzacji.generateLoginId(
-      pozostaleDane.id_uzytkownika,
-    );
-    const noweKonto = await AuthDaneAutoryzacji.create({
-      id_logowania,
-      ...pozostaleDane,
-      hash_hasla,
-    });
-
-    return noweKonto.toJSON();
+  async pobierzSzczegolyUzytkownika(
+    email: string,
+  ): Promise<AuthDaneAutoryzacjiAttributes | null> {
+    const user = await getUserWithDetails(email);
+    return user ? (user.toJSON() as AuthDaneAutoryzacjiAttributes) : null;
   }
 
-  /**
-   * Zmiana hasła
-   */
-  async zmienHaslo(
-    id_logowania: string,
-    stareHaslo: string,
-    noweHaslo: string,
-  ): Promise<void> {
-    const uzytkownik = await AuthDaneAutoryzacji.findByPk(id_logowania);
-
-    if (!uzytkownik) {
-      throw new AppError("Użytkownik nie istnieje", 404);
-    }
-
-    // Weryfikuj stare hasło
-    const stareHasloPoprawne = await bcrypt.compare(
-      stareHaslo,
-      uzytkownik.hash_hasla,
-    );
-    if (!stareHasloPoprawne) {
-      throw new AppError("Nieprawidłowe stare hasło", 401);
-    }
-
-    // Zahashuj nowe hasło
-    const nowyHash = await bcrypt.hash(noweHaslo, 12);
-
-    // Zaktualizuj hasło
-    uzytkownik.hash_hasla = nowyHash;
-    uzytkownik.nieudane_proby_logowania = 0; // Resetuj nieudane próby
-    uzytkownik.zablokowane_do = null; // Odblokuj konto
-    await uzytkownik.save();
-  }
-
-  /**
-   * Resetowanie hasła (przez administratora)
-   */
-  async resetujHaslo(id_logowania: string, noweHaslo: string): Promise<void> {
-    const uzytkownik = await AuthDaneAutoryzacji.findByPk(id_logowania);
-
-    if (!uzytkownik) {
-      throw new AppError("Użytkownik nie istnieje", 404);
-    }
-
-    // Zahashuj nowe hasło
-    const nowyHash = await bcrypt.hash(noweHaslo, 12);
-
-    // Zaktualizuj hasło i resetuj blokady
-    uzytkownik.hash_hasla = nowyHash;
-    uzytkownik.nieudane_proby_logowania = 0;
-    uzytkownik.zablokowane_do = null;
-    await uzytkownik.save();
-  }
-
-  /**
-   * Odblokowanie konta
-   */
-  async odblokujKonto(id_logowania: string): Promise<void> {
-    const uzytkownik = await AuthDaneAutoryzacji.findByPk(id_logowania);
-
-    if (!uzytkownik) {
-      throw new AppError("Użytkownik nie istnieje", 404);
-    }
-
-    uzytkownik.nieudane_proby_logowania = 0;
-    uzytkownik.zablokowane_do = null;
-    await uzytkownik.save();
-  }
-
-  /**
-   * Pobierz wszystkich użytkowników (tylko dla adminów)
-   */
-  async pobierzWszystkichUzytkownikow(): Promise<
-    AuthDaneAutoryzacjiAttributes[]
-  > {
-    const uzytkownicy = await AuthDaneAutoryzacji.findAll({
-      attributes: { exclude: ["hash_hasla"] }, // Nie zwracaj hashy haseł
-      order: [["data_utworzenia", "DESC"]],
-    });
-
-    return uzytkownicy.map((u) => u.toJSON());
-  }
-
-  /**
-   * Pobierz użytkownika po ID
-   */
   async pobierzUzytkownika(
     id_logowania: string,
   ): Promise<AuthDaneAutoryzacjiAttributes | null> {
     const uzytkownik = await AuthDaneAutoryzacji.findByPk(id_logowania, {
       attributes: { exclude: ["hash_hasla"] },
     });
-
     return uzytkownik ? uzytkownik.toJSON() : null;
-  }
-
-  /**
-   * Usuń konto użytkownika
-   */
-  async usunKonto(id_logowania: string): Promise<void> {
-    const uzytkownik = await AuthDaneAutoryzacji.findByPk(id_logowania);
-
-    if (!uzytkownik) {
-      throw new AppError("Użytkownik nie istnieje", 404);
-    }
-
-    await uzytkownik.destroy();
-  }
-
-  /**
-   * Statystyki użytkowników
-   */
-  async pobierzStatystyki(): Promise<{
-    lacznie_uzytkownikow: number;
-    adminow: number;
-    pracownikow: number;
-    dostawcow: number;
-    zablokowanych: number;
-    aktywnych_dzisiaj: number;
-  }> {
-    const dzisiaj = new Date();
-    dzisiaj.setHours(0, 0, 0, 0);
-
-    const [
-      lacznie_uzytkownikow,
-      adminow,
-      pracownikow,
-      dostawcow,
-      zablokowanych,
-      aktywnych_dzisiaj,
-    ] = await Promise.all([
-      AuthDaneAutoryzacji.count(),
-      AuthDaneAutoryzacji.count({ where: { rola_uzytkownika: "admin" } }),
-      AuthDaneAutoryzacji.count({ where: { rola_uzytkownika: "staff" } }),
-      AuthDaneAutoryzacji.count({ where: { rola_uzytkownika: "supplier" } }),
-      AuthDaneAutoryzacji.count({
-        where: {
-          zablokowane_do: { [Op.gt]: new Date() },
-        },
-      }),
-      AuthDaneAutoryzacji.count({
-        where: {
-          ostatnie_logowanie: { [Op.gte]: dzisiaj },
-        },
-      }),
-    ]);
-
-    return {
-      lacznie_uzytkownikow,
-      adminow,
-      pracownikow,
-      dostawcow,
-      zablokowanych,
-      aktywnych_dzisiaj,
-    };
   }
 }

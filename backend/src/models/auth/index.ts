@@ -1,10 +1,12 @@
-// Import wszystkich modeli autoryzacji
-import AuthDaneAutoryzacji, {
+// Importuj wszystkie modele i funkcje inicjalizujące
+import {
+  AuthDaneAutoryzacji,
   initAuthDaneAutoryzacji,
 } from "./AuthDaneAutoryzacji";
-import AuthPracownicy, { initAuthPracownicy } from "./AuthPracownicy";
-import AuthDostawcy, { initAuthDostawcy } from "./AuthDostawcy";
-import AuthHistoriaLogowan, {
+import { AuthPracownicy, initAuthPracownicy } from "./AuthPracownicy";
+import { AuthDostawcy, initAuthDostawcy } from "./AuthDostawcy";
+import {
+  AuthHistoriaLogowan,
   initAuthHistoriaLogowan,
 } from "./AuthHistoriaLogowan";
 
@@ -71,38 +73,32 @@ const setupAuthAssociations = () => {
   });
 };
 
-// Funkcja pobierająca użytkownika z szczegółami na podstawie email
+// Funkcja pobierająca użytkownika z szczegółami
 const getUserWithDetails = async (email: string) => {
-  // Najpierw pobierz podstawowe dane autoryzacji
   const authData = await AuthDaneAutoryzacji.findOne({
     where: { adres_email: email },
   });
-
   if (!authData) return null;
 
-  // Na podstawie roli, pobierz odpowiednie dane w jednym zapytaniu
   switch (authData.rola_uzytkownika) {
     case "admin":
-      return await AuthDaneAutoryzacji.findByPk(authData.id_logowania, {
+      return AuthDaneAutoryzacji.findByPk(authData.id_logowania, {
         include: [{ model: AuthPracownicy, as: "admin" }],
       });
-
     case "staff":
-      return await AuthDaneAutoryzacji.findByPk(authData.id_logowania, {
+      return AuthDaneAutoryzacji.findByPk(authData.id_logowania, {
         include: [{ model: AuthPracownicy, as: "staff" }],
       });
-
     case "supplier":
-      return await AuthDaneAutoryzacji.findByPk(authData.id_logowania, {
+      return AuthDaneAutoryzacji.findByPk(authData.id_logowania, {
         include: [{ model: AuthDostawcy, as: "supplier" }],
       });
-
     default:
       return authData;
   }
 };
 
-// Eksport modeli i funkcji konfiguracji
+// Eksportuj wszystko w sposób jawny i bezpośredni
 export {
   AuthDaneAutoryzacji,
   AuthPracownicy,
@@ -116,12 +112,20 @@ export {
   getUserWithDetails,
 };
 
-// Domyślny eksport obiektu z wszystkimi modelami
-export default {
-  AuthDaneAutoryzacji,
-  AuthPracownicy,
-  AuthDostawcy,
-  AuthHistoriaLogowan,
-  setupAssociations: setupAuthAssociations,
-  getUserWithDetails,
-};
+// Eksportuj również typy atrybutów dla całej aplikacji
+export type {
+  AuthDaneAutoryzacjiAttributes,
+  AuthDaneAutoryzacjiCreationAttributes,
+} from "./AuthDaneAutoryzacji";
+export type {
+  AuthPracownicyAttributes,
+  AuthPracownicyCreationAttributes,
+} from "./AuthPracownicy";
+export type {
+  AuthDostawcyAttributes,
+  AuthDostawcyCreationAttributes,
+} from "./AuthDostawcy";
+export type {
+  AuthHistoriaLogowanAttributes,
+  AuthHistoriaLogowanCreationAttributes,
+} from "./AuthHistoriaLogowan";

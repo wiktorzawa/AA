@@ -1,8 +1,14 @@
 import express from "express";
 import staffController from "../../controllers/auth/staffController";
-import { validateStaffData } from "../../middleware"; // Import nowego middleware
+import {
+  authenticateToken,
+  requireRole,
+  validateStaffData,
+} from "../../middleware";
 
 const router = express.Router();
+
+router.use(authenticateToken, requireRole("admin"));
 
 // Pobieranie wszystkich pracowników
 router.get("/", staffController.getAllStaff);
@@ -10,11 +16,8 @@ router.get("/", staffController.getAllStaff);
 // Pobieranie pracownika po ID
 router.get("/:id", staffController.getStaffById);
 
-// Dodawanie nowego pracownika (bez konta logowania)
+// Tworzenie nowego pracownika (zawsze z kontem logowania i hasłem)
 router.post("/", validateStaffData, staffController.createStaff);
-
-// Dodawanie nowego pracownika z automatycznie wygenerowanym hasłem
-router.post("/with-password", validateStaffData, staffController.createStaffWithPassword);
 
 // Aktualizacja pracownika
 router.put("/:id", validateStaffData, staffController.updateStaff);

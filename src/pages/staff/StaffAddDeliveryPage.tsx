@@ -3,12 +3,16 @@ import { useState } from "react";
 import { Button, Card, Label, Alert, FileInput } from "flowbite-react";
 import { HiCloudUpload, HiCheck, HiX } from "react-icons/hi";
 import { uploadDeliveryFile } from "../../api/deliveryApi";
+import { logger } from "../../utils/logger";
+import { useAuthStore } from "@/stores/authStore";
 
 export const StaffAddDeliveryPage: FC = () => {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [isUploading, setIsUploading] = useState(false);
   const [uploadSuccess, setUploadSuccess] = useState(false);
   const [uploadError, setUploadError] = useState<string | null>(null);
+
+  const user = useAuthStore((state) => state.user);
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -46,35 +50,42 @@ export const StaffAddDeliveryPage: FC = () => {
       return;
     }
 
+    if (!user?.id_dostawcy) {
+      setUploadError(
+        "Nie można zidentyfikować dostawcy. Proszę zalogować się ponownie.",
+      );
+      return;
+    }
+
     setIsUploading(true);
     setUploadError(null);
 
     try {
       // Przesyłanie pierwszego pliku do prawdziwego API
-      console.log(
-        "🚀 [StaffUpload]: Rozpoczynam upload pliku:",
-        selectedFiles[0].name,
-      );
+      logger.info("StaffUpload: Rozpoczynam upload pliku", {
+        fileName: selectedFiles[0].name,
+      });
 
       const result = await uploadDeliveryFile({
         file: selectedFiles[0],
+        supplierId: user.id_dostawcy,
       });
 
-      console.log("📤 [StaffUpload]: Wynik uploadu:", result);
+      logger.info("StaffUpload: Wynik uploadu", { result });
 
       if (result.success) {
         setUploadSuccess(true);
         setSelectedFiles([]);
-        console.log("✅ [StaffUpload]: Upload zakończony sukcesem");
+        logger.info("StaffUpload: Upload zakończony sukcesem");
         setTimeout(() => setUploadSuccess(false), 5000);
       } else {
         setUploadError(
           result.error || "Wystąpił błąd podczas przesyłania pliku",
         );
-        console.error("❌ [StaffUpload]: Błąd uploadu:", result.error);
+        logger.error("StaffUpload: Błąd uploadu", { error: result.error });
       }
     } catch (error) {
-      console.error("❌ [StaffUpload]: Wyjątek podczas uploadu:", error);
+      logger.error("StaffUpload: Wyjątek podczas uploadu", { error });
       setUploadError("Wystąpił błąd podczas przesyłania pliku");
     } finally {
       setIsUploading(false);

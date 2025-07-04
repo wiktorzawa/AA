@@ -1,6 +1,7 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import { sequelize } from "../../config/database";
 import { UserRole } from "../../types/auth.types";
+import { USER_ROLES, TIME_LIMITS } from "../../constants";
 
 // Interfejs atrybutów modelu
 export interface AuthDaneAutoryzacjiAttributes {
@@ -74,7 +75,7 @@ export class AuthDaneAutoryzacji
 
     // Zablokuj konto po 5 nieudanych próbach na 30 minut
     if (this.nieudane_proby_logowania >= 5) {
-      this.zablokowane_do = new Date(Date.now() + 30 * 60 * 1000); // 30 minut
+      this.zablokowane_do = new Date(Date.now() + TIME_LIMITS.LOCKOUT_DURATION);
     }
   }
 
@@ -118,7 +119,11 @@ export const initAuthDaneAutoryzacji = () => {
         comment: "Zahaszowane hasło użytkownika dla bezpieczeństwa.",
       },
       rola_uzytkownika: {
-        type: DataTypes.ENUM("admin", "staff", "supplier"),
+        type: DataTypes.ENUM(
+          USER_ROLES.ADMIN,
+          USER_ROLES.STAFF,
+          USER_ROLES.SUPPLIER,
+        ),
         allowNull: false,
         comment: "Rola użytkownika w systemie (admin, staff, supplier).",
       },

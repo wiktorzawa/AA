@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { AuthHistoriaLogowan } from "../../models/auth/AuthHistoriaLogowan";
+import { logger } from "../../utils/logger";
 
 // Zmienna statyczna w zasięgu modułu do śledzenia ostatniego czyszczenia
 let lastCleanup = new Date();
@@ -22,25 +23,20 @@ export const sessionCleaner = async (
 
     // Sprawdź czy minął czas od ostatniego czyszczenia
     if (timeSinceLastCleanup > cleanupIntervalMs) {
-      console.log("🧹 [SessionCleaner]: Automatyczne zamykanie wygasłych sesji...");
+      logger.info("Automatyczne zamykanie wygasłych sesji");
 
       const zamknieteSesjе = await AuthHistoriaLogowan.zamknijWygasleSesjе(
         SESSION_TIMEOUT_MINUTES,
       );
 
       if (zamknieteSesjе > 0) {
-        console.log(
-          `✅ [SessionCleaner]: Zamknięto ${zamknieteSesjе} wygasłych sesji`,
-        );
+        logger.info("Zamknięto wygasłe sesje", { count: zamknieteSesjе });
       }
 
       lastCleanup = now; // Zaktualizuj czas ostatniego czyszczenia
     }
   } catch (error) {
-    console.error(
-      "❌ [SessionCleaner]: Błąd podczas automatycznego zamykania sesji:",
-      error,
-    );
+    logger.error("Błąd podczas automatycznego zamykania sesji", { error });
     // Nie przerywamy żądania z powodu błędu w zarządzaniu sesjami
   }
 

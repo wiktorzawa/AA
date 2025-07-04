@@ -1,4 +1,5 @@
 import axiosInstance from "./axios";
+import { logger } from "../utils/logger";
 
 // Interfejs dla modelu danych dostawcy bazujący na nowych modelach Sequelize
 export interface Dostawca {
@@ -43,48 +44,64 @@ export interface DostawcaZHaslem {
 /**
  * Pobiera wszystkich dostawców
  * @returns Lista dostawców
+ * @throws Error gdy nie można pobrać danych
  */
 export const pobierzDostawcow = async (): Promise<Dostawca[]> => {
   try {
     const response = await axiosInstance.get("/suppliers");
-    return response.data.success ? response.data.data : [];
+    if (!response.data.success) {
+      throw new Error(response.data.error || "Failed to fetch suppliers");
+    }
+    return response.data.data || [];
   } catch (error) {
-    console.error("Błąd podczas pobierania dostawców:", error);
-    return [];
+    logger.error("Failed to get suppliers", { error });
+    throw error;
   }
 };
 
 /**
  * Pobiera dostawcę po ID
  * @param id Identyfikator dostawcy
- * @returns Dane dostawcy lub null w przypadku błędu
+ * @returns Dane dostawcy
+ * @throws Error gdy nie można pobrać danych lub dostawca nie istnieje
  */
-export const pobierzDostawce = async (id: string): Promise<Dostawca | null> => {
+export const pobierzDostawce = async (id: string): Promise<Dostawca> => {
   try {
     const response = await axiosInstance.get(
       `/suppliers/${encodeURIComponent(id)}`,
     );
-    return response.data.success ? response.data.data : null;
+    if (!response.data.success) {
+      throw new Error(response.data.error || "Supplier not found");
+    }
+    if (!response.data.data) {
+      throw new Error(`Supplier with ID ${id} not found`);
+    }
+    return response.data.data;
   } catch (error) {
-    console.error(`Błąd podczas pobierania dostawcy o ID ${id}:`, error);
-    return null;
+    logger.error("Failed to get supplier", { id, error });
+    throw error;
   }
 };
 
 /**
  * Pobiera dostawcę po NIP
  * @param nip Numer NIP
- * @returns Dane dostawcy lub null w przypadku błędu
+ * @returns Dane dostawcy
+ * @throws Error gdy nie można pobrać danych lub dostawca nie istnieje
  */
-export const pobierzDostawcePoNip = async (
-  nip: string,
-): Promise<Dostawca | null> => {
+export const pobierzDostawcePoNip = async (nip: string): Promise<Dostawca> => {
   try {
     const response = await axiosInstance.get(`/suppliers/nip/${nip}`);
-    return response.data.success ? response.data.data : null;
+    if (!response.data.success) {
+      throw new Error(response.data.error || "Supplier not found");
+    }
+    if (!response.data.data) {
+      throw new Error(`Supplier with NIP ${nip} not found`);
+    }
+    return response.data.data;
   } catch (error) {
-    console.error(`Błąd podczas pobierania dostawcy o NIP ${nip}:`, error);
-    return null;
+    logger.error("Failed to get supplier by NIP", { nip, error });
+    throw error;
   }
 };
 
@@ -100,7 +117,7 @@ export const sprawdzDostepnoscNip = async (
     const response = await axiosInstance.get(`/suppliers/check-nip/${nip}`);
     return response.data;
   } catch (error) {
-    console.error("Błąd podczas sprawdzania dostępności NIP:", error);
+    logger.error("Failed to check NIP availability", { nip, error });
     return { available: false, message: "Błąd podczas sprawdzania NIP" };
   }
 };
@@ -119,7 +136,7 @@ export const sprawdzDostepnoscEmail = async (
     );
     return response.data;
   } catch (error) {
-    console.error("Błąd podczas sprawdzania dostępności email:", error);
+    logger.error("Failed to check email availability", { email, error });
     return { available: false, message: "Błąd podczas sprawdzania email" };
   }
 };
@@ -127,37 +144,51 @@ export const sprawdzDostepnoscEmail = async (
 /**
  * Dodaje nowego dostawcę z automatycznie wygenerowanym hasłem
  * @param dostawca Dane nowego dostawcy (bez ID)
- * @returns Dane utworzonego dostawcy wraz z wygenerowanym hasłem lub null w przypadku błędu
+ * @returns Dane utworzonego dostawcy wraz z wygenerowanym hasłem
+ * @throws Error gdy nie można utworzyć dostawcy
  */
 export const dodajDostawceZHaslem = async (
   dostawca: NowyDostawcaBezId,
-): Promise<DostawcaZHaslem | null> => {
+): Promise<DostawcaZHaslem> => {
   try {
     const response = await axiosInstance.post(
       "/suppliers/with-password",
       dostawca,
     );
-    return response.data.success ? response.data.data : null;
+    if (!response.data.success) {
+      throw new Error(response.data.error || "Failed to create supplier");
+    }
+    if (!response.data.data) {
+      throw new Error("No data returned from server");
+    }
+    return response.data.data;
   } catch (error) {
-    console.error("Błąd podczas dodawania dostawcy z hasłem:", error);
-    return null;
+    logger.error("Failed to add supplier with password", { error });
+    throw error;
   }
 };
 
 /**
  * Dodaje nowego dostawcę (bez konta logowania)
  * @param dostawca Dane nowego dostawcy
- * @returns Dane utworzonego dostawcy lub null w przypadku błędu
+ * @returns Dane utworzonego dostawcy
+ * @throws Error gdy nie można utworzyć dostawcy
  */
 export const dodajDostawce = async (
   dostawca: NowyDostawca,
-): Promise<Dostawca | null> => {
+): Promise<Dostawca> => {
   try {
     const response = await axiosInstance.post("/suppliers", dostawca);
-    return response.data.success ? response.data.data : null;
+    if (!response.data.success) {
+      throw new Error(response.data.error || "Failed to create supplier");
+    }
+    if (!response.data.data) {
+      throw new Error("No data returned from server");
+    }
+    return response.data.data;
   } catch (error) {
-    console.error("Błąd podczas dodawania dostawcy:", error);
-    return null;
+    logger.error("Failed to add supplier", { error });
+    throw error;
   }
 };
 
@@ -165,37 +196,48 @@ export const dodajDostawce = async (
  * Aktualizuje dane dostawcy
  * @param id Identyfikator dostawcy
  * @param dane Dane do aktualizacji
- * @returns Zaktualizowane dane dostawcy lub null w przypadku błędu
+ * @returns Zaktualizowane dane dostawcy
+ * @throws Error gdy nie można zaktualizować danych
  */
 export const aktualizujDostawce = async (
   id: string,
   dane: AktualizacjaDostawcy,
-): Promise<Dostawca | null> => {
+): Promise<Dostawca> => {
   try {
     const response = await axiosInstance.put(
       `/suppliers/${encodeURIComponent(id)}`,
       dane,
     );
-    return response.data.success ? response.data.data : null;
+    if (!response.data.success) {
+      throw new Error(response.data.error || "Failed to update supplier");
+    }
+    if (!response.data.data) {
+      throw new Error("No data returned from server");
+    }
+    return response.data.data;
   } catch (error) {
-    console.error(`Błąd podczas aktualizacji dostawcy o ID ${id}:`, error);
-    return null;
+    logger.error("Failed to update supplier", { id, error });
+    throw error;
   }
 };
 
 /**
  * Usuwa dostawcę
  * @param id Identyfikator dostawcy
- * @returns True jeśli usunięto, false w przypadku błędu
+ * @returns Informacja o pomyślnym usunięciu
+ * @throws Error gdy nie można usunąć dostawcy
  */
-export const usunDostawce = async (id: string): Promise<boolean> => {
+export const usunDostawce = async (id: string): Promise<{ success: true }> => {
   try {
     const response = await axiosInstance.delete(
       `/suppliers/${encodeURIComponent(id)}`,
     );
-    return response.data.success || false;
+    if (!response.data.success) {
+      throw new Error(response.data.error || "Failed to delete supplier");
+    }
+    return { success: true };
   } catch (error) {
-    console.error(`Błąd podczas usuwania dostawcy o ID ${id}:`, error);
-    return false;
+    logger.error("Failed to delete supplier", { id, error });
+    throw error;
   }
 };

@@ -1,12 +1,13 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import { sequelize } from "../../config/database";
+import { USER_ROLES, ID_PREFIXES } from "../../constants";
 
 // Interfejs atrybutów modelu
 export interface AuthPracownicyAttributes {
   id_pracownika: string;
   imie: string;
   nazwisko: string;
-  rola: "admin" | "staff";
+  rola: typeof USER_ROLES.ADMIN | typeof USER_ROLES.STAFF;
   adres_email: string;
   telefon?: string | null;
   data_utworzenia: Date;
@@ -27,7 +28,7 @@ export class AuthPracownicy
   public id_pracownika!: string;
   public imie!: string;
   public nazwisko!: string;
-  public rola!: "admin" | "staff";
+  public rola!: typeof USER_ROLES.ADMIN | typeof USER_ROLES.STAFF;
   public adres_email!: string;
   public telefon!: string | null;
 
@@ -59,7 +60,7 @@ export class AuthPracownicy
   }
 
   public static async generateUniqueId(
-    rola: "admin" | "staff",
+    rola: typeof USER_ROLES.ADMIN | typeof USER_ROLES.STAFF,
   ): Promise<string> {
     // Pobierz liczbę rekordów dla danej roli
     const count = await this.count({ where: { rola } });
@@ -69,7 +70,8 @@ export class AuthPracownicy
     const formattedNumber = nextNumber.toString().padStart(5, "0");
 
     // Określ prefix na podstawie roli
-    const prefix = rola === "admin" ? "ADM" : "STF";
+    const prefix =
+      rola === USER_ROLES.ADMIN ? ID_PREFIXES.ADMIN : ID_PREFIXES.STAFF;
 
     return `${prefix}/${formattedNumber}`;
   }
@@ -104,7 +106,7 @@ export const initAuthPracownicy = () => {
         comment: "Nazwisko pracownika.",
       },
       rola: {
-        type: DataTypes.ENUM("admin", "staff"),
+        type: DataTypes.ENUM(USER_ROLES.ADMIN, USER_ROLES.STAFF),
         allowNull: false,
         comment: "Rola pracownika w systemie (admin lub staff).",
       },

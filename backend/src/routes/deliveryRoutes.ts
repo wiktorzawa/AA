@@ -1,51 +1,42 @@
 import { Router, Request } from "express";
-import multer from "multer";
+import multer, { type FileFilterCallback } from "multer";
 import deliveryController from "../controllers/deliveryController";
-import { authenticateToken } from "../middleware/auth/authenticateToken.middleware";
-import { requireRole } from "../middleware/auth/requireRole.middleware";
 import {
+  authenticateToken,
+  requireRole,
   validateNewDeliveryData,
   validateDeliveryStatusUpdate,
+  validateConfirmDeliveryData,
   checkSupplierDeliveryAccess,
   checkDeliveryModifyPermissions,
   checkDeliveryDeletePermissions,
-} from "../middleware/deliveries";
-import { AppError } from "../utils/AppError";
+  checkDeliveryViewAccess,
+  validateDeliveryFile,
+  validateConfirmConsistency,
+} from "../middleware";
 
 const router = Router();
 
-// Konfiguracja multer dla upload'u plików
+// Konfiguracja multer dla upload'u plików - podstawowa walidacja, szczegółowa w middleware
 const upload = multer({
   storage: multer.memoryStorage(),
   limits: {
     fileSize: 10 * 1024 * 1024, // 10MB limit
   },
-  fileFilter: (req: Request, file: Express.Multer.File, cb: any) => {
-    const allowedMimeTypes = [
-      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", // .xlsx
-      "application/vnd.ms-excel", // .xls
-      "application/vnd.ms-excel.sheet.macroEnabled.12", // .xlsm
-      "application/vnd.ms-excel.sheet.macroenabled.12", // .xlsm (alternatywny MIME type)
-      "application/zip", // .xlsm może być wykrywany jako ZIP
-    ];
-
-    const allowedExtensions = [".xlsx", ".xls", ".xlsm"];
+  fileFilter: (
+    req: Request,
+    file: Express.Multer.File,
+    cb: FileFilterCallback,
+  ) => {
+    // Minimalna walidacja - szczegółowa jest w validateDeliveryFile middleware
     const fileExtension = file.originalname
       .toLowerCase()
       .slice(file.originalname.lastIndexOf("."));
 
-    if (
-      allowedMimeTypes.includes(file.mimetype) ||
-      allowedExtensions.includes(fileExtension)
-    ) {
+    if ([".xlsx", ".xls", ".xlsm"].includes(fileExtension)) {
       cb(null, true);
     } else {
-      cb(
-        new AppError(
-          "Nieprawidłowy format pliku. Obsługiwane formaty: .xlsx, .xls, .xlsm",
-          400,
-        ),
-      );
+      cb(null, false); // Zostawiamy szczegółowe błędy dla middleware
     }
   },
 });
@@ -99,6 +90,17 @@ router.get(
 router.get("/:id", deliveryController.getDeliveryById);
 
 /**
+ * @route   GET /api/deliveries/:deliveryId/products
+ * @desc    Pobiera produkty dla konkretnej dostawy
+ * @access  Admin, Staff, Supplier (supplier tylko swoje)
+ */
+router.get(
+  "/:deliveryId/products",
+  checkDeliveryViewAccess,
+  deliveryController.getProductsByDeliveryId,
+);
+
+/**
  * @route   POST /api/deliveries
  * @desc    Tworzy nową dostawę
  * @access  Admin, Staff, Supplier
@@ -144,6 +146,7 @@ router.post(
     { name: "deliveryFile", maxCount: 1 },
     { name: "file", maxCount: 1 },
   ]),
+  validateDeliveryFile,
   checkSupplierDeliveryAccess,
   deliveryController.uploadDeliveryFile,
 );
@@ -159,8 +162,27 @@ router.post(
     { name: "deliveryFile", maxCount: 1 },
     { name: "file", maxCount: 1 },
   ]),
+  validateDeliveryFile,
   checkSupplierDeliveryAccess,
   deliveryController.previewDeliveryFile,
+);
+
+/**
+ * @route   POST /api/deliveries/upload/confirm
+ * @desc    Potwierdza i zapisuje dostawę po weryfikacji
+ * @access  Admin, Staff, Supplier
+ */
+router.post(
+  "/upload/confirm",
+  upload.fields([
+    { name: "deliveryFile", maxCount: 1 },
+    { name: "file", maxCount: 1 },
+  ]),
+  validateDeliveryFile,
+  validateConfirmDeliveryData,
+  validateConfirmConsistency,
+  checkSupplierDeliveryAccess,
+  deliveryController.confirmDelivery,
 );
 
 export default router;

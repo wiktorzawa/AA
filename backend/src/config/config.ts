@@ -1,74 +1,55 @@
-import * as dotenv from "dotenv";
-import * as path from "path";
+import { logger } from "../utils/logger";
 
-// Wczytaj główny .env z katalogu nadrzędnego (jeśli tam jest globalna konfiguracja)
-// __dirname w backend/src/config/config.ts to app_flow_react/backend/src/config
-// więc path.resolve(__dirname, "../../../.env") celuje w app_flow_react/.env
-dotenv.config({ path: path.resolve(__dirname, "../../../.env") });
-
-// Wczytaj lokalny .env z katalogu backend (app_flow_react/backend/.env)
-// path.resolve(__dirname, "../../.env") celuje w app_flow_react/backend/.env
-const backendEnvPath = path.resolve(__dirname, "../../.env");
-const backendEnvResult = dotenv.config({ path: backendEnvPath });
-
-if (backendEnvResult.error) {
-  console.warn(
-    `Warning: Could not load .env file from ${backendEnvPath}: ${backendEnvResult.error.message}`,
-  );
-}
+// Ta konfiguracja jest teraz znacznie prostsza.
+// Zakładamy, że dotenv został już zainicjowany w głównym pliku aplikacji (server.ts)
+// lub w konfiguracji testów (jest.config.js).
+// Ten plik służy tylko do zbierania i eksportowania zmiennych w jednym miejscu.
 
 export interface Config {
   port: number;
   frontendUrl: string;
-  allegroClientId: string;
-  allegroClientSecret: string;
-  allegroApiUrl: string;
-  allegroAuthTokenUrl: string;
-  allegroRedirectUri: string;
-  allegroScope: string;
-  dbHost: string;
+  dbHost?: string;
   dbPort: number;
-  dbUsername: string;
+  dbUsername?: string;
   dbPassword?: string;
-  dbName: string;
+  dbName?: string;
   dbDialect: string;
-  brightDataCustomerID: string;
-  brightDataApiToken: string;
+  jwtSecret?: string;
+  jwtRefreshSecret?: string;
+  brightDataCustomerID?: string;
+  brightDataApiToken?: string;
 }
-
-const isSandbox = process.env.ALLEGRO_ENV === "sandbox";
 
 export const config: Config = {
   port: parseInt(process.env.PORT || "3001", 10),
-  frontendUrl: process.env.FRONTEND_URL || "http://localhost:5173",
-  allegroClientId: process.env.ALLEGRO_CLIENT_ID || "",
-  allegroClientSecret: process.env.ALLEGRO_CLIENT_SECRET || "",
-  allegroApiUrl: isSandbox
-    ? "https://api.allegro.pl.allegrosandbox.pl"
-    : "https://api.allegro.pl",
-  allegroAuthTokenUrl: isSandbox
-    ? "https://allegro.pl.allegrosandbox.pl/auth/oauth/token"
-    : "https://allegro.pl/auth/oauth/token",
-  allegroRedirectUri: process.env.ALLEGRO_REDIRECT_URI || "",
-  allegroScope: process.env.ALLEGRO_SCOPE || "allegro:api:profile:read",
-  dbHost: process.env.DB_HOST || "localhost",
+  frontendUrl: process.env.FRONTEND_URL || "http://localhost:5174",
+  dbHost: process.env.DB_HOST,
   dbPort: parseInt(process.env.DB_PORT || "3306", 10),
-  dbUsername: process.env.DB_USER || "root",
+  dbUsername: process.env.DB_USER,
   dbPassword: process.env.DB_PASSWORD,
-  dbName: process.env.DB_NAME || "your_database_name",
+  dbName: process.env.DB_NAME,
   dbDialect: process.env.DB_DIALECT || "mysql",
-  brightDataCustomerID: process.env.BRIGHT_DATA_CUSTOMER_ID || "",
-  brightDataApiToken: process.env.BRIGHT_DATA_API_TOKEN || "",
+  jwtSecret: process.env.JWT_SECRET,
+  jwtRefreshSecret: process.env.JWT_REFRESH_SECRET,
+  brightDataCustomerID: process.env.BRIGHT_DATA_CUSTOMER_ID,
+  brightDataApiToken: process.env.BRIGHT_DATA_API_TOKEN,
 };
 
-// Walidacja kluczowych zmiennych Allegro
-if (!config.allegroClientId) {
-  console.warn(
-    "OSTRZEŻENIE: Zmienna środowiskowa ALLEGRO_CLIENT_ID nie jest ustawiona!",
-  );
-}
-if (!config.allegroClientSecret) {
-  console.warn(
-    "OSTRZEŻENIE: Zmienna środowiskowa ALLEGRO_CLIENT_SECRET nie jest ustawiona!",
-  );
+// --- Walidacja kluczowych zmiennych środowiskowych ---
+const requiredEnvVars: (keyof Config)[] = [
+  "dbHost",
+  "dbUsername",
+  "dbName",
+  "jwtSecret",
+  "jwtRefreshSecret",
+];
+
+const missingVars = requiredEnvVars.filter((key) => !config[key]);
+
+if (missingVars.length > 0) {
+  const errorMessage = `KRYTYCZNY BŁĄD: Brakujące zmienne środowiskowe: ${missingVars.join(
+    ", ",
+  )}. Aplikacja nie może zostać uruchomiona.`;
+  logger.error(errorMessage);
+  throw new Error(errorMessage);
 }

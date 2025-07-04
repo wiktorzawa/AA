@@ -1,7 +1,6 @@
 import type { FC, ReactNode } from "react";
 import { Navigate } from "react-router-dom";
-import { useAuth } from "@/contexts/AuthContext";
-import { Spinner } from "flowbite-react";
+import { useAuthStore } from "../../stores/authStore";
 
 interface ProtectedRouteProps {
   children: ReactNode;
@@ -12,16 +11,8 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({
   children,
   allowedRoles,
 }) => {
-  const { user, isLoading, isAuthenticated } = useAuth();
-
-  // Pokaż spinner podczas ładowania
-  if (isLoading) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <Spinner size="xl" />
-      </div>
-    );
-  }
+  const user = useAuthStore((state) => state.user);
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   // Jeśli użytkownik nie jest zalogowany, przekieruj do logowania
   if (!isAuthenticated || !user) {

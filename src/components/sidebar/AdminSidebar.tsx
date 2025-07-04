@@ -242,7 +242,7 @@ export const AdminSidebar: FC<AdminSidebarProps> = ({
                     </SidebarItem>
                   </SidebarCollapse>
 
-                  <SidebarCollapse label="Advanced Tables" icon={HiTable}>
+                  <SidebarCollapse label="Tabele Produktów" icon={HiTable}>
                     <SidebarItem
                       href="/admin/tables"
                       className={twMerge(
@@ -253,7 +253,7 @@ export const AdminSidebar: FC<AdminSidebarProps> = ({
                       )}
                       onClick={() => navigate("/admin/tables")}
                     >
-                      All Tables
+                      Wszystkie Produkty
                     </SidebarItem>
                     <SidebarItem
                       href="/admin/tables/default"
@@ -265,7 +265,7 @@ export const AdminSidebar: FC<AdminSidebarProps> = ({
                       )}
                       onClick={() => navigate("/admin/tables/default")}
                     >
-                      Default Table
+                      Produkty w Dostawach
                     </SidebarItem>
                     <SidebarItem
                       href="/admin/tables/comparison"
@@ -277,7 +277,7 @@ export const AdminSidebar: FC<AdminSidebarProps> = ({
                       )}
                       onClick={() => navigate("/admin/tables/comparison")}
                     >
-                      Comparison
+                      Porównanie Produktów
                     </SidebarItem>
                   </SidebarCollapse>
 

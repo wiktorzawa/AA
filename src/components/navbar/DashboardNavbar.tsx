@@ -13,7 +13,7 @@ import {
 import { HiSearch } from "react-icons/hi";
 import { HiBars3 } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuthStore } from "@/stores/authStore";
 
 interface DashboardNavbarProps {
   onToggleSidebar: () => void;
@@ -23,10 +23,11 @@ export const DashboardNavbar: FC<DashboardNavbarProps> = ({
   onToggleSidebar,
 }) => {
   const navigate = useNavigate();
-  const { user, logout } = useAuth();
+  const user = useAuthStore((state) => state.user);
+  const logout = useAuthStore((state) => state.logout);
 
   const handleSignOut = async () => {
-    await logout();
+    logout();
     navigate("/authentication/sign-in");
   };
 
@@ -84,7 +85,7 @@ export const DashboardNavbar: FC<DashboardNavbarProps> = ({
           />
         </form>
       </div>
-      <div className="flex items-center">
+      <div className="flex items-center gap-3">
         <DarkThemeToggle />
         <Dropdown
           arrowIcon={false}
@@ -98,16 +99,18 @@ export const DashboardNavbar: FC<DashboardNavbarProps> = ({
           }
         >
           <DropdownHeader>
-            <span className="block text-sm">Użytkownik</span>
-            <span className="block truncate text-sm font-medium">
+            <span className="block text-sm dark:text-gray-300">Użytkownik</span>
+            <span className="block truncate text-sm font-medium dark:text-white">
               {user?.adres_email || "brak danych"}
             </span>
           </DropdownHeader>
-          <DropdownItem>Dashboard</DropdownItem>
-          <DropdownItem>Settings</DropdownItem>
-          <DropdownItem>Earnings</DropdownItem>
+          <DropdownItem className="dark:text-white">Dashboard</DropdownItem>
+          <DropdownItem className="dark:text-white">Settings</DropdownItem>
+          <DropdownItem className="dark:text-white">Earnings</DropdownItem>
           <DropdownDivider />
-          <DropdownItem onClick={handleSignOut}>Wyloguj</DropdownItem>
+          <DropdownItem onClick={handleSignOut} className="dark:text-white">
+            Wyloguj
+          </DropdownItem>
         </Dropdown>
       </div>
     </Navbar>

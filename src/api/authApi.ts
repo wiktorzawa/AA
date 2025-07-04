@@ -2,8 +2,8 @@ import axiosInstance from "./axios";
 
 // Interfejs dla danych uwierzytelniających
 export interface DaneLogowania {
-  username: string;
-  password: string;
+  adres_email: string;
+  haslo: string;
 }
 
 // Interfejs dla odpowiedzi z logowania
@@ -13,6 +13,12 @@ export interface OdpowiedzLogowania {
   userId?: string;
   token?: string;
   refresh_token?: string;
+  uzytkownik?: {
+    id_logowania: string;
+    id_uzytkownika: string;
+    adres_email: string;
+    rola_uzytkownika: "admin" | "staff" | "supplier";
+  };
   error?: string;
 }
 
@@ -35,7 +41,7 @@ export interface VerifyTokenResponse {
 
 /**
  * Loguje użytkownika do systemu
- * @param credentials Dane logowania (username, password)
+ * @param credentials Dane logowania (adres_email, haslo)
  * @returns Odpowiedź z informacją o sukcesie, roli użytkownika i tokenach
  */
 export const zaloguj = async (

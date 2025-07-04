@@ -1,4 +1,5 @@
 import axiosInstance from "./axios";
+import { logger } from "../utils/logger";
 
 // Interfejs dla modelu danych pracownika bazujący na nowych modelach Sequelize
 export interface Pracownik {
@@ -35,70 +36,93 @@ export interface PracownikZHaslem {
 /**
  * Pobiera wszystkich pracowników
  * @returns Lista pracowników
+ * @throws Error gdy nie można pobrać danych
  */
 export const pobierzPracownikow = async (): Promise<Pracownik[]> => {
   try {
     const response = await axiosInstance.get("/staff");
-    return response.data.success ? response.data.data : [];
+    if (!response.data.success) {
+      throw new Error(response.data.error || "Failed to fetch staff members");
+    }
+    return response.data.data || [];
   } catch (error) {
-    console.error("Błąd podczas pobierania pracowników:", error);
-    return [];
+    logger.error("Failed to get staff members", { error });
+    throw error; // Rzucamy błąd dalej dla TanStack Query
   }
 };
 
 /**
  * Pobiera pracownika po ID
  * @param id Identyfikator pracownika
- * @returns Dane pracownika lub null w przypadku błędu
+ * @returns Dane pracownika
+ * @throws Error gdy nie można pobrać danych lub pracownik nie istnieje
  */
-export const pobierzPracownika = async (
-  id: string,
-): Promise<Pracownik | null> => {
+export const pobierzPracownika = async (id: string): Promise<Pracownik> => {
   try {
     const response = await axiosInstance.get(
       `/staff/${encodeURIComponent(id)}`,
     );
-    return response.data.success ? response.data.data : null;
+    if (!response.data.success) {
+      throw new Error(response.data.error || "Staff member not found");
+    }
+    if (!response.data.data) {
+      throw new Error(`Staff member with ID ${id} not found`);
+    }
+    return response.data.data;
   } catch (error) {
-    console.error(`Błąd podczas pobierania pracownika o ID ${id}:`, error);
-    return null;
+    logger.error("Failed to get staff member", { id, error });
+    throw error;
   }
 };
 
 /**
  * Dodaje nowego pracownika z automatycznie wygenerowanym hasłem
  * @param pracownik Dane nowego pracownika (bez ID)
- * @returns Dane utworzonego pracownika z hasłem lub null w przypadku błędu
+ * @returns Dane utworzonego pracownika z hasłem
+ * @throws Error gdy nie można utworzyć pracownika
  */
 export const dodajPracownikaZHaslem = async (
   pracownik: NowyPracownikBezId,
-): Promise<PracownikZHaslem | null> => {
+): Promise<PracownikZHaslem> => {
   try {
     const response = await axiosInstance.post(
       "/staff/with-password",
       pracownik,
     );
-    return response.data.success ? response.data.data : null;
+    if (!response.data.success) {
+      throw new Error(response.data.error || "Failed to create staff member");
+    }
+    if (!response.data.data) {
+      throw new Error("No data returned from server");
+    }
+    return response.data.data;
   } catch (error) {
-    console.error("Błąd podczas dodawania pracownika z hasłem:", error);
-    return null;
+    logger.error("Failed to add staff member with password", { error });
+    throw error;
   }
 };
 
 /**
  * Dodaje nowego pracownika (bez konta logowania)
  * @param pracownik Dane nowego pracownika
- * @returns Dane utworzonego pracownika lub null w przypadku błędu
+ * @returns Dane utworzonego pracownika
+ * @throws Error gdy nie można utworzyć pracownika
  */
 export const dodajPracownika = async (
   pracownik: NowyPracownik,
-): Promise<Pracownik | null> => {
+): Promise<Pracownik> => {
   try {
     const response = await axiosInstance.post("/staff", pracownik);
-    return response.data.success ? response.data.data : null;
+    if (!response.data.success) {
+      throw new Error(response.data.error || "Failed to create staff member");
+    }
+    if (!response.data.data) {
+      throw new Error("No data returned from server");
+    }
+    return response.data.data;
   } catch (error) {
-    console.error("Błąd podczas dodawania pracownika:", error);
-    return null;
+    logger.error("Failed to add staff member", { error });
+    throw error;
   }
 };
 
@@ -106,37 +130,50 @@ export const dodajPracownika = async (
  * Aktualizuje dane pracownika
  * @param id Identyfikator pracownika
  * @param dane Dane do aktualizacji
- * @returns Zaktualizowane dane pracownika lub null w przypadku błędu
+ * @returns Zaktualizowane dane pracownika
+ * @throws Error gdy nie można zaktualizować danych
  */
 export const aktualizujPracownika = async (
   id: string,
   dane: AktualizacjaPracownika,
-): Promise<Pracownik | null> => {
+): Promise<Pracownik> => {
   try {
     const response = await axiosInstance.put(
       `/staff/${encodeURIComponent(id)}`,
       dane,
     );
-    return response.data.success ? response.data.data : null;
+    if (!response.data.success) {
+      throw new Error(response.data.error || "Failed to update staff member");
+    }
+    if (!response.data.data) {
+      throw new Error("No data returned from server");
+    }
+    return response.data.data;
   } catch (error) {
-    console.error(`Błąd podczas aktualizacji pracownika o ID ${id}:`, error);
-    return null;
+    logger.error("Failed to update staff member", { id, error });
+    throw error;
   }
 };
 
 /**
  * Usuwa pracownika
  * @param id Identyfikator pracownika
- * @returns True jeśli usunięto, false w przypadku błędu
+ * @returns Informacja o pomyślnym usunięciu
+ * @throws Error gdy nie można usunąć pracownika
  */
-export const usunPracownika = async (id: string): Promise<boolean> => {
+export const usunPracownika = async (
+  id: string,
+): Promise<{ success: true }> => {
   try {
     const response = await axiosInstance.delete(
       `/staff/${encodeURIComponent(id)}`,
     );
-    return response.data.success || false;
+    if (!response.data.success) {
+      throw new Error(response.data.error || "Failed to delete staff member");
+    }
+    return { success: true };
   } catch (error) {
-    console.error(`Błąd podczas usuwania pracownika o ID ${id}:`, error);
-    return false;
+    logger.error("Failed to delete staff member", { id, error });
+    throw error;
   }
 };

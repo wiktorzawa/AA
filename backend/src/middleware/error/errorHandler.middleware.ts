@@ -1,11 +1,13 @@
 import { Request, Response, NextFunction } from "express";
 import { AppError } from "../../utils/AppError";
+import { logger } from "../../utils/logger";
 
 export const errorHandler = (
   err: Error,
   req: Request,
   res: Response,
-  next: NextFunction,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _next: NextFunction,
 ) => {
   // Domyślny status i wiadomość błędu
   let statusCode = 500;
@@ -18,7 +20,7 @@ export const errorHandler = (
   }
   // Obsługa błędów Multer (upload plików)
   else if (err.name === "MulterError") {
-    const multerError = err as any;
+    const multerError = err as Error & { code: string };
     switch (multerError.code) {
       case "LIMIT_FILE_SIZE":
         statusCode = 413; // Payload Too Large
@@ -50,7 +52,7 @@ export const errorHandler = (
     }
   } else {
     // Loguj nieznane błędy serwera
-    console.error("❌ Nieoczekiwany błąd serwera:", err);
+    logger.error("Nieoczekiwany błąd serwera", { error: err });
   }
 
   res.status(statusCode).json({

@@ -1,34 +1,37 @@
 import express from "express";
 import supplierController from "../../controllers/auth/supplierController";
-import { validateSupplierData } from "../../middleware"; // Import nowego middleware
+import {
+  authenticateToken,
+  requireRole,
+  validateSupplierData,
+} from "../../middleware";
 
 const router = express.Router();
 
-// Pobieranie wszystkich dostawców
-router.get("/", supplierController.getAllSuppliers);
+router.use(authenticateToken);
 
-// Pobieranie dostawcy po ID
-router.get("/:id", supplierController.getSupplierById);
+// Dostęp dla admina do wszystkich operacji
+router.get("/", requireRole("admin"), supplierController.getAllSuppliers);
+router.delete("/:id", requireRole("admin"), supplierController.deleteSupplier);
 
-// Pobieranie dostawcy po NIP
-router.get("/nip/:nip", supplierController.getSupplierByNip);
+// Dostęp dla admina i dostawcy (do swoich danych)
+router.get(
+  "/:id",
+  requireRole("admin", "supplier"),
+  supplierController.getSupplierById,
+);
+router.put(
+  "/:id",
+  validateSupplierData,
+  requireRole("admin", "supplier"),
+  supplierController.updateSupplier,
+);
 
-// Sprawdzanie dostępności NIP
+// Endpointy publiczne do sprawdzania NIP i email
 router.get("/check-nip/:nip", supplierController.checkNipAvailability);
-
-// Sprawdzanie dostępności email
 router.get("/check-email/:email", supplierController.checkEmailAvailability);
 
-// Dodawanie nowego dostawcy (bez konta logowania)
+// Endpoint publiczny do tworzenia konta dostawcy
 router.post("/", validateSupplierData, supplierController.createSupplier);
-
-// Dodawanie nowego dostawcy z automatycznie wygenerowanym hasłem
-router.post("/with-password", validateSupplierData, supplierController.createSupplierWithPassword);
-
-// Aktualizacja dostawcy
-router.put("/:id", validateSupplierData, supplierController.updateSupplier);
-
-// Usunięcie dostawcy
-router.delete("/:id", supplierController.deleteSupplier);
 
 export default router;

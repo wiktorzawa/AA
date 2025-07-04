@@ -1,209 +1,341 @@
-import type { FC } from "react";
-import { useState } from "react";
-import { Button, Card, Label, Alert, FileInput } from "flowbite-react";
-import { HiCloudUpload, HiCheck, HiX } from "react-icons/hi";
-import { uploadDeliveryFile } from "../../api/deliveryApi";
+import {
+  Alert,
+  Button,
+  Card,
+  FileInput,
+  Label,
+  Select,
+  Textarea,
+  TextInput,
+  Spinner,
+} from "flowbite-react";
+import { useState, useEffect, type FC } from "react";
+import { HiCheck, HiX } from "react-icons/hi";
+import { useQuery } from "@tanstack/react-query";
+import { pobierzDostawcow } from "@/api/supplierApi";
+import { QUERY_KEYS } from "@/constants";
+import { useAuthStore } from "../../stores/authStore";
+import { previewDeliveryFile, uploadDeliveryFile } from "@/api/deliveryApi";
+import { logger } from "@/utils/logger";
+
+// Interface dla danych podglądu dostawy
+interface DeliveryPreviewData {
+  fileName: string;
+  detectedDeliveryNumber?: string;
+  totalProducts: number;
+  estimatedValue?: number;
+  validationWarnings?: string[];
+  status?: string;
+}
 
 export const AdminAddDeliveryPage: FC = () => {
-  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
-  const [isUploading, setIsUploading] = useState(false);
+  const [file, setFile] = useState<File | null>(null);
+  const [isProcessing, setIsProcessing] = useState(false);
   const [uploadSuccess, setUploadSuccess] = useState(false);
   const [uploadError, setUploadError] = useState<string | null>(null);
+  const [supplierId, setSupplierId] = useState<string>("");
+  const [deliveryNotes, setDeliveryNotes] = useState<string>("");
+  const [previewData, setPreviewData] = useState<DeliveryPreviewData | null>(
+    null,
+  );
+  const [confirmDeliveryNumber, setConfirmDeliveryNumber] =
+    useState<string>("");
 
-  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      const files = Array.from(e.target.files);
-      const excelFiles = files.filter(
-        (file) =>
-          file.type === "application/vnd.ms-excel" ||
-          file.type ===
-            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" ||
-          file.type === "application/vnd.ms-excel.sheet.macroEnabled.12" ||
-          file.name.endsWith(".xls") ||
-          file.name.endsWith(".xlsx") ||
-          file.name.endsWith(".xlsm"),
-      );
+  const user = useAuthStore((state) => state.user);
 
-      if (excelFiles.length !== files.length) {
-        setUploadError("Tylko pliki Excel są dozwolone");
-        return;
-      }
+  // Pobieranie listy dostawców z API
+  const {
+    data: suppliers,
+    isLoading: isSuppliersLoading,
+    isError: isSuppliersError,
+  } = useQuery({
+    queryKey: QUERY_KEYS.SUPPLIERS,
+    queryFn: pobierzDostawcow,
+  });
 
-      setSelectedFiles((prev) => [...prev, ...excelFiles]);
-      setUploadError(null);
+  useEffect(() => {
+    // Jeśli zalogowany jest dostawca, automatycznie ustaw jego ID
+    // Wykonaj to po pomyślnym załadowaniu danych dostawców
+    if (user?.rola_uzytkownika === "supplier" && suppliers) {
+      setSupplierId(user.id_uzytkownika);
     }
-  };
+  }, [user, suppliers]);
 
-  const removeFile = (index: number) => {
-    setSelectedFiles((prev) => prev.filter((_, i) => i !== index));
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const allowedTypes = [
+      "application/vnd.ms-excel",
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "application/vnd.ms-excel.sheet.macroEnabled.12",
+    ];
+    if (
+      !allowedTypes.includes(file.type) &&
+      !/\.(xls|xlsx|xlsm)$/i.test(file.name)
+    ) {
+      setUploadError("Tylko pliki Excel (.xls, .xlsx, .xlsm) są dozwolone.");
+      return;
+    }
+
+    setFile(file);
+    setUploadError(null);
+    setPreviewData(null);
+    setIsProcessing(true);
+
+    try {
+      const result = await previewDeliveryFile(file);
+      if (result.success) {
+        setPreviewData(result.data);
+        if (result.data?.status === "requires_manual_input") {
+          setUploadError(
+            "Nie udało się automatycznie wykryć numeru dostawy. Wprowadź go ręcznie.",
+          );
+        }
+      } else {
+        setUploadError(result.error || "Błąd podczas analizy pliku.");
+      }
+    } catch {
+      setUploadError("Wystąpił krytyczny błąd podczas przetwarzania pliku.");
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (selectedFiles.length === 0) {
-      setUploadError("Proszę wybrać przynajmniej jeden plik Excel");
+    if (!file || !supplierId) {
+      setUploadError("Proszę wybrać plik i dostawcę.");
+      return;
+    }
+    if (
+      previewData?.status === "requires_manual_input" &&
+      !confirmDeliveryNumber
+    ) {
+      setUploadError("Proszę potwierdzić numer dostawy.");
       return;
     }
 
-    setIsUploading(true);
+    setIsProcessing(true);
     setUploadError(null);
 
     try {
-      // Przesyłanie pierwszego pliku do prawdziwego API
-      console.log(
-        "🚀 [AdminUpload]: Rozpoczynam upload pliku:",
-        selectedFiles[0].name,
-      );
-
       const result = await uploadDeliveryFile({
-        file: selectedFiles[0],
+        file: file,
+        supplierId: supplierId,
+        confirmDeliveryNumber: confirmDeliveryNumber || undefined,
       });
-
-      console.log("📤 [AdminUpload]: Wynik uploadu:", result);
 
       if (result.success) {
         setUploadSuccess(true);
-        setSelectedFiles([]);
-        console.log("✅ [AdminUpload]: Upload zakończony sukcesem");
+        setFile(null);
+        setPreviewData(null);
+        setConfirmDeliveryNumber("");
+        setDeliveryNotes("");
         setTimeout(() => setUploadSuccess(false), 5000);
       } else {
         setUploadError(
-          result.error || "Wystąpił błąd podczas przesyłania pliku",
+          result.error || "Wystąpił błąd podczas przesyłania pliku.",
         );
-        console.error("❌ [AdminUpload]: Błąd uploadu:", result.error);
       }
     } catch (error) {
-      console.error("❌ [AdminUpload]: Wyjątek podczas uploadu:", error);
-      setUploadError("Wystąpił błąd podczas przesyłania pliku");
+      logger.error("Upload failed", { error });
+      setUploadError("Wystąpił krytyczny błąd serwera.");
     } finally {
-      setIsUploading(false);
+      setIsProcessing(false);
     }
   };
 
+  const renderFilePreview = () => (
+    <div className="mt-4 rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800">
+      <h4 className="mb-3 text-lg font-semibold text-gray-900 dark:text-white">
+        Podgląd Pliku
+      </h4>
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <p>
+          <span className="font-semibold">Nazwa Pliku:</span>{" "}
+          {previewData.fileName}
+        </p>
+        <p>
+          <span className="font-semibold">Wykryty Nr Dostawy:</span>{" "}
+          {previewData.detectedDeliveryNumber || "Brak"}
+        </p>
+        <p>
+          <span className="font-semibold">Liczba Produktów:</span>{" "}
+          {previewData.totalProducts}
+        </p>
+        <p>
+          <span className="font-semibold">Szacowana Wartość:</span>{" "}
+          {previewData.estimatedValue?.toFixed(2)} EUR
+        </p>
+      </div>
+      {previewData.validationWarnings?.length > 0 && (
+        <Alert color="warning" withBorderAccent className="mt-4">
+          <h3 className="font-semibold">Sugestie:</h3>
+          <ul className="list-inside list-disc">
+            {previewData.validationWarnings.map((warn: string, i: number) => (
+              <li key={i}>{warn}</li>
+            ))}
+          </ul>
+        </Alert>
+      )}
+    </div>
+  );
+
   return (
-    <div className="min-h-screen bg-gray-50 p-4 dark:bg-gray-900">
+    <section className="min-h-screen bg-gray-50 p-4 dark:bg-gray-900">
       <div className="mx-auto max-w-4xl">
-        <div className="mb-6">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-            Dodaj Nową Dostawę
-          </h1>
-          <p className="mt-2 text-gray-600 dark:text-gray-400">
-            Prześlij pliki Excel z danymi dostawy
-          </p>
-        </div>
+        <h1 className="mb-2 text-3xl font-bold text-gray-900 dark:text-white">
+          Dodaj Nową Dostawę
+        </h1>
+        <p className="mb-6 text-gray-600 dark:text-gray-400">
+          Prześlij plik Excel, aby zaimportować dane nowej dostawy do systemu.
+        </p>
 
         {uploadSuccess && (
-          <Alert color="success" className="mb-6">
-            <HiCheck className="h-4 w-4" />
-            <span className="ml-2">
-              Dostawa została pomyślnie dodana do systemu!
+          <Alert
+            color="success"
+            onDismiss={() => setUploadSuccess(false)}
+            className="mb-6"
+          >
+            <HiCheck className="h-5 w-5" />
+            <span className="ml-2 font-medium">
+              Dostawa została pomyślnie dodana!
             </span>
           </Alert>
         )}
+        {uploadError && (
+          <Alert
+            color="failure"
+            onDismiss={() => setUploadError(null)}
+            className="mb-6"
+          >
+            <HiX className="h-5 w-5" />
+            <span className="ml-2 font-medium">{uploadError}</span>
+          </Alert>
+        )}
 
-        <Card>
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Dropzone - Flowbite Pro Pattern */}
-            <div>
-              <h3 className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
-                Pliki Excel dostawy
-              </h3>
-
-              <div className="flex w-full items-center justify-center">
+        <form onSubmit={handleSubmit}>
+          <Card>
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+              {/* Sekcja Wyboru Dostawcy */}
+              <div className="md:col-span-2">
                 <Label
-                  htmlFor="dropzone-file"
-                  className="flex h-64 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+                  htmlFor="supplier"
+                  className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                    <HiCloudUpload className="mb-3 h-10 w-10 text-gray-400" />
-                    <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                      <span className="font-semibold">
-                        Kliknij aby przesłać
-                      </span>{" "}
-                      lub przeciągnij i upuść
-                    </p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">
-                      Tylko pliki Excel: XLS, XLSX, XLSM (MAX. 50MB na plik)
-                    </p>
-                  </div>
-                  <FileInput
-                    id="dropzone-file"
-                    className="hidden"
-                    multiple
-                    accept=".xls,.xlsx,.xlsm"
-                    onChange={handleFileSelect}
-                  />
+                  Wybierz dostawcę
                 </Label>
+                <Select
+                  id="supplier"
+                  required
+                  value={supplierId}
+                  onChange={(e) => setSupplierId(e.target.value)}
+                  disabled={
+                    isProcessing ||
+                    isSuppliersLoading ||
+                    user?.rola_uzytkownika === "supplier"
+                  }
+                >
+                  <option value="" disabled>
+                    {isSuppliersLoading
+                      ? "Ładowanie..."
+                      : "-- Wybierz z listy --"}
+                  </option>
+                  {suppliers?.map((supplier) => (
+                    <option
+                      key={supplier.id_dostawcy}
+                      value={supplier.id_dostawcy}
+                    >
+                      {supplier.nazwa_firmy}
+                    </option>
+                  ))}
+                </Select>
+                {isSuppliersError && (
+                  <p className="mt-1 text-sm text-red-600 dark:text-red-400">
+                    Błąd podczas ładowania listy dostawców
+                  </p>
+                )}
               </div>
 
-              {uploadError && (
-                <Alert color="failure" className="mt-4">
-                  <HiX className="h-4 w-4" />
-                  <span className="ml-2">{uploadError}</span>
-                </Alert>
+              {/* Sekcja Uploadu Pliku */}
+              <div className="md:col-span-2">
+                <Label
+                  htmlFor="file-upload"
+                  className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Plik dostawy
+                </Label>
+                <FileInput
+                  id="file-upload"
+                  onChange={handleFileChange}
+                  disabled={isProcessing}
+                />
+                <p className="mt-1 text-sm text-gray-500 dark:text-gray-300">
+                  Tylko pliki Excel: XLS, XLSX, XLSM (MAX. 10MB)
+                </p>
+              </div>
+
+              {isProcessing && !previewData && (
+                <p className="text-center md:col-span-2">
+                  Analizowanie pliku...
+                </p>
               )}
 
-              {/* Lista wybranych plików */}
-              {selectedFiles.length > 0 && (
-                <div className="mt-4">
-                  <h4 className="mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                    Wybrane pliki ({selectedFiles.length})
-                  </h4>
-                  <div className="space-y-2">
-                    {selectedFiles.map((file, index) => (
-                      <div
-                        key={index}
-                        className="flex items-center justify-between rounded-lg border border-gray-200 bg-white p-3 dark:border-gray-700 dark:bg-gray-800"
-                      >
-                        <div className="flex items-center space-x-3">
-                          <div className="flex-shrink-0">
-                            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-100 dark:bg-blue-900">
-                              <span className="text-xs font-medium text-blue-600 dark:text-blue-400">
-                                {file.name.split(".").pop()?.toUpperCase() ||
-                                  "XLS"}
-                              </span>
-                            </div>
-                          </div>
-                          <div>
-                            <p className="text-sm font-medium text-gray-900 dark:text-white">
-                              {file.name}
-                            </p>
-                            <p className="text-xs text-gray-500 dark:text-gray-400">
-                              {(file.size / 1024 / 1024).toFixed(2)} MB
-                            </p>
-                          </div>
-                        </div>
-                        <Button
-                          size="xs"
-                          color="failure"
-                          onClick={() => removeFile(index)}
-                          disabled={isUploading}
-                        >
-                          <HiX className="h-3 w-3" />
-                        </Button>
-                      </div>
-                    ))}
-                  </div>
+              {previewData && (
+                <div className="md:col-span-2">{renderFilePreview()}</div>
+              )}
+
+              {previewData?.status === "requires_manual_input" && (
+                <div className="md:col-span-2">
+                  <Label
+                    htmlFor="confirm-delivery-number"
+                    className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                  >
+                    Potwierdź numer dostawy
+                  </Label>
+                  <TextInput
+                    id="confirm-delivery-number"
+                    placeholder="Wprowadź numer dostawy, np. PL12345678"
+                    value={confirmDeliveryNumber}
+                    onChange={(e) => setConfirmDeliveryNumber(e.target.value)}
+                    required
+                  />
                 </div>
               )}
+
+              {/* Sekcja Uwag */}
+              <div className="md:col-span-2">
+                <Label
+                  htmlFor="delivery-notes"
+                  className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Uwagi do dostawy (opcjonalnie)
+                </Label>
+                <Textarea
+                  id="delivery-notes"
+                  placeholder="Dodaj dodatkowe informacje dotyczące tej dostawy..."
+                  rows={4}
+                  value={deliveryNotes}
+                  onChange={(e) => setDeliveryNotes(e.target.value)}
+                  disabled={isProcessing}
+                />
+              </div>
             </div>
 
-            {/* Przyciski akcji */}
-            <div className="flex justify-end space-x-4 border-t pt-6 dark:border-gray-700">
-              <Button type="button" color="gray" disabled={isUploading}>
+            {/* Przyciski Akcji */}
+            <div className="mt-6 flex items-center justify-end space-x-4 border-t border-gray-200 pt-4 dark:border-gray-700">
+              <Button type="button" color="gray" disabled={isProcessing}>
                 Anuluj
               </Button>
-              <Button
-                type="submit"
-                disabled={isUploading || selectedFiles.length === 0}
-              >
-                {isUploading ? "Przesyłanie..." : "Dodaj Dostawę"}
+              <Button type="submit" disabled={isProcessing}>
+                {isProcessing && <Spinner size="sm" className="mr-3" />}
+                Zatwierdź dostawę
               </Button>
             </div>
-          </form>
-        </Card>
+          </Card>
+        </form>
       </div>
-    </div>
+    </section>
   );
 };

@@ -1,5 +1,7 @@
 // backend/src/types/auth.types.ts
-import { Request } from "express";
+import type { AuthPracownicyAttributes } from "../models/auth/AuthPracownicy";
+import type { AuthDostawcyAttributes } from "../models/auth/AuthDostawcy";
+import type { AuthDaneAutoryzacjiAttributes } from "../models/auth/AuthDaneAutoryzacji";
 
 export type UserRole = "admin" | "staff" | "supplier";
 
@@ -30,11 +32,6 @@ export interface TokenPayload {
   rola_uzytkownika: UserRole;
 }
 
-// Rozszerzenie Request o dane użytkownika
-export interface AuthenticatedRequest extends Request {
-  user?: TokenPayload;
-}
-
 // 🆕 NOWE INTERFEJSY DLA SERVICE LAYER
 export interface CreatePracownikData {
   imie: string;
@@ -63,28 +60,13 @@ export interface CreateDostawcaData {
 }
 
 export interface CreatePracownikResponse {
-  pracownik: any; // Will be typed properly when we import model types
-  daneAutoryzacji: any; // Will be typed properly when we import model types
+  pracownik: AuthPracownicyAttributes;
+  daneAutoryzacji: AuthDaneAutoryzacjiAttributes;
   wygenerowane_haslo?: string; // Jeśli hasło zostało wygenerowane
 }
 
 export interface CreateDostawcaResponse {
-  dostawca: any; // Will be typed properly when we import model types
-  daneAutoryzacji: any; // Will be typed properly when we import model types
+  dostawca: AuthDostawcyAttributes;
+  daneAutoryzacji: AuthDaneAutoryzacjiAttributes;
   wygenerowane_haslo?: string; // Jeśli hasło zostało wygenerowane
-}
-
-// 🔄 LEGACY INTERFACES (dla kompatybilności z istniejącym kodem)
-export interface LegacyLoginRequest {
-  username: string;
-  password: string;
-}
-
-export interface LegacyLoginResponse {
-  success: boolean;
-  userRole?: UserRole;
-  userId?: string;
-  token?: string;
-  refresh_token?: string;
-  error?: string;
 }

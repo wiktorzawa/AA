@@ -1,14 +1,36 @@
 import type { FC } from "react";
 import { useState } from "react";
 import { Button, Card, Label, Alert, FileInput } from "flowbite-react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { HiCloudUpload, HiCheck, HiX } from "react-icons/hi";
+import { useAuthStore } from "../../stores/authStore";
 import { uploadDeliveryFile } from "../../api/deliveryApi";
+import { logger } from "../../utils/logger";
 
 export const SupplierAddDeliveryPage: FC = () => {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
-  const [isUploading, setIsUploading] = useState(false);
   const [uploadSuccess, setUploadSuccess] = useState(false);
-  const [uploadError, setUploadError] = useState<string | null>(null);
+  const user = useAuthStore((state) => state.user);
+
+  const queryClient = useQueryClient();
+
+  const uploadMutation = useMutation({
+    mutationFn: uploadDeliveryFile,
+    onSuccess: (result) => {
+      logger.info("SupplierUpload: Upload zakończony sukcesem", { result });
+      setUploadSuccess(true);
+      setSelectedFiles([]);
+
+      // Unieważnienie zapytań deliveries - automatyczne odświeżenie listy dostaw
+      queryClient.invalidateQueries({ queryKey: ["deliveries"] });
+
+      // Ukrycie komunikatu sukcesu po 5 sekundach
+      setTimeout(() => setUploadSuccess(false), 5000);
+    },
+    onError: (error) => {
+      logger.error("SupplierUpload: Błąd uploadu", { error });
+    },
+  });
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -25,12 +47,12 @@ export const SupplierAddDeliveryPage: FC = () => {
       );
 
       if (excelFiles.length !== files.length) {
-        setUploadError("Tylko pliki Excel są dozwolone");
+        // Można dodać toast notification lub inny sposób powiadomienia
+        console.warn("Tylko pliki Excel są dozwolone");
         return;
       }
 
       setSelectedFiles((prev) => [...prev, ...excelFiles]);
-      setUploadError(null);
     }
   };
 
@@ -42,43 +64,25 @@ export const SupplierAddDeliveryPage: FC = () => {
     e.preventDefault();
 
     if (selectedFiles.length === 0) {
-      setUploadError("Proszę wybrać przynajmniej jeden plik Excel");
+      console.warn("Proszę wybrać przynajmniej jeden plik Excel");
       return;
     }
 
-    setIsUploading(true);
-    setUploadError(null);
-
-    try {
-      // Przesyłanie pierwszego pliku do prawdziwego API
-      console.log(
-        "🚀 [SupplierUpload]: Rozpoczynam upload pliku:",
-        selectedFiles[0].name,
-      );
-
-      const result = await uploadDeliveryFile({
-        file: selectedFiles[0],
-      });
-
-      console.log("📤 [SupplierUpload]: Wynik uploadu:", result);
-
-      if (result.success) {
-        setUploadSuccess(true);
-        setSelectedFiles([]);
-        console.log("✅ [SupplierUpload]: Upload zakończony sukcesem");
-        setTimeout(() => setUploadSuccess(false), 5000);
-      } else {
-        setUploadError(
-          result.error || "Wystąpił błąd podczas przesyłania pliku",
-        );
-        console.error("❌ [SupplierUpload]: Błąd uploadu:", result.error);
-      }
-    } catch (error) {
-      console.error("❌ [SupplierUpload]: Wyjątek podczas uploadu:", error);
-      setUploadError("Wystąpił błąd podczas przesyłania pliku");
-    } finally {
-      setIsUploading(false);
+    if (!user) {
+      console.error("Brak zalogowanego użytkownika, nie można wysłać pliku.");
+      return;
     }
+
+    // Przesyłanie pierwszego pliku przez useMutation
+    logger.info("SupplierUpload: Rozpoczynam upload pliku", {
+      fileName: selectedFiles[0].name,
+      supplierId: user.id_uzytkownika,
+    });
+
+    uploadMutation.mutate({
+      file: selectedFiles[0],
+      supplierId: user.id_uzytkownika,
+    });
   };
 
   return (
@@ -137,10 +141,14 @@ export const SupplierAddDeliveryPage: FC = () => {
                 </Label>
               </div>
 
-              {uploadError && (
+              {uploadMutation.isError && (
                 <Alert color="failure" className="mt-4">
                   <HiX className="h-4 w-4" />
-                  <span className="ml-2">{uploadError}</span>
+                  <span className="ml-2">
+                    {uploadMutation.error instanceof Error
+                      ? uploadMutation.error.message
+                      : "Wystąpił błąd podczas przesyłania pliku"}
+                  </span>
                 </Alert>
               )}
 
@@ -178,7 +186,7 @@ export const SupplierAddDeliveryPage: FC = () => {
                           size="xs"
                           color="failure"
                           onClick={() => removeFile(index)}
-                          disabled={isUploading}
+                          disabled={uploadMutation.isPending}
                         >
                           <HiX className="h-3 w-3" />
                         </Button>
@@ -191,14 +199,20 @@ export const SupplierAddDeliveryPage: FC = () => {
 
             {/* Przyciski akcji */}
             <div className="flex justify-end space-x-4 border-t pt-6 dark:border-gray-700">
-              <Button type="button" color="gray" disabled={isUploading}>
+              <Button
+                type="button"
+                color="gray"
+                disabled={uploadMutation.isPending}
+              >
                 Anuluj
               </Button>
               <Button
                 type="submit"
-                disabled={isUploading || selectedFiles.length === 0}
+                disabled={
+                  uploadMutation.isPending || selectedFiles.length === 0
+                }
               >
-                {isUploading ? "Przesyłanie..." : "Dodaj Dostawę"}
+                {uploadMutation.isPending ? "Przesyłanie..." : "Dodaj Dostawę"}
               </Button>
             </div>
           </form>

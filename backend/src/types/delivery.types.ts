@@ -1,10 +1,12 @@
+import { DeliveryStatus } from "../constants";
+
 // Status types for deliveries
-export type DeliveryStatus =
-  | "nowa"
-  | "trwa weryfikacja"
-  | "zweryfikowano"
-  | "raport"
-  | "zakończono";
+// export type DeliveryStatus =
+//   | "nowa"
+//   | "trwa weryfikacja"
+//   | "zweryfikowano"
+//   | "raport"
+//   | "zakończono";
 export type ProductVerificationStatus =
   | "nowy"
   | "w_trakcie"
@@ -37,6 +39,7 @@ export interface FilePreviewResponse {
   productSample: PreviewProduct[];
   columnMapping: ColumnMapping;
   validationWarnings?: string[];
+  validationDetails?: ValidationDetails;
 }
 
 export interface PreviewProduct {
@@ -97,34 +100,8 @@ export interface CreateProductRequest {
   kategoria_produktu?: string;
 }
 
-export interface CreateInvoiceRequest {
-  id_dostawcy: string;
-  id_dostawy?: string;
-  numer_faktury: string;
-  data_faktury: string; // ISO date string
-  data_platnosci: string; // ISO date string
-  kwota_brutto_razem: number;
-  kwota_netto_razem: number;
-  waluta?: string;
-}
-
-export interface CreateFinancesRequest {
-  id_dostawy: string;
-  suma_produktow: number;
-  wartosc_produktow_spec: number;
-  procent_wartosci: number;
-  waluta?: string;
-  kurs_wymiany?: number;
-  stawka_vat?: number;
-}
-
 export interface UpdateDeliveryStatusRequest {
   status_weryfikacji: DeliveryStatus;
-}
-
-export interface UpdateProductStatusRequest {
-  status_weryfikacji: ProductVerificationStatus;
-  uwagi_weryfikacji?: string;
 }
 
 export interface UpdateInvoiceStatusRequest {
@@ -279,5 +256,59 @@ export interface PaginatedResponse<T> {
     limit: number;
     total: number;
     totalPages: number;
+  };
+}
+
+export interface ValidationDetails {
+  criticalErrors: ValidationError[];
+  warnings: ValidationError[];
+  missingDataSummary: {
+    productsWithoutPalette: number;
+    productsWithoutEAN: number;
+    productsWithoutPrice: number;
+    productsWithoutQuantity: number;
+  };
+  dataQualityScore: number; // 0-100
+  recommendedAction: "proceed" | "review_required" | "manual_correction_needed";
+}
+
+export interface ValidationError {
+  type: "critical" | "warning";
+  code: string;
+  message: string;
+  field?: string;
+  rowNumber?: number;
+  affectedProducts?: number;
+}
+
+export interface ConfirmDeliveryRequest {
+  fileName: string;
+  detectedDeliveryNumber?: string | null;
+  confirmedDeliveryNumber?: string;
+  detectedPaletteNumbers?: string[];
+  confirmedPaletteNumbers?: string[];
+  productCorrections?: ProductCorrection[];
+  bypassValidation?: boolean;
+}
+
+export interface ProductCorrection {
+  index: number; // Index in original products array
+  corrections: Partial<PreviewProduct>;
+}
+
+export interface ConfirmDeliveryResponse {
+  id_dostawy: string;
+  id_dostawcy: string;
+  nazwa_pliku: string;
+  nr_palet_dostawy?: string;
+  status_weryfikacji: DeliveryStatus;
+  liczba_produktow: number;
+  wartosc_calkowita: number;
+  url_pliku_S3: string;
+  data_utworzenia: string;
+  validationSummary: {
+    totalWarnings: number;
+    totalErrors: number;
+    appliedCorrections: number;
   };
 }

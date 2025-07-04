@@ -1,44 +1,45 @@
-import "dotenv/config";
 import express, { Express, Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import path from "path";
+
+// --- UJEDNOLICONA KONFIGURACJA ZMIENNYCH ŚRODOWISKOWYCH ---
+// Konfiguracja dotenv musi być na samym początku, aby wszystkie moduły miały dostęp
+dotenv.config({ path: path.resolve(__dirname, "../../.env") });
+
+// --- DODANY LOG DO DEBUGOWANIA ---
+console.log("--- DEBUG: Wartości zmiennych środowiskowych z .env ---");
+console.log(`DB_HOST: ${process.env.DB_HOST}`);
+console.log(`DB_USER: ${process.env.DB_USER}`);
+console.log(`DB_NAME: ${process.env.DB_NAME}`);
+console.log("-----------------------------------------------------");
+
 import { config } from "./config/config";
+import { TIME_LIMITS } from "./constants";
 import session from "express-session";
 import crypto from "crypto"; // Do generowania secret
 import { sessionCleaner, errorHandler, requestLogger } from "./middleware"; // Import nowych middleware
 import { initializeDatabase } from "./config/database";
+import { logger } from "./utils/logger";
 
-// --- Konfiguracja i ładowanie zmiennych ---
-console.log("🔧 [startup]: Ładuję zmienne środowiskowe...");
-// Najpierw wczytaj główny .env z katalogu nadrzędnego
-dotenv.config({ path: path.resolve(__dirname, "../../.env") });
-console.log(
-  "📁 [startup]: Ładuję główny .env z:",
-  path.resolve(__dirname, "../../.env"),
-);
-// Następnie wczytaj lokalny backend/.env (może nadpisać niektóre zmienne jak PORT)
-console.log("📁 [startup]: Ładuję lokalny backend/.env");
-dotenv.config(); // Domyślnie szuka .env w bieżącym katalogu (backend)
+logger.info("Zmienne środowiskowe załadowane");
+logger.debug("Sprawdzenie załadowanego portu", { port: process.env.PORT });
 
-console.log("✅ [startup]: Zmienne środowiskowe załadowane");
-
-console.log(
-  "DEBUG: ALLEGRO_REDIRECT_URI from process.env in server.ts:",
-  process.env.ALLEGRO_REDIRECT_URI,
-);
+logger.debug("ALLEGRO_REDIRECT_URI from process.env in server.ts", {
+  allegroRedirectUri: process.env.ALLEGRO_REDIRECT_URI,
+});
 
 // --- Inicjalizacja Aplikacji Express ---
-console.log("🚀 [startup]: Tworzę aplikację Express...");
+logger.info("Tworzę aplikację Express");
 export const app: Express = express();
 const PORT = process.env.PORT || 3001;
-console.log("🌐 [startup]: Port serwera:", PORT);
+logger.info("Port serwera", { port: PORT });
 
 // --- Konfiguracja Middleware ---
-console.log("🔧 [middleware]: Konfiguruję middleware...");
+logger.info("Konfiguruję middleware");
 
 // Konfiguracja CORS
-console.log("🔧 [middleware]: Konfiguruję CORS...");
+logger.info("Konfiguruję CORS");
 const corsOptions = {
   origin: config.frontendUrl,
   credentials: true,
@@ -46,15 +47,15 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Parsery
-console.log("🔧 [middleware]: Konfiguruję JSON parser...");
+logger.info("Konfiguruję JSON parser");
 app.use(express.json());
 
 // Logger
-console.log("🔧 [middleware]: Konfiguruję logger żądań...");
+logger.info("Konfiguruję logger żądań");
 app.use(requestLogger);
 
 // Zarządzanie sesjami
-console.log("🔧 [middleware]: Konfiguruję automatyczne zarządzanie sesjami...");
+logger.info("Konfiguruję automatyczne zarządzanie sesjami");
 const sessionSecret =
   process.env.SESSION_SECRET || crypto.randomBytes(32).toString("hex");
 
@@ -66,56 +67,63 @@ app.use(
     cookie: {
       secure: process.env.NODE_ENV === "production",
       httpOnly: true,
-      maxAge: 24 * 60 * 60 * 1000, // 24 godziny
+      maxAge: TIME_LIMITS.SESSION_MAX_AGE,
     },
   }),
 );
 
 app.use(sessionCleaner);
 
-// --- Routes ---
-console.log("🛣️ [routes]: Konfiguruję routing...");
-// Importuj główny plik z routingiem
-import routes from "./routes";
-console.log("🛣️ [routes]: Dodaję główny router /api...");
-app.use("/api", routes);
-
-// Prosty endpoint testowy
-app.get("/api/ping", (req: Request, res: Response) => {
-  res.json({ message: "pong" });
-});
-
-// Strona główna
-app.get("/", (req: Request, res: Response) => {
-  res.send("Backend MS-BOX");
-});
+// --- Globalny handler błędów ---
+// Przeniesiony tutaj, aby łapać błędy z middleware, ale przed routingiem
+app.use(errorHandler);
 
 // --- Inicjalizacja i Start Serwera ---
 
-// Globalny handler błędów (musi być na końcu)
-console.log("🔧 [middleware]: Konfiguruję globalny handler błędów...");
-app.use(errorHandler);
-
 // Funkcja startowa serwera
 export const startServer = async () => {
-  console.log("🚀 [server]: Rozpoczynam uruchamianie serwera...");
+  logger.info("Rozpoczynam uruchamianie serwera");
   try {
-    console.log("🗄️ [server]: Inicjalizuję bazę danych...");
+    logger.info("Inicjalizuję bazę danych");
     await initializeDatabase();
-    console.log("✅ [server]: Baza danych zainicjalizowana pomyślnie");
+
+    // --- Routes ---
+    // Ładowane dopiero po pomyślnej inicjalizacji bazy danych
+    logger.info("Konfiguruję routing");
+    try {
+      const routes = (await import("./routes")).default;
+      app.use("/api", routes);
+    } catch (error) {
+      // Używamy console.error, aby mieć pewność, że log zostanie wyświetlony
+      console.error("!!! SZCZEGÓŁOWY BŁĄD IMPORTOWANIA TRAS:", error);
+      logger.error("Błąd krytyczny podczas importowania modułu tras.", {
+        error,
+      });
+      process.exit(1);
+    }
+
+    // Prosty endpoint testowy
+    app.get("/api/ping", (req: Request, res: Response) => {
+      res.json({ message: "pong" });
+    });
+
+    // Strona główna
+    app.get("/", (req: Request, res: Response) => {
+      res.send("Backend MS-BOX");
+    });
 
     app.listen(PORT, () => {
-      console.log(`⚡️ [server]: Serwer działa na http://localhost:${PORT}`);
-      console.log("🎉 [server]: Backend gotowy do przyjmowania żądań!");
+      logger.info("Serwer działa", { url: `http://localhost:${PORT}` });
+      logger.info("Backend gotowy do przyjmowania żądań");
     });
   } catch (error) {
-    console.error("❌ [server]: Błąd podczas uruchamiania serwera:", error);
+    logger.error("Błąd podczas uruchamiania serwera", { error });
     process.exit(1);
   }
 };
 
 // Uruchomienie serwera, jeśli plik jest wykonywany bezpośrednio
 if (require.main === module) {
-  console.log("🎬 [startup]: Wywołuję startServer()...");
+  logger.info("Wywołuję startServer");
   startServer();
 }
