@@ -243,10 +243,21 @@ export class DeliveryController {
       // Sprawdź potwierdzenie numeru dostawy (opcjonalne dla kompatybilności wstecznej)
       const confirmDeliveryNumber = req.body.confirmDeliveryNumber;
 
+      // Odczytaj i sparsuj mapowanie kolumn, jeśli zostało przesłane
+      let columnMapping;
+      if (req.body.columnMapping) {
+        try {
+          columnMapping = JSON.parse(req.body.columnMapping);
+        } catch (error) {
+          throw new AppError("Nieprawidłowy format mapowania kolumn.", 400);
+        }
+      }
+
       const result = await this.deliveryService.uploadAndProcessFile(
         file!,
         supplierId,
         confirmDeliveryNumber,
+        columnMapping,
       );
 
       logger.info("DeliveryController sending response", { statusCode: 201 });

@@ -10,6 +10,7 @@ import {
 } from "@/api/staffApi";
 import { QUERY_KEYS } from "@/constants";
 import { logger } from "@/utils/logger";
+import { toast } from "react-hot-toast";
 
 /**
  * Hook do pobierania wszystkich pracowników
@@ -91,16 +92,9 @@ export const useDeleteStaffMember = () => {
 
   return useMutation({
     mutationFn: (id: string) => usunPracownika(id),
-    onSuccess: (result, id) => {
-      logger.info("Staff member deleted successfully", { id });
-
-      // Invalidate lista pracowników i usuń konkretny pracownik z cache
-      queryClient.invalidateQueries({
-        queryKey: QUERY_KEYS.STAFF,
-      });
-      queryClient.removeQueries({
-        queryKey: [...QUERY_KEYS.STAFF, id],
-      });
+    onSuccess: (_result, id) => {
+      toast.success(`Pomyślnie usunięto pracownika o ID: ${id}`);
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.STAFF] });
     },
     onError: (error) => {
       logger.error("Failed to delete staff member", { error });

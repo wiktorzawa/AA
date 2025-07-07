@@ -13,7 +13,11 @@ export type ProductVerificationStatus =
   | "zatwierdzony"
   | "odrzucony";
 export type InvoicePaymentStatus = "pending" | "paid" | "overdue" | "cancelled";
-export type PreviewStatus = "success" | "requires_manual_input";
+export type PreviewStatus =
+  | "SUKCES"
+  | "WYMAGA_POTWIERDZENIA"
+  | "WYMAGA_MAPOWANIA"
+  | "BŁĄD";
 
 // File upload types
 export interface FileUploadResponse {
@@ -29,15 +33,17 @@ export interface FileUploadResponse {
 }
 
 export interface FilePreviewResponse {
-  status: PreviewStatus;
-  missingFields?: ("deliveryNumber" | "paletteNumber")[];
-  detectedDeliveryNumber?: string | null;
-  detectedPaletteNumbers?: string[];
-  fileName: string;
+  analysisStatus: PreviewStatus;
+  products: PreviewProduct[];
+  availableColumns: string[];
+  columnMapping: ColumnMapping;
+  deliveryNumber: string | null;
+  paletteNumbers: string[];
   totalProducts: number;
   estimatedValue: number;
+  fileName: string;
+  hasHeaders: boolean;
   productSample: PreviewProduct[];
-  columnMapping: ColumnMapping;
   validationWarnings?: string[];
   validationDetails?: ValidationDetails;
 }
@@ -72,10 +78,12 @@ export interface ColumnMapping {
 
 export interface ProcessedExcelData {
   deliveryNumber: string | null;
-  paletteNumbers: string[];
   products: PreviewProduct[];
+  paletteNumbers: string[];
   totalValue: number;
   columnMapping: ColumnMapping;
+  availableColumns: string[];
+  hasHeaders: boolean;
 }
 
 // Request/Response interfaces for API

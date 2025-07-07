@@ -152,12 +152,12 @@ router.post(
 );
 
 /**
- * @route   POST /api/deliveries/upload/preview
+ * @route   POST /api/deliveries/preview
  * @desc    Podgląd pliku dostawy bez zapisywania do bazy
  * @access  Admin, Staff, Supplier
  */
 router.post(
-  "/upload/preview",
+  "/preview",
   upload.fields([
     { name: "deliveryFile", maxCount: 1 },
     { name: "file", maxCount: 1 },
@@ -168,12 +168,12 @@ router.post(
 );
 
 /**
- * @route   POST /api/deliveries/upload/confirm
+ * @route   POST /api/deliveries/confirm
  * @desc    Potwierdza i zapisuje dostawę po weryfikacji
  * @access  Admin, Staff, Supplier
  */
 router.post(
-  "/upload/confirm",
+  "/confirm",
   upload.fields([
     { name: "deliveryFile", maxCount: 1 },
     { name: "file", maxCount: 1 },

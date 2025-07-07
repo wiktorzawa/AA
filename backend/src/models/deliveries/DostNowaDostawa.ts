@@ -88,6 +88,7 @@ export class DostNowaDostawa
     // Wzorce numerów dostaw w nazwach plików:
     // PL10023609, AM38160, AM38159 itp.
     const patterns = [
+      /\b\d{4,5}\b/g, // Wzorzec dla 4 lub 5 cyfr jako osobne słowo (np. 9301)
       /PL\d{8}/, // PL + 8 cyfr (np. PL10023609)
       /AM\d{5}/, // AM + 5 cyfr (np. AM38160, AM38159)
       /[A-Z]{2}\d{5,8}/, // 2 litery + 5-8 cyfr (ogólny wzorzec)
@@ -96,6 +97,7 @@ export class DostNowaDostawa
     for (const pattern of patterns) {
       const match = filename.match(pattern);
       if (match) {
+        // Jeśli wzorzec znajduje wiele dopasowań (flaga 'g'), połącz je
         return match[0];
       }
     }

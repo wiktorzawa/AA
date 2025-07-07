@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getProducts } from "@/api/productsApi";
+import { getAllProducts } from "@/api/productsApi";
 import { getProductsByDeliveryId } from "@/api/deliveryApi";
 import { QUERY_KEYS } from "@/constants";
 
@@ -8,11 +8,21 @@ import { QUERY_KEYS } from "@/constants";
  */
 export const useProducts = (searchTerm?: string, currentPage?: number) => {
   return useQuery({
-    queryKey: [...QUERY_KEYS.PRODUCTS, { searchTerm, currentPage }],
-    queryFn: getProducts,
-    // placeholderData zachowuje poprzednie dane podczas ładowania nowych
+    queryKey: [
+      ...QUERY_KEYS.PRODUCTS,
+      { searchTerm: searchTerm || "", currentPage: currentPage || 1 },
+    ],
+    queryFn: ({ queryKey }) => {
+      const [_key, params] = queryKey as [
+        string[],
+        { searchTerm: string; currentPage: number },
+      ];
+      return getAllProducts({
+        queryKey: ["products", params.searchTerm, params.currentPage],
+      });
+    },
     placeholderData: (previousData) => previousData,
-    staleTime: 1000 * 60 * 2, // Produkty "świeże" przez 2 minuty
+    retry: 1,
   });
 };
 
@@ -21,11 +31,11 @@ export const useProducts = (searchTerm?: string, currentPage?: number) => {
  * @param deliveryId - ID dostawy
  * @param enabled - czy query ma być aktywny (np. tylko gdy rząd rozwinięty)
  */
-export const useProductsByDelivery = (deliveryId: string, enabled = true) => {
+export const useProductsByDelivery = (deliveryId: string, enabled: boolean) => {
   return useQuery({
-    queryKey: [...QUERY_KEYS.PRODUCTS, "delivery", deliveryId],
+    queryKey: [...QUERY_KEYS.DELIVERIES, deliveryId, "products"],
     queryFn: () => getProductsByDeliveryId(deliveryId),
-    enabled: enabled && !!deliveryId, // Fetch tylko gdy enabled=true i mamy deliveryId
+    enabled: !!deliveryId && enabled,
   });
 };
 
@@ -34,8 +44,8 @@ export const useProductsByDelivery = (deliveryId: string, enabled = true) => {
  */
 export const useProductsStats = () => {
   return useQuery({
-    queryKey: QUERY_KEYS.PRODUCTS_STATS,
-    queryFn: getProducts, // Zakładam że istnieje getProductsStats API
-    staleTime: 1000 * 60 * 10, // Stats są "świeże" przez 10 minut
+    queryKey: [...QUERY_KEYS.PRODUCTS_STATS],
+    queryFn: () => getAllProducts({ queryKey: ["products-stats", "", 1] }), // Mock call
+    staleTime: 1000 * 60 * 10,
   });
 };

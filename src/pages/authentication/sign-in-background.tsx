@@ -13,6 +13,7 @@ import { HiInformationCircle } from "react-icons/hi";
 import { zaloguj } from "../../api/authApi";
 import { useAuthStore } from "../../stores/authStore";
 import { logger } from "../../utils/logger";
+import axios from "axios";
 
 const SignInBackgroundPage: FC = function () {
   const navigate = useNavigate();
@@ -103,12 +104,16 @@ const SignInBackgroundPage: FC = function () {
         );
       }
     } catch (err: unknown) {
-      logger.error("Błąd API logowania", { error: err });
-      if (err.response && err.response.data && err.response.data.error) {
-        setError(err.response.data.error);
+      if (axios.isAxiosError(err)) {
+        if (err.response && err.response.data && err.response.data.error) {
+          setError(err.response.data.error);
+        } else {
+          setError("Wystąpił nieoczekiwany błąd podczas logowania.");
+        }
       } else {
-        setError("Błąd połączenia z serwerem. Spróbuj ponownie później.");
+        setError("Wystąpił nieznany błąd.");
       }
+      logger.error("Błąd logowania:", { error: err });
     } finally {
       setLoading(false);
     }

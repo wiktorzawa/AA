@@ -1,7 +1,7 @@
 import type { FC, PropsWithChildren } from "react";
 import { useState } from "react";
 import { StaffSidebar } from "@/components/sidebar/StaffSidebar";
-import { DashboardNavbar } from "@/components/navbar/DashboardNavbar";
+import { DashboardNavbar } from "@/components/sidebar/navbar/DashboardNavbar";
 
 export const StaffLayout: FC<PropsWithChildren> = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);

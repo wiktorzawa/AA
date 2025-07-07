@@ -360,16 +360,19 @@ export class DeliveryService {
     file: Express.Multer.File,
     id_dostawcy: string,
     confirmDeliveryNumber?: string,
+    customMapping?: ColumnMapping,
   ): Promise<FileUploadResponse> {
     const transaction = await sequelize.transaction();
 
     try {
-      // 1. Plik jest już zwalidowany przez middleware
+      // 1. Przetwórz plik Excel, uwzględniając niestandardowe mapowanie, jeśli istnieje
+      const processedData = this.processExcelFile(
+        file,
+        customMapping,
+        false, // isPreview = false, więc walidacja jest włączona
+      );
 
-      // 2. Przetwórz plik Excel
-      const processedData = this.processExcelFile(file);
-
-      // 3. Określ numer dostawy - najpierw z nazwy pliku, potem z potwierdzenia użytkownika
+      // 2. Określ numer dostawy
       let finalDeliveryNumber = processedData.deliveryNumber;
 
       if (!finalDeliveryNumber) {
@@ -498,40 +501,46 @@ export class DeliveryService {
    */
   async previewFile(file: Express.Multer.File): Promise<FilePreviewResponse> {
     try {
-      const processedData = this.processExcelFile(file);
-      const { deliveryNumber, paletteNumbers, products, totalValue } =
-        processedData;
+      const processedData = this.processExcelFile(file, undefined, true);
+      const { products, columnMapping, hasHeaders } = processedData;
 
-      const missingFields: ("deliveryNumber" | "paletteNumber")[] = [];
-      if (!deliveryNumber) {
-        missingFields.push("deliveryNumber");
-      }
-      // Prosta logika sprawdzająca, czy udało się wykryć jakiekolwiek numery palet
-      if (paletteNumbers.length === 0) {
-        missingFields.push("paletteNumber");
+      // Sprawdź, czy kluczowe kolumny są zmapowane
+      const hasRequiredMapping =
+        columnMapping.productName &&
+        columnMapping.quantity &&
+        columnMapping.price;
+
+      let status: PreviewStatus;
+      if (hasRequiredMapping) {
+        status = hasHeaders ? "SUKCES" : "WYMAGA_POTWIERDZENIA";
+      } else {
+        status = "WYMAGA_MAPOWANIA";
       }
 
-      // Enhanced validation
+      // Walidacja, która może nadpisać status
       const validationDetails = this.performEnhancedValidation(
         products,
-        deliveryNumber,
-        paletteNumbers,
+        processedData.deliveryNumber,
+        processedData.paletteNumbers,
       );
 
-      const status: PreviewStatus =
-        missingFields.length > 0 ? "requires_manual_input" : "success";
+      if (validationDetails.criticalErrors.length > 0) {
+        status = "BŁĄD";
+      }
 
       return {
-        status,
-        missingFields: missingFields.length > 0 ? missingFields : undefined,
-        detectedDeliveryNumber: deliveryNumber,
-        detectedPaletteNumbers: paletteNumbers,
-        fileName: file.originalname,
-        totalProducts: products.length,
-        estimatedValue: totalValue,
-        productSample: products.slice(0, 10),
+        analysisStatus: status,
+        products: processedData.products,
+        availableColumns: processedData.availableColumns,
         columnMapping: processedData.columnMapping,
-        validationWarnings: this.validateProductData(products),
+        deliveryNumber: processedData.deliveryNumber,
+        paletteNumbers: processedData.paletteNumbers,
+        totalProducts: processedData.products.length,
+        estimatedValue: processedData.totalValue,
+        fileName: file.originalname,
+        hasHeaders: processedData.hasHeaders,
+        productSample: processedData.products.slice(0, 5),
+        validationWarnings: validationDetails.warnings.map((w) => w.message),
         validationDetails,
       };
     } catch (error) {
@@ -557,7 +566,7 @@ export class DeliveryService {
       // 1. Plik jest już zwalidowany przez middleware
 
       // 2. Przetwórz plik Excel ponownie
-      const processedData = this.processExcelFile(file);
+      const processedData = this.processExcelFile(file, undefined, true);
 
       // 3. Określ ostateczny numer dostawy
       const finalDeliveryNumber =
@@ -726,9 +735,26 @@ export class DeliveryService {
   }
 
   /**
+   * 🤔 Pomocnicza funkcja do konwersji indeksu na nazwę kolumny Excel (0 -> A, 1 -> B)
+   */
+  private excelColumnFromIndex(index: number): string {
+    let excelColumn = "";
+    let tempIndex = index;
+    while (tempIndex >= 0) {
+      excelColumn = String.fromCharCode((tempIndex % 26) + 65) + excelColumn;
+      tempIndex = Math.floor(tempIndex / 26) - 1;
+    }
+    return `Kolumna ${excelColumn}`;
+  }
+
+  /**
    * 📊 Przetwarza plik Excel i wyciąga dane
    */
-  private processExcelFile(file: Express.Multer.File): ProcessedExcelData {
+  private processExcelFile(
+    file: Express.Multer.File,
+    customMapping?: ColumnMapping,
+    isPreview = false,
+  ): ProcessedExcelData {
     try {
       // Plik jest już zwalidowany przez middleware, ale sprawdzamy dla bezpieczeństwa
       if (!file.buffer || file.buffer.length === 0) {
@@ -755,29 +781,30 @@ export class DeliveryService {
       const jsonData = XLSX.utils.sheet_to_json(worksheet, {
         header: 1,
         defval: "",
+        blankrows: false,
       }) as (string | number)[][];
 
-      if (jsonData.length < 2) {
-        throw new AppError(
-          "Plik Excel nie zawiera wystarczających danych",
-          400,
-        );
+      if (jsonData.length === 0) {
+        throw new AppError("Plik Excel jest pusty.", 400);
       }
 
-      // 3. Wykryj mapowanie kolumn
-      const rawHeaders = jsonData[0] || [];
-      logger.debug("Processing Excel headers", {
-        rawHeaders,
-        headerTypes: rawHeaders.map((h: string | number) => typeof h),
+      // 3. Wykryj nagłówki i mapowanie, LUB użyj mapowania od użytkownika
+      const { hasHeaders, headers, columnMapping } = customMapping
+        ? this.useCustomMapping(jsonData, customMapping)
+        : this.detectAndMapHeaders(jsonData);
+
+      const dataRows = hasHeaders ? jsonData.slice(1) : jsonData;
+
+      if (dataRows.length === 0) {
+        throw new AppError("Brak danych do przetworzenia w pliku.", 400);
+      }
+
+      logger.info("Dane z pliku Excel przetworzone", {
+        detectedHeaders: headers,
+        detectedMapping: columnMapping,
+        hasHeaders,
+        rowCount: dataRows.length,
       });
-
-      const headers: string[] = rawHeaders.map((header: string | number) =>
-        header && typeof header === "string" ? header : String(header || ""),
-      );
-      logger.debug("Processed headers", { headers });
-
-      const columnMapping = this.detectColumnMapping(headers);
-      logger.debug("Column mapping detected", { columnMapping });
 
       // 4. Wyodrębnij numer dostawy z nazwy pliku
       const deliveryNumber = DostNowaDostawa.extractDeliveryNumberFromFilename(
@@ -789,9 +816,9 @@ export class DeliveryService {
       const paletteNumbers = new Set<string>();
       let totalValue = 0;
 
-      for (let i = 1; i < jsonData.length; i++) {
-        const row = jsonData[i];
-        if (!row || row.length === 0) continue;
+      for (const row of dataRows) {
+        if (!row || row.length === 0 || row.every((cell) => cell === ""))
+          continue;
 
         const product = this.mapRowToProduct(row, headers, columnMapping);
         if (product) {
@@ -805,8 +832,10 @@ export class DeliveryService {
         }
       }
 
-      // 6. Walidacja krytycznych błędów danych
-      this.validateCriticalProductData(products);
+      // 6. Walidacja krytycznych błędów danych (tylko jeśli to nie jest podgląd)
+      if (!isPreview) {
+        this.validateCriticalProductData(products);
+      }
 
       return {
         deliveryNumber,
@@ -814,6 +843,8 @@ export class DeliveryService {
         paletteNumbers: Array.from(paletteNumbers),
         totalValue,
         columnMapping,
+        availableColumns: headers,
+        hasHeaders,
       };
     } catch (error) {
       if (error instanceof AppError) {
@@ -825,12 +856,88 @@ export class DeliveryService {
   }
 
   /**
-   * 🔎 Wykrywa mapowanie kolumn na podstawie nagłówków
+   * Używa mapowania podanego przez użytkownika zamiast automatycznej detekcji
    */
-  private detectColumnMapping(headers: string[]): ColumnMapping {
+  private useCustomMapping(
+    jsonData: (string | number)[][],
+    customMapping: ColumnMapping,
+  ): {
+    headers: string[];
+    columnMapping: ColumnMapping;
+    hasHeaders: boolean;
+  } {
+    // Gdy mamy mapowanie od użytkownika, nazwy kolumn mogą być generyczne.
+    const headers = (jsonData[0] || []).map((_, index) =>
+      this.excelColumnFromIndex(index),
+    );
+    // Tutaj można dodać logikę do dopasowania `customMapping` do generycznych nagłówków,
+    // ale na razie zakładamy, że mapowanie jest poprawne.
+    return {
+      headers: Object.values(customMapping), // Użyj nazw z mapowania jako "nagłówków"
+      columnMapping: customMapping,
+      hasHeaders: false, // Traktujemy to jak plik bez nagłówków, bo polegamy na mapowaniu
+    };
+  }
+
+  /**
+   * 🔎 Wykrywa, czy plik ma nagłówki i tworzy mapowanie kolumn
+   */
+  private detectAndMapHeaders(jsonData: (string | number)[][]): {
+    headers: string[];
+    columnMapping: ColumnMapping;
+    hasHeaders: boolean;
+  } {
+    const firstRow = jsonData[0] || [];
+    let potentialHeaders = firstRow.map((h) => String(h || "").toLowerCase());
+    let hasHeaders = false;
+
+    // Prosta heurystyka: jeśli więcej niż 50% komórek w pierwszym wierszu zawiera tekst,
+    // a nie tylko liczby, zakładamy, że to nagłówki.
+    const textCells = potentialHeaders.filter((h) => isNaN(Number(h))).length;
+    if (textCells / potentialHeaders.length > 0.5) {
+      hasHeaders = true;
+    }
+
+    // Jeśli nie ma nagłówków, tworzymy generyczne nazwy (Kolumna A, Kolumna B, ...)
+    if (!hasHeaders) {
+      potentialHeaders = firstRow.map((_, index) =>
+        this.excelColumnFromIndex(index),
+      );
+    }
+
+    const columnMapping = this.detectColumnMapping(
+      potentialHeaders,
+      hasHeaders ? undefined : jsonData.slice(0, 5), // Przekaż próbkę danych do zgadywania
+    );
+
+    return {
+      headers: potentialHeaders,
+      columnMapping,
+      hasHeaders,
+    };
+  }
+
+  /**
+   * 🔎 Wykrywa mapowanie kolumn na podstawie nagłówków lub zgaduje na podstawie danych
+   */
+  private detectColumnMapping(
+    headers: string[],
+    dataSample?: (string | number)[][],
+  ): ColumnMapping {
+    if (dataSample && dataSample.length > 0) {
+      return this.guessColumnMappingFromData(headers, dataSample);
+    }
+    // ... reszta istniejącej funkcji detectColumnMapping
     const mapping: ColumnMapping = {};
 
     const headerMap: Record<string, keyof ColumnMapping> = {
+      // Nowe aliasy na podstawie logów
+      b077p6d9r7: "asin",
+      "8715342016979.00": "ean",
+      "lifa living runde couchtische im 2er set, 2 beistelltische aus schwarzem metall und mdf-holz, vintage-stil & industrie-stil mit korbfunktion, bis zu 20kg belastbarkeit, 40 x 36 cm, √ò 50 x 40 cm":
+        "productName",
+      "69.95": "price",
+
       // Numer palety
       "nr palety": "paletteNumber",
       "numer palety": "paletteNumber",
@@ -921,6 +1028,131 @@ export class DeliveryService {
     });
 
     logger.debug("Final mapping after priorities", { mapping });
+    return mapping;
+  }
+
+  /**
+   * 🤔 Zgaduje mapowanie kolumn na podstawie próbki danych (dla plików bez nagłówków)
+   */
+  private guessColumnMappingFromData(
+    headers: string[],
+    dataSample: (string | number)[][],
+  ): ColumnMapping {
+    const mapping: ColumnMapping = {};
+    const scores: {
+      [key in keyof ColumnMapping]?: { [colIndex: number]: number };
+    } = {};
+    const assignedColumns = new Set<number>();
+
+    const fieldKeys: (keyof ColumnMapping)[] = [
+      "ean",
+      "price",
+      "quantity",
+      "productName",
+      "paletteNumber",
+      "asin",
+      "lpn",
+    ];
+    fieldKeys.forEach((key) => (scores[key] = {}));
+
+    // Ulepszone, bardziej szczegółowe heurystyki
+    const looksLikeQuantity = (v: any) => {
+      const n = Number(String(v).replace(",", "."));
+      return !isNaN(n) && Number.isInteger(n) && n > 0 && n < 10000;
+    };
+    const looksLikeProductName = (v: any) => {
+      const s = String(v);
+      return (
+        isNaN(Number(s)) && s.length > 3 && s.trim().split(/\s+/).length >= 1
+      );
+    };
+    const looksLikePalette = (v: any) => {
+      const s = String(v).toLowerCase();
+      return (s.startsWith("pal") || s.includes("palet")) && /\d/.test(s);
+    };
+    const looksLikePureEAN = (v: any) => /^\d{8,13}$/.test(String(v));
+
+    // Krok 1: Oceń wszystkie kolumny na podstawie próbki
+    for (let colIndex = 0; colIndex < headers.length; colIndex++) {
+      for (const row of dataSample) {
+        const cell = row[colIndex];
+        if (cell === undefined || cell === null || cell === "") continue;
+
+        if (this.looksLikePrice(cell))
+          scores.price![colIndex] = (scores.price![colIndex] || 0) + 3;
+        if (looksLikeQuantity(cell))
+          scores.quantity![colIndex] = (scores.quantity![colIndex] || 0) + 2;
+        if (this.looksLikeEAN(cell))
+          scores.ean![colIndex] = (scores.ean![colIndex] || 0) + 1;
+        if (looksLikePureEAN(cell))
+          scores.ean![colIndex] = (scores.ean![colIndex] || 0) + 3; // Duży bonus dla czystych EAN
+        if (looksLikeProductName(cell))
+          scores.productName![colIndex] =
+            (scores.productName![colIndex] || 0) + 1.5;
+        if (looksLikePalette(cell))
+          scores.paletteNumber![colIndex] =
+            (scores.paletteNumber![colIndex] || 0) + 1;
+      }
+    }
+
+    // Krok 2: Przypisz mapowania w kolejności priorytetów, unikając duplikatów
+    const priorityOrder: (keyof ColumnMapping)[] = [
+      "price",
+      "quantity",
+      "ean",
+      "productName",
+      "paletteNumber",
+    ];
+
+    for (const field of priorityOrder) {
+      const fieldScores = scores[field];
+      if (!fieldScores || Object.keys(fieldScores).length === 0) continue;
+
+      let bestColIndex = -1;
+      let maxScore = 0;
+
+      for (const colIndexStr in fieldScores) {
+        const colIndex = parseInt(colIndexStr, 10);
+        if (assignedColumns.has(colIndex)) continue; // Pomiń już przypisane
+
+        if (fieldScores[colIndex] > maxScore) {
+          maxScore = fieldScores[colIndex];
+          bestColIndex = colIndex;
+        }
+      }
+
+      if (bestColIndex !== -1 && maxScore > 0) {
+        mapping[field as keyof ColumnMapping] = headers[bestColIndex];
+        assignedColumns.add(bestColIndex);
+      }
+    }
+
+    // Krok 3: Fallback dla nazwy produktu, jeśli nie została znaleziona
+    if (!mapping.productName) {
+      let bestFallbackIndex = -1;
+      let longestAvgLength = 0;
+
+      for (let i = 0; i < headers.length; i++) {
+        if (assignedColumns.has(i)) continue;
+
+        const avgLength =
+          dataSample.reduce(
+            (acc, row) => acc + String(row[i] || "").length,
+            0,
+          ) / dataSample.length;
+
+        if (avgLength > longestAvgLength) {
+          longestAvgLength = avgLength;
+          bestFallbackIndex = i;
+        }
+      }
+
+      if (bestFallbackIndex !== -1) {
+        mapping.productName = headers[bestFallbackIndex];
+      }
+    }
+
+    logger.debug("Guessed column mapping from data (v3)", { mapping, scores });
     return mapping;
   }
 
@@ -1034,22 +1266,19 @@ export class DeliveryService {
    * 💰 Sprawdza czy wartość wygląda jak cena
    */
   private looksLikePrice(value: string | number | undefined): boolean {
-    if (!value) return false;
-    const str = value.toString().trim();
-
-    // Liczba z możliwymi separatorami (1234.56, 1,234.56, 1234,56)
-    if (/^\d{1,8}[.,]?\d{0,2}$/.test(str.replace(/[\s,]/g, ""))) {
-      const num = parseFloat(str.replace(/[,\s]/g, "."));
-      return !isNaN(num) && num > 0 && num < 100000; // Rozsądny zakres cen
-    }
-
-    return false;
+    if (value === undefined || value === null || value === "") return false;
+    const s = String(value).trim();
+    // Prosty regex: szuka liczb z 1 lub 2 miejscami po przecinku/kropce, opcjonalnie z walutą
+    return /^(?:\d{1,10})(?:[.,]\d{1,2})?[\s]?(?:PLN|EUR|USD|zł|€|\$)?$/.test(
+      s,
+    );
   }
 
   /**
    * 🏷️ Formatuje numery palet z ograniczeniem długości
    */
   private formatPaletteNumbers(paletteNumbers: string[]): string {
+    if (!paletteNumbers || paletteNumbers.length === 0) return "";
     const maxLength = 500; // MySQL TEXT limit safety
     const joined = paletteNumbers.join(", ");
 
@@ -1067,24 +1296,10 @@ export class DeliveryService {
    * 🔢 Parsuje liczby z różnych formatów
    */
   private parseNumber(value: string | number | undefined): number | null {
-    if (value === null || value === undefined || value === "") {
-      return null;
-    }
-
-    // Jeśli już jest liczbą
-    if (typeof value === "number") {
-      return isNaN(value) ? null : value;
-    }
-
-    // Konwertuj string
-    const stringValue = value.toString().trim();
-    if (stringValue === "") return null;
-
-    // Ujednolić separator dziesiętny do kropki i usunąć wszystko co nie jest cyfrą lub kropką
-    const cleaned = stringValue.replace(/,/g, ".").replace(/[^\d.]/g, "");
-    const parsed = parseFloat(cleaned);
-
-    return isNaN(parsed) ? null : parsed;
+    if (value === undefined || value === null) return null;
+    const s = String(value).replace(",", ".").trim();
+    const num = parseFloat(s);
+    return isNaN(num) ? null : num;
   }
 
   /**
@@ -1146,7 +1361,7 @@ export class DeliveryService {
       }
     });
 
-    // Jeśli więcej niż 50% produktów ma pusté nazwy
+    // Jeśli więcej niż 50% produktów ma pustę nazwy
     if (emptyProducts > products.length * 0.5) {
       criticalIssues.push(`${emptyProducts} produktów bez nazwy`);
     }

@@ -48,19 +48,6 @@ export interface ColumnMapping {
   subcategory?: string;
 }
 
-export interface ValidationDetails {
-  criticalErrors: ValidationError[];
-  warnings: ValidationError[];
-  missingDataSummary: {
-    productsWithoutPalette: number;
-    productsWithoutEAN: number;
-    productsWithoutPrice: number;
-    productsWithoutQuantity: number;
-  };
-  dataQualityScore: number;
-  recommendedAction: "proceed" | "review_required" | "manual_correction_needed";
-}
-
 export interface ValidationError {
   type: "critical" | "warning";
   code: string;
@@ -70,13 +57,15 @@ export interface ValidationError {
   affectedProducts?: number;
 }
 
-export interface PaginatedResponse<T> {
-  data: T[];
-  pagination: {
-    total: number;
-    page: number;
-    limit: number;
+export interface ValidationDetails {
+  criticalErrors: ValidationError[];
+  warnings: ValidationError[];
+  missingDataSummary: {
+    productsWithoutPalette: number;
+    productsWithoutEAN: number;
+    productsWithoutPrice: number;
+    productsWithoutQuantity: number;
   };
-  success: boolean;
-  message?: string;
+  dataQualityScore: number; // 0-100
+  recommendedAction: "proceed" | "review_required" | "manual_correction_needed";
 }

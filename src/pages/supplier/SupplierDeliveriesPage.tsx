@@ -1,19 +1,42 @@
 import type { FC } from "react";
-import { BlockBreadcrumb } from "@/components/block-breadcrumb";
-import { HiTruck } from "react-icons/hi";
-import AdvancedDeliveriesTableWithExpandableRows from "../../components/tables/ExpandableDeliveriesTable";
+import { useQuery } from "@tanstack/react-query";
+import { Breadcrumb, Spinner, BreadcrumbItem } from "flowbite-react";
+import { HiHome } from "react-icons/hi";
+import { getDeliveries } from "@/api/deliveryApi";
 
-const SupplierDeliveriesPage: FC = () => {
+export const SupplierDeliveriesPage: FC = () => {
+  const {
+    data: deliveriesData,
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["deliveries"],
+    queryFn: getDeliveries,
+  });
+
+  if (isError) {
+    console.error("Błąd ładowania dostaw:", error);
+  }
+
   return (
     <>
-      <BlockBreadcrumb>
-        <BlockBreadcrumb.Item href="/supplier" icon={HiTruck}>
-          Panel Dostawcy
-        </BlockBreadcrumb.Item>
-        <BlockBreadcrumb.Item>Dostawy</BlockBreadcrumb.Item>
-      </BlockBreadcrumb>
+      <Breadcrumb className="mb-8">
+        <BreadcrumbItem href="/supplier" icon={HiHome}>
+          Dashboard
+        </BreadcrumbItem>
+        <BreadcrumbItem>Dostawy</BreadcrumbItem>
+      </Breadcrumb>
+      <div className="text-center">
+        {isLoading && (
+          <div>
+            <Spinner />
+            <p>Ładowanie dostaw...</p>
+          </div>
+        )}
+      </div>
 
-      <AdvancedDeliveriesTableWithExpandableRows />
+      {deliveriesData && <pre>{JSON.stringify(deliveriesData, null, 2)}</pre>}
     </>
   );
 };

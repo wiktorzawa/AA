@@ -20,10 +20,10 @@ import { twMerge } from "tailwind-merge";
 
 export function AdvancedTableWithExpandableRows() {
   return (
-    <section className="bg-gray-50 py-3 dark:bg-gray-900 sm:py-5">
+    <section className="bg-gray-50 py-3 sm:py-5 dark:bg-gray-900">
       <div className="mx-auto max-w-screen-2xl px-4 lg:px-12">
-        <div className="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
-          <div className="flex flex-col items-center justify-between space-y-3 border-b p-4 dark:border-gray-700 md:flex-row md:space-x-4 md:space-y-0">
+        <div className="relative overflow-hidden bg-white shadow-md sm:rounded-lg dark:bg-gray-800">
+          <div className="flex flex-col items-center justify-between space-y-3 border-b p-4 md:flex-row md:space-y-0 md:space-x-4 dark:border-gray-700">
             <div className="flex w-full items-center space-x-3">
               <h5 className="font-semibold dark:text-white">
                 Flowbite Products
@@ -78,14 +78,14 @@ export function AdvancedTableWithExpandableRows() {
               </Button>
             </div>
           </div>
-          <div className="flex flex-col-reverse items-start justify-between border-b p-4 dark:border-gray-700 md:flex-row md:items-center md:space-x-4">
+          <div className="flex flex-col-reverse items-start justify-between border-b p-4 md:flex-row md:items-center md:space-x-4 dark:border-gray-700">
             <div className="mt-3 md:mt-0">
               <Dropdown
                 color="gray"
                 label={
                   <>
                     <svg
-                      className="-ml-1 mr-1.5 h-5 w-5"
+                      className="mr-1.5 -ml-1 h-5 w-5"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                       xmlns="http://www.w3.org/2000/svg"
@@ -120,10 +120,11 @@ export function AdvancedTableWithExpandableRows() {
                 <Select
                   id="brand"
                   name="brand"
+                  defaultValue=""
                   theme={{
                     field: {
                       select: {
-                        base: "peer block w-full appearance-none border-0 border-b-2 border-gray-200 focus:border-blue-600 focus:outline-none focus:ring-0 dark:border-gray-600 dark:text-white dark:focus:border-blue-500",
+                        base: "peer block w-full appearance-none border-0 border-b-2 border-gray-200 focus:border-blue-600 focus:ring-0 focus:outline-none dark:border-gray-600 dark:text-white dark:focus:border-blue-500",
                         colors: {
                           gray: "bg-transparent text-gray-500",
                         },
@@ -137,7 +138,7 @@ export function AdvancedTableWithExpandableRows() {
                     },
                   }}
                 >
-                  <option selected>Brand</option>
+                  <option value="">Brand</option>
                   <option value="purple">Samsung</option>
                   <option value="primary">Apple</option>
                   <option value="pink">Pink</option>
@@ -151,10 +152,11 @@ export function AdvancedTableWithExpandableRows() {
                 <Select
                   id="price"
                   name="price"
+                  defaultValue=""
                   theme={{
                     field: {
                       select: {
-                        base: "peer block w-full appearance-none border-0 border-b-2 border-gray-200 focus:border-blue-600 focus:outline-none focus:ring-0 dark:border-gray-600 dark:text-white dark:focus:border-blue-500",
+                        base: "peer block w-full appearance-none border-0 border-b-2 border-gray-200 focus:border-blue-600 focus:ring-0 focus:outline-none dark:border-gray-600 dark:text-white dark:focus:border-blue-500",
                         colors: {
                           gray: "bg-transparent text-gray-500",
                         },
@@ -168,7 +170,7 @@ export function AdvancedTableWithExpandableRows() {
                     },
                   }}
                 >
-                  <option selected>Price</option>
+                  <option value="">Price</option>
                   <option value="below-100">$ 1-100</option>
                   <option value="below-500">$ 101-500</option>
                   <option value="below-1000">$ 501-1000</option>
@@ -182,10 +184,11 @@ export function AdvancedTableWithExpandableRows() {
                 <Select
                   id="category"
                   name="category"
+                  defaultValue=""
                   theme={{
                     field: {
                       select: {
-                        base: "peer block w-full appearance-none border-0 border-b-2 border-gray-200 focus:border-blue-600 focus:outline-none focus:ring-0 dark:border-gray-600 dark:text-white dark:focus:border-blue-500",
+                        base: "peer block w-full appearance-none border-0 border-b-2 border-gray-200 focus:border-blue-600 focus:ring-0 focus:outline-none dark:border-gray-600 dark:text-white dark:focus:border-blue-500",
                         colors: {
                           gray: "bg-transparent text-gray-500",
                         },
@@ -199,7 +202,7 @@ export function AdvancedTableWithExpandableRows() {
                     },
                   }}
                 >
-                  <option selected>Category</option>
+                  <option value="">Category</option>
                   <option value="pc">PC</option>
                   <option value="phone">Phone</option>
                   <option value="tablet">Tablet</option>
@@ -213,10 +216,11 @@ export function AdvancedTableWithExpandableRows() {
                 <Select
                   id="color"
                   name="color"
+                  defaultValue=""
                   theme={{
                     field: {
                       select: {
-                        base: "peer block w-full appearance-none border-0 border-b-2 border-gray-200 focus:border-blue-600 focus:outline-none focus:ring-0 dark:border-gray-600 dark:text-white dark:focus:border-blue-500",
+                        base: "peer block w-full appearance-none border-0 border-b-2 border-gray-200 focus:border-blue-600 focus:ring-0 focus:outline-none dark:border-gray-600 dark:text-white dark:focus:border-blue-500",
                         colors: {
                           gray: "bg-transparent text-gray-500",
                         },
@@ -230,7 +234,7 @@ export function AdvancedTableWithExpandableRows() {
                     },
                   }}
                 >
-                  <option selected>Color</option>
+                  <option value="">Color</option>
                   <option value="purple">Purple</option>
                   <option value="primary">primary</option>
                   <option value="pink">Pink</option>
@@ -242,120 +246,122 @@ export function AdvancedTableWithExpandableRows() {
           <div className="overflow-x-auto">
             <Table className="w-full text-left text-sm text-gray-500 dark:text-gray-400">
               <TableHead className="bg-gray-50 text-xs uppercase dark:bg-gray-700">
-                <TableHeadCell scope="col" className="p-4">
-                  <div className="flex items-center">
-                    <Checkbox
-                      id="checkbox-all"
-                      name="checkbox-all"
-                      className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600"
-                    />
-                    <Label htmlFor="checkbox-all" className="sr-only">
-                      Select all products
-                    </Label>
-                  </div>
-                </TableHeadCell>
-                <TableHeadCell scope="col" className="px-4 py-3">
-                  <span className="sr-only">Expand/Collapse Row</span>
-                </TableHeadCell>
-                <TableHeadCell scope="col" className="min-w-56 px-4 py-3">
-                  Product
-                </TableHeadCell>
-                <TableHeadCell scope="col" className="min-w-40 px-4 py-3">
-                  Category
-                  <svg
-                    className="ml-1 inline-block h-4 w-4"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden
-                  >
-                    <path
-                      clipRule="evenodd"
-                      fillRule="evenodd"
-                      d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z"
-                    />
-                  </svg>
-                </TableHeadCell>
-                <TableHeadCell scope="col" className="min-w-24 px-4 py-3">
-                  Brand
-                  <svg
-                    className="ml-1 inline-block h-4 w-4"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden
-                  >
-                    <path
-                      clipRule="evenodd"
-                      fillRule="evenodd"
-                      d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z"
-                    />
-                  </svg>
-                </TableHeadCell>
-                <TableHeadCell scope="col" className="min-w-24 px-4 py-3">
-                  Price
-                  <svg
-                    className="ml-1 inline-block h-4 w-4"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden
-                  >
-                    <path
-                      clipRule="evenodd"
-                      fillRule="evenodd"
-                      d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z"
-                    />
-                  </svg>
-                </TableHeadCell>
-                <TableHeadCell scope="col" className="min-w-24 px-4 py-3">
-                  Stock
-                  <svg
-                    className="ml-1 inline-block h-4 w-4"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden
-                  >
-                    <path
-                      clipRule="evenodd"
-                      fillRule="evenodd"
-                      d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z"
-                    />
-                  </svg>
-                </TableHeadCell>
-                <TableHeadCell scope="col" className="min-w-48 px-4 py-3">
-                  Total Sales
-                  <svg
-                    className="ml-1 inline-block h-4 w-4"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden
-                  >
-                    <path
-                      clipRule="evenodd"
-                      fillRule="evenodd"
-                      d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z"
-                    />
-                  </svg>
-                </TableHeadCell>
-                <TableHeadCell scope="col" className="min-w-28 px-4 py-3">
-                  Status
-                  <svg
-                    className="ml-1 inline-block h-4 w-4"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden
-                  >
-                    <path
-                      clipRule="evenodd"
-                      fillRule="evenodd"
-                      d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z"
-                    />
-                  </svg>
-                </TableHeadCell>
+                <TableRow>
+                  <TableHeadCell scope="col" className="p-4">
+                    <div className="flex items-center">
+                      <Checkbox
+                        id="checkbox-all"
+                        name="checkbox-all"
+                        className="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800"
+                      />
+                      <Label htmlFor="checkbox-all" className="sr-only">
+                        Select all products
+                      </Label>
+                    </div>
+                  </TableHeadCell>
+                  <TableHeadCell scope="col" className="px-4 py-3">
+                    <span className="sr-only">Expand/Collapse Row</span>
+                  </TableHeadCell>
+                  <TableHeadCell scope="col" className="min-w-56 px-4 py-3">
+                    Product
+                  </TableHeadCell>
+                  <TableHeadCell scope="col" className="min-w-40 px-4 py-3">
+                    Category
+                    <svg
+                      className="ml-1 inline-block h-4 w-4"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden
+                    >
+                      <path
+                        clipRule="evenodd"
+                        fillRule="evenodd"
+                        d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z"
+                      />
+                    </svg>
+                  </TableHeadCell>
+                  <TableHeadCell scope="col" className="min-w-24 px-4 py-3">
+                    Brand
+                    <svg
+                      className="ml-1 inline-block h-4 w-4"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden
+                    >
+                      <path
+                        clipRule="evenodd"
+                        fillRule="evenodd"
+                        d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z"
+                      />
+                    </svg>
+                  </TableHeadCell>
+                  <TableHeadCell scope="col" className="min-w-24 px-4 py-3">
+                    Price
+                    <svg
+                      className="ml-1 inline-block h-4 w-4"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden
+                    >
+                      <path
+                        clipRule="evenodd"
+                        fillRule="evenodd"
+                        d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z"
+                      />
+                    </svg>
+                  </TableHeadCell>
+                  <TableHeadCell scope="col" className="min-w-24 px-4 py-3">
+                    Stock
+                    <svg
+                      className="ml-1 inline-block h-4 w-4"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden
+                    >
+                      <path
+                        clipRule="evenodd"
+                        fillRule="evenodd"
+                        d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z"
+                      />
+                    </svg>
+                  </TableHeadCell>
+                  <TableHeadCell scope="col" className="min-w-48 px-4 py-3">
+                    Total Sales
+                    <svg
+                      className="ml-1 inline-block h-4 w-4"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden
+                    >
+                      <path
+                        clipRule="evenodd"
+                        fillRule="evenodd"
+                        d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z"
+                      />
+                    </svg>
+                  </TableHeadCell>
+                  <TableHeadCell scope="col" className="min-w-28 px-4 py-3">
+                    Status
+                    <svg
+                      className="ml-1 inline-block h-4 w-4"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden
+                    >
+                      <path
+                        clipRule="evenodd"
+                        fillRule="evenodd"
+                        d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z"
+                      />
+                    </svg>
+                  </TableHeadCell>
+                </TableRow>
               </TableHead>
               <TableBody data-accordion="table-column">
                 <TableRow
@@ -374,7 +380,7 @@ export function AdvancedTableWithExpandableRows() {
                         id="checkbox-table-search-1"
                         name="checkbox-table-search-1"
                         onClick={(event) => event.stopPropagation()}
-                        className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600"
+                        className="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800"
                       />
                       <Label
                         htmlFor="checkbox-table-search-1"
@@ -402,7 +408,7 @@ export function AdvancedTableWithExpandableRows() {
                   </TableCell>
                   <TableCell
                     scope="row"
-                    className="flex items-center whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white"
+                    className="flex items-center px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white"
                   >
                     <img
                       src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
@@ -412,19 +418,19 @@ export function AdvancedTableWithExpandableRows() {
                     Apple iMac 27&#34;
                   </TableCell>
                   <TableCell className="px-4 py-3">PC</TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     Apple
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     $2999
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     200
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     245
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3">
+                  <TableCell className="px-4 py-3 whitespace-nowrap">
                     <Badge color="success" className="w-fit">
                       Active
                     </Badge>
@@ -440,28 +446,28 @@ export function AdvancedTableWithExpandableRows() {
                     colSpan={9}
                   >
                     <div className="mb-4 grid grid-cols-4 gap-4">
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
                           alt="iMac Front"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-side-image.png"
                           alt="iMac Side"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
                           alt="iMac Back"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
                           alt="iMac Back"
@@ -470,7 +476,7 @@ export function AdvancedTableWithExpandableRows() {
                       </div>
                     </div>
                     <div>
-                      <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                      <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                         Details
                       </h6>
                       <div className="max-w-screen-md text-base text-gray-500 dark:text-gray-400">
@@ -483,7 +489,7 @@ export function AdvancedTableWithExpandableRows() {
                     </div>
                     <div className="mt-4 grid grid-cols-4 gap-4">
                       <div className="relative flex flex-col items-start justify-between rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Product State
                         </h6>
                         <Badge className="flex">
@@ -500,7 +506,7 @@ export function AdvancedTableWithExpandableRows() {
                         </Badge>
                       </div>
                       <div className="relative flex flex-col justify-between rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Shipping
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -521,20 +527,20 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Colors
                         </h6>
                         <div className="flex items-center space-x-2">
                           <div className="h-6 w-6 rounded-full bg-purple-600"></div>
                           <div className="h-6 w-6 rounded-full bg-indigo-400"></div>
-                          <div className="h-6 w-6 rounded-full bg-primary-600"></div>
+                          <div className="bg-primary-600 h-6 w-6 rounded-full"></div>
                           <div className="h-6 w-6 rounded-full bg-pink-400"></div>
                           <div className="h-6 w-6 rounded-full bg-teal-300"></div>
                           <div className="h-6 w-6 rounded-full bg-green-300"></div>
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Brand
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -542,7 +548,7 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Sold by
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -550,7 +556,7 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Ships from
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -558,7 +564,7 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Dimensions (cm)
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -566,7 +572,7 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Item weight
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -628,7 +634,7 @@ export function AdvancedTableWithExpandableRows() {
                         id="checkbox-table-search-1"
                         name="checkbox-table-search-1"
                         onClick={(event) => event.stopPropagation()}
-                        className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600"
+                        className="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800"
                       />
                       <Label
                         htmlFor="checkbox-table-search-1"
@@ -656,7 +662,7 @@ export function AdvancedTableWithExpandableRows() {
                   </TableCell>
                   <TableCell
                     scope="row"
-                    className="flex items-center whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white"
+                    className="flex items-center px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white"
                   >
                     <img
                       src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
@@ -666,19 +672,19 @@ export function AdvancedTableWithExpandableRows() {
                     Apple iMac 20&quot;
                   </TableCell>
                   <TableCell className="px-4 py-3">PC</TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     Apple
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     $1499
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     1237
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     2000
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3">
+                  <TableCell className="px-4 py-3 whitespace-nowrap">
                     <Badge color="success" className="w-fit">
                       Active
                     </Badge>
@@ -694,28 +700,28 @@ export function AdvancedTableWithExpandableRows() {
                     colSpan={9}
                   >
                     <div className="mb-4 grid grid-cols-4 gap-4">
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
                           alt="iMac Front"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-side-image.png"
                           alt="iMac Side"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
                           alt="iMac Back"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
                           alt="iMac Back"
@@ -724,7 +730,7 @@ export function AdvancedTableWithExpandableRows() {
                       </div>
                     </div>
                     <div>
-                      <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                      <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                         Details
                       </h6>
                       <div className="max-w-screen-md text-base text-gray-500 dark:text-gray-400">
@@ -737,7 +743,7 @@ export function AdvancedTableWithExpandableRows() {
                     </div>
                     <div className="mt-4 grid grid-cols-4 gap-4">
                       <div className="relative flex flex-col items-start justify-between rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Product State
                         </h6>
                         <Badge className="flex">
@@ -754,7 +760,7 @@ export function AdvancedTableWithExpandableRows() {
                         </Badge>
                       </div>
                       <div className="relative flex flex-col justify-between rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Shipping
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -775,20 +781,20 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Colors
                         </h6>
                         <div className="flex items-center space-x-2">
                           <div className="h-6 w-6 rounded-full bg-purple-600"></div>
                           <div className="h-6 w-6 rounded-full bg-indigo-400"></div>
-                          <div className="h-6 w-6 rounded-full bg-primary-600"></div>
+                          <div className="bg-primary-600 h-6 w-6 rounded-full"></div>
                           <div className="h-6 w-6 rounded-full bg-pink-400"></div>
                           <div className="h-6 w-6 rounded-full bg-teal-300"></div>
                           <div className="h-6 w-6 rounded-full bg-green-300"></div>
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Brand
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -796,7 +802,7 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Sold by
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -804,7 +810,7 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Ships from
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -812,7 +818,7 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Dimensions (cm)
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -820,7 +826,7 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Item weight
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -882,7 +888,7 @@ export function AdvancedTableWithExpandableRows() {
                         id="checkbox-table-search-1"
                         name="checkbox-table-search-1"
                         onClick={(event) => event.stopPropagation()}
-                        className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600"
+                        className="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800"
                       />
                       <Label
                         htmlFor="checkbox-table-search-1"
@@ -910,7 +916,7 @@ export function AdvancedTableWithExpandableRows() {
                   </TableCell>
                   <TableCell
                     scope="row"
-                    className="flex items-center whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white"
+                    className="flex items-center px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white"
                   >
                     <img
                       src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
@@ -920,19 +926,19 @@ export function AdvancedTableWithExpandableRows() {
                     Apple iPhone 14
                   </TableCell>
                   <TableCell className="px-4 py-3">Phone</TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     Apple
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     $999
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     300
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     466
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3">
+                  <TableCell className="px-4 py-3 whitespace-nowrap">
                     <Badge color="success" className="w-fit">
                       Active
                     </Badge>
@@ -948,28 +954,28 @@ export function AdvancedTableWithExpandableRows() {
                     colSpan={9}
                   >
                     <div className="mb-4 grid grid-cols-4 gap-4">
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
                           alt="iMac Front"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-side-image.png"
                           alt="iMac Side"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
                           alt="iMac Back"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
                           alt="iMac Back"
@@ -978,7 +984,7 @@ export function AdvancedTableWithExpandableRows() {
                       </div>
                     </div>
                     <div>
-                      <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                      <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                         Details
                       </h6>
                       <div className="max-w-screen-md text-base text-gray-500 dark:text-gray-400">
@@ -991,7 +997,7 @@ export function AdvancedTableWithExpandableRows() {
                     </div>
                     <div className="mt-4 grid grid-cols-4 gap-4">
                       <div className="relative flex flex-col items-start justify-between rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Product State
                         </h6>
                         <Badge className="flex">
@@ -1008,7 +1014,7 @@ export function AdvancedTableWithExpandableRows() {
                         </Badge>
                       </div>
                       <div className="relative flex flex-col justify-between rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Shipping
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1029,20 +1035,20 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Colors
                         </h6>
                         <div className="flex items-center space-x-2">
                           <div className="h-6 w-6 rounded-full bg-purple-600"></div>
                           <div className="h-6 w-6 rounded-full bg-indigo-400"></div>
-                          <div className="h-6 w-6 rounded-full bg-primary-600"></div>
+                          <div className="bg-primary-600 h-6 w-6 rounded-full"></div>
                           <div className="h-6 w-6 rounded-full bg-pink-400"></div>
                           <div className="h-6 w-6 rounded-full bg-teal-300"></div>
                           <div className="h-6 w-6 rounded-full bg-green-300"></div>
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Brand
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1050,7 +1056,7 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Sold by
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1058,7 +1064,7 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Ships from
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1066,7 +1072,7 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Dimensions (cm)
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1074,7 +1080,7 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Item weight
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1136,7 +1142,7 @@ export function AdvancedTableWithExpandableRows() {
                         id="checkbox-table-search-1"
                         name="checkbox-table-search-1"
                         onClick={(event) => event.stopPropagation()}
-                        className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600"
+                        className="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800"
                       />
                       <Label
                         htmlFor="checkbox-table-search-1"
@@ -1164,7 +1170,7 @@ export function AdvancedTableWithExpandableRows() {
                   </TableCell>
                   <TableCell
                     scope="row"
-                    className="flex items-center whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white"
+                    className="flex items-center px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white"
                   >
                     <img
                       src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
@@ -1174,19 +1180,19 @@ export function AdvancedTableWithExpandableRows() {
                     Apple iPad Air
                   </TableCell>
                   <TableCell className="px-4 py-3">Tablet</TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     Apple
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     $1199
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     4576
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     90
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3">
+                  <TableCell className="px-4 py-3 whitespace-nowrap">
                     <Badge color="success" className="w-fit">
                       Active
                     </Badge>
@@ -1202,28 +1208,28 @@ export function AdvancedTableWithExpandableRows() {
                     colSpan={9}
                   >
                     <div className="mb-4 grid grid-cols-4 gap-4">
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
                           alt="iMac Front"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-side-image.png"
                           alt="iMac Side"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
                           alt="iMac Back"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
                           alt="iMac Back"
@@ -1232,7 +1238,7 @@ export function AdvancedTableWithExpandableRows() {
                       </div>
                     </div>
                     <div>
-                      <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                      <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                         Details
                       </h6>
                       <div className="max-w-screen-md text-base text-gray-500 dark:text-gray-400">
@@ -1245,7 +1251,7 @@ export function AdvancedTableWithExpandableRows() {
                     </div>
                     <div className="mt-4 grid grid-cols-4 gap-4">
                       <div className="relative flex flex-col items-start justify-between rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Product State
                         </h6>
                         <Badge className="flex">
@@ -1262,7 +1268,7 @@ export function AdvancedTableWithExpandableRows() {
                         </Badge>
                       </div>
                       <div className="relative flex flex-col justify-between rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Shipping
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1283,20 +1289,20 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Colors
                         </h6>
                         <div className="flex items-center space-x-2">
                           <div className="h-6 w-6 rounded-full bg-purple-600"></div>
                           <div className="h-6 w-6 rounded-full bg-indigo-400"></div>
-                          <div className="h-6 w-6 rounded-full bg-primary-600"></div>
+                          <div className="bg-primary-600 h-6 w-6 rounded-full"></div>
                           <div className="h-6 w-6 rounded-full bg-pink-400"></div>
                           <div className="h-6 w-6 rounded-full bg-teal-300"></div>
                           <div className="h-6 w-6 rounded-full bg-green-300"></div>
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Brand
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1304,7 +1310,7 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Sold by
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1312,7 +1318,7 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Ships from
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1320,7 +1326,7 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Dimensions (cm)
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1328,7 +1334,7 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Item weight
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1390,7 +1396,7 @@ export function AdvancedTableWithExpandableRows() {
                         id="checkbox-table-search-1"
                         name="checkbox-table-search-1"
                         onClick={(event) => event.stopPropagation()}
-                        className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600"
+                        className="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800"
                       />
                       <Label
                         htmlFor="checkbox-table-search-1"
@@ -1418,7 +1424,7 @@ export function AdvancedTableWithExpandableRows() {
                   </TableCell>
                   <TableCell
                     scope="row"
-                    className="flex items-center whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white"
+                    className="flex items-center px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white"
                   >
                     <img
                       src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
@@ -1428,19 +1434,19 @@ export function AdvancedTableWithExpandableRows() {
                     Xbox Series S
                   </TableCell>
                   <TableCell className="px-4 py-3">Gaming/Console</TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     Microsoft
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     $299
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     56
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     3087
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3">
+                  <TableCell className="px-4 py-3 whitespace-nowrap">
                     <Badge color="success" className="w-fit">
                       Active
                     </Badge>
@@ -1456,28 +1462,28 @@ export function AdvancedTableWithExpandableRows() {
                     colSpan={9}
                   >
                     <div className="mb-4 grid grid-cols-4 gap-4">
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
                           alt="iMac Front"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-side-image.png"
                           alt="iMac Side"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
                           alt="iMac Back"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
                           alt="iMac Back"
@@ -1486,7 +1492,7 @@ export function AdvancedTableWithExpandableRows() {
                       </div>
                     </div>
                     <div>
-                      <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                      <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                         Details
                       </h6>
                       <div className="max-w-screen-md text-base text-gray-500 dark:text-gray-400">
@@ -1499,7 +1505,7 @@ export function AdvancedTableWithExpandableRows() {
                     </div>
                     <div className="mt-4 grid grid-cols-4 gap-4">
                       <div className="relative flex flex-col items-start justify-between rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Product State
                         </h6>
                         <Badge className="flex">
@@ -1516,7 +1522,7 @@ export function AdvancedTableWithExpandableRows() {
                         </Badge>
                       </div>
                       <div className="relative flex flex-col justify-between rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Shipping
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1537,20 +1543,20 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Colors
                         </h6>
                         <div className="flex items-center space-x-2">
                           <div className="h-6 w-6 rounded-full bg-purple-600"></div>
                           <div className="h-6 w-6 rounded-full bg-indigo-400"></div>
-                          <div className="h-6 w-6 rounded-full bg-primary-600"></div>
+                          <div className="bg-primary-600 h-6 w-6 rounded-full"></div>
                           <div className="h-6 w-6 rounded-full bg-pink-400"></div>
                           <div className="h-6 w-6 rounded-full bg-teal-300"></div>
                           <div className="h-6 w-6 rounded-full bg-green-300"></div>
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Brand
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1558,7 +1564,7 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Sold by
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1566,7 +1572,7 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Ships from
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1574,7 +1580,7 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Dimensions (cm)
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1582,7 +1588,7 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Item weight
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1644,7 +1650,7 @@ export function AdvancedTableWithExpandableRows() {
                         id="checkbox-table-search-1"
                         name="checkbox-table-search-1"
                         onClick={(event) => event.stopPropagation()}
-                        className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600"
+                        className="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800"
                       />
                       <Label
                         htmlFor="checkbox-table-search-1"
@@ -1672,7 +1678,7 @@ export function AdvancedTableWithExpandableRows() {
                   </TableCell>
                   <TableCell
                     scope="row"
-                    className="flex items-center whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white"
+                    className="flex items-center px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white"
                   >
                     <img
                       src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
@@ -1682,19 +1688,19 @@ export function AdvancedTableWithExpandableRows() {
                     PlayStation 5
                   </TableCell>
                   <TableCell className="px-4 py-3">Gaming/Console</TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     Sony
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     $799
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     78
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     2999
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3">
+                  <TableCell className="px-4 py-3 whitespace-nowrap">
                     <Badge color="success" className="w-fit">
                       Active
                     </Badge>
@@ -1710,28 +1716,28 @@ export function AdvancedTableWithExpandableRows() {
                     colSpan={9}
                   >
                     <div className="mb-4 grid grid-cols-4 gap-4">
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
                           alt="iMac Front"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-side-image.png"
                           alt="iMac Side"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
                           alt="iMac Back"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
                           alt="iMac Back"
@@ -1740,7 +1746,7 @@ export function AdvancedTableWithExpandableRows() {
                       </div>
                     </div>
                     <div>
-                      <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                      <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                         Details
                       </h6>
                       <div className="max-w-screen-md text-base text-gray-500 dark:text-gray-400">
@@ -1753,7 +1759,7 @@ export function AdvancedTableWithExpandableRows() {
                     </div>
                     <div className="mt-4 grid grid-cols-4 gap-4">
                       <div className="relative flex flex-col items-start justify-between rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Product State
                         </h6>
                         <Badge className="flex">
@@ -1770,7 +1776,7 @@ export function AdvancedTableWithExpandableRows() {
                         </Badge>
                       </div>
                       <div className="relative flex flex-col justify-between rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Shipping
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1791,20 +1797,20 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Colors
                         </h6>
                         <div className="flex items-center space-x-2">
                           <div className="h-6 w-6 rounded-full bg-purple-600"></div>
                           <div className="h-6 w-6 rounded-full bg-indigo-400"></div>
-                          <div className="h-6 w-6 rounded-full bg-primary-600"></div>
+                          <div className="bg-primary-600 h-6 w-6 rounded-full"></div>
                           <div className="h-6 w-6 rounded-full bg-pink-400"></div>
                           <div className="h-6 w-6 rounded-full bg-teal-300"></div>
                           <div className="h-6 w-6 rounded-full bg-green-300"></div>
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Brand
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1812,7 +1818,7 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Sold by
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1820,7 +1826,7 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Ships from
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1828,7 +1834,7 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Dimensions (cm)
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1836,7 +1842,7 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Item weight
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -1898,7 +1904,7 @@ export function AdvancedTableWithExpandableRows() {
                         id="checkbox-table-search-1"
                         name="checkbox-table-search-1"
                         onClick={(event) => event.stopPropagation()}
-                        className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600"
+                        className="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800"
                       />
                       <Label
                         htmlFor="checkbox-table-search-1"
@@ -1926,7 +1932,7 @@ export function AdvancedTableWithExpandableRows() {
                   </TableCell>
                   <TableCell
                     scope="row"
-                    className="flex items-center whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white"
+                    className="flex items-center px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white"
                   >
                     <img
                       src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
@@ -1936,19 +1942,19 @@ export function AdvancedTableWithExpandableRows() {
                     Xbox Series X
                   </TableCell>
                   <TableCell className="px-4 py-3">Gaming/Console</TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     Microsoft
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     $699
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     200
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     1870
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3">
+                  <TableCell className="px-4 py-3 whitespace-nowrap">
                     <Badge color="success" className="w-fit">
                       Active
                     </Badge>
@@ -1964,28 +1970,28 @@ export function AdvancedTableWithExpandableRows() {
                     colSpan={9}
                   >
                     <div className="mb-4 grid grid-cols-4 gap-4">
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
                           alt="iMac Front"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-side-image.png"
                           alt="iMac Side"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
                           alt="iMac Back"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
                           alt="iMac Back"
@@ -1994,7 +2000,7 @@ export function AdvancedTableWithExpandableRows() {
                       </div>
                     </div>
                     <div>
-                      <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                      <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                         Details
                       </h6>
                       <div className="max-w-screen-md text-base text-gray-500 dark:text-gray-400">
@@ -2007,7 +2013,7 @@ export function AdvancedTableWithExpandableRows() {
                     </div>
                     <div className="mt-4 grid grid-cols-4 gap-4">
                       <div className="relative flex flex-col items-start justify-between rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Product State
                         </h6>
                         <Badge className="flex">
@@ -2024,7 +2030,7 @@ export function AdvancedTableWithExpandableRows() {
                         </Badge>
                       </div>
                       <div className="relative flex flex-col justify-between rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Shipping
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -2045,20 +2051,20 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Colors
                         </h6>
                         <div className="flex items-center space-x-2">
                           <div className="h-6 w-6 rounded-full bg-purple-600"></div>
                           <div className="h-6 w-6 rounded-full bg-indigo-400"></div>
-                          <div className="h-6 w-6 rounded-full bg-primary-600"></div>
+                          <div className="bg-primary-600 h-6 w-6 rounded-full"></div>
                           <div className="h-6 w-6 rounded-full bg-pink-400"></div>
                           <div className="h-6 w-6 rounded-full bg-teal-300"></div>
                           <div className="h-6 w-6 rounded-full bg-green-300"></div>
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Brand
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -2066,7 +2072,7 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Sold by
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -2074,7 +2080,7 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Ships from
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -2082,7 +2088,7 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Dimensions (cm)
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -2090,7 +2096,7 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Item weight
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -2152,7 +2158,7 @@ export function AdvancedTableWithExpandableRows() {
                         id="checkbox-table-search-1"
                         name="checkbox-table-search-1"
                         onClick={(event) => event.stopPropagation()}
-                        className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600"
+                        className="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800"
                       />
                       <Label
                         htmlFor="checkbox-table-search-1"
@@ -2180,7 +2186,7 @@ export function AdvancedTableWithExpandableRows() {
                   </TableCell>
                   <TableCell
                     scope="row"
-                    className="flex items-center whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white"
+                    className="flex items-center px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white"
                   >
                     <img
                       src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
@@ -2190,19 +2196,19 @@ export function AdvancedTableWithExpandableRows() {
                     Apple Watch SE
                   </TableCell>
                   <TableCell className="px-4 py-3">Watch</TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     Apple
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     $399
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     657
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     5067
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3">
+                  <TableCell className="px-4 py-3 whitespace-nowrap">
                     <Badge color="success" className="w-fit">
                       Active
                     </Badge>
@@ -2218,28 +2224,28 @@ export function AdvancedTableWithExpandableRows() {
                     colSpan={9}
                   >
                     <div className="mb-4 grid grid-cols-4 gap-4">
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
                           alt="iMac Front"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-side-image.png"
                           alt="iMac Side"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
                           alt="iMac Back"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
                           alt="iMac Back"
@@ -2248,7 +2254,7 @@ export function AdvancedTableWithExpandableRows() {
                       </div>
                     </div>
                     <div>
-                      <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                      <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                         Details
                       </h6>
                       <div className="max-w-screen-md text-base text-gray-500 dark:text-gray-400">
@@ -2261,7 +2267,7 @@ export function AdvancedTableWithExpandableRows() {
                     </div>
                     <div className="mt-4 grid grid-cols-4 gap-4">
                       <div className="relative flex flex-col items-start justify-between rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Product State
                         </h6>
                         <Badge className="flex">
@@ -2278,7 +2284,7 @@ export function AdvancedTableWithExpandableRows() {
                         </Badge>
                       </div>
                       <div className="relative flex flex-col justify-between rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Shipping
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -2299,20 +2305,20 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Colors
                         </h6>
                         <div className="flex items-center space-x-2">
                           <div className="h-6 w-6 rounded-full bg-purple-600"></div>
                           <div className="h-6 w-6 rounded-full bg-indigo-400"></div>
-                          <div className="h-6 w-6 rounded-full bg-primary-600"></div>
+                          <div className="bg-primary-600 h-6 w-6 rounded-full"></div>
                           <div className="h-6 w-6 rounded-full bg-pink-400"></div>
                           <div className="h-6 w-6 rounded-full bg-teal-300"></div>
                           <div className="h-6 w-6 rounded-full bg-green-300"></div>
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Brand
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -2320,7 +2326,7 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Sold by
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -2328,7 +2334,7 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Ships from
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -2336,7 +2342,7 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Dimensions (cm)
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -2344,7 +2350,7 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Item weight
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -2406,7 +2412,7 @@ export function AdvancedTableWithExpandableRows() {
                         id="checkbox-table-search-1"
                         name="checkbox-table-search-1"
                         onClick={(event) => event.stopPropagation()}
-                        className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600"
+                        className="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800"
                       />
                       <Label
                         htmlFor="checkbox-table-search-1"
@@ -2434,7 +2440,7 @@ export function AdvancedTableWithExpandableRows() {
                   </TableCell>
                   <TableCell
                     scope="row"
-                    className="flex items-center whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white"
+                    className="flex items-center px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white"
                   >
                     <img
                       src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
@@ -2444,19 +2450,19 @@ export function AdvancedTableWithExpandableRows() {
                     NIKON D850
                   </TableCell>
                   <TableCell className="px-4 py-3">Photo</TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     Nikon
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     $599
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     465
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     1870
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3">
+                  <TableCell className="px-4 py-3 whitespace-nowrap">
                     <Badge color="success" className="w-fit">
                       Active
                     </Badge>
@@ -2472,28 +2478,28 @@ export function AdvancedTableWithExpandableRows() {
                     colSpan={9}
                   >
                     <div className="mb-4 grid grid-cols-4 gap-4">
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
                           alt="iMac Front"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-side-image.png"
                           alt="iMac Side"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
                           alt="iMac Back"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
                           alt="iMac Back"
@@ -2502,7 +2508,7 @@ export function AdvancedTableWithExpandableRows() {
                       </div>
                     </div>
                     <div>
-                      <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                      <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                         Details
                       </h6>
                       <div className="max-w-screen-md text-base text-gray-500 dark:text-gray-400">
@@ -2515,7 +2521,7 @@ export function AdvancedTableWithExpandableRows() {
                     </div>
                     <div className="mt-4 grid grid-cols-4 gap-4">
                       <div className="relative flex flex-col items-start justify-between rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Product State
                         </h6>
                         <Badge className="flex">
@@ -2532,7 +2538,7 @@ export function AdvancedTableWithExpandableRows() {
                         </Badge>
                       </div>
                       <div className="relative flex flex-col justify-between rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Shipping
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -2553,20 +2559,20 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Colors
                         </h6>
                         <div className="flex items-center space-x-2">
                           <div className="h-6 w-6 rounded-full bg-purple-600"></div>
                           <div className="h-6 w-6 rounded-full bg-indigo-400"></div>
-                          <div className="h-6 w-6 rounded-full bg-primary-600"></div>
+                          <div className="bg-primary-600 h-6 w-6 rounded-full"></div>
                           <div className="h-6 w-6 rounded-full bg-pink-400"></div>
                           <div className="h-6 w-6 rounded-full bg-teal-300"></div>
                           <div className="h-6 w-6 rounded-full bg-green-300"></div>
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Brand
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -2574,7 +2580,7 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Sold by
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -2582,7 +2588,7 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Ships from
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -2590,7 +2596,7 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Dimensions (cm)
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -2598,7 +2604,7 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Item weight
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -2660,7 +2666,7 @@ export function AdvancedTableWithExpandableRows() {
                         id="checkbox-table-search-1"
                         name="checkbox-table-search-1"
                         onClick={(event) => event.stopPropagation()}
-                        className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600"
+                        className="text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800"
                       />
                       <Label
                         htmlFor="checkbox-table-search-1"
@@ -2688,7 +2694,7 @@ export function AdvancedTableWithExpandableRows() {
                   </TableCell>
                   <TableCell
                     scope="row"
-                    className="flex items-center whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white"
+                    className="flex items-center px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white"
                   >
                     <img
                       src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
@@ -2698,19 +2704,19 @@ export function AdvancedTableWithExpandableRows() {
                     Monitor BenQ EX2710Q
                   </TableCell>
                   <TableCell className="px-4 py-3">TV/Monitor</TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     BenQ
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     $499
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     354
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3 font-medium text-gray-900 dark:text-white">
+                  <TableCell className="px-4 py-3 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                     76
                   </TableCell>
-                  <TableCell className="whitespace-nowrap px-4 py-3">
+                  <TableCell className="px-4 py-3 whitespace-nowrap">
                     <Badge color="success" className="w-fit">
                       Active
                     </Badge>
@@ -2726,28 +2732,28 @@ export function AdvancedTableWithExpandableRows() {
                     colSpan={9}
                   >
                     <div className="mb-4 grid grid-cols-4 gap-4">
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
                           alt="iMac Front"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-side-image.png"
                           alt="iMac Side"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
                           alt="iMac Back"
                           className="h-full w-auto"
                         />
                       </div>
-                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 dark:bg-gray-700 sm:h-36 sm:w-full">
+                      <div className="relative flex h-32 items-center justify-center rounded-lg bg-gray-100 p-2 sm:h-36 sm:w-full dark:bg-gray-700">
                         <img
                           src="https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-back-image.png"
                           alt="iMac Back"
@@ -2756,7 +2762,7 @@ export function AdvancedTableWithExpandableRows() {
                       </div>
                     </div>
                     <div>
-                      <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                      <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                         Details
                       </h6>
                       <div className="max-w-screen-md text-base text-gray-500 dark:text-gray-400">
@@ -2769,7 +2775,7 @@ export function AdvancedTableWithExpandableRows() {
                     </div>
                     <div className="mt-4 grid grid-cols-4 gap-4">
                       <div className="relative flex flex-col items-start justify-between rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Product State
                         </h6>
                         <Badge className="flex">
@@ -2786,7 +2792,7 @@ export function AdvancedTableWithExpandableRows() {
                         </Badge>
                       </div>
                       <div className="relative flex flex-col justify-between rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Shipping
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -2807,20 +2813,20 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Colors
                         </h6>
                         <div className="flex items-center space-x-2">
                           <div className="h-6 w-6 rounded-full bg-purple-600"></div>
                           <div className="h-6 w-6 rounded-full bg-indigo-400"></div>
-                          <div className="h-6 w-6 rounded-full bg-primary-600"></div>
+                          <div className="bg-primary-600 h-6 w-6 rounded-full"></div>
                           <div className="h-6 w-6 rounded-full bg-pink-400"></div>
                           <div className="h-6 w-6 rounded-full bg-teal-300"></div>
                           <div className="h-6 w-6 rounded-full bg-green-300"></div>
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Brand
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -2828,7 +2834,7 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Sold by
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -2836,7 +2842,7 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Ships from
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -2844,7 +2850,7 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Dimensions (cm)
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -2852,7 +2858,7 @@ export function AdvancedTableWithExpandableRows() {
                         </div>
                       </div>
                       <div className="relative rounded-lg bg-gray-100 p-3 dark:bg-gray-700">
-                        <h6 className="mb-2 text-base font-medium leading-none text-gray-900 dark:text-white">
+                        <h6 className="mb-2 text-base leading-none font-medium text-gray-900 dark:text-white">
                           Item weight
                         </h6>
                         <div className="flex items-center text-gray-500 dark:text-gray-400">
@@ -2902,7 +2908,7 @@ export function AdvancedTableWithExpandableRows() {
             </Table>
           </div>
           <div
-            className="flex flex-col items-start justify-between space-y-3 px-4 pb-4 pt-3 md:flex-row md:items-center md:space-y-0"
+            className="flex flex-col items-start justify-between space-y-3 px-4 pt-3 pb-4 md:flex-row md:items-center md:space-y-0"
             aria-label="Table navigation"
           >
             <div className="flex items-center space-x-5 text-xs">
@@ -2920,10 +2926,10 @@ export function AdvancedTableWithExpandableRows() {
               </div>
             </div>
             <div className="flex items-center space-x-4">
-              <button className="flex items-center rounded-lg py-1.5 text-center text-sm font-medium text-primary-700 hover:text-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:text-primary-500 dark:hover:text-primary-600 dark:focus:ring-primary-800">
+              <button className="text-primary-700 hover:text-primary-800 focus:ring-primary-300 dark:text-primary-500 dark:hover:text-primary-600 dark:focus:ring-primary-800 flex items-center rounded-lg py-1.5 text-center text-sm font-medium focus:ring-4 focus:outline-none">
                 Print barcodes
               </button>
-              <button className="flex items-center rounded-lg py-1.5 text-center text-sm font-medium text-primary-700 hover:text-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:text-primary-500 dark:hover:text-primary-600 dark:focus:ring-primary-800">
+              <button className="text-primary-700 hover:text-primary-800 focus:ring-primary-300 dark:text-primary-500 dark:hover:text-primary-600 dark:focus:ring-primary-800 flex items-center rounded-lg py-1.5 text-center text-sm font-medium focus:ring-4 focus:outline-none">
                 Duplicate
               </button>
               <Button size="sm" className="[&_span]:text-xs">

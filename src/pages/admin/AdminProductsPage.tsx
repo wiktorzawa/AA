@@ -1,60 +1,42 @@
-import {
-  Button,
-  Pagination,
-  Spinner,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeadCell,
-  TableRow,
-  TextInput,
-} from "flowbite-react";
 import type { FC } from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { Button, Pagination, Spinner, TextInput } from "flowbite-react";
 import { HiPlus, HiSearch } from "react-icons/hi";
 import { useQuery } from "@tanstack/react-query";
-import { getProducts } from "@/api/productsApi";
+
+import { getAllProducts } from "@/api/productsApi";
 import { BlockBreadcrumb } from "@/components/block-breadcrumb";
 import { DebugAuthStatus } from "@/components/DebugAuthStatus";
-
-// Interface dla produktu z API dostawy (format polski)
-interface DeliveryProductDisplay {
-  id?: string;
-  nazwa_produktu?: string;
-  kategoria_produktu?: string;
-  cena_produktu_spec?: number;
-  ilosc?: number;
-}
+import { ProductsExpandableTable } from "@/components/tables/ProductsExpandableTable";
 
 // Custom hook for debouncing
 function useDebounce(value: string, delay: number) {
   const [debouncedValue, setDebouncedValue] = useState(value);
-  useEffect(() => {
+  useState(() => {
     const handler = setTimeout(() => {
       setDebouncedValue(value);
     }, delay);
     return () => {
       clearTimeout(handler);
     };
-  }, [value, delay]);
+  });
   return debouncedValue;
 }
 
 export const AdminProductsPage: FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
-  const debouncedSearchTerm = useDebounce(searchTerm, 500); // 500ms opóźnienia
+  const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
   const {
     data: productsData,
     isLoading,
-    isFetching, // Używamy isFetching do pokazywania spinnera przy każdej zmianie
+    isFetching,
     isError,
     error,
   } = useQuery({
     queryKey: ["products", debouncedSearchTerm, currentPage],
-    queryFn: getProducts,
+    queryFn: getAllProducts,
     placeholderData: (previousData) => previousData,
     retry: 1,
   });
@@ -94,7 +76,7 @@ export const AdminProductsPage: FC = () => {
                 value={searchTerm}
                 onChange={(e) => {
                   setSearchTerm(e.target.value);
-                  setCurrentPage(1); // Resetuj do pierwszej strony przy nowym wyszukiwaniu
+                  setCurrentPage(1);
                 }}
               />
             </div>
@@ -107,56 +89,19 @@ export const AdminProductsPage: FC = () => {
           </div>
         </div>
 
-        <div className="overflow-x-auto">
-          {isLoading ? (
-            <div className="flex h-64 items-center justify-center">
-              <Spinner size="xl" />
-            </div>
-          ) : (
-            <Table hoverable>
-              <TableHead>
-                <TableHeadCell>Nazwa Produktu</TableHeadCell>
-                <TableHeadCell>Kategoria</TableHeadCell>
-                <TableHeadCell>Cena</TableHeadCell>
-                <TableHeadCell>Ilość</TableHeadCell>
-                <TableHeadCell>Status</TableHeadCell>
-              </TableHead>
-              <TableBody className="divide-y">
-                {products.map(
-                  (product: DeliveryProductDisplay, index: number) => (
-                    <TableRow
-                      key={product.id || index}
-                      className="bg-white dark:border-gray-700 dark:bg-gray-800"
-                    >
-                      <TableCell className="font-medium whitespace-nowrap text-gray-900 dark:text-white">
-                        {product.nazwa_produktu || "Brak nazwy"}
-                      </TableCell>
-                      <TableCell>
-                        {product.kategoria_produktu || "Brak kategorii"}
-                      </TableCell>
-                      <TableCell>
-                        {product.cena_produktu_spec
-                          ? `${product.cena_produktu_spec.toFixed(2)} zł`
-                          : "Brak ceny"}
-                      </TableCell>
-                      <TableCell>{product.ilosc || 0}</TableCell>
-                      <TableCell>
-                        <span className="inline-flex rounded-full bg-green-100 px-2 py-1 text-xs font-semibold text-green-800 dark:bg-green-900 dark:text-green-300">
-                          Dostępny
-                        </span>
-                      </TableCell>
-                    </TableRow>
-                  ),
-                )}
-              </TableBody>
-            </Table>
-          )}
-          {isFetching && !isLoading && (
-            <div className="absolute inset-0 flex items-center justify-center bg-white/50 dark:bg-gray-800/50">
-              <Spinner size="lg" />
-            </div>
-          )}
-        </div>
+        {isLoading ? (
+          <div className="flex h-64 items-center justify-center">
+            <Spinner size="xl" />
+          </div>
+        ) : (
+          <ProductsExpandableTable products={products} />
+        )}
+
+        {isFetching && !isLoading && (
+          <div className="absolute inset-0 z-10 flex items-center justify-center bg-white/50 dark:bg-gray-800/50">
+            <Spinner size="lg" />
+          </div>
+        )}
 
         <nav
           className="flex flex-col items-start justify-between space-y-3 p-4 md:flex-row md:items-center md:space-y-0"
@@ -172,7 +117,7 @@ export const AdminProductsPage: FC = () => {
               {pagination?.totalItems || 0}
             </span>
           </span>
-          {pagination?.totalPages > 1 && (
+          {pagination && pagination.totalPages > 1 && (
             <Pagination
               currentPage={currentPage}
               onPageChange={setCurrentPage}

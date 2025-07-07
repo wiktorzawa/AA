@@ -1,6 +1,5 @@
 import { type FC } from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-
 import { AdminLayout } from "@/layouts/AdminLayout";
 import { StaffLayout } from "@/layouts/StaffLayout";
 import { SupplierLayout } from "@/layouts/SupplierLayout";
@@ -11,21 +10,16 @@ import ProfileLockPage from "@/pages/authentication/profile-lock";
 import ResetPasswordPage from "@/pages/authentication/reset-password";
 import SignInBackgroundPage from "@/pages/authentication/sign-in-background";
 import SignUpPage from "@/pages/authentication/sign-up";
-
-import AdminDashboardPage from "@/pages/admin/AdminDashboardPage";
-import { AdminProductsPage } from "@/pages/admin/AdminProductsPage";
-import { AdminTablesPage } from "@/pages/admin/AdminTablesPage";
 import { AdminAddDeliveryPage } from "@/pages/admin/AdminAddDeliveryPage";
+import ProductsListPage from "@/pages/admin/ProductsListPage";
+import AdminDashboardPage from "@/pages/admin/AdminDashboardPage";
 import StaffDashboardPage from "@/pages/staff/StaffDashboardPage";
 import StaffTasksPage from "@/pages/staff/StaffTasksPage";
 import { StaffAddDeliveryPage } from "@/pages/staff/StaffAddDeliveryPage";
 import SupplierDashboardPage from "@/pages/supplier/SupplierDashboardPage";
 import SupplierDeliveriesPage from "@/pages/supplier/SupplierDeliveriesPage";
-import { SupplierAddDeliveryPage } from "@/pages/supplier/SupplierAddDeliveryPage";
-import ProtectedRoute from "@/components/authentication/ProtectedRoute";
-
-// Test import productData
-import { productData } from "@/data/products";
+import SupplierAddDeliveryPage from "@/pages/supplier/SupplierAddDeliveryPage";
+import { ProtectedRoute } from "@/components/authentication/ProtectedRoute";
 
 const RoleBasedRedirect: FC = () => {
   const user = useAuthStore((state) => state.user);
@@ -75,68 +69,6 @@ const App: FC = () => {
 
         {/* Admin routes */}
         <Route
-          path="/test"
-          element={
-            <div style={{ padding: "20px", background: "red", color: "white" }}>
-              TEST ROUTE WORKS!
-            </div>
-          }
-        />
-
-        <Route
-          path="/test-productdata"
-          element={
-            <div style={{ padding: "20px" }}>
-              <h1>Product Data Test</h1>
-              <p>
-                Product count: {productData ? productData.length : "undefined"}
-              </p>
-              <p>First product: {productData?.[0]?.name || "No data"}</p>
-            </div>
-          }
-        />
-        <Route
-          path="/test-simple-dashboard"
-          element={
-            <div style={{ padding: "20px" }}>
-              <h1>Simple Dashboard Test</h1>
-              <p>If you see this, basic JSX works</p>
-            </div>
-          }
-        />
-        <Route
-          path="/test-minimal-dashboard"
-          element={
-            <div
-              style={{ padding: "20px", background: "green", color: "white" }}
-            >
-              <h1>Minimal Dashboard</h1>
-              <p>Testing without imports</p>
-            </div>
-          }
-        />
-        <Route path="/test-dashboard" element={<AdminDashboardPage />} />
-        <Route
-          path="/test-layout"
-          element={
-            <AdminLayout>
-              <div
-                style={{ padding: "20px", background: "blue", color: "white" }}
-              >
-                LAYOUT TEST
-              </div>
-            </AdminLayout>
-          }
-        />
-        <Route
-          path="/admin-test"
-          element={
-            <AdminLayout>
-              <AdminDashboardPage />
-            </AdminLayout>
-          }
-        />
-        <Route
           path="/admin"
           element={
             <ProtectedRoute allowedRoles={["admin"]}>
@@ -157,16 +89,6 @@ const App: FC = () => {
           }
         />
         <Route
-          path="/admin/tables"
-          element={
-            <ProtectedRoute allowedRoles={["admin"]}>
-              <AdminLayout>
-                <AdminTablesPage />
-              </AdminLayout>
-            </ProtectedRoute>
-          }
-        />
-        <Route
           path="/admin/deliveries/add"
           element={
             <ProtectedRoute allowedRoles={["admin"]}>
@@ -182,6 +104,16 @@ const App: FC = () => {
             <ProtectedRoute allowedRoles={["admin"]}>
               <AdminLayout>
                 <div>Wszystkie Dostawy</div>
+              </AdminLayout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/products"
+          element={
+            <ProtectedRoute allowedRoles={["admin"]}>
+              <AdminLayout>
+                <ProductsListPage />
               </AdminLayout>
             </ProtectedRoute>
           }
@@ -212,16 +144,6 @@ const App: FC = () => {
             <ProtectedRoute allowedRoles={["admin"]}>
               <AdminLayout>
                 <div>Zarządzanie Dostawcami</div>
-              </AdminLayout>
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/admin/products"
-          element={
-            <ProtectedRoute allowedRoles={["admin"]}>
-              <AdminLayout>
-                <AdminProductsPage />
               </AdminLayout>
             </ProtectedRoute>
           }

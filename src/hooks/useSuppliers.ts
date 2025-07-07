@@ -10,6 +10,7 @@ import {
 } from "@/api/supplierApi";
 import { QUERY_KEYS } from "@/constants";
 import { logger } from "@/utils/logger";
+import { toast } from "react-hot-toast";
 
 /**
  * Hook do pobierania wszystkich dostawców
@@ -91,16 +92,9 @@ export const useDeleteSupplier = () => {
 
   return useMutation({
     mutationFn: (id: string) => usunDostawce(id),
-    onSuccess: (result, id) => {
-      logger.info("Supplier deleted successfully", { id });
-
-      // Invalidate lista dostawców i usuń konkretny dostawca z cache
-      queryClient.invalidateQueries({
-        queryKey: QUERY_KEYS.SUPPLIERS,
-      });
-      queryClient.removeQueries({
-        queryKey: [...QUERY_KEYS.SUPPLIERS, id],
-      });
+    onSuccess: (_result, id) => {
+      toast.success(`Pomyślnie usunięto dostawcę o ID: ${id}`);
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.SUPPLIERS] });
     },
     onError: (error) => {
       logger.error("Failed to delete supplier", { error });

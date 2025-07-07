@@ -61,6 +61,10 @@ export const API_ENDPOINTS = {
     PROFILES: "/adspower/profiles",
     GROUPS: "/adspower/groups",
   },
+  PRODUCTS: {
+    BASE: "/products",
+    DETAILS: (productId: string) => `/products/${productId}`,
+  },
 } as const;
 
 // ===== DEFAULT VALUES =====

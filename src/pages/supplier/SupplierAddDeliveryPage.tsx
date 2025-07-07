@@ -1,223 +1,155 @@
 import type { FC } from "react";
 import { useState } from "react";
-import { Button, Card, Label, Alert, FileInput } from "flowbite-react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { HiCloudUpload, HiCheck, HiX } from "react-icons/hi";
-import { useAuthStore } from "../../stores/authStore";
-import { uploadDeliveryFile } from "../../api/deliveryApi";
-import { logger } from "../../utils/logger";
+import { FileInput, Card, Alert, Spinner, HelperText } from "flowbite-react";
+import { HiInformationCircle } from "react-icons/hi";
+import * as deliveryApi from "../../api/deliveryApi";
+import type { FilePreviewResponse, ColumnMapping } from "../../types/api.types";
+import { ProductDataTable } from "../../ProductDataTable";
+import { DeliveryDetailsForm } from "../../components/deliveries/DeliveryDetailsForm";
+import { ColumnMappingForm } from "../../components/deliveries/ColumnMappingForm";
+import { toast } from "react-hot-toast";
+import { useMutation } from "@tanstack/react-query";
 
-export const SupplierAddDeliveryPage: FC = () => {
-  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
-  const [uploadSuccess, setUploadSuccess] = useState(false);
-  const user = useAuthStore((state) => state.user);
+const SupplierAddDeliveryPage: FC = () => {
+  const [file, setFile] = useState<File | null>(null);
+  const [previewData, setPreviewData] = useState<FilePreviewResponse | null>(
+    null,
+  );
 
-  const queryClient = useQueryClient();
-
-  const uploadMutation = useMutation({
-    mutationFn: uploadDeliveryFile,
-    onSuccess: (result) => {
-      logger.info("SupplierUpload: Upload zakończony sukcesem", { result });
-      setUploadSuccess(true);
-      setSelectedFiles([]);
-
-      // Unieważnienie zapytań deliveries - automatyczne odświeżenie listy dostaw
-      queryClient.invalidateQueries({ queryKey: ["deliveries"] });
-
-      // Ukrycie komunikatu sukcesu po 5 sekundach
-      setTimeout(() => setUploadSuccess(false), 5000);
+  const {
+    mutate: previewFileMutation,
+    isPending: isLoading,
+    error,
+  } = useMutation<
+    FilePreviewResponse,
+    Error,
+    { file: File; mapping?: ColumnMapping }
+  >({
+    mutationFn: (variables) =>
+      deliveryApi.previewFile(variables.file, variables.mapping),
+    onSuccess: (response) => {
+      toast.success(
+        "Plik został przeanalizowany. Sprawdź podgląd i potwierdź mapowanie.",
+      );
+      setPreviewData(response);
     },
-    onError: (error) => {
-      logger.error("SupplierUpload: Błąd uploadu", { error });
+    onError: (err) => {
+      const errorMessage =
+        err.message || "Wystąpił nieznany błąd podczas przetwarzania pliku.";
+      toast.error(errorMessage);
+      setPreviewData(null);
     },
   });
 
-  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      const files = Array.from(e.target.files);
-      const excelFiles = files.filter(
-        (file) =>
-          file.type === "application/vnd.ms-excel" ||
-          file.type ===
-            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" ||
-          file.type === "application/vnd.ms-excel.sheet.macroEnabled.12" ||
-          file.name.endsWith(".xls") ||
-          file.name.endsWith(".xlsx") ||
-          file.name.endsWith(".xlsm"),
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = event.target.files?.[0];
+    if (selectedFile) {
+      setFile(selectedFile);
+      setPreviewData(null);
+      previewFileMutation({ file: selectedFile });
+    }
+  };
+
+  const handleMappingConfirm = (newMapping: ColumnMapping) => {
+    if (file) {
+      previewFileMutation({ file, mapping: newMapping });
+    }
+  };
+
+  const handleFinalSubmit = async (details: { deliveryNumber: string }) => {
+    if (!file || !previewData?.columnMapping) return;
+    try {
+      await deliveryApi.uploadAndProcessFile(
+        file,
+        previewData.columnMapping,
+        details.deliveryNumber,
       );
-
-      if (excelFiles.length !== files.length) {
-        // Można dodać toast notification lub inny sposób powiadomienia
-        console.warn("Tylko pliki Excel są dozwolone");
-        return;
-      }
-
-      setSelectedFiles((prev) => [...prev, ...excelFiles]);
+      toast.success("Dostawa została pomyślnie dodana!");
+      setFile(null);
+      setPreviewData(null);
+    } catch (err: any) {
+      toast.error(
+        err.response?.data?.message ||
+          "Wystąpił błąd podczas finalnego zapisu dostawy.",
+      );
     }
-  };
-
-  const removeFile = (index: number) => {
-    setSelectedFiles((prev) => prev.filter((_, i) => i !== index));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (selectedFiles.length === 0) {
-      console.warn("Proszę wybrać przynajmniej jeden plik Excel");
-      return;
-    }
-
-    if (!user) {
-      console.error("Brak zalogowanego użytkownika, nie można wysłać pliku.");
-      return;
-    }
-
-    // Przesyłanie pierwszego pliku przez useMutation
-    logger.info("SupplierUpload: Rozpoczynam upload pliku", {
-      fileName: selectedFiles[0].name,
-      supplierId: user.id_uzytkownika,
-    });
-
-    uploadMutation.mutate({
-      file: selectedFiles[0],
-      supplierId: user.id_uzytkownika,
-    });
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 dark:bg-gray-900">
-      <div className="mx-auto max-w-4xl">
-        <div className="mb-6">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-            Dodaj Nową Dostawę
-          </h1>
-          <p className="mt-2 text-gray-600 dark:text-gray-400">
-            Prześlij pliki Excel z danymi dostawy
-          </p>
+    <div className="space-y-6">
+      <Card>
+        <h1 className="text-2xl font-bold dark:text-white">
+          Dodaj Nową Dostawę
+        </h1>
+        <p className="text-gray-600 dark:text-gray-400">
+          Wybierz plik z danymi dostawy (np. Excel, CSV), a system spróbuje go
+          automatycznie przetworzyć.
+        </p>
+        <div id="fileUpload" className="max-w-md">
+          <FileInput
+            id="file"
+            onChange={handleFileChange}
+            accept=".xls,.xlsx,.csv"
+          />
+          <HelperText>Wybierz plik w formacie .xls, .xlsx lub .csv</HelperText>
         </div>
+      </Card>
 
-        {uploadSuccess && (
-          <Alert color="success" className="mb-6">
-            <HiCheck className="h-4 w-4" />
-            <span className="ml-2">
-              Dostawa została pomyślnie dodana do systemu!
-            </span>
-          </Alert>
-        )}
+      {isLoading && (
+        <div className="text-center">
+          <Spinner aria-label="Ładowanie podglądu" size="xl" />
+          <p>Przetwarzanie pliku...</p>
+        </div>
+      )}
 
-        <Card>
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Dropzone - Flowbite Pro Pattern */}
-            <div>
-              <h3 className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
-                Pliki Excel dostawy
+      {error && (
+        <Alert color="failure" icon={HiInformationCircle}>
+          {error.message}
+        </Alert>
+      )}
+
+      {previewData && (
+        <div className="space-y-6">
+          {previewData.analysisStatus === "BŁĄD" && (
+            <Alert color="failure" icon={HiInformationCircle}>
+              <h3 className="font-semibold">
+                Wystąpiły błędy podczas przetwarzania pliku:
               </h3>
+              <ul className="mt-2 list-inside list-disc">
+                {previewData.validationDetails?.criticalErrors.map(
+                  (err, index) => (
+                    <li key={index}>
+                      {err.message} (wiersz: {err.rowNumber || "N/A"})
+                    </li>
+                  ),
+                )}
+              </ul>
+            </Alert>
+          )}
 
-              <div className="flex w-full items-center justify-center">
-                <Label
-                  htmlFor="dropzone-file"
-                  className="flex h-64 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600"
-                >
-                  <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                    <HiCloudUpload className="mb-3 h-10 w-10 text-gray-400" />
-                    <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                      <span className="font-semibold">
-                        Kliknij aby przesłać
-                      </span>{" "}
-                      lub przeciągnij i upuść
-                    </p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">
-                      Tylko pliki Excel: XLS, XLSX, XLSM (MAX. 50MB na plik)
-                    </p>
-                  </div>
-                  <FileInput
-                    id="dropzone-file"
-                    className="hidden"
-                    multiple
-                    accept=".xls,.xlsx,.xlsm"
-                    onChange={handleFileSelect}
-                  />
-                </Label>
-              </div>
+          {previewData.analysisStatus === "WYMAGA_MAPOWANIA" && (
+            <ColumnMappingForm
+              availableColumns={previewData.availableColumns}
+              guessedMapping={previewData.columnMapping}
+              onConfirm={handleMappingConfirm}
+            />
+          )}
 
-              {uploadMutation.isError && (
-                <Alert color="failure" className="mt-4">
-                  <HiX className="h-4 w-4" />
-                  <span className="ml-2">
-                    {uploadMutation.error instanceof Error
-                      ? uploadMutation.error.message
-                      : "Wystąpił błąd podczas przesyłania pliku"}
-                  </span>
-                </Alert>
-              )}
+          {previewData.products && previewData.products.length > 0 && (
+            <ProductDataTable products={previewData.products} />
+          )}
 
-              {/* Lista wybranych plików */}
-              {selectedFiles.length > 0 && (
-                <div className="mt-4">
-                  <h4 className="mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                    Wybrane pliki ({selectedFiles.length})
-                  </h4>
-                  <div className="space-y-2">
-                    {selectedFiles.map((file, index) => (
-                      <div
-                        key={index}
-                        className="flex items-center justify-between rounded-lg border border-gray-200 bg-white p-3 dark:border-gray-700 dark:bg-gray-800"
-                      >
-                        <div className="flex items-center space-x-3">
-                          <div className="flex-shrink-0">
-                            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-purple-100 dark:bg-purple-900">
-                              <span className="text-xs font-medium text-purple-600 dark:text-purple-400">
-                                {file.name.split(".").pop()?.toUpperCase() ||
-                                  "XLS"}
-                              </span>
-                            </div>
-                          </div>
-                          <div>
-                            <p className="text-sm font-medium text-gray-900 dark:text-white">
-                              {file.name}
-                            </p>
-                            <p className="text-xs text-gray-500 dark:text-gray-400">
-                              {(file.size / 1024 / 1024).toFixed(2)} MB
-                            </p>
-                          </div>
-                        </div>
-                        <Button
-                          size="xs"
-                          color="failure"
-                          onClick={() => removeFile(index)}
-                          disabled={uploadMutation.isPending}
-                        >
-                          <HiX className="h-3 w-3" />
-                        </Button>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Przyciski akcji */}
-            <div className="flex justify-end space-x-4 border-t pt-6 dark:border-gray-700">
-              <Button
-                type="button"
-                color="gray"
-                disabled={uploadMutation.isPending}
-              >
-                Anuluj
-              </Button>
-              <Button
-                type="submit"
-                disabled={
-                  uploadMutation.isPending || selectedFiles.length === 0
-                }
-              >
-                {uploadMutation.isPending ? "Przesyłanie..." : "Dodaj Dostawę"}
-              </Button>
-            </div>
-          </form>
-        </Card>
-      </div>
+          {(previewData.analysisStatus === "SUKCES" ||
+            previewData.analysisStatus === "WYMAGA_POTWIERDZENIA") && (
+            <DeliveryDetailsForm
+              onSubmit={handleFinalSubmit}
+              initialDeliveryNumber={previewData.deliveryNumber || ""}
+            />
+          )}
+        </div>
+      )}
     </div>
   );
 };
+
+export default SupplierAddDeliveryPage;

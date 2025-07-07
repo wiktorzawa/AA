@@ -1,5 +1,8 @@
+import axios from "axios";
 import axiosInstance from "./axios";
 import { logger } from "../utils/logger";
+import type { ColumnMapping } from "../types/api.types";
+import type { FilePreviewResponse } from "@/types/delivery.types";
 // Definicja typu produktu dostawy z backend
 export interface DeliveryProduct {
   id_produktu_dostawy: number;
@@ -29,6 +32,7 @@ interface ApiResponse<T> {
 export interface DeliveryUploadRequest {
   file: File;
   supplierId: string;
+  mapping?: Record<string, string>;
   confirmDeliveryNumber?: string;
 }
 
@@ -51,22 +55,17 @@ export interface DeliveryUploadResponse {
 export interface DeliveryPreviewResponse {
   success: boolean;
   data?: {
-    status: string;
+    status: "SUKCES" | "WYMAGA_POTWIERDZENIA" | "WYMAGA_MAPOWANIA" | "BŁĄD";
     missingFields?: string[];
     detectedDeliveryNumber?: string;
     detectedPaletteNumbers: string[];
     fileName: string;
     totalProducts: number;
     estimatedValue: number;
-    productSample: Array<{
-      nr_palety?: string;
-      nazwa_produktu: string;
-      kod_ean?: string;
-      kod_asin?: string;
-      ilosc: number;
-      cena_produktu_spec?: number;
-    }>;
+    productSample: Array<Record<string, string | number>>;
     columnMapping: Record<string, string>;
+    availableColumns: string[];
+    hasHeaders: boolean;
     validationWarnings: string[];
   };
   error?: string;
@@ -96,6 +95,11 @@ export const uploadDeliveryFile = async (
       formData.append("confirmDeliveryNumber", data.confirmDeliveryNumber);
     }
 
+    // Dołącz mapowanie, jeśli zostało podane
+    if (data.mapping) {
+      formData.append("columnMapping", JSON.stringify(data.mapping));
+    }
+
     const response = await axiosInstance.post("/deliveries/upload", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
@@ -104,37 +108,53 @@ export const uploadDeliveryFile = async (
       timeout: 60000, // 60 sekund
     });
 
+    // Sprawdź, czy odpowiedź z backendu wskazuje na sukces
+    if (!response.data.success) {
+      // Rzuć błąd, aby react-query mogło go obsłużyć w `onError`
+      throw new Error(
+        response.data.error || "Błąd podczas przetwarzania pliku na serwerze",
+      );
+    }
+
     return response.data;
   } catch (error: unknown) {
     logger.error("Failed to upload delivery file", { error });
 
-    if (error && typeof error === "object" && "response" in error) {
-      const axiosError = error as {
-        response?: { data?: DeliveryUploadResponse };
-      };
-      if (axiosError.response?.data) {
-        return axiosError.response.data;
-      }
+    // Przechwytywanie błędów axios i rzucanie ich dalej
+    if (axios.isAxiosError(error) && error.response) {
+      // Wyciągnij komunikat błędu z odpowiedzi serwera, jeśli istnieje
+      const serverError =
+        error.response.data?.message || error.response.data?.error;
+      throw new Error(serverError || "Błąd serwera podczas przesyłania pliku.");
     }
 
-    return {
-      success: false,
-      error: "Błąd podczas przesyłania pliku dostawy",
-    };
+    // Rzucanie innych błędów, w tym tych rzuconych ręcznie
+    if (error instanceof Error) {
+      throw error;
+    }
+
+    // Fallback na generyczny błąd
+    throw new Error("Nieoczekiwany błąd podczas przesyłania pliku dostawy");
   }
 };
 
 /**
  * Tworzy podgląd pliku bez zapisywania do bazy
  * @param file Plik do podglądu
+ * @param mapping Opcjonalne mapowanie kolumn od użytkownika
  * @returns Podgląd zawartości pliku
  */
-export const previewDeliveryFile = async (
+export const previewFile = async (
   file: File,
-): Promise<DeliveryPreviewResponse> => {
+  mapping?: ColumnMapping,
+): Promise<FilePreviewResponse> => {
   try {
     const formData = new FormData();
     formData.append("deliveryFile", file);
+
+    if (mapping) {
+      formData.append("columnMapping", JSON.stringify(mapping));
+    }
 
     const response = await axiosInstance.post("/deliveries/preview", formData, {
       headers: {
@@ -147,19 +167,52 @@ export const previewDeliveryFile = async (
   } catch (error: unknown) {
     logger.error("Failed to preview delivery file", { error });
 
-    if (error && typeof error === "object" && "response" in error) {
-      const axiosError = error as {
-        response?: { data?: DeliveryPreviewResponse };
-      };
-      if (axiosError.response?.data) {
-        return axiosError.response.data;
-      }
+    if (axios.isAxiosError(error)) {
+      throw error; // Rzuć dalej, aby komponent mógł obsłużyć
     }
 
-    return {
-      success: false,
-      error: "Błąd podczas tworzenia podglądu pliku",
-    };
+    throw new Error("Nieoczekiwany błąd podczas tworzenia podglądu pliku");
+  }
+};
+
+/**
+ * Przesyła plik i finalizuje dostawę
+ * @param file Plik z danymi
+ * @param mapping Potwierdzone mapowanie kolumn
+ * @param deliveryNumber Potwierdzony numer dostawy
+ * @param supplierId Opcjonalny ID dostawcy
+ * @returns Wynik operacji
+ */
+export const uploadAndProcessFile = async (
+  file: File,
+  mapping: ColumnMapping,
+  deliveryNumber: string,
+  supplierId?: string,
+): Promise<DeliveryUploadResponse> => {
+  try {
+    const formData = new FormData();
+    formData.append("deliveryFile", file);
+    formData.append("columnMapping", JSON.stringify(mapping));
+    formData.append("confirmDeliveryNumber", deliveryNumber);
+    if (supplierId) {
+      formData.append("id_dostawcy", supplierId);
+    }
+
+    const response = await axiosInstance.post(
+      "/deliveries/confirm-upload",
+      formData,
+      {
+        headers: { "Content-Type": "multipart/form-data" },
+        timeout: 60000,
+      },
+    );
+    return response.data;
+  } catch (error) {
+    logger.error("Failed to finalize delivery upload", { error });
+    if (axios.isAxiosError(error)) {
+      throw error;
+    }
+    throw new Error("Nieoczekiwany błąd podczas finalizowania dostawy");
   }
 };
 

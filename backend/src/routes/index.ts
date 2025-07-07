@@ -3,7 +3,7 @@ import authRoutes from "./auth/authRoutes";
 import staffRoutes from "./auth/staffRoutes";
 import supplierRoutes from "./auth/supplierRoutes";
 import deliveryRoutes from "./deliveryRoutes";
-// import deliveryRoutes from "./deliveryRoutes";
+import productRoutes from "./productRoutes"; // <-- DODAJ TEN IMPORT
 
 const router = express.Router();
 
@@ -18,5 +18,8 @@ router.use("/suppliers", supplierRoutes);
 
 // Trasy dla dostaw
 router.use("/deliveries", deliveryRoutes);
+
+// Trasy dla produktów
+router.use("/products", productRoutes); // <-- DODAJ TĘ LINIĘ
 
 export default router;

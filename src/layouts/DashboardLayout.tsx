@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import type { FC, PropsWithChildren } from "react";
 import { useEffect } from "react";
-import { DashboardNavbar } from "@components/navbar/DashboardNavbar";
+import { DashboardNavbar } from "@/components/sidebar/navbar/DashboardNavbar";
 import AppSidebar from "@components/sidebar/AppSidebar";
 import { useUIStore } from "@/stores/uiStore";
 
