@@ -22,6 +22,12 @@ export const ProductsExpandableTable: FC<ProductsExpandableTableProps> = ({
 }) => {
   const [expandedRows, setExpandedRows] = useState<Set<number>>(new Set());
 
+  // Sprawdź, czy jakikolwiek produkt ma zdefiniowany stan_produktu
+  const showStatusColumn = products.some(
+    (product) =>
+      product.stan_produktu !== undefined && product.stan_produktu !== null,
+  );
+
   const toggleRow = (id: number) => {
     const newExpandedRows = new Set(expandedRows);
     if (newExpandedRows.has(id)) {
@@ -72,14 +78,16 @@ export const ProductsExpandableTable: FC<ProductsExpandableTableProps> = ({
               kategoria
             </TableHeadCell>
             <TableHeadCell scope="col" className="min-w-24 px-4 py-3">
-              ilosc_w_magazynie
+              ilosc
             </TableHeadCell>
             <TableHeadCell scope="col" className="min-w-24 px-4 py-3">
-              cena_jednostkowa
+              cena
             </TableHeadCell>
-            <TableHeadCell scope="col" className="min-w-24 px-4 py-3">
-              stan_produktu
-            </TableHeadCell>
+            {showStatusColumn && (
+              <TableHeadCell scope="col" className="min-w-24 px-4 py-3">
+                stan_produktu
+              </TableHeadCell>
+            )}
             <TableHeadCell scope="col" className="min-w-32 px-4 py-3">
               status
             </TableHeadCell>
@@ -88,20 +96,20 @@ export const ProductsExpandableTable: FC<ProductsExpandableTableProps> = ({
 
         <TableBody>
           {products.map((product) => (
-            <React.Fragment key={product.id_produktu_dostawy}>
+            <React.Fragment key={product.id}>
               <TableRow
                 className="cursor-pointer border-b transition hover:bg-gray-200 dark:border-gray-700 dark:hover:bg-gray-700"
-                onClick={() => toggleRow(product.id_produktu_dostawy)}
+                onClick={() => toggleRow(product.id)}
               >
                 <TableCell className="w-4 px-4 py-3">
                   <div className="flex items-center">
                     <Checkbox
-                      id={`checkbox-${product.id_produktu_dostawy}`}
-                      name={`checkbox-${product.id_produktu_dostawy}`}
+                      id={`checkbox-${product.id}`}
+                      name={`checkbox-${product.id}`}
                       onClick={(event) => event.stopPropagation()}
                     />
                     <Label
-                      htmlFor={`checkbox-${product.id_produktu_dostawy}`}
+                      htmlFor={`checkbox-${product.id}`}
                       className="sr-only"
                     >
                       Zaznacz produkt
@@ -111,9 +119,7 @@ export const ProductsExpandableTable: FC<ProductsExpandableTableProps> = ({
                 <TableCell className="w-4 p-3">
                   <svg
                     className={`h-6 w-6 shrink-0 transition-transform ${
-                      expandedRows.has(product.id_produktu_dostawy)
-                        ? "rotate-180"
-                        : ""
+                      expandedRows.has(product.id) ? "rotate-180" : ""
                     }`}
                     fill="currentColor"
                     viewBox="0 0 20 20"
@@ -133,7 +139,6 @@ export const ProductsExpandableTable: FC<ProductsExpandableTableProps> = ({
                 >
                   <img
                     src={
-                      product.zdjecie_url ||
                       "https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png"
                     }
                     alt={product.nazwa_produktu}
@@ -142,88 +147,82 @@ export const ProductsExpandableTable: FC<ProductsExpandableTableProps> = ({
                   {product.nazwa_produktu}
                 </TableCell>
                 <TableCell className="px-4 py-3">
-                  {product.kategoria || "N/A"}
+                  {product.kategoria_produktu || "N/A"}
                 </TableCell>
                 <TableCell className="px-4 py-3 font-medium text-gray-900 dark:text-white">
-                  {product.ilosc_w_magazynie}
+                  {product.ilosc}
                 </TableCell>
                 <TableCell className="px-4 py-3 font-medium text-gray-900 dark:text-white">
-                  {product.cena_jednostkowa
-                    ? `${product.cena_jednostkowa.toFixed(2)} PLN`
+                  {product.cena_produktu_spec
+                    ? `${product.cena_produktu_spec.toFixed(2)} PLN`
                     : "N/A"}
                 </TableCell>
-                <TableCell className="px-4 py-3 font-medium text-gray-900 dark:text-white">
-                  {product.stan_produktu || "N/A"}
-                </TableCell>
+                {showStatusColumn && (
+                  <TableCell className="px-4 py-3 font-medium text-gray-900 dark:text-white">
+                    {product.stan_produktu || "N/A"}
+                  </TableCell>
+                )}
                 <TableCell className="px-4 py-3">
                   <Badge
-                    color={getStatusBadgeColor(product.status)}
+                    color={getStatusBadgeColor(product.status_weryfikacji)}
                     className="w-fit"
                   >
-                    {product.status || "brak"}
+                    {product.status_weryfikacji || "brak"}
                   </Badge>
                 </TableCell>
               </TableRow>
-              {expandedRows.has(product.id_produktu_dostawy) && (
+              {expandedRows.has(product.id) && (
                 <TableRow>
                   <TableCell
                     className="border-b p-4 dark:border-gray-700"
-                    colSpan={8}
+                    colSpan={showStatusColumn ? 8 : 7}
                   >
                     <div className="grid grid-cols-4 gap-4">
                       <div>
                         <h6 className="font-semibold dark:text-white">
-                          id_dostawy:
+                          Delivery ID:
                         </h6>
-                        <p>{product.id_dostawy || "N/A"}</p>
+                        <p>{product.delivery?.id || "N/A"}</p>
                       </div>
                       <div>
                         <h6 className="font-semibold dark:text-white">
-                          nr_palety:
+                          Palette ID:
                         </h6>
-                        <p>{product.nr_palety || "N/A"}</p>
+                        <p>{product.palette?.id || "N/A"}</p>
                       </div>
                       <div>
                         <h6 className="font-semibold dark:text-white">LPN:</h6>
-                        <p>{product.LPN || "N/A"}</p>
+                        <p>{product.lpn || "N/A"}</p>
                       </div>
                       <div>
-                        <h6 className="font-semibold dark:text-white">
-                          kod_ean:
-                        </h6>
+                        <h6 className="font-semibold dark:text-white">EAN:</h6>
                         <p>{product.kod_ean || "N/A"}</p>
                       </div>
                       <div>
-                        <h6 className="font-semibold dark:text-white">
-                          kod_asin:
-                        </h6>
+                        <h6 className="font-semibold dark:text-white">ASIN:</h6>
                         <p>{product.kod_asin || "N/A"}</p>
                       </div>
                       <div>
                         <h6 className="font-semibold dark:text-white">
-                          kraj_pochodzenia:
+                          Country:
                         </h6>
                         <p>{product.kraj_pochodzenia || "N/A"}</p>
                       </div>
                       <div>
                         <h6 className="font-semibold dark:text-white">
-                          data_utworzenia:
+                          Created:
                         </h6>
-                        <p>
-                          {new Date(product.data_utworzenia).toLocaleString()}
-                        </p>
+                        <p>{new Date(product.createdAt).toLocaleString()}</p>
                       </div>
                       <div>
                         <h6 className="font-semibold dark:text-white">
-                          data_aktualizacji:
+                          Updated:
                         </h6>
-                        <p>
-                          {new Date(product.data_aktualizacji).toLocaleString()}
-                        </p>
+                        <p>{new Date(product.updatedAt).toLocaleString()}</p>
                       </div>
                       <div className="col-span-4">
                         <h6 className="font-semibold dark:text-white">
-                          uwagi_weryfikacji:
+                          Verification Notes:
                         </h6>
                         <p>{product.uwagi_weryfikacji || "Brak uwag"}</p>
                       </div>

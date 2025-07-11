@@ -5,9 +5,8 @@ import {
   dodajDostawceZHaslem,
   aktualizujDostawce,
   usunDostawce,
-  type NowyDostawcaBezId,
-  type AktualizacjaDostawcy,
 } from "@/api/supplierApi";
+import type { Supplier } from "@/types/supplier.types";
 import { QUERY_KEYS } from "@/constants";
 import { logger } from "@/utils/logger";
 import { toast } from "react-hot-toast";
@@ -16,7 +15,7 @@ import { toast } from "react-hot-toast";
  * Hook do pobierania wszystkich dostawców
  */
 export const useSuppliers = () => {
-  return useQuery({
+  return useQuery<Supplier[], Error>({
     queryKey: QUERY_KEYS.SUPPLIERS,
     queryFn: pobierzDostawcow,
     staleTime: 1000 * 60 * 5, // 5 minut
@@ -27,7 +26,7 @@ export const useSuppliers = () => {
  * Hook do pobierania konkretnego dostawcy
  */
 export const useSupplier = (id: string) => {
-  return useQuery({
+  return useQuery<Supplier, Error>({
     queryKey: [...QUERY_KEYS.SUPPLIERS, id],
     queryFn: () => pobierzDostawce(id),
     enabled: !!id, // Tylko gdy mamy ID
@@ -42,8 +41,9 @@ export const useCreateSupplier = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (supplierData: NowyDostawcaBezId) =>
-      dodajDostawceZHaslem(supplierData),
+    mutationFn: (
+      supplierData: Omit<Supplier, "id" | "createdAt" | "updatedAt">,
+    ) => dodajDostawceZHaslem(supplierData),
     onSuccess: (result) => {
       logger.info("Supplier created successfully", { result });
 
@@ -65,8 +65,13 @@ export const useUpdateSupplier = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ id, data }: { id: string; data: AktualizacjaDostawcy }) =>
-      aktualizujDostawce(id, data),
+    mutationFn: ({
+      id,
+      data,
+    }: {
+      id: string;
+      data: Partial<Omit<Supplier, "id" | "createdAt" | "updatedAt">>;
+    }) => aktualizujDostawce(id, data),
     onSuccess: (result, variables) => {
       logger.info("Supplier updated successfully", { result });
 

@@ -1,8 +1,37 @@
-import axios from "axios";
-import axiosInstance from "./axios";
 import { logger } from "../utils/logger";
-import type { ColumnMapping } from "../types/api.types";
-import type { FilePreviewResponse } from "@/types/delivery.types";
+import type { ColumnMapping, FilePreviewResponse } from "../types/api.types";
+import type { Delivery } from "@/types/delivery.types";
+import strapiAdapter from "./strapiAdapter";
+
+// Definicja typu dla elementu danych Strapi
+interface StrapiDataItem {
+  id: number;
+  attributes: Omit<Delivery, "id">;
+  [key: string]: any; // Zezwól na inne właściwości, których nie znamy
+}
+
+/**
+ * Mapuje dane Strapi na format aplikacji
+ */
+const mapStrapiToAppFormat = (strapiData: StrapiDataItem): Delivery => {
+  const attrs = strapiData.attributes || strapiData;
+  return {
+    id: strapiData.id,
+    id_dostawy: attrs.id_dostawy,
+    id_dostawcy: attrs.id_dostawcy,
+    id_pliku: attrs.id_pliku,
+    nazwa_pliku: attrs.nazwa_pliku,
+    url_pliku_S3: attrs.url_pliku_S3,
+    nr_palet_dostawy: attrs.nr_palet_dostawy,
+    nr_lot_dostawy: attrs.nr_lot_dostawy,
+    status_weryfikacji: attrs.status_weryfikacji,
+    supplier: attrs.supplier?.data,
+    products: attrs.products?.data,
+    createdAt: attrs.createdAt,
+    updatedAt: attrs.updatedAt,
+  };
+};
+
 // Definicja typu produktu dostawy z backend
 export interface DeliveryProduct {
   id_produktu_dostawy: number;
@@ -89,7 +118,7 @@ export const uploadDeliveryFile = async (
   try {
     const formData = new FormData();
     formData.append("deliveryFile", data.file);
-    formData.append("id_dostawcy", data.supplierId); // Dodajemy ID dostawcy
+    formData.append("id_dostawcy", data.supplierId);
 
     if (data.confirmDeliveryNumber) {
       formData.append("confirmDeliveryNumber", data.confirmDeliveryNumber);
@@ -100,35 +129,19 @@ export const uploadDeliveryFile = async (
       formData.append("columnMapping", JSON.stringify(data.mapping));
     }
 
-    const response = await axiosInstance.post("/deliveries/upload", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-      // Zwiększony timeout dla uploadów
-      timeout: 60000, // 60 sekund
-    });
+    const response = await strapiAdapter.upload("/deliveries/upload", formData);
 
     // Sprawdź, czy odpowiedź z backendu wskazuje na sukces
-    if (!response.data.success) {
-      // Rzuć błąd, aby react-query mogło go obsłużyć w `onError`
+    if (!response.success) {
       throw new Error(
-        response.data.error || "Błąd podczas przetwarzania pliku na serwerze",
+        response.error || "Błąd podczas przetwarzania pliku na serwerze",
       );
     }
 
-    return response.data;
+    return response;
   } catch (error: unknown) {
     logger.error("Failed to upload delivery file", { error });
 
-    // Przechwytywanie błędów axios i rzucanie ich dalej
-    if (axios.isAxiosError(error) && error.response) {
-      // Wyciągnij komunikat błędu z odpowiedzi serwera, jeśli istnieje
-      const serverError =
-        error.response.data?.message || error.response.data?.error;
-      throw new Error(serverError || "Błąd serwera podczas przesyłania pliku.");
-    }
-
-    // Rzucanie innych błędów, w tym tych rzuconych ręcznie
     if (error instanceof Error) {
       throw error;
     }
@@ -146,31 +159,33 @@ export const uploadDeliveryFile = async (
  */
 export const previewFile = async (
   file: File,
-  mapping?: ColumnMapping,
-): Promise<FilePreviewResponse> => {
+  columnMapping?: ColumnMapping | null,
+): Promise<DeliveryPreviewResponse> => {
+  const formData = new FormData();
+  formData.append("deliveryFile", file);
+  if (columnMapping) {
+    formData.append("columnMapping", JSON.stringify(columnMapping));
+  }
+
   try {
-    const formData = new FormData();
-    formData.append("deliveryFile", file);
-
-    if (mapping) {
-      formData.append("columnMapping", JSON.stringify(mapping));
-    }
-
-    const response = await axiosInstance.post("/deliveries/preview", formData, {
+    const response = await strapiAdapter.post("/deliveries/preview", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
-      timeout: 30000, // 30 sekund
     });
 
-    return response.data;
-  } catch (error: unknown) {
-    logger.error("Failed to preview delivery file", { error });
-
-    if (axios.isAxiosError(error)) {
-      throw error; // Rzuć dalej, aby komponent mógł obsłużyć
+    // Backend zwraca { success: true, data: FilePreviewResponse }
+    // Musimy wyciągnąć dane z response.data
+    if (response && response.data) {
+      return response.data;
+    } else if (response && response.success) {
+      // Fallback jeśli dane są bezpośrednio w response
+      return response;
     }
 
+    throw new Error("Nieprawidłowy format odpowiedzi z serwera");
+  } catch (error: unknown) {
+    logger.error("Failed to preview delivery file", { error });
     throw new Error("Nieoczekiwany błąd podczas tworzenia podglądu pliku");
   }
 };
@@ -187,32 +202,87 @@ export const uploadAndProcessFile = async (
   file: File,
   mapping: ColumnMapping,
   deliveryNumber: string,
-  supplierId?: string,
+  supplierId: string, // Zmieniamy na wymagane
 ): Promise<DeliveryUploadResponse> => {
   try {
     const formData = new FormData();
-    formData.append("deliveryFile", file);
-    formData.append("columnMapping", JSON.stringify(mapping));
-    formData.append("confirmDeliveryNumber", deliveryNumber);
-    if (supplierId) {
-      formData.append("id_dostawcy", supplierId);
+    formData.append("files.file", file, file.name);
+
+    const dataPayload = {
+      delivery_number: deliveryNumber,
+      mapping: mapping,
+      id_dostawcy: supplierId, // Dodajemy ID do payloadu
+    };
+
+    formData.append("data", JSON.stringify(dataPayload));
+
+    // Endpoint 'confirm' oczekuje teraz tych danych
+    const response = await strapiAdapter.upload(
+      "/deliveries/confirm",
+      formData,
+    );
+
+    return response;
+  } catch (error) {
+    console.error("Błąd podczas przesyłania i przetwarzania pliku:", error);
+    // Rzuć błąd dalej, aby można go było obsłużyć w useMutation
+    throw error;
+  }
+};
+
+/**
+ * Tworzy dane finansowe dla dostawy
+ * @param deliveryId ID dostawy
+ * @param financeData Dane finansowe (kurs, marża, VAT, waluta)
+ * @returns Wynik operacji z danymi finansowymi
+ */
+interface FinanceData {
+  kurs_wymiany: number;
+  procent_wartosci: number;
+  stawka_vat: number;
+  waluta: string;
+}
+
+interface FinanceResponse {
+  id: number;
+  // Zdefiniuj inne pola, które spodziewasz się otrzymać
+}
+
+export const createFinances = async (
+  deliveryId: string,
+  financeData: FinanceData,
+): Promise<ApiResponse<FinanceResponse>> => {
+  try {
+    logger.info("Creating finances for delivery", {
+      deliveryId,
+      financeData,
+    });
+
+    const response = await strapiAdapter.post(
+      `/deliveries/${deliveryId}/finances`,
+      financeData,
+    );
+
+    if (response.success) {
+      logger.info("Finances created successfully", {
+        deliveryId,
+        financeId: response.data?.finance?.id,
+      });
     }
 
-    const response = await axiosInstance.post(
-      "/deliveries/confirm-upload",
-      formData,
-      {
-        headers: { "Content-Type": "multipart/form-data" },
-        timeout: 60000,
-      },
-    );
-    return response.data;
-  } catch (error) {
-    logger.error("Failed to finalize delivery upload", { error });
-    if (axios.isAxiosError(error)) {
+    return response;
+  } catch (error: unknown) {
+    logger.error("Failed to create finances", {
+      deliveryId,
+      financeData,
+      error,
+    });
+
+    if (error instanceof Error) {
       throw error;
     }
-    throw new Error("Nieoczekiwany błąd podczas finalizowania dostawy");
+
+    throw new Error("Nieoczekiwany błąd podczas tworzenia danych finansowych");
   }
 };
 
@@ -220,22 +290,25 @@ export const uploadAndProcessFile = async (
  * Pobiera listę dostaw
  * @returns Lista dostaw użytkownika
  */
-export const getDeliveries = async () => {
+export const getDeliveries = async (): Promise<{
+  success: boolean;
+  data: Delivery[];
+  error?: string;
+}> => {
   try {
-    const response = await axiosInstance.get("/deliveries");
-    return response.data;
+    const response = await strapiAdapter.get("/deliveries?populate=*");
+    const deliveries = Array.isArray(response.data)
+      ? response.data.map(mapStrapiToAppFormat)
+      : [];
+    return {
+      success: true,
+      data: deliveries,
+    };
   } catch (error: unknown) {
     logger.error("Failed to fetch deliveries", { error });
-
-    if (error && typeof error === "object" && "response" in error) {
-      const axiosError = error as { response?: { data?: unknown } };
-      if (axiosError.response?.data) {
-        return axiosError.response.data;
-      }
-    }
-
     return {
       success: false,
+      data: [],
       error: "Błąd podczas pobierania listy dostaw",
     };
   }
@@ -250,18 +323,15 @@ export const getProductsByDeliveryId = async (
   deliveryId: string,
 ): Promise<ApiResponse<DeliveryProduct[]>> => {
   try {
-    const response = await axiosInstance.get<ApiResponse<DeliveryProduct[]>>(
+    const response = await strapiAdapter.get(
       `/deliveries/${deliveryId}/products`,
     );
-
-    // Zwracamy cały obiekt response.data (zawiera success, data, message)
-    return response.data;
+    return response;
   } catch (error) {
     logger.error("Błąd podczas pobierania produktów dla dostawy:", {
       deliveryId,
       error,
     });
-    // Rzucenie błędu dalej pozwoli react-query na odpowiednie zarządzanie stanem błędu
     throw error;
   }
 };

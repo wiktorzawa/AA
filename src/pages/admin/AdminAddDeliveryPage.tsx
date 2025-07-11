@@ -20,6 +20,14 @@ import { ProductDataTable } from "@/ProductDataTable";
 import { QUERY_KEYS } from "@/constants";
 import type { FilePreviewResponse, ColumnMapping } from "@/types/api.types";
 
+interface ErrorWithMessage {
+  response?: {
+    data?: {
+      message?: string;
+    };
+  };
+}
+
 export const AdminAddDeliveryPage: FC = () => {
   const [file, setFile] = useState<File | null>(null);
   const [previewData, setPreviewData] = useState<FilePreviewResponse | null>(
@@ -57,9 +65,10 @@ export const AdminAddDeliveryPage: FC = () => {
     try {
       const data = await deliveryApi.previewFile(fileToPreview, mapping);
       setPreviewData(data);
-    } catch (err: any) {
+    } catch (err) {
+      const error = err as ErrorWithMessage;
       setError(
-        err.response?.data?.message ||
+        error.response?.data?.message ||
           "Wystąpił nieoczekiwany błąd podczas podglądu pliku.",
       );
     } finally {
@@ -68,8 +77,36 @@ export const AdminAddDeliveryPage: FC = () => {
   };
 
   const handleMappingConfirm = (newMapping: ColumnMapping) => {
-    if (file) {
-      handlePreview(file, newMapping);
+    if (file && previewData) {
+      // Konwertuj nazwy kolumn na indeksy dla backend
+      const indexMapping = {
+        productName: previewData.availableColumns.indexOf(
+          newMapping.productName || "",
+        ),
+        quantity: previewData.availableColumns.indexOf(
+          newMapping.quantity || "",
+        ),
+        price: previewData.availableColumns.indexOf(newMapping.price || ""),
+        ean: previewData.availableColumns.indexOf(newMapping.ean || ""),
+        palette: previewData.availableColumns.indexOf(
+          newMapping.paletteNumber || "",
+        ), // Uwaga: paletteNumber -> palette
+        asin: previewData.availableColumns.indexOf(newMapping.asin || ""),
+        lpn: previewData.availableColumns.indexOf(newMapping.lpn || ""),
+        condition: previewData.availableColumns.indexOf(
+          newMapping.condition || "",
+        ),
+      };
+
+      // Zamień -1 (nie znaleziono) na undefined lub -1 w zależności od potrzeby backend
+      const cleanedMapping = Object.fromEntries(
+        Object.entries(indexMapping).map(([key, value]) => [
+          key,
+          value >= 0 ? value : -1, // Backend oczekuje -1 dla brakujących kolumn
+        ]),
+      );
+
+      handlePreview(file, cleanedMapping);
     }
   };
 
@@ -88,9 +125,10 @@ export const AdminAddDeliveryPage: FC = () => {
       setFile(null);
       setPreviewData(null);
       // Opcjonalnie reset dostawcy: setSupplierId("");
-    } catch (err: any) {
+    } catch (err) {
+      const error = err as ErrorWithMessage;
       setError(
-        err.response?.data?.message ||
+        error.response?.data?.message ||
           "Wystąpił błąd podczas finalnego zapisu dostawy.",
       );
     } finally {
@@ -158,18 +196,69 @@ export const AdminAddDeliveryPage: FC = () => {
 
       {previewData && (
         <div className="space-y-6">
+          {previewData.analysisStatus === "WYMAGA_NUMERU_LOTU" && (
+            <Alert color="warning" icon={HiInformationCircle}>
+              <h3 className="font-semibold">Wymagany numer lotu</h3>
+              <p className="mt-2">
+                Nie wykryto numeru lotu w nazwie pliku. Proszę uzupełnić numer
+                lotu w formularzu poniżej.
+              </p>
+            </Alert>
+          )}
+
           {previewData.analysisStatus === "WYMAGA_MAPOWANIA" && (
             <ColumnMappingForm
               availableColumns={previewData.availableColumns}
               guessedMapping={{
-                productName: previewData.columnMapping.productName || "",
-                quantity: previewData.columnMapping.quantity || "",
-                price: previewData.columnMapping.price || "",
-                ean: previewData.columnMapping.ean || "",
-                paletteNumber: previewData.columnMapping.paletteNumber || "",
-                asin: previewData.columnMapping.asin || "",
-                lpn: previewData.columnMapping.lpn || "",
-                condition: previewData.columnMapping.condition || "",
+                // Backend zwraca indeksy, ale musimy zmapować na nazwy kolumn
+                productName:
+                  previewData.columnMapping.productName >= 0
+                    ? previewData.availableColumns[
+                        previewData.columnMapping.productName
+                      ] || ""
+                    : "",
+                quantity:
+                  previewData.columnMapping.quantity >= 0
+                    ? previewData.availableColumns[
+                        previewData.columnMapping.quantity
+                      ] || ""
+                    : "",
+                price:
+                  previewData.columnMapping.price >= 0
+                    ? previewData.availableColumns[
+                        previewData.columnMapping.price
+                      ] || ""
+                    : "",
+                ean:
+                  previewData.columnMapping.ean >= 0
+                    ? previewData.availableColumns[
+                        previewData.columnMapping.ean
+                      ] || ""
+                    : "",
+                paletteNumber:
+                  previewData.columnMapping.palette >= 0
+                    ? previewData.availableColumns[
+                        previewData.columnMapping.palette
+                      ] || ""
+                    : "",
+                asin:
+                  previewData.columnMapping.asin >= 0
+                    ? previewData.availableColumns[
+                        previewData.columnMapping.asin
+                      ] || ""
+                    : "",
+                lpn:
+                  previewData.columnMapping.lpn >= 0
+                    ? previewData.availableColumns[
+                        previewData.columnMapping.lpn
+                      ] || ""
+                    : "",
+                condition:
+                  previewData.columnMapping.condition >= 0
+                    ? previewData.availableColumns[
+                        previewData.columnMapping.condition
+                      ] || ""
+                    : "",
               }}
               onConfirm={handleMappingConfirm}
             />
@@ -180,7 +269,8 @@ export const AdminAddDeliveryPage: FC = () => {
           )}
 
           {(previewData.analysisStatus === "SUKCES" ||
-            previewData.analysisStatus === "WYMAGA_POTWIERDZENIA") && (
+            previewData.analysisStatus === "WYMAGA_POTWIERDZENIA" ||
+            previewData.analysisStatus === "WYMAGA_NUMERU_LOTU") && (
             <DeliveryDetailsForm
               onSubmit={handleFinalSubmit}
               initialDeliveryNumber={previewData.deliveryNumber || ""}

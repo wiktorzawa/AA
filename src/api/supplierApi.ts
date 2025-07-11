@@ -1,58 +1,62 @@
-import axiosInstance from "./axios";
+import strapiAdapter from "./strapiAdapter";
 import { logger } from "../utils/logger";
-
-// Interfejs dla modelu danych dostawcy bazujący na nowych modelach Sequelize
-export interface Dostawca {
-  id_dostawcy: string;
-  nazwa_firmy: string;
-  imie_kontaktu: string;
-  nazwisko_kontaktu: string;
-  numer_nip: string;
-  adres_email: string;
-  telefon: string;
-  strona_www?: string | null;
-  adres_ulica: string;
-  adres_numer_budynku: string;
-  adres_numer_lokalu?: string | null;
-  adres_miasto: string;
-  adres_kod_pocztowy: string;
-  adres_kraj: string;
-  data_utworzenia: string;
-  data_aktualizacji: string;
-}
-
-// Typ dla nowego dostawcy (bez dat)
-export type NowyDostawca = Omit<
-  Dostawca,
-  "data_utworzenia" | "data_aktualizacji"
->;
-
-// Typ dla aktualizacji dostawcy (częściowe dane, bez ID i dat)
-export type AktualizacjaDostawcy = Partial<
-  Omit<Dostawca, "id_dostawcy" | "data_utworzenia" | "data_aktualizacji">
->;
-
-// Typ dla nowego dostawcy bez ID (generowane automatycznie)
-export type NowyDostawcaBezId = Omit<NowyDostawca, "id_dostawcy">;
+import type { Supplier } from "@/types/supplier.types";
 
 // Interfejs dla odpowiedzi z hasłem
 export interface DostawcaZHaslem {
-  supplier: Dostawca;
+  supplier: Supplier;
   password: string;
 }
+
+// Definicja typu dla elementu danych dostawcy Strapi
+interface StrapiSupplierItem {
+  id: number;
+  attributes: Omit<Supplier, "id">;
+  [key: string]: any;
+}
+
+/**
+ * Mapuje dane Strapi na format aplikacji
+ */
+const mapStrapiToAppFormat = (strapiData: StrapiSupplierItem): Supplier => {
+  const attrs = strapiData.attributes || strapiData;
+  return {
+    id: strapiData.id,
+    id_dostawcy: attrs.id_dostawcy,
+    nazwa_firmy: attrs.nazwa_firmy,
+    imie_kontaktu: attrs.imie_kontaktu,
+    nazwisko_kontaktu: attrs.nazwisko_kontaktu,
+    numer_nip: attrs.numer_nip,
+    adres_email: attrs.adres_email,
+    telefon: attrs.telefon,
+    strona_www: attrs.strona_www,
+    adres_ulica: attrs.adres_ulica,
+    adres_numer_budynku: attrs.adres_numer_budynku,
+    adres_numer_lokalu: attrs.adres_numer_lokalu,
+    adres_miasto: attrs.adres_miasto,
+    adres_kod_pocztowy: attrs.adres_kod_pocztowy,
+    adres_kraj: attrs.adres_kraj,
+    createdAt: attrs.createdAt,
+    updatedAt: attrs.updatedAt,
+  };
+};
 
 /**
  * Pobiera wszystkich dostawców
  * @returns Lista dostawców
  * @throws Error gdy nie można pobrać danych
  */
-export const pobierzDostawcow = async (): Promise<Dostawca[]> => {
+export const pobierzDostawcow = async (): Promise<Supplier[]> => {
   try {
-    const response = await axiosInstance.get("/suppliers");
-    if (!response.data.success) {
-      throw new Error(response.data.error || "Failed to fetch suppliers");
+    const response = await strapiAdapter.get(
+      "/suppliers?populate=*&sort=nazwa_firmy:asc",
+    );
+
+    if (response.data) {
+      return response.data.map(mapStrapiToAppFormat);
     }
-    return response.data.data || [];
+
+    return [];
   } catch (error) {
     logger.error("Failed to get suppliers", { error });
     throw error;
@@ -65,18 +69,17 @@ export const pobierzDostawcow = async (): Promise<Dostawca[]> => {
  * @returns Dane dostawcy
  * @throws Error gdy nie można pobrać danych lub dostawca nie istnieje
  */
-export const pobierzDostawce = async (id: string): Promise<Dostawca> => {
+export const pobierzDostawce = async (id: string): Promise<Supplier> => {
   try {
-    const response = await axiosInstance.get(
-      `/suppliers/${encodeURIComponent(id)}`,
-    );
-    if (!response.data.success) {
-      throw new Error(response.data.error || "Supplier not found");
+    const response = await strapiAdapter.get(`/suppliers/${id}?populate=*`);
+
+    if (response.data) {
+      return mapStrapiToAppFormat(response.data);
+    } else if (response.id) {
+      return mapStrapiToAppFormat(response);
     }
-    if (!response.data.data) {
-      throw new Error(`Supplier with ID ${id} not found`);
-    }
-    return response.data.data;
+
+    throw new Error(`Supplier with ID ${id} not found`);
   } catch (error) {
     logger.error("Failed to get supplier", { id, error });
     throw error;
@@ -84,84 +87,50 @@ export const pobierzDostawce = async (id: string): Promise<Dostawca> => {
 };
 
 /**
- * Pobiera dostawcę po NIP
- * @param nip Numer NIP
- * @returns Dane dostawcy
- * @throws Error gdy nie można pobrać danych lub dostawca nie istnieje
- */
-export const pobierzDostawcePoNip = async (nip: string): Promise<Dostawca> => {
-  try {
-    const response = await axiosInstance.get(`/suppliers/nip/${nip}`);
-    if (!response.data.success) {
-      throw new Error(response.data.error || "Supplier not found");
-    }
-    if (!response.data.data) {
-      throw new Error(`Supplier with NIP ${nip} not found`);
-    }
-    return response.data.data;
-  } catch (error) {
-    logger.error("Failed to get supplier by NIP", { nip, error });
-    throw error;
-  }
-};
-
-/**
- * Sprawdza dostępność NIP
- * @param nip Numer NIP do sprawdzenia
- * @returns Informacja o dostępności NIP
- */
-export const sprawdzDostepnoscNip = async (
-  nip: string,
-): Promise<{ available: boolean; message: string }> => {
-  try {
-    const response = await axiosInstance.get(`/suppliers/check-nip/${nip}`);
-    return response.data;
-  } catch (error) {
-    logger.error("Failed to check NIP availability", { nip, error });
-    return { available: false, message: "Błąd podczas sprawdzania NIP" };
-  }
-};
-
-/**
- * Sprawdza dostępność email
- * @param email Adres email do sprawdzenia
- * @returns Informacja o dostępności email
- */
-export const sprawdzDostepnoscEmail = async (
-  email: string,
-): Promise<{ available: boolean; message: string }> => {
-  try {
-    const response = await axiosInstance.get(
-      `/suppliers/check-email/${encodeURIComponent(email)}`,
-    );
-    return response.data;
-  } catch (error) {
-    logger.error("Failed to check email availability", { email, error });
-    return { available: false, message: "Błąd podczas sprawdzania email" };
-  }
-};
-
-/**
  * Dodaje nowego dostawcę z automatycznie wygenerowanym hasłem
  * @param dostawca Dane nowego dostawcy (bez ID)
- * @returns Dane utworzonego dostawcy wraz z wygenerowanym hasłem
+ * @returns Dane utworzonego dostawcy z hasłem
  * @throws Error gdy nie można utworzyć dostawcy
  */
 export const dodajDostawceZHaslem = async (
-  dostawca: NowyDostawcaBezId,
+  dostawca: Omit<Supplier, "id" | "createdAt" | "updatedAt">,
 ): Promise<DostawcaZHaslem> => {
   try {
-    const response = await axiosInstance.post(
-      "/suppliers/with-password",
-      dostawca,
-    );
-    if (!response.data.success) {
-      throw new Error(response.data.error || "Failed to create supplier");
+    // Generuj hasło
+    const password = Math.random().toString(36).slice(-8) + "S1!";
+
+    // Utwórz dostawcę w Strapi
+    const response = await strapiAdapter.post("/suppliers", {
+      data: {
+        ...dostawca,
+        id_dostawcy: `SUP-${Date.now()}`,
+      },
+    });
+
+    let createdSupplier;
+    if (response.data) {
+      createdSupplier = mapStrapiToAppFormat(response.data);
+    } else {
+      createdSupplier = mapStrapiToAppFormat(response);
     }
-    if (!response.data.data) {
-      throw new Error("No data returned from server");
+
+    // Utwórz użytkownika w systemie autoryzacji
+    try {
+      await strapiAdapter.post("/auth/local/register", {
+        username: dostawca.email,
+        email: dostawca.email,
+        password: password,
+        role: "supplier",
+        supplier_id: createdSupplier.id,
+      });
+    } catch (authError) {
+      logger.warn("Failed to create auth user for supplier", { authError });
     }
-    return response.data.data;
+
+    return {
+      supplier: createdSupplier,
+      password: password,
+    };
   } catch (error) {
     logger.error("Failed to add supplier with password", { error });
     throw error;
@@ -175,17 +144,18 @@ export const dodajDostawceZHaslem = async (
  * @throws Error gdy nie można utworzyć dostawcy
  */
 export const dodajDostawce = async (
-  dostawca: NowyDostawca,
-): Promise<Dostawca> => {
+  dostawca: Omit<Supplier, "id" | "createdAt" | "updatedAt">,
+): Promise<Supplier> => {
   try {
-    const response = await axiosInstance.post("/suppliers", dostawca);
-    if (!response.data.success) {
-      throw new Error(response.data.error || "Failed to create supplier");
+    const response = await strapiAdapter.post("/suppliers", {
+      data: dostawca,
+    });
+
+    if (response.data) {
+      return mapStrapiToAppFormat(response.data);
+    } else {
+      return mapStrapiToAppFormat(response);
     }
-    if (!response.data.data) {
-      throw new Error("No data returned from server");
-    }
-    return response.data.data;
   } catch (error) {
     logger.error("Failed to add supplier", { error });
     throw error;
@@ -201,20 +171,18 @@ export const dodajDostawce = async (
  */
 export const aktualizujDostawce = async (
   id: string,
-  dane: AktualizacjaDostawcy,
-): Promise<Dostawca> => {
+  dane: Partial<Omit<Supplier, "id" | "createdAt" | "updatedAt">>,
+): Promise<Supplier> => {
   try {
-    const response = await axiosInstance.put(
-      `/suppliers/${encodeURIComponent(id)}`,
-      dane,
-    );
-    if (!response.data.success) {
-      throw new Error(response.data.error || "Failed to update supplier");
+    const response = await strapiAdapter.put(`/suppliers/${id}`, {
+      data: dane,
+    });
+
+    if (response.data) {
+      return mapStrapiToAppFormat(response.data);
+    } else {
+      return mapStrapiToAppFormat(response);
     }
-    if (!response.data.data) {
-      throw new Error("No data returned from server");
-    }
-    return response.data.data;
   } catch (error) {
     logger.error("Failed to update supplier", { id, error });
     throw error;
@@ -229,15 +197,50 @@ export const aktualizujDostawce = async (
  */
 export const usunDostawce = async (id: string): Promise<{ success: true }> => {
   try {
-    const response = await axiosInstance.delete(
-      `/suppliers/${encodeURIComponent(id)}`,
-    );
-    if (!response.data.success) {
-      throw new Error(response.data.error || "Failed to delete supplier");
-    }
+    await strapiAdapter.delete(`/suppliers/${id}`);
     return { success: true };
   } catch (error) {
     logger.error("Failed to delete supplier", { id, error });
+    throw error;
+  }
+};
+
+/**
+ * Sprawdza dostępność numeru NIP
+ * @param nip Numer NIP do sprawdzenia
+ * @returns Informacja o dostępności
+ */
+export const sprawdzDostepnoscNIP = async (
+  nip: string,
+): Promise<{ available: boolean }> => {
+  try {
+    const response = await strapiAdapter.get(
+      `/suppliers?filters[numer_nip][$eq]=${nip}`,
+    );
+    const suppliers = response.data || response;
+    return { available: suppliers.length === 0 };
+  } catch (error) {
+    logger.error("Failed to check NIP availability", { nip, error });
+    throw error;
+  }
+};
+
+/**
+ * Sprawdza dostępność adresu email
+ * @param email Adres email do sprawdzenia
+ * @returns Informacja o dostępności
+ */
+export const sprawdzDostepnoscEmail = async (
+  email: string,
+): Promise<{ available: boolean }> => {
+  try {
+    const response = await strapiAdapter.get(
+      `/suppliers?filters[adres_email][$eq]=${email}`,
+    );
+    const suppliers = response.data || response;
+    return { available: suppliers.length === 0 };
+  } catch (error) {
+    logger.error("Failed to check email availability", { email, error });
     throw error;
   }
 };

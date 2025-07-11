@@ -19,21 +19,8 @@ import {
 } from "flowbite-react";
 
 import { useDeliveries, useProductsByDelivery } from "../../hooks";
+import type { Delivery } from "@/types/delivery.types";
 import type { DeliveryProduct } from "../../api/deliveryApi";
-
-// Types for our delivery data
-interface DeliveryData {
-  id_dostawy: string;
-  id_dostawcy: string;
-  nazwa_pliku: string;
-  nr_palet_dostawy?: string;
-  status_weryfikacji: string;
-  data_utworzenia: string;
-  data_aktualizacji?: string;
-  url_pliku_S3?: string;
-}
-
-// ProductData typ jest teraz importowany jako DeliveryProduct z API
 
 export const AdvancedDeliveriesTableWithExpandableRows: FC = () => {
   const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set());
@@ -76,23 +63,23 @@ export const AdvancedDeliveriesTableWithExpandableRows: FC = () => {
     if (selectedRows.size === deliveries.length) {
       setSelectedRows(new Set());
     } else {
-      setSelectedRows(
-        new Set(deliveries.map((d: DeliveryData) => d.id_dostawy)),
-      );
+      setSelectedRows(new Set(deliveries.map((d: Delivery) => d.id_dostawy)));
     }
   };
 
   // Get status badge color
   const getStatusBadgeColor = (status: string) => {
     switch (status) {
-      case "zweryfikowana":
+      case "zweryfikowano":
         return "success";
-      case "w_trakcie":
+      case "trwa weryfikacja":
         return "warning";
       case "nowa":
         return "info";
-      case "odrzucona":
-        return "failure";
+      case "raport":
+        return "purple";
+      case "zakończono":
+        return "dark";
       default:
         return "gray";
     }
@@ -100,18 +87,7 @@ export const AdvancedDeliveriesTableWithExpandableRows: FC = () => {
 
   // Get status display text
   const getStatusDisplayText = (status: string) => {
-    switch (status) {
-      case "zweryfikowana":
-        return "Zweryfikowana";
-      case "w_trakcie":
-        return "W trakcie";
-      case "nowa":
-        return "Nowa";
-      case "odrzucona":
-        return "Odrzucona";
-      default:
-        return status || "Nieznany";
-    }
+    return status.charAt(0).toUpperCase() + status.slice(1);
   };
 
   if (isLoading) {
@@ -316,7 +292,7 @@ export const AdvancedDeliveriesTableWithExpandableRows: FC = () => {
                 </TableHeadCell>
               </TableHead>
               <TableBody className="divide-y divide-gray-200 bg-white dark:divide-gray-700 dark:bg-gray-800">
-                {deliveries.map((delivery: DeliveryData, index: number) => (
+                {deliveries.map((delivery: Delivery, index: number) => (
                   <DeliveryRow
                     key={delivery.id_dostawy || index}
                     delivery={delivery}
@@ -343,7 +319,7 @@ export const AdvancedDeliveriesTableWithExpandableRows: FC = () => {
 
 // Component for individual delivery row
 interface DeliveryRowProps {
-  delivery: DeliveryData;
+  delivery: Delivery;
   isSelected: boolean;
   isExpanded: boolean;
   onToggleSelection: () => void;
@@ -395,7 +371,7 @@ const DeliveryRow: FC<DeliveryRowProps> = ({
           </Badge>
         </TableCell>
         <TableCell>
-          {new Date(delivery.data_utworzenia).toLocaleDateString("pl-PL")}
+          {new Date(delivery.createdAt).toLocaleDateString("pl-PL")}
         </TableCell>
         <TableCell>
           <Button

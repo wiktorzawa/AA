@@ -3,13 +3,13 @@ import { useQuery } from "@tanstack/react-query";
 import { Spinner } from "flowbite-react";
 import { BlockBreadcrumb } from "@/components/block-breadcrumb";
 import { ProductsExpandableTable } from "@/components/tables/ProductsExpandableTable";
-import { getAllProducts } from "@/api/productsApi";
+import { getProducts } from "@/api/productsApi";
 import { logger } from "@/utils/logger";
 
 export const ProductsListPage: FC = () => {
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["products", "", 1],
-    queryFn: getAllProducts,
+    queryFn: () => getProducts({ page: 1, limit: 100 }),
   });
 
   if (isLoading) {
@@ -35,7 +35,7 @@ export const ProductsListPage: FC = () => {
     );
   }
 
-  const productsForTable = data?.products || [];
+  const productsForTable = data?.data?.products || [];
 
   return (
     <>

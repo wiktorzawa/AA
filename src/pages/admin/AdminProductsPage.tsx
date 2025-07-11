@@ -4,7 +4,7 @@ import { Button, Pagination, Spinner, TextInput } from "flowbite-react";
 import { HiPlus, HiSearch } from "react-icons/hi";
 import { useQuery } from "@tanstack/react-query";
 
-import { getAllProducts } from "@/api/productsApi";
+import { getProducts } from "@/api/productsApi";
 import { BlockBreadcrumb } from "@/components/block-breadcrumb";
 import { DebugAuthStatus } from "@/components/DebugAuthStatus";
 import { ProductsExpandableTable } from "@/components/tables/ProductsExpandableTable";
@@ -27,6 +27,7 @@ export const AdminProductsPage: FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
+  const itemsPerPage = 10;
 
   const {
     data: productsData,
@@ -36,13 +37,18 @@ export const AdminProductsPage: FC = () => {
     error,
   } = useQuery({
     queryKey: ["products", debouncedSearchTerm, currentPage],
-    queryFn: getAllProducts,
+    queryFn: () =>
+      getProducts({
+        page: currentPage,
+        limit: itemsPerPage,
+        searchTerm: debouncedSearchTerm,
+      }),
     placeholderData: (previousData) => previousData,
     retry: 1,
   });
 
-  const products = productsData?.products || [];
-  const pagination = productsData?.pagination;
+  const products = productsData?.data?.products || [];
+  const pagination = productsData?.data?.paginationInfo;
 
   if (isError) {
     return (

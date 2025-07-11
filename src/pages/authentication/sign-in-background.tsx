@@ -1,6 +1,3 @@
-import type { FC, FormEvent } from "react";
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import {
   Alert,
   Button,
@@ -9,111 +6,52 @@ import {
   Spinner,
   TextInput,
 } from "flowbite-react";
+import type { FC } from "react";
+import { useState } from "react";
 import { HiInformationCircle } from "react-icons/hi";
-import { zaloguj } from "../../api/authApi";
-import { useAuthStore } from "../../stores/authStore";
-import { logger } from "../../utils/logger";
-import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import { zaloguj } from "@/api/authApi";
+import { logger } from "@/utils/logger";
+import { useAuthStore } from "@/stores/authStore";
 
 const SignInBackgroundPage: FC = function () {
+  const [email, setEmail] = useState("admin@msbox.com");
+  const [password, setPassword] = useState("admin");
+  const [remember, setRemember] = useState(true);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const login = useAuthStore((state) => state.login);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [remember, setRemember] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    setError(null);
     setLoading(true);
+    setError("");
 
     try {
-      const response = await zaloguj({ adres_email: email, haslo: password });
+      const result = await zaloguj({
+        identifier: email,
+        password: password,
+      });
 
-      logger.info("Login response:", response);
-
-      // Sprawdź nowy format API
-      if (
-        response.success &&
-        response.userRole &&
-        response.token &&
-        response.refresh_token &&
-        response.userId
-      ) {
-        // Nowy format API
-        const userData = {
-          id_logowania: response.userId,
-          id_uzytkownika: response.userId,
-          adres_email: email,
-          rola_uzytkownika: response.userRole,
-        };
-
-        login({
-          user: userData,
-          token: response.token,
-          refreshToken: response.refresh_token,
+      if (result.success && result.user && result.jwt) {
+        logger.info("Login successful, updating auth store.", {
+          user: result.user,
         });
-
-        // Przekierowanie na podstawie roli
-        switch (response.userRole) {
-          case "admin":
-            navigate("/admin/dashboard");
-            break;
-          case "staff":
-            navigate("/staff/dashboard");
-            break;
-          case "supplier":
-            navigate("/supplier/dashboard");
-            break;
-          default:
-            navigate("/");
-            break;
-        }
-      } else if (
-        response.token &&
-        response.refresh_token &&
-        response.uzytkownik
-      ) {
-        // Stary format API
-        login({
-          user: response.uzytkownik,
-          token: response.token,
-          refreshToken: response.refresh_token,
-        });
-
-        // Przekierowanie na podstawie roli
-        switch (response.uzytkownik.rola_uzytkownika) {
-          case "admin":
-            navigate("/admin/dashboard");
-            break;
-          case "staff":
-            navigate("/staff/dashboard");
-            break;
-          case "supplier":
-            navigate("/supplier/dashboard");
-            break;
-          default:
-            navigate("/");
-            break;
-        }
+        login({ user: result.user, token: result.jwt });
+        navigate("/");
       } else {
-        setError(
-          response.error || "Błąd logowania. Sprawdź dane i spróbuj ponownie.",
-        );
+        const errorMessage =
+          typeof result.error === "string"
+            ? result.error
+            : result.error?.message || "Wystąpił nieznany błąd";
+        setError(errorMessage);
+        logger.error("Login failed:", { error: result.error });
       }
-    } catch (err: unknown) {
-      if (axios.isAxiosError(err)) {
-        if (err.response && err.response.data && err.response.data.error) {
-          setError(err.response.data.error);
-        } else {
-          setError("Wystąpił nieoczekiwany błąd podczas logowania.");
-        }
-      } else {
-        setError("Wystąpił nieznany błąd.");
-      }
-      logger.error("Błąd logowania:", { error: err });
+    } catch (err: any) {
+      const errorMessage = err?.error?.message || err.message || "Błąd serwera";
+      setError(errorMessage);
+      logger.error("Login exception:", { error: err });
     } finally {
       setLoading(false);
     }

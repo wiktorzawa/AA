@@ -28,7 +28,7 @@ export interface ColumnDef<T> {
 export interface ActionDef<T> {
   label: string;
   onClick: (row: T) => void;
-  icon?: FC<any>;
+  icon?: FC<React.SVGProps<SVGSVGElement>>;
 }
 
 // Props for the DataTable component

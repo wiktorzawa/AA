@@ -31,8 +31,10 @@ export const DashboardNavbar: FC<DashboardNavbarProps> = ({
     navigate("/authentication/sign-in");
   };
 
+  const userRole = user?.role?.name?.toLowerCase();
+
   const getLogoText = () => {
-    switch (user?.rola_uzytkownika) {
+    switch (userRole) {
       case "admin":
         return "MsBox_admin";
       case "supplier":
@@ -45,7 +47,7 @@ export const DashboardNavbar: FC<DashboardNavbarProps> = ({
   };
 
   const getLogoHref = () => {
-    switch (user?.rola_uzytkownika) {
+    switch (userRole) {
       case "admin":
         return "/admin";
       case "supplier":
@@ -99,9 +101,11 @@ export const DashboardNavbar: FC<DashboardNavbarProps> = ({
           }
         >
           <DropdownHeader>
-            <span className="block text-sm dark:text-gray-300">Użytkownik</span>
+            <span className="block text-sm dark:text-gray-300">
+              {user?.username || "Użytkownik"}
+            </span>
             <span className="block truncate text-sm font-medium dark:text-white">
-              {user?.adres_email || "brak danych"}
+              {user?.email || "brak danych"}
             </span>
           </DropdownHeader>
           <DropdownItem className="dark:text-white">Dashboard</DropdownItem>

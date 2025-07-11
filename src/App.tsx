@@ -31,7 +31,8 @@ const RoleBasedRedirect: FC = () => {
     return <Navigate to="/authentication/sign-in" replace />;
   }
 
-  switch (user.rola_uzytkownika) {
+  // Używamy teraz obiektu role.name
+  switch (user.role?.name.toLowerCase()) {
     case "admin":
       return <Navigate to="/admin" replace />;
     case "staff":
@@ -39,6 +40,10 @@ const RoleBasedRedirect: FC = () => {
     case "supplier":
       return <Navigate to="/supplier" replace />;
     default:
+      // Domyślna rola 'authenticated' lub inna niestandardowa
+      logger.warn("Unknown user role for redirection", {
+        role: user.role?.name,
+      });
       return <Navigate to="/authentication/sign-in" replace />;
   }
 };

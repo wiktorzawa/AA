@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getAllProducts } from "@/api/productsApi";
+import { getProducts } from "@/api/productsApi";
 import { getProductsByDeliveryId } from "@/api/deliveryApi";
 import { QUERY_KEYS } from "@/constants";
 
@@ -13,12 +13,13 @@ export const useProducts = (searchTerm?: string, currentPage?: number) => {
       { searchTerm: searchTerm || "", currentPage: currentPage || 1 },
     ],
     queryFn: ({ queryKey }) => {
-      const [_key, params] = queryKey as [
+      const [, params] = queryKey as [
         string[],
         { searchTerm: string; currentPage: number },
       ];
-      return getAllProducts({
-        queryKey: ["products", params.searchTerm, params.currentPage],
+      return getProducts({
+        page: params.currentPage,
+        searchTerm: params.searchTerm,
       });
     },
     placeholderData: (previousData) => previousData,
@@ -45,7 +46,7 @@ export const useProductsByDelivery = (deliveryId: string, enabled: boolean) => {
 export const useProductsStats = () => {
   return useQuery({
     queryKey: [...QUERY_KEYS.PRODUCTS_STATS],
-    queryFn: () => getAllProducts({ queryKey: ["products-stats", "", 1] }), // Mock call
+    queryFn: () => getProducts({ page: 1, limit: 1000 }), // Pobierz wszystkie dla statystyk
     staleTime: 1000 * 60 * 10,
   });
 };

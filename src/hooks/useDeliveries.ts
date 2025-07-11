@@ -4,6 +4,7 @@ import {
   uploadDeliveryFile,
   type DeliveryUploadRequest,
 } from "@/api/deliveryApi";
+import type { Delivery } from "@/types/delivery.types";
 import { QUERY_KEYS } from "@/constants";
 import { logger } from "@/utils/logger";
 
@@ -11,7 +12,7 @@ import { logger } from "@/utils/logger";
  * Hook do pobierania listy dostaw
  */
 export const useDeliveries = () => {
-  return useQuery({
+  return useQuery<{ success: boolean; data: Delivery[]; error?: string }>({
     queryKey: QUERY_KEYS.DELIVERIES,
     queryFn: getDeliveries,
   });

@@ -15,7 +15,7 @@ import {
 } from "flowbite-react";
 import { HiExclamationCircle, HiRefresh } from "react-icons/hi";
 import { useQuery } from "@tanstack/react-query";
-import { getAllProducts } from "@/api/productsApi";
+import { getProducts } from "@/api/productsApi";
 
 // Importujemy komponent do debugowania autoryzacji
 import { DebugAuthStatus } from "@/components/DebugAuthStatus";
@@ -32,7 +32,7 @@ export const AdminTablesPage: FC = () => {
     refetch,
   } = useQuery({
     queryKey: ["products"], // Uproszczony klucz zapytania
-    queryFn: () => getAllProducts({ queryKey: ["products", "", 1] }), // Dostosowanie do oczekiwanego formatu getAllProducts
+    queryFn: () => getProducts({ page: 1, limit: 100 }),
   });
 
   // Obsługa stanu ładowania
@@ -57,7 +57,7 @@ export const AdminTablesPage: FC = () => {
 
   // Mapa produktów jest teraz oparta tylko na danych z API
   const formattedProducts =
-    productsData?.products?.map((product) => ({
+    productsData?.data?.products?.map((product) => ({
       id_produktu_dostawy: product.id_produktu_dostawy,
       nazwa_produktu: product.nazwa_produktu,
       kategoria: product.kategoria,

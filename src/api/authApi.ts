@@ -1,162 +1,191 @@
-import axiosInstance from "./axios";
+import { useAuthStore } from "@/stores/authStore";
+import strapiAdapter from "./strapiAdapter";
+import type { User } from "@/stores/authStore";
 
 // Interfejs dla danych uwierzytelniających
 export interface DaneLogowania {
-  adres_email: string;
-  haslo: string;
+  identifier: string; // email w Strapi
+  password: string;
 }
 
-// Interfejs dla odpowiedzi z logowania
+// Interfejs dla błędu API
+export interface ApiError {
+  message: string;
+  details?: unknown;
+}
+
+// Interfejs dla odpowiedzi z logowania - teraz używa typu User z authStore
 export interface OdpowiedzLogowania {
   success: boolean;
-  userRole?: "admin" | "staff" | "supplier";
-  userId?: string;
-  token?: string;
-  refresh_token?: string;
-  uzytkownik?: {
-    id_logowania: string;
-    id_uzytkownika: string;
-    adres_email: string;
-    rola_uzytkownika: "admin" | "staff" | "supplier";
-  };
-  error?: string;
-}
-
-// Interfejs dla odświeżenia tokenu
-export interface RefreshTokenRequest {
-  refresh_token: string;
-}
-
-// Interfejs dla weryfikacji tokenu
-export interface VerifyTokenResponse {
-  success: boolean;
-  user?: {
-    id_logowania: string;
-    id_uzytkownika: string;
-    adres_email: string;
-    rola_uzytkownika: "admin" | "staff" | "supplier";
-  };
-  error?: string;
+  jwt?: string;
+  user?: User;
+  error?: string | ApiError;
 }
 
 /**
  * Loguje użytkownika do systemu
- * @param credentials Dane logowania (adres_email, haslo)
+ * @param credentials Dane logowania (email jako identifier, password)
  * @returns Odpowiedź z informacją o sukcesie, roli użytkownika i tokenach
  */
 export const zaloguj = async (
   credentials: DaneLogowania,
 ): Promise<OdpowiedzLogowania> => {
   try {
-    const response = await axiosInstance.post("/auth/login", credentials);
-    return response.data;
-  } catch (error: unknown) {
-    if (error && typeof error === "object" && "response" in error) {
-      const axiosError = error as { response?: { data?: OdpowiedzLogowania } };
-      if (axiosError.response?.data) {
-        return axiosError.response.data;
+    // 1. Zaloguj się, aby uzyskać token JWT
+    const loginResponse = await strapiAdapter.post<
+      DaneLogowania,
+      { jwt: string; user: { id: number } } // Oczekujemy tylko podstawowych danych
+    >("/auth/local", credentials);
+
+    if (loginResponse.jwt) {
+      // 2. Ustaw token w localStorage, aby następne żądanie było uwierzytelnione
+      localStorage.setItem("token", loginResponse.jwt);
+
+      // 3. Pobierz pełne dane użytkownika z zagnieżdżoną rolą
+      // To zapytanie użyje tokenu, który właśnie zapisaliśmy
+      const userWithRole = await strapiAdapter.get<User>(
+        "/users/me?populate=role",
+      );
+
+      // 4. Sprawdź, czy otrzymaliśmy kompletne dane
+      if (userWithRole?.id && userWithRole.role?.name) {
+        let supplierId: string | undefined = undefined;
+
+        // Jeśli rola to Dostawca, pobierz jego profil, aby uzyskać id_dostawcy
+        if (
+          userWithRole.role.name === "Supplier" ||
+          userWithRole.role.name === "Dostawca"
+        ) {
+          try {
+            // Adapter zwraca już tablicę obiektów, każdy z polem 'attributes'
+            const suppliersResponse = await strapiAdapter.get<
+              { id: number; attributes: any }[]
+            >(`/suppliers?filters[user][id][$eq]=${userWithRole.id}`);
+
+            // --- OSTATECZNY DEBUG ---
+            console.log(
+              "[Auth Debug] Raw response from /api/suppliers filter:",
+              suppliersResponse,
+            );
+
+            if (suppliersResponse && suppliersResponse.length > 0) {
+              // Bierzemy pierwszy pasujący profil dostawcy
+              const supplierProfile = suppliersResponse[0];
+              if (supplierProfile.attributes?.id_dostawcy) {
+                supplierId = supplierProfile.attributes.id_dostawcy;
+                userWithRole.supplierId = supplierId;
+                console.log(
+                  `[Auth Success] Found supplierId: ${supplierId} for user ${userWithRole.email}`,
+                );
+              } else {
+                console.warn(
+                  "[Auth Warn] Supplier profile found, but no id_dostawcy attribute.",
+                  { profile: supplierProfile },
+                );
+              }
+            } else {
+              console.warn(
+                `[Auth Warn] User role is Supplier, but no linked profile found in /api/suppliers.`,
+              );
+            }
+          } catch (e) {
+            console.error("[Auth Error] Failed to fetch supplier profile:", e);
+            // Nie blokuj logowania, jeśli profilu nie da się pobrać, ale zaloguj błąd
+          }
+        }
+
+        // 5. Zaktualizuj stan w authStore i zwróć sukces
+        useAuthStore.getState().login({
+          user: userWithRole,
+          token: loginResponse.jwt,
+          supplierId: supplierId,
+        });
+
+        return {
+          success: true,
+          jwt: loginResponse.jwt,
+          user: userWithRole,
+        };
       }
     }
 
+    // Jeśli którykolwiek krok zawiódł, zwróć błąd
     return {
       success: false,
-      error: "Błąd połączenia z serwerem",
+      error: "Błąd logowania - nieprawidłowa odpowiedź serwera lub brak roli.",
+    };
+  } catch (error: unknown) {
+    console.error("🚨 Login error:", error);
+    // Usuń token, jeśli logowanie się nie powiodło, aby uniknąć niespójności
+    localStorage.removeItem("token");
+    const apiError = error as {
+      response?: { data?: { error?: { message: string; details: unknown } } };
+    };
+    const strapiError = apiError.response?.data?.error;
+
+    return {
+      success: false,
+      error: {
+        message: strapiError?.message || "Wystąpił nieznany błąd logowania.",
+        details: strapiError?.details,
+      },
     };
   }
 };
 
 /**
- * Odświeża token dostępu
- * @param refreshTokenData Dane z refresh tokenem
- * @returns Nowe tokeny lub błąd
- */
-export const odswiezToken = async (
-  refreshTokenData: RefreshTokenRequest,
-): Promise<OdpowiedzLogowania> => {
-  try {
-    const response = await axiosInstance.post(
-      "/auth/refresh-token",
-      refreshTokenData,
-    );
-    return response.data;
-  } catch (error: unknown) {
-    if (error && typeof error === "object" && "response" in error) {
-      const axiosError = error as { response?: { data?: OdpowiedzLogowania } };
-      if (axiosError.response?.data) {
-        return axiosError.response.data;
-      }
-    }
-
-    return {
-      success: false,
-      error: "Błąd podczas odświeżania tokenu",
-    };
-  }
-};
-
-/**
- * Weryfikuje token dostępu
- * @param token Token do weryfikacji
+ * Weryfikuje token dostępu i pobiera dane użytkownika
  * @returns Dane użytkownika lub błąd
  */
-export const weryfikujToken = async (
-  token: string,
-): Promise<VerifyTokenResponse> => {
+export const weryfikujToken = async (): Promise<{
+  success: boolean;
+  user?: User;
+  error?: string;
+}> => {
   try {
-    const response = await axiosInstance.post(
-      "/auth/verify-token",
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      },
+    const userWithRole = await strapiAdapter.get<User>(
+      "/users/me?populate=role",
     );
-    return response.data;
-  } catch (error: unknown) {
-    if (error && typeof error === "object" && "response" in error) {
-      const axiosError = error as { response?: { data?: VerifyTokenResponse } };
-      if (axiosError.response?.data) {
-        return axiosError.response.data;
-      }
+
+    if (userWithRole && userWithRole.id) {
+      return {
+        success: true,
+        user: userWithRole,
+      };
     }
 
     return {
       success: false,
-      error: "Błąd podczas weryfikacji tokenu",
+      error: "Nie udało się zweryfikować tokenu",
+    };
+  } catch (error) {
+    const apiError = error as { error?: string };
+    return {
+      success: false,
+      error: apiError?.error || "Błąd podczas weryfikacji tokenu",
     };
   }
 };
 
 /**
  * Wylogowuje użytkownika z systemu
- * @param token Token użytkownika
  * @returns Odpowiedź o sukcesie wylogowania
  */
-export const wyloguj = async (
-  token: string,
-): Promise<{ success: boolean; message?: string; error?: string }> => {
+export const wyloguj = async (): Promise<{
+  success: boolean;
+  message?: string;
+  error?: string;
+}> => {
   try {
-    const response = await axiosInstance.post(
-      "/auth/logout",
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      },
-    );
-    return response.data;
-  } catch (error: unknown) {
-    if (error && typeof error === "object" && "response" in error) {
-      const axiosError = error as {
-        response?: { data?: { success: boolean; error?: string } };
-      };
-      if (axiosError.response?.data) {
-        return axiosError.response.data;
-      }
-    }
+    // Strapi nie ma dedykowanego endpointa do wylogowania
+    // Usuwamy token z localStorage
+    localStorage.removeItem("token");
 
+    return {
+      success: true,
+      message: "Pomyślnie wylogowano",
+    };
+  } catch (error) {
     return {
       success: false,
       error: "Błąd podczas wylogowania",
@@ -166,24 +195,39 @@ export const wyloguj = async (
 
 /**
  * Pobiera profil użytkownika
- * @param email Email użytkownika
  * @returns Dane profilu użytkownika
  */
-export const pobierzProfilUzytkownika = async (email: string) => {
+export const pobierzProfilUzytkownika = async () => {
   try {
-    const response = await axiosInstance.get(`/auth/profile/${email}`);
-    return response.data;
-  } catch (error: unknown) {
-    if (error && typeof error === "object" && "response" in error) {
-      const axiosError = error as { response?: { data?: unknown } };
-      if (axiosError.response?.data) {
-        return axiosError.response.data;
-      }
-    }
-
+    const user = await strapiAdapter.get<User>("/users/me?populate=role");
+    return {
+      success: true,
+      user: user,
+    };
+  } catch (error) {
+    const apiError = error as { error?: string };
     return {
       success: false,
-      error: "Błąd podczas pobierania profilu użytkownika",
+      error: apiError?.error || "Błąd podczas pobierania profilu użytkownika",
     };
   }
+};
+
+// Funkcje pomocnicze dla kompatybilności wstecznej
+export const odswiezToken = async () => {
+  // Strapi używa JWT które nie wymaga odświeżania w standardowej konfiguracji
+  // Możemy zwrócić obecny token
+  const token = localStorage.getItem("token");
+  if (token) {
+    return {
+      success: true,
+      token,
+      jwt: token,
+    };
+  }
+
+  return {
+    success: false,
+    error: "Brak tokenu do odświeżenia",
+  };
 };

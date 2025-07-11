@@ -18,4 +18,10 @@ export default defineConfig({
       "@theme": fileURLToPath(new URL("./src/theme", import.meta.url)),
     },
   },
+  server: {
+    hmr: {
+      protocol: "ws",
+      host: "localhost",
+    },
+  },
 });

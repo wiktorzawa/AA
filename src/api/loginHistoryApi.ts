@@ -1,4 +1,4 @@
-import axiosInstance from "./axios";
+import strapiAdapter from "./strapiAdapter";
 
 // Interfejs dla wpisu w historii logowań
 export interface WpisHistoriiLogowania {
@@ -42,7 +42,7 @@ export const pobierzHistorieLogowania = async (
   limit: number = 50,
 ): Promise<HistoriaLogowaniaResponse> => {
   try {
-    const response = await axiosInstance.get(
+    const response = await strapiAdapter.get(
       `/auth/login-history/${encodeURIComponent(id_logowania)}`,
       {
         params: { limit },
@@ -75,7 +75,7 @@ export const pobierzOstatnieUdaneLogowanie = async (
   id_logowania: string,
 ): Promise<OstatnieLogowanieResponse> => {
   try {
-    const response = await axiosInstance.get(
+    const response = await strapiAdapter.get(
       `/auth/last-login/${encodeURIComponent(id_logowania)}`,
     );
     return response.data;
@@ -105,7 +105,7 @@ export const wyczyścStaraHistorie = async (
   dni: number = 90,
 ): Promise<CzyszczenieHistoriiResponse> => {
   try {
-    const response = await axiosInstance.post("/auth/clean-history", { dni });
+    const response = await strapiAdapter.post("/auth/clean-history", { dni });
     return response.data;
   } catch (error: unknown) {
     if (error && typeof error === "object" && "response" in error) {
