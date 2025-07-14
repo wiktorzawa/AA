@@ -5,32 +5,35 @@ import { logger } from "@/utils/logger";
 
 const RoleBasedRedirect = () => {
   const navigate = useNavigate();
-  const { isAuthenticated, user } = useAuthStore((state) => ({
-    isAuthenticated: state.isAuthenticated,
-    user: state.user,
-  }));
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const appRole = useAuthStore((state) => state.appRole);
 
   useEffect(() => {
-    if (isAuthenticated && user?.role) {
-      const role = user.role.name.toLowerCase();
-      logger.info(`User authenticated with role: ${role}. Redirecting...`);
+    if (isAuthenticated && appRole) {
+      logger.info(
+        `User authenticated with appRole: ${appRole}. Redirecting...`,
+      );
 
-      switch (role) {
+      let targetPath = "";
+      switch (appRole) {
         case "admin":
-          navigate("/admin/dashboard", { replace: true });
+          targetPath = "/admin/dashboard";
           break;
         case "staff":
-          navigate("/staff/dashboard", { replace: true });
+          targetPath = "/staff/dashboard";
           break;
         case "supplier":
-          navigate("/supplier/dashboard", { replace: true });
+          targetPath = "/supplier/dashboard";
           break;
         default:
-          logger.warn(`Unknown role: ${role}. Redirecting to sign-in.`);
-          navigate("/authentication/sign-in", { replace: true });
+          logger.warn(`Unknown appRole: ${appRole}. Redirecting to sign-in.`);
+          targetPath = "/authentication/sign-in";
       }
+
+      logger.info(`Navigating to: ${targetPath}`);
+      navigate(targetPath, { replace: true });
     }
-  }, [isAuthenticated, user, navigate]);
+  }, [isAuthenticated, appRole, navigate]);
 
   return null; // Ten komponent nic nie renderuje
 };

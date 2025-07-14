@@ -30,16 +30,30 @@ const SignInBackgroundPage: FC = function () {
 
     try {
       const result = await zaloguj({
-        identifier: email,
+        email: email,
         password: password,
       });
 
-      if (result.success && result.user && result.jwt) {
-        logger.info("Login successful, updating auth store.", {
+      if (result.success) {
+        logger.info("Login successful, navigating to dashboard.", {
           user: result.user,
+          appRole: result.appRole,
         });
-        login({ user: result.user, token: result.jwt });
-        navigate("/");
+        let target = "/";
+        switch (result.appRole) {
+          case "admin":
+            target = "/admin/dashboard";
+            break;
+          case "staff":
+            target = "/staff/dashboard";
+            break;
+          case "supplier":
+            target = "/supplier/dashboard";
+            break;
+          default:
+            target = "/";
+        }
+        window.location.href = target;
       } else {
         const errorMessage =
           typeof result.error === "string"

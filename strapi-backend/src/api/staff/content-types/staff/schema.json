@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "staffs",
+  "info": {
+    "singularName": "staff",
+    "pluralName": "staffs",
+    "displayName": "Staff"
+  },
+  "options": {
+    "comment": ""
+  },
+  "attributes": {
+    "staffId": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "firstName": {
+      "type": "string",
+      "required": true
+    },
+    "lastName": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true,
+      "unique": true
+    },
+    "phone": {
+      "type": "string"
+    },
+    "hireDate": {
+      "type": "date"
+    },
+    "terminationDate": {
+      "type": "date"
+    },
+    "position": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

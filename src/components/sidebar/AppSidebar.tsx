@@ -7,6 +7,7 @@ import {
 } from "flowbite-react";
 import type { FC } from "react";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import {
   HiChartPie,
   HiClipboard,
@@ -26,26 +27,23 @@ interface AppSidebarProps {
 }
 
 const AppSidebar: FC<AppSidebarProps> = function ({ userRole }) {
-  const [currentPage, setCurrentPage] = useState("");
+  const location = useLocation();
+  // const [currentPage, setCurrentPage] = useState(""); // USUNIĘTE
   const [actualUserRole, setActualUserRole] = useState<string | null>(null);
 
   useEffect(() => {
-    const newPage = window.location.pathname;
-    setCurrentPage(newPage);
-
-    // Pobierz rolę z localStorage lub użyj przekazanej prop
     const roleFromStorage = localStorage.getItem("userRole");
     const finalRole = userRole || roleFromStorage;
 
-    logger.debug("AppSidebar role resolution", {
-      userRoleProp: userRole,
-      roleFromStorage,
-      finalRole,
-      currentPage: newPage,
-    });
+    // logger.debug("AppSidebar role resolution", {
+    //   userRoleProp: userRole,
+    //   roleFromStorage,
+    //   finalRole,
+    //   currentPage: newPage,
+    // });
 
     setActualUserRole(finalRole);
-  }, [userRole, currentPage]);
+  }, [userRole]); // Usunięto location.pathname z zależności
 
   // Menu dla Admin
   const renderAdminMenu = () => (
@@ -53,42 +51,42 @@ const AppSidebar: FC<AppSidebarProps> = function ({ userRole }) {
       <SidebarItem
         href="/admin/dashboard"
         icon={HiChartPie}
-        active={"/admin/dashboard" === currentPage}
+        active={"/admin/dashboard" === location.pathname}
       >
         Dashboard
       </SidebarItem>
       <SidebarItem
         href="/admin/landing"
         icon={HiCollection}
-        active={"/admin/landing" === currentPage}
+        active={"/admin/landing" === location.pathname}
       >
         Landing Page
       </SidebarItem>
       <SidebarItem
         href="/admin/tables"
         icon={HiTable}
-        active={"/admin/tables" === currentPage}
+        active={"/admin/tables" === location.pathname}
       >
         Advanced Tables
       </SidebarItem>
       <SidebarItem
         href="/admin/users"
         icon={HiUsers}
-        active={"/admin/users" === currentPage}
+        active={"/admin/users" === location.pathname}
       >
         Zarządzanie Użytkownikami
       </SidebarItem>
       <SidebarItem
         href="/admin/staff"
         icon={HiClipboard}
-        active={"/admin/staff" === currentPage}
+        active={"/admin/staff" === location.pathname}
       >
         Zarządzanie Personelem
       </SidebarItem>
       <SidebarItem
         href="/admin/suppliers"
         icon={HiTruck}
-        active={"/admin/suppliers" === currentPage}
+        active={"/admin/suppliers" === location.pathname}
       >
         Zarządzanie Dostawcami
       </SidebarItem>
@@ -100,14 +98,14 @@ const AppSidebar: FC<AppSidebarProps> = function ({ userRole }) {
       <SidebarItem
         href="/admin/reports"
         icon={HiDocumentReport}
-        active={"/admin/reports" === currentPage}
+        active={"/admin/reports" === location.pathname}
       >
         Raporty
       </SidebarItem>
       <SidebarItem
         href="/admin/settings"
         icon={HiCog}
-        active={"/admin/settings" === currentPage}
+        active={"/admin/settings" === location.pathname}
       >
         Ustawienia Systemu
       </SidebarItem>
@@ -120,14 +118,14 @@ const AppSidebar: FC<AppSidebarProps> = function ({ userRole }) {
       <SidebarItem
         href="/staff/dashboard"
         icon={HiChartPie}
-        active={"/staff/dashboard" === currentPage}
+        active={"/staff/dashboard" === location.pathname}
       >
         Dashboard
       </SidebarItem>
       <SidebarItem
         href="/staff/tasks"
         icon={HiClipboard}
-        active={"/staff/tasks" === currentPage}
+        active={"/staff/tasks" === location.pathname}
       >
         Moje Zadania
       </SidebarItem>
@@ -139,14 +137,14 @@ const AppSidebar: FC<AppSidebarProps> = function ({ userRole }) {
       <SidebarItem
         href="/staff/inventory"
         icon={HiCollection}
-        active={"/staff/inventory" === currentPage}
+        active={"/staff/inventory" === location.pathname}
       >
         Magazyn
       </SidebarItem>
       <SidebarItem
         href="/staff/reports"
         icon={HiDocumentReport}
-        active={"/staff/reports" === currentPage}
+        active={"/staff/reports" === location.pathname}
       >
         Raporty
       </SidebarItem>
@@ -159,14 +157,14 @@ const AppSidebar: FC<AppSidebarProps> = function ({ userRole }) {
       <SidebarItem
         href="/supplier/dashboard"
         icon={HiChartPie}
-        active={"/supplier/dashboard" === currentPage}
+        active={"/supplier/dashboard" === location.pathname}
       >
         Dashboard
       </SidebarItem>
       <SidebarItem
         href="/supplier/deliveries"
         icon={HiTruck}
-        active={"/supplier/deliveries" === currentPage}
+        active={"/supplier/deliveries" === location.pathname}
       >
         Moje Dostawy
       </SidebarItem>
@@ -178,14 +176,14 @@ const AppSidebar: FC<AppSidebarProps> = function ({ userRole }) {
       <SidebarItem
         href="/supplier/orders"
         icon={HiClipboard}
-        active={"/supplier/orders" === currentPage}
+        active={"/supplier/orders" === location.pathname}
       >
         Zamówienia
       </SidebarItem>
       <SidebarItem
         href="/supplier/invoices"
         icon={HiDocumentReport}
-        active={"/supplier/invoices" === currentPage}
+        active={"/supplier/invoices" === location.pathname}
       >
         Faktury
       </SidebarItem>
@@ -195,7 +193,11 @@ const AppSidebar: FC<AppSidebarProps> = function ({ userRole }) {
   // Menu domyślne (gdy brak roli lub ogólny dashboard)
   const renderDefaultMenu = () => (
     <>
-      <SidebarItem href="/" icon={HiChartPie} active={"/" === currentPage}>
+      <SidebarItem
+        href="/"
+        icon={HiChartPie}
+        active={"/" === location.pathname}
+      >
         Dashboard
       </SidebarItem>
       <SidebarItem href="/authentication/sign-in" icon={HiUsers}>

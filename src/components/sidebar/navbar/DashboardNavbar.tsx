@@ -28,7 +28,7 @@ export const DashboardNavbar: FC<DashboardNavbarProps> = ({
 
   const handleSignOut = async () => {
     logout();
-    navigate("/authentication/sign-in");
+    navigate("/");
   };
 
   const userRole = user?.role?.name?.toLowerCase();

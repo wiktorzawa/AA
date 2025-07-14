@@ -20,8 +20,16 @@ export const ROUTES = {
   ROOT: "/",
   LOGIN: "/login",
   DASHBOARD: "/dashboard",
+  AUTHENTICATION: {
+    SIGN_IN: "/authentication/sign-in",
+    SIGN_UP: "/authentication/sign-up",
+    FORGOT_PASSWORD: "/authentication/forgot-password",
+    RESET_PASSWORD: "/authentication/reset-password",
+    PROFILE_LOCK: "/authentication/profile-lock",
+  },
   ADMIN: {
     ROOT: "/admin",
+    DASHBOARD: "/admin/dashboard",
     PRODUCTS: "/admin/products",
     DELIVERIES: "/admin/deliveries",
     STAFF: "/admin/staff",
@@ -30,6 +38,7 @@ export const ROUTES = {
   },
   STAFF: {
     ROOT: "/staff",
+    DASHBOARD: "/staff/dashboard",
     DELIVERIES: "/staff/deliveries",
     PRODUCTS: "/staff/products",
   },

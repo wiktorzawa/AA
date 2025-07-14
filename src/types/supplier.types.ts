@@ -1,19 +1,22 @@
 export interface Supplier {
   id: number;
-  id_dostawcy: string;
-  nazwa_firmy: string;
-  imie_kontaktu: string;
-  nazwisko_kontaktu: string;
-  numer_nip: string;
-  adres_email: string;
-  telefon: string;
-  strona_www?: string | null;
-  adres_ulica: string;
-  adres_numer_budynku: string;
-  adres_numer_lokalu?: string | null;
-  adres_miasto: string;
-  adres_kod_pocztowy: string;
-  adres_kraj: string;
-  createdAt: string;
-  updatedAt: string;
+  attributes: {
+    supplierId: string;
+    companyName: string;
+    nip: string;
+    email: string;
+    contactFirstName?: string;
+    contactLastName?: string;
+    phone?: string;
+    website?: string;
+    street?: string;
+    buildingNumber?: string;
+    apartmentNumber?: string;
+    city?: string;
+    postalCode?: string;
+    country?: string;
+    createdAt: string;
+    updatedAt: string;
+    publishedAt?: string;
+  };
 }

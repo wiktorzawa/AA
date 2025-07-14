@@ -22,9 +22,11 @@ _Ta sekcja jest automatycznie synchronizowana z listą zadań w naszym środowis
 3.  **(UKOŃCZONE)** `scaffold_new_strapi`: Stwórz zupełnie nowy, czysty projekt Strapi v5 od podstaw.
 4.  **(UKOŃCZONE)** `configure_strapi_env`: Skonfiguruj plik .env w nowym projekcie Strapi, aby połączyć się z czystą bazą danych na AWS RDS.
 5.  **(UKOŃCZONE)** `run_new_strapi`: Uruchom nową instancję Strapi, aby zweryfikować połączenie z bazą danych i automatycznie wygenerować schemat.
-6.  **(W TRAKCIE)** `recreate_content_types_in_strapi`: Odtwórz wszystkie niezbędne typy treści (Content Types) i relacje w nowym Strapi na podstawie dokumentacji.
-7.  **(OCZEKUJĄCE)** `refactor_frontend_for_new_backend`: Zrefaktoryzuj wywołania API na frontendzie, aby były w pełni zgodne z nowym, czystym backendem Strapi.
-8.  **(OCZEKUJĄCE)** `e2e_testing`: Przeprowadź pełne testy End-to-End kluczowych funkcjonalności aplikacji (logowanie, dodawanie dostaw, etc.).
+6.  **(UKOŃCZONE)** `recreate_user_related_types`: Odtwórz typy treści `Supplier` i `Staff` oraz ich dwukierunkową relację z wbudowanym modelem `User`.
+7.  **(W TRAKCIE)** `implement_authentication_flow`: Zaimplementuj proces logowania i uwierzytelniania na frontendzie, łącząc go z wtyczką `users-permissions` w Strapi.
+8.  **(OCZEKUJĄCE)** `recreate_delivery_types`: Odtwórz typy treści związane z logiką dostaw (np. `Delivery`, `DeliveryProduct`).
+9.  **(OCZEKUJĄCE)** `refactor_frontend_for_new_backend`: Zrefaktoryzuj wywołania API na frontendzie, aby były w pełni zgodne z nowym, czystym backendem Strapi.
+10. **(OCZEKUJĄCE)** `e2e_testing`: Przeprowadź pełne testy End-to-End kluczowych funkcjonalności aplikacji (logowanie, dodawanie dostaw, etc.).
 
 ---
 
@@ -43,6 +45,8 @@ _Tutaj zapisujemy wszystkie pomysły, które nie są częścią bieżącego plan
 
 _Dziennik najważniejszych decyzji, które podjęliśmy._
 
+- **2025-07-11:** Zmieniono priorytet prac. Zamiast kontynuować tworzenie typów treści, skupiamy się na wdrożeniu pełnego procesu logowania i uwierzytelniania, aby odblokować testowanie kluczowych przepływów użytkownika.
+- **2025-07-11:** Pomyślnie odtworzono kluczowe typy treści (`Supplier`, `Staff`) w nowej instancji Strapi v5. Ustanowiono dwukierunkową relację `oneToOne` z wbudowanym modelem `User` poprzez poprawne rozszerzenie jego schematu. Ten krok odblokowuje implementację logiki biznesowej związanej z użytkownikami.
 - **2025-07-11:** Pomyślnie uruchomiono nową instancję Strapi v5. Aplikacja poprawnie połączyła się z docelową, czystą bazą danych `strapi_db_clean` na AWS RDS, co stanowiło kluczowy kamień milowy i odblokowało dalsze prace nad backendem.
 - **2025-07-11:** Zakończono fazę analityczną. Na podstawie kodu frontendu oraz schematu starej bazy danych (`backup_bazy_danych.sql`) zdefiniowano kompletny, finalny schemat danych dla nowego backendu.
 - **2025-07-11:** Odrzucono plan migracji danych za pomocą skryptu na rzecz stworzenia całkowicie nowej, czystej instancji Strapi i ręcznego odtworzenia modeli danych.

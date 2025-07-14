@@ -8,14 +8,14 @@ export const AdminLayout: FC<PropsWithChildren> = ({ children }) => {
   const [isSidebarHovered, setIsSidebarHovered] = useState(false);
 
   const handleToggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
+    setIsSidebarOpen((prev) => !prev);
   };
 
   const handleSidebarHoverChange = (isHovered: boolean) => {
     setIsSidebarHovered(isHovered);
   };
 
-  // Określ czy sidebar zajmuje pełną szerokość (280px) czy wąską (64px)
+  // Sidebar jest rozwinięty, gdy otwarty lub otwarty na hover
   const sidebarIsExpanded =
     isSidebarOpen || (!isSidebarOpen && isSidebarHovered);
 
@@ -27,11 +27,9 @@ export const AdminLayout: FC<PropsWithChildren> = ({ children }) => {
       />
       <DashboardNavbar onToggleSidebar={handleToggleSidebar} />
       <main
-        className={`min-h-screen bg-gray-50 p-4 pt-16 transition-all duration-300 dark:bg-gray-900 ${
-          sidebarIsExpanded ? "ml-80" : "ml-16"
-        } min-h-screen`}
+        className={`${sidebarIsExpanded ? "ml-80" : "ml-16"} min-h-screen bg-gray-50 p-4 pt-16 transition-all duration-300 dark:bg-gray-900`}
       >
-        <div className="w-full">{children}</div>
+        {children}
       </main>
     </div>
   );

@@ -12,23 +12,26 @@ interface DashboardLayoutProps extends PropsWithChildren {
 }
 
 const DashboardLayout: FC<DashboardLayoutProps> = ({ children, userRole }) => {
-  const { isSidebarOpen, toggleSidebar, openSidebar, closeSidebar } =
-    useUIStore();
+  // Pobieraj każdą wartość/funkcję osobno, by uniknąć niepotrzebnych rerenderów
+  const isSidebarOpen = useUIStore((state) => state.isSidebarOpen);
+  const openSidebar = useUIStore((state) => state.openSidebar);
+  const closeSidebar = useUIStore((state) => state.closeSidebar);
 
   // Inicjalizacja stanu sidebara na podstawie rozmiaru okna
   useEffect(() => {
     if (typeof window !== "undefined") {
-      if (window.innerWidth >= 768 && !isSidebarOpen) {
+      if (window.innerWidth >= 768) {
         openSidebar();
-      } else if (window.innerWidth < 768 && isSidebarOpen) {
+      } else {
         closeSidebar();
       }
     }
-  }, [isSidebarOpen, openSidebar, closeSidebar]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
-      <DashboardNavbar onToggleSidebar={toggleSidebar} />
+      <DashboardNavbar onToggleSidebar={openSidebar} />
       <div className="flex items-start pt-16">
         <div
           className={classNames(
