@@ -1,20 +1,17 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { Button, Card, Checkbox, Label, TextInput } from "flowbite-react";
 import type { FC } from "react";
+import { Link } from "react-router-dom";
 
 const SignUpPage: FC = function () {
   return (
     <div className="flex flex-col items-center justify-center px-6 lg:h-screen lg:gap-y-12">
-      <a href="/" className="my-6 flex items-center gap-x-1 lg:my-0">
-        <img
-          alt="Flowbite logo"
-          src="https://flowbite.com/docs/images/logo.svg"
-          className="mr-3 h-10"
-        />
+      <Link to="/" className="my-6 flex items-center gap-x-1 lg:my-0">
+        <img alt="MS-BOX logo" src="/flowbite.svg" className="mr-3 h-10" />
         <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-          Flowbite
+          MS-BOX Platform
         </span>
-      </a>
+      </Link>
       <Card
         horizontal
         imgSrc="/images/authentication/create-account.jpg"
@@ -68,9 +65,12 @@ const SignUpPage: FC = function () {
           </div>
           <p className="text-sm text-gray-500 dark:text-gray-300">
             Already have an account?&nbsp;
-            <a href="#" className="text-primary-600 dark:text-primary-200">
+            <Link
+              to="/authentication/sign-in-background"
+              className="text-primary-600 dark:text-primary-200"
+            >
               Login here
-            </a>
+            </Link>
           </p>
         </form>
       </Card>

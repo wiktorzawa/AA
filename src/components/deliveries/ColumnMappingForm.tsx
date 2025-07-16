@@ -2,7 +2,7 @@ import type { FC } from "react";
 import { useState, useEffect } from "react";
 import { Select, Card, Button } from "flowbite-react";
 
-const MAPPABLE_FIELDS = {
+const MAPPABLE_FIELDS: Record<string, string> = {
   productName: "Nazwa Produktu (wymagane)",
   quantity: "Ilość (wymagane)",
   price: "Cena (wymagane)",

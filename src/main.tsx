@@ -7,6 +7,23 @@ import { AxiosError } from "axios";
 
 import App from "./App.tsx";
 import "./index.css";
+//import strapiAdapter from "./api/strapiAdapter.ts";
+//import { useAuthStore } from "./stores/authStore.ts";
+
+// Inicjalizacja tokena przy starcie aplikacji z authStore
+//const initializeToken = () => {
+//  const token = useAuthStore.getState().token;
+//  console.log(
+//    "🔧 Initializing token on app start:",
+//    token ? "TOKEN_EXISTS" : "NO_TOKEN",
+//  );
+//  if (token) {
+//    strapiAdapter.setToken(token);
+//  }
+//};
+//
+// Wywołaj inicjalizację tokena
+//initializeToken();
 
 // Utwórz instancję QueryClient z prawidłową konfiguracją
 const queryClient = new QueryClient({

@@ -58,20 +58,18 @@ export const AdminTablesPage: FC = () => {
   // Mapa produktów jest teraz oparta tylko na danych z API
   const formattedProducts =
     productsData?.data?.products?.map((product) => ({
-      id_produktu_dostawy: product.id_produktu_dostawy,
+      id_produktu_dostawy: product.id, // Używamy 'id' z typu Product
       nazwa_produktu: product.nazwa_produktu,
-      kategoria: product.kategoria,
-      brand: product.brand,
-      cena_jednostkowa: product.cena_jednostkowa,
-      ilosc_w_magazynie: product.ilosc_w_magazynie,
-      sales: product.sales || 0,
-      status:
-        product.status ||
-        (product.ilosc_w_magazynie > 0 ? "Active" : "Inactive"),
+      kategoria: product.kategoria_produktu || "Brak",
+      cena_jednostkowa: product.cena_produktu_spec || 0,
+      ilosc_w_magazynie: product.ilosc,
+      status: product.status_weryfikacji,
       zdjecie_url:
-        product.zdjecie_url ||
-        "https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png",
-      szczegoly: product.szczegoly || "Brak szczegółów.",
+        "https://flowbite.s3.amazonaws.com/blocks/application-ui/products/imac-front-image.png", // Placeholder
+      // Te pola nie istnieją w typie Product, więc je usuwamy lub mapujemy z istniejących
+      // brand: "N/A",
+      // sales: 0,
+      // szczegoly: product.uwagi_weryfikacji || "Brak szczegółów.",
     })) || [];
 
   const handleRefresh = () => {
@@ -154,7 +152,7 @@ export const AdminTablesPage: FC = () => {
                       </TableCell>
                       <TableCell className="p-4 text-base font-medium text-gray-900 dark:text-white">
                         {/* Wartość sprzedaży - do wdrożenia */}
-                        {product.sales}
+                        {/* product.sales */}
                       </TableCell>
                       <TableCell className="p-4">
                         <span

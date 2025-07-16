@@ -1,0 +1,95 @@
+{
+    "kind": "collectionType",
+    "collectionName": "products",
+    "info": {
+        "singularName": "product",
+        "pluralName": "products",
+        "displayName": "Produkt",
+        "description": "Produkty w dostawach"
+    },
+    "options": {
+        "draftAndPublish": false
+    },
+    "pluginOptions": {},
+    "attributes": {
+        "productId": {
+            "type": "string",
+            "unique": true,
+            "private": true,
+            "configurable": false
+        },
+        "idProduktu": {
+            "type": "string",
+            "unique": true
+        },
+        "nazwaProduktu": {
+            "type": "string",
+            "required": true,
+            "maxLength": 255
+        },
+        "kodEan": {
+            "type": "string",
+            "maxLength": 13
+        },
+        "kodAsin": {
+            "type": "string",
+            "maxLength": 20
+        },
+        "lpn": {
+            "type": "string",
+            "maxLength": 255
+        },
+        "nrPalety": {
+            "type": "string",
+            "maxLength": 255
+        },
+        "ilosc": {
+            "type": "integer",
+            "required": true,
+            "default": 1,
+            "min": 0
+        },
+        "cenaProduktuSpec": {
+            "type": "decimal",
+            "min": 0
+        },
+        "stanProduktu": {
+            "type": "enumeration",
+            "enum": [
+                "nowy",
+                "uzywany_jak_nowy",
+                "uzywany_bardzo_dobry",
+                "uzywany_dobry",
+                "uzywany_akceptowalny",
+                "odnowiony"
+            ],
+            "default": "nowy"
+        },
+        "krajPochodzenia": {
+            "type": "string",
+            "maxLength": 50
+        },
+        "kategoriaProduktu": {
+            "type": "string",
+            "maxLength": 255
+        },
+        "statusWeryfikacji": {
+            "type": "enumeration",
+            "enum": [
+                "oczekuje",
+                "zweryfikowany",
+                "odrzucony"
+            ],
+            "default": "oczekuje"
+        },
+        "uwagiWeryfikacji": {
+            "type": "text"
+        },
+        "delivery": {
+            "type": "relation",
+            "relation": "manyToOne",
+            "target": "api::delivery.delivery",
+            "inversedBy": "products"
+        }
+    }
+}

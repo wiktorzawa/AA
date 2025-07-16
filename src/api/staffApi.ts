@@ -1,124 +1,71 @@
 import strapiAdapter from "./strapiAdapter";
 import { logger } from "../utils/logger";
+import type { ApiStaffStaff } from "@/types/strapi";
+import type { StaffProfile as Staff } from "@/types/app.types";
 
-// Interfejs dla modelu danych pracownika
-export interface Pracownik {
-  id: number; // Strapi używa numerycznych ID
-  id_pracownika: string;
-  imie: string;
-  nazwisko: string;
-  rola: "admin" | "staff";
-  adres_email: string;
-  telefon?: string | null;
-  createdAt: string;
-  updatedAt: string;
-  // Mapowanie dla kompatybilności wstecznej
-  data_utworzenia?: string;
-  data_aktualizacji?: string;
-}
-
-// Typ dla nowego pracownika (bez dat)
-export type NowyPracownik = Omit<
-  Pracownik,
-  "id" | "createdAt" | "updatedAt" | "data_utworzenia" | "data_aktualizacji"
->;
-
-// Typ dla aktualizacji pracownika (częściowe dane, bez ID i dat)
-export type AktualizacjaPracownika = Partial<
-  Omit<
-    Pracownik,
-    | "id"
-    | "id_pracownika"
-    | "createdAt"
-    | "updatedAt"
-    | "data_utworzenia"
-    | "data_aktualizacji"
-  >
->;
-
-// Typ dla nowego pracownika bez ID (generowane automatycznie)
-export type NowyPracownikBezId = Omit<NowyPracownik, "id_pracownika">;
-
-// Interfejs dla odpowiedzi z hasłem
-export interface PracownikZHaslem {
-  staff: Pracownik;
+export interface StaffWithPassword {
+  staff: Staff;
   password: string;
 }
 
-// Definicja typu dla elementu danych pracownika Strapi
 interface StrapiStaffItem {
   id: number;
-  attributes: Omit<Pracownik, "id">;
-  [key: string]: any;
+  attributes: ApiStaffStaff["attributes"];
 }
 
-/**
- * Mapuje dane Strapi na format aplikacji
- */
-const mapStrapiToAppFormat = (strapiData: StrapiStaffItem): Pracownik => {
+const mapStrapiToAppFormat = (strapiData: StrapiStaffItem): Staff => {
+  const {
+    staffId,
+    firstName,
+    lastName,
+    position,
+    email,
+    phone,
+    hireDate,
+    terminationDate,
+  } = strapiData.attributes;
+
   return {
     id: strapiData.id,
-    id_pracownika:
-      strapiData.attributes?.id_pracownika ||
-      strapiData.id_pracownika ||
-      `STAFF-${strapiData.id}`,
-    imie: strapiData.attributes?.imie || strapiData.imie,
-    nazwisko: strapiData.attributes?.nazwisko || strapiData.nazwisko,
-    rola: strapiData.attributes?.rola || strapiData.rola || "staff",
-    adres_email: strapiData.attributes?.adres_email || strapiData.adres_email,
-    telefon: strapiData.attributes?.telefon || strapiData.telefon,
-    createdAt: strapiData.attributes?.createdAt || strapiData.createdAt,
-    updatedAt: strapiData.attributes?.updatedAt || strapiData.updatedAt,
-    // Kompatybilność wsteczna
-    data_utworzenia: strapiData.attributes?.createdAt || strapiData.createdAt,
-    data_aktualizacji: strapiData.attributes?.updatedAt || strapiData.updatedAt,
+    staffId,
+    firstName,
+    lastName,
+    position,
+    email,
+    phone,
+    hireDate,
+    terminationDate,
   };
 };
 
-/**
- * Pobiera wszystkich pracowników
- * @returns Lista pracowników
- * @throws Error gdy nie można pobrać danych
- */
-export const pobierzPracownikow = async (): Promise<Pracownik[]> => {
+const mapAppToStrapiFormat = (appData: Partial<Omit<Staff, "id">>) => {
+  const strapiData: { [key: string]: any } = {};
+  for (const [key, value] of Object.entries(appData)) {
+    strapiData[key] = value;
+  }
+  return strapiData;
+};
+
+export const fetchStaffMembers = async (): Promise<Staff[]> => {
   try {
-    const response = await strapiAdapter.get("/staff-members?populate=*");
-
-    if (response.data) {
-      // Format Strapi z atrybutami
-      return response.data.map((item: StrapiStaffItem) =>
-        mapStrapiToAppFormat(item),
-      );
-    } else if (Array.isArray(response)) {
-      // Bezpośrednia odpowiedź
-      return response.map((item: StrapiStaffItem) =>
-        mapStrapiToAppFormat(item),
-      );
-    }
-
-    return [];
+    const response = await strapiAdapter.get<{ data: StrapiStaffItem[] }>(
+      "/staffs?populate=*",
+    );
+    return response.data ? response.data.map(mapStrapiToAppFormat) : [];
   } catch (error) {
     logger.error("Failed to get staff members", { error });
     throw error;
   }
 };
 
-/**
- * Pobiera pracownika po ID
- * @param id Identyfikator pracownika
- * @returns Dane pracownika
- * @throws Error gdy nie można pobrać danych lub pracownik nie istnieje
- */
-export const pobierzPracownika = async (id: string): Promise<Pracownik> => {
+export const fetchStaffMember = async (id: string): Promise<Staff> => {
   try {
-    const response = await strapiAdapter.get(`/staff-members/${id}?populate=*`);
-
+    const response = await strapiAdapter.get<{ data: StrapiStaffItem }>(
+      `/staffs/${id}?populate=*`,
+    );
     if (response.data) {
       return mapStrapiToAppFormat(response.data);
-    } else if (response.id) {
-      return mapStrapiToAppFormat(response);
     }
-
     throw new Error(`Staff member with ID ${id} not found`);
   } catch (error) {
     logger.error("Failed to get staff member", { id, error });
@@ -126,41 +73,29 @@ export const pobierzPracownika = async (id: string): Promise<Pracownik> => {
   }
 };
 
-/**
- * Dodaje nowego pracownika z automatycznie wygenerowanym hasłem
- * @param pracownik Dane nowego pracownika (bez ID)
- * @returns Dane utworzonego pracownika z hasłem
- * @throws Error gdy nie można utworzyć pracownika
- */
-export const dodajPracownikaZHaslem = async (
-  pracownik: NowyPracownikBezId,
-): Promise<PracownikZHaslem> => {
+export const addStaffWithPassword = async (
+  staff: Omit<Staff, "id">,
+): Promise<StaffWithPassword> => {
+  const password = Math.random().toString(36).slice(-8) + "A1!";
+  const payload = { data: mapAppToStrapiFormat(staff) };
   try {
-    // Generuj hasło
-    const password = Math.random().toString(36).slice(-8) + "A1!";
+    const response = await strapiAdapter.post<
+      typeof payload,
+      { data: StrapiStaffItem }
+    >("/staffs", payload);
 
-    // Utwórz pracownika w Strapi
-    const response = await strapiAdapter.post("/staff-members", {
-      data: {
-        ...pracownik,
-        id_pracownika: `STAFF-${Date.now()}`,
-      },
-    });
-
-    let createdStaff;
-    if (response.data) {
-      createdStaff = mapStrapiToAppFormat(response.data);
-    } else {
-      createdStaff = mapStrapiToAppFormat(response);
+    if (!response.data) {
+      throw new Error("Failed to create staff member, no data received.");
     }
+    const createdStaff = mapStrapiToAppFormat(response.data);
 
-    // Utwórz użytkownika w systemie autoryzacji
     try {
       await strapiAdapter.post("/auth/local/register", {
-        username: pracownik.adres_email,
-        email: pracownik.adres_email,
+        username: staff.email,
+        email: staff.email,
         password: password,
-        role: pracownik.rola || "staff",
+        role: staff.position || "staff",
+        staff_profile: createdStaff.id,
       });
     } catch (authError) {
       logger.warn("Failed to create auth user for staff member", { authError });
@@ -176,72 +111,48 @@ export const dodajPracownikaZHaslem = async (
   }
 };
 
-/**
- * Dodaje nowego pracownika (bez konta logowania)
- * @param pracownik Dane nowego pracownika
- * @returns Dane utworzonego pracownika
- * @throws Error gdy nie można utworzyć pracownika
- */
-export const dodajPracownika = async (
-  pracownik: NowyPracownik,
-): Promise<Pracownik> => {
-  try {
-    const response = await strapiAdapter.post("/staff-members", {
-      data: pracownik,
-    });
-
-    if (response.data) {
-      return mapStrapiToAppFormat(response.data);
-    } else {
-      return mapStrapiToAppFormat(response);
-    }
-  } catch (error) {
-    logger.error("Failed to add staff member", { error });
-    throw error;
-  }
-};
-
-/**
- * Aktualizuje dane pracownika
- * @param id Identyfikator pracownika
- * @param dane Dane do aktualizacji
- * @returns Zaktualizowane dane pracownika
- * @throws Error gdy nie można zaktualizować danych
- */
-export const aktualizujPracownika = async (
+export const updateStaffMember = async (
   id: string,
-  dane: AktualizacjaPracownika,
-): Promise<Pracownik> => {
+  data: Partial<Omit<Staff, "id">>,
+): Promise<Staff> => {
+  const payload = { data: mapAppToStrapiFormat(data) };
   try {
-    const response = await strapiAdapter.put(`/staff-members/${id}`, {
-      data: dane,
-    });
+    const response = await strapiAdapter.put<
+      typeof payload,
+      { data: StrapiStaffItem }
+    >(`/staffs/${id}`, payload);
 
     if (response.data) {
       return mapStrapiToAppFormat(response.data);
-    } else {
-      return mapStrapiToAppFormat(response);
     }
+    throw new Error(
+      `Failed to update staff member with ID ${id}, no data received.`,
+    );
   } catch (error) {
     logger.error("Failed to update staff member", { id, error });
     throw error;
   }
 };
 
-/**
- * Usuwa pracownika
- * @param id Identyfikator pracownika
- * @returns Informacja o pomyślnym usunięciu
- * @throws Error gdy nie można usunąć pracownika
- */
-export const usunPracownika = async (
+export const deleteStaffMember = async (
   id: string,
 ): Promise<{ success: true }> => {
   try {
-    await strapiAdapter.delete(`/staff-members/${id}`);
+    await strapiAdapter.delete(`/staffs/${id}`);
     return { success: true };
   } catch (error) {
     logger.error("Failed to delete staff member", { id, error });
     throw error;
   }
 };
+
+// Aliasy eksportów dla polskich nazw używanych w hookach
+export const pobierzPracownikow = fetchStaffMembers;
+export const pobierzPracownika = fetchStaffMember;
+export const dodajPracownikaZHaslem = addStaffWithPassword;
+export const aktualizujPracownika = updateStaffMember;
+export const usunPracownika = deleteStaffMember;
+
+// Typy dla polskich nazw
+export type NowyPracownikBezId = Omit<Staff, "id">;
+export type AktualizacjaPracownika = Partial<Omit<Staff, "id">>;

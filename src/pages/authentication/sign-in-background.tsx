@@ -12,7 +12,6 @@ import { HiInformationCircle } from "react-icons/hi";
 import { Link, useNavigate } from "react-router-dom";
 import { zaloguj } from "@/api/authApi";
 import { logger } from "@/utils/logger";
-import { useAuthStore } from "@/stores/authStore";
 
 const SignInBackgroundPage: FC = function () {
   const [email, setEmail] = useState("admin@msbox.com");
@@ -21,7 +20,6 @@ const SignInBackgroundPage: FC = function () {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const login = useAuthStore((state) => state.login);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -53,7 +51,7 @@ const SignInBackgroundPage: FC = function () {
           default:
             target = "/";
         }
-        window.location.href = target;
+        navigate(target);
       } else {
         const errorMessage =
           typeof result.error === "string"

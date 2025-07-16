@@ -146,8 +146,7 @@ backend/src/
 
 **Autoryzacja (`/api/auth`):**
 
-- `POST /login` - JWT authentication
-- `POST /refresh-token` - ⭐ Automatyczne odświeżanie tokenów
+- `POST /login` - JWT authentication z długim czasem życia (30 dni)
 - `POST /verify-token` - Weryfikacja sesji
 - `GET /profile/:email` - Profil użytkownika
 
@@ -169,12 +168,14 @@ backend/src/
 **1. Automatyczne Zarządzanie Sesjami:**
 
 ```typescript
-// Interceptor automatycznie odnawia tokeny
+// Interceptor automatycznie obsługuje wygaśnięcie tokenów
 axios.interceptors.response.use(
   (response) => response,
   async (error) => {
     if (error.response?.status === 401) {
-      await refreshTokenAndRetry(originalRequest);
+      // Automatyczne wylogowanie po wygaśnięciu tokenu (30 dni)
+      useAuthStore.getState().logout();
+      window.location.href = "/authentication/sign-in";
     }
   },
 );
@@ -516,14 +517,12 @@ export const useAuthStore = create<AuthState>()(
     (set, get) => ({
       user: null,
       token: null,
-      refreshToken: null,
       isAuthenticated: false,
 
       login: (userData) =>
         set({
           user: userData,
           token: userData.token,
-          refreshToken: userData.refreshToken,
           isAuthenticated: true,
         }),
 
@@ -531,14 +530,7 @@ export const useAuthStore = create<AuthState>()(
         set({
           user: null,
           token: null,
-          refreshToken: null,
           isAuthenticated: false,
-        }),
-
-      setTokens: (tokens) =>
-        set({
-          token: tokens.token,
-          refreshToken: tokens.refreshToken,
         }),
     }),
     {

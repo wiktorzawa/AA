@@ -1,18 +1,31 @@
 import type { FC } from "react";
 import { useState } from "react";
-import { Button, Card, Label, Alert, FileInput } from "flowbite-react";
+import {
+  Button,
+  Card,
+  Label,
+  Alert,
+  FileInput,
+  Select,
+  Spinner,
+} from "flowbite-react";
 import { HiCloudUpload, HiCheck, HiX } from "react-icons/hi";
 import { uploadDeliveryFile } from "../../api/deliveryApi";
 import { logger } from "../../utils/logger";
-import { useAuthStore } from "@/stores/authStore";
+import { useSuppliers } from "@/hooks/useSuppliers";
 
 export const StaffAddDeliveryPage: FC = () => {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [isUploading, setIsUploading] = useState(false);
   const [uploadSuccess, setUploadSuccess] = useState(false);
   const [uploadError, setUploadError] = useState<string | null>(null);
+  const [selectedSupplier, setSelectedSupplier] = useState<string>("");
 
-  const user = useAuthStore((state) => state.user);
+  const {
+    data: suppliers,
+    isLoading: isLoadingSuppliers,
+    isError: isErrorSuppliers,
+  } = useSuppliers();
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -50,10 +63,8 @@ export const StaffAddDeliveryPage: FC = () => {
       return;
     }
 
-    if (!user?.id_dostawcy) {
-      setUploadError(
-        "Nie można zidentyfikować dostawcy. Proszę zalogować się ponownie.",
-      );
+    if (!selectedSupplier) {
+      setUploadError("Proszę wybrać dostawcę z listy.");
       return;
     }
 
@@ -68,7 +79,7 @@ export const StaffAddDeliveryPage: FC = () => {
 
       const result = await uploadDeliveryFile({
         file: selectedFiles[0],
-        supplierId: user.id_dostawcy,
+        supplierId: parseInt(selectedSupplier, 10),
       });
 
       logger.info("StaffUpload: Wynik uploadu", { result });
@@ -115,6 +126,31 @@ export const StaffAddDeliveryPage: FC = () => {
 
         <Card>
           <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <Label htmlFor="supplier-select" value="Wybierz dostawcę" />
+              {isLoadingSuppliers ? (
+                <Spinner aria-label="Ładowanie dostawców..." />
+              ) : isErrorSuppliers ? (
+                <Alert color="failure">Błąd podczas ładowania dostawców.</Alert>
+              ) : (
+                <Select
+                  id="supplier-select"
+                  required
+                  value={selectedSupplier}
+                  onChange={(e) => setSelectedSupplier(e.target.value)}
+                  className="mt-2"
+                >
+                  <option value="" disabled>
+                    -- Wybierz dostawcę --
+                  </option>
+                  {suppliers?.map((supplier) => (
+                    <option key={supplier.id} value={supplier.id}>
+                      {supplier.attributes.nazwa}
+                    </option>
+                  ))}
+                </Select>
+              )}
+            </div>
             {/* Dropzone - Flowbite Pro Pattern */}
             <div>
               <h3 className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">

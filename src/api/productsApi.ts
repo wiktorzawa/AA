@@ -1,6 +1,6 @@
-import strapiAdapter from "./strapiAdapter";
+import { strapiAdapter } from "@/api/strapiAdapter";
 import { logger } from "../utils/logger";
-import type { Product } from "@/types/product.types";
+import type { Product } from "@/types/app.types";
 
 // Interfejs dla odpowiedzi z paginacją
 export interface ProductsResponse {

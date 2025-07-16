@@ -130,3 +130,6 @@ const StaffTasksPage: FC = () => {
 };
 
 export default StaffTasksPage;
+
+// Named export dla spójności z innymi komponentami
+export { StaffTasksPage };

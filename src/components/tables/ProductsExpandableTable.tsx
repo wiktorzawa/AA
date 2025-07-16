@@ -11,7 +11,7 @@ import {
 } from "flowbite-react";
 import type { FC } from "react";
 import React, { useState } from "react";
-import type { Product } from "@/types/product.types";
+import type { Product } from "@/types/app.types";
 
 interface ProductsExpandableTableProps {
   products: Product[];

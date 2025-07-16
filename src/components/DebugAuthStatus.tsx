@@ -7,7 +7,7 @@ import { HiEye, HiEyeOff } from "react-icons/hi";
  * Komponent diagnostyczny do wyświetlania stanu autoryzacji
  */
 export const DebugAuthStatus = () => {
-  const { user, token, refreshToken, isAuthenticated } = useAuthStore();
+  const { user, token, isAuthenticated } = useAuthStore();
   const [showTokens, setShowTokens] = useState(false);
 
   return (
@@ -26,7 +26,7 @@ export const DebugAuthStatus = () => {
           ) : (
             <HiEye className="mr-2" />
           )}
-          {showTokens ? "Ukryj tokeny" : "Pokaż tokeny"}
+          {showTokens ? "Ukryj token" : "Pokaż token"}
         </Button>
       </div>
 
@@ -42,34 +42,22 @@ export const DebugAuthStatus = () => {
           <>
             <p className="flex justify-between">
               <span className="font-semibold">Użytkownik:</span>
-              <span>{user.adres_email}</span>
-            </p>
-            <p className="flex justify-between">
-              <span className="font-semibold">Rola:</span>
-              <span className="capitalize">{user.rola_uzytkownika}</span>
+              <span>{user.email}</span>
             </p>
             <p className="flex justify-between">
               <span className="font-semibold">ID:</span>
-              <span>{user.id_uzytkownika}</span>
+              <span>{user.id}</span>
             </p>
           </>
         )}
 
         {showTokens && (
-          <>
-            <p className="flex flex-col">
-              <span className="font-semibold">Token:</span>
-              <span className="mt-1 rounded bg-gray-100 p-1 text-xs break-all dark:bg-gray-800">
-                {token || "Brak tokenu"}
-              </span>
-            </p>
-            <p className="flex flex-col">
-              <span className="font-semibold">Refresh Token:</span>
-              <span className="mt-1 rounded bg-gray-100 p-1 text-xs break-all dark:bg-gray-800">
-                {refreshToken || "Brak refresh tokenu"}
-              </span>
-            </p>
-          </>
+          <p className="flex flex-col">
+            <span className="font-semibold">Token JWT:</span>
+            <span className="mt-1 rounded bg-gray-100 p-1 text-xs break-all dark:bg-gray-800">
+              {token || "Brak tokenu"}
+            </span>
+          </p>
         )}
       </div>
     </Card>

@@ -15,7 +15,6 @@ export const AdminLayout: FC<PropsWithChildren> = ({ children }) => {
     setIsSidebarHovered(isHovered);
   };
 
-  // Sidebar jest rozwinięty, gdy otwarty lub otwarty na hover
   const sidebarIsExpanded =
     isSidebarOpen || (!isSidebarOpen && isSidebarHovered);
 
@@ -27,7 +26,9 @@ export const AdminLayout: FC<PropsWithChildren> = ({ children }) => {
       />
       <DashboardNavbar onToggleSidebar={handleToggleSidebar} />
       <main
-        className={`${sidebarIsExpanded ? "ml-80" : "ml-16"} min-h-screen bg-gray-50 p-4 pt-16 transition-all duration-300 dark:bg-gray-900`}
+        className={`${
+          sidebarIsExpanded ? "lg:ml-80" : "lg:ml-16"
+        } min-h-screen bg-gray-50 p-4 pt-16 transition-all duration-300 dark:bg-gray-900`}
       >
         {children}
       </main>

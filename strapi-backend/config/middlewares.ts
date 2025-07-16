@@ -9,4 +9,9 @@ export default [
   'strapi::session',
   'strapi::favicon',
   'strapi::public',
+  // Temporarily disabled response-formatter middleware to fix auth issues
+  // {
+  //   name: "global::response-formatter",
+  //   config: {},
+  // },
 ];

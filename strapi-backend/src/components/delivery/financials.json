@@ -1,0 +1,56 @@
+{
+    "collectionName": "components_delivery_financials",
+    "info": {
+        "displayName": "Finanse",
+        "description": "Dane finansowe dostawy",
+        "icon": "money-bill"
+    },
+    "options": {},
+    "attributes": {
+        "kursWymiany": {
+            "type": "decimal",
+            "required": true,
+            "min": 0
+        },
+        "procentWartosci": {
+            "type": "decimal",
+            "required": true,
+            "min": 0,
+            "max": 1
+        },
+        "stawkaVat": {
+            "type": "decimal",
+            "required": true,
+            "default": 0.23,
+            "min": 0,
+            "max": 1
+        },
+        "waluta": {
+            "type": "enumeration",
+            "enum": [
+                "EUR",
+                "USD",
+                "GBP",
+                "PLN"
+            ],
+            "default": "EUR",
+            "required": true
+        },
+        "wartoscZeSpecyfikacjiSuma": {
+            "type": "decimal",
+            "min": 0
+        },
+        "wartoscZeSpecyfikacjiSumaPln": {
+            "type": "decimal",
+            "min": 0
+        },
+        "kosztNetto": {
+            "type": "decimal",
+            "min": 0
+        },
+        "kosztBrutto": {
+            "type": "decimal",
+            "min": 0
+        }
+    }
+}

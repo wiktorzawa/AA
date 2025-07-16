@@ -15,7 +15,6 @@ export const StaffLayout: FC<PropsWithChildren> = ({ children }) => {
     setIsSidebarHovered(isHovered);
   };
 
-  // Określ czy sidebar zajmuje pełną szerokość (280px) czy wąską (64px)
   const sidebarIsExpanded =
     isSidebarOpen || (!isSidebarOpen && isSidebarHovered);
 
@@ -28,7 +27,7 @@ export const StaffLayout: FC<PropsWithChildren> = ({ children }) => {
       <DashboardNavbar onToggleSidebar={handleToggleSidebar} />
       <main
         className={`pt-16 transition-all duration-300 ${
-          sidebarIsExpanded ? "ml-80" : "ml-16"
+          sidebarIsExpanded ? "lg:ml-80" : "lg:ml-16"
         } min-h-screen`}
       >
         <div className="w-full">{children}</div>

@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import { Card } from "flowbite-react";
-import type { PreviewProduct } from "./types/api.types";
-import { DataTable, type ColumnDef } from "./components/flowbite-pro/DataTable";
+import type { PreviewProduct } from "./api/deliveryApi";
+import { DataTable, type ColumnDef } from "./components/DataTable";
 
 interface ProductDataTableProps {
   products: PreviewProduct[];

@@ -18,7 +18,7 @@ import { ColumnMappingForm } from "@/components/deliveries/ColumnMappingForm";
 import { DeliveryDetailsForm } from "@/components/deliveries/DeliveryDetailsForm";
 import { ProductDataTable } from "@/ProductDataTable";
 import { QUERY_KEYS } from "@/constants";
-import type { FilePreviewResponse, ColumnMapping } from "@/types/api.types";
+import type { FilePreviewResponse, ColumnMapping } from "@/api/deliveryApi";
 
 interface ErrorWithMessage {
   response?: {
@@ -77,36 +77,8 @@ export const AdminAddDeliveryPage: FC = () => {
   };
 
   const handleMappingConfirm = (newMapping: ColumnMapping) => {
-    if (file && previewData) {
-      // Konwertuj nazwy kolumn na indeksy dla backend
-      const indexMapping = {
-        productName: previewData.availableColumns.indexOf(
-          newMapping.productName || "",
-        ),
-        quantity: previewData.availableColumns.indexOf(
-          newMapping.quantity || "",
-        ),
-        price: previewData.availableColumns.indexOf(newMapping.price || ""),
-        ean: previewData.availableColumns.indexOf(newMapping.ean || ""),
-        palette: previewData.availableColumns.indexOf(
-          newMapping.paletteNumber || "",
-        ), // Uwaga: paletteNumber -> palette
-        asin: previewData.availableColumns.indexOf(newMapping.asin || ""),
-        lpn: previewData.availableColumns.indexOf(newMapping.lpn || ""),
-        condition: previewData.availableColumns.indexOf(
-          newMapping.condition || "",
-        ),
-      };
-
-      // Zamień -1 (nie znaleziono) na undefined lub -1 w zależności od potrzeby backend
-      const cleanedMapping = Object.fromEntries(
-        Object.entries(indexMapping).map(([key, value]) => [
-          key,
-          value >= 0 ? value : -1, // Backend oczekuje -1 dla brakujących kolumn
-        ]),
-      );
-
-      handlePreview(file, cleanedMapping);
+    if (file) {
+      handlePreview(file, newMapping);
     }
   };
 
@@ -196,7 +168,7 @@ export const AdminAddDeliveryPage: FC = () => {
 
       {previewData && (
         <div className="space-y-6">
-          {previewData.analysisStatus === "WYMAGA_NUMERU_LOTU" && (
+          {previewData.analysisStatus === "WYMAGA_POTWIERDZENIA" && (
             <Alert color="warning" icon={HiInformationCircle}>
               <h3 className="font-semibold">Wymagany numer lotu</h3>
               <p className="mt-2">
@@ -269,11 +241,12 @@ export const AdminAddDeliveryPage: FC = () => {
           )}
 
           {(previewData.analysisStatus === "SUKCES" ||
-            previewData.analysisStatus === "WYMAGA_POTWIERDZENIA" ||
-            previewData.analysisStatus === "WYMAGA_NUMERU_LOTU") && (
+            previewData.analysisStatus === "WYMAGA_POTWIERDZENIA") && (
             <DeliveryDetailsForm
               onSubmit={handleFinalSubmit}
               initialDeliveryNumber={previewData.deliveryNumber || ""}
+              estimatedValue={previewData.estimatedValue}
+              totalProducts={previewData.totalProducts}
             />
           )}
         </div>

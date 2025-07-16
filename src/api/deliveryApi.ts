@@ -1,7 +1,80 @@
 import { logger } from "../utils/logger";
-import type { ColumnMapping, FilePreviewResponse } from "../types/api.types";
+// Usunięty import: import type { ColumnMapping, FilePreviewResponse } from "../types/api.types";
 import type { Delivery } from "@/types/delivery.types";
 import strapiAdapter from "./strapiAdapter";
+
+// Typy przeniesione z api.types.ts
+export type PreviewStatus =
+  | "SUKCES"
+  | "WYMAGA_POTWIERDZENIA"
+  | "WYMAGA_MAPOWANIA"
+  | "BŁĄD";
+
+export interface FilePreviewResponse {
+  analysisStatus: PreviewStatus;
+  products: PreviewProduct[];
+  availableColumns: string[];
+  columnMapping: ColumnMapping;
+  deliveryNumber: string | null;
+  paletteNumbers: string[];
+  totalProducts: number;
+  estimatedValue: number;
+  fileName: string;
+  hasHeaders: boolean;
+  productSample: PreviewProduct[];
+  validationWarnings?: string[];
+  validationDetails?: ValidationDetails;
+}
+
+export interface PreviewProduct {
+  nr_palety?: string;
+  nazwa_produktu: string;
+  kod_ean?: string;
+  kod_asin?: string;
+  ilosc: number;
+  cena_produktu_spec?: number;
+  lpn?: string;
+  stan_produktu?: string;
+  kraj_pochodzenia?: string;
+  kategoria_produktu?: string;
+}
+
+export interface ColumnMapping {
+  paletteNumber?: string;
+  productName?: string;
+  ean?: string;
+  asin?: string;
+  quantity?: string;
+  price?: string;
+  lpn?: string;
+  condition?: string;
+  country?: string;
+  department?: string;
+  category?: string;
+  subcategory?: string;
+}
+
+export interface ValidationDetails {
+  criticalErrors: ValidationError[];
+  warnings: ValidationError[];
+  missingDataSummary: {
+    productsWithoutPalette: number;
+    productsWithoutEAN: number;
+    productsWithoutPrice: number;
+    productsWithoutQuantity: number;
+  };
+  dataQualityScore: number;
+  recommendedAction: "proceed" | "review_required" | "manual_correction_needed";
+}
+
+export interface ValidationError {
+  type: "critical" | "warning";
+  code: string;
+  message: string;
+  field?: string;
+  rowNumber?: number;
+  affectedProducts?: number;
+}
 
 // Definicja typu dla elementu danych Strapi
 interface StrapiDataItem {
@@ -129,7 +202,10 @@ export const uploadDeliveryFile = async (
       formData.append("columnMapping", JSON.stringify(data.mapping));
     }
 
-    const response = await strapiAdapter.upload("/deliveries/upload", formData);
+    const response = (await strapiAdapter.upload(
+      "/deliveries/upload",
+      formData,
+    )) as DeliveryUploadResponse;
 
     // Sprawdź, czy odpowiedź z backendu wskazuje na sukces
     if (!response.success) {
@@ -168,17 +244,25 @@ export const previewFile = async (
   }
 
   try {
-    const response = await strapiAdapter.post("/deliveries/preview", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
+    const response = (await strapiAdapter.post(
+      "/deliveries/preview",
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       },
-    });
+    )) as DeliveryPreviewResponse;
 
     // Backend zwraca { success: true, data: FilePreviewResponse }
     // Musimy wyciągnąć dane z response.data
-    if (response && response.data) {
-      return response.data;
-    } else if (response && response.success) {
+    if (response && typeof response === "object" && "data" in response) {
+      return response.data as DeliveryPreviewResponse;
+    } else if (
+      response &&
+      typeof response === "object" &&
+      "success" in response
+    ) {
       // Fallback jeśli dane są bezpośrednio w response
       return response;
     }
@@ -206,21 +290,19 @@ export const uploadAndProcessFile = async (
 ): Promise<DeliveryUploadResponse> => {
   try {
     const formData = new FormData();
-    formData.append("files.file", file, file.name);
+    // Użyj klucza, którego oczekuje niestandardowy kontroler, np. 'file'
+    formData.append("file", file, file.name);
 
-    const dataPayload = {
-      delivery_number: deliveryNumber,
-      mapping: mapping,
-      id_dostawcy: supplierId, // Dodajemy ID do payloadu
-    };
-
-    formData.append("data", JSON.stringify(dataPayload));
+    // Dane tekstowe przesyłane jako osobne pola
+    formData.append("delivery_number", deliveryNumber);
+    formData.append("id_dostawcy", supplierId);
+    formData.append("mapping", JSON.stringify(mapping));
 
     // Endpoint 'confirm' oczekuje teraz tych danych
-    const response = await strapiAdapter.upload(
+    const response = (await strapiAdapter.upload(
       "/deliveries/confirm",
       formData,
-    );
+    )) as DeliveryUploadResponse;
 
     return response;
   } catch (error) {
@@ -258,10 +340,10 @@ export const createFinances = async (
       financeData,
     });
 
-    const response = await strapiAdapter.post(
+    const response = (await strapiAdapter.post(
       `/deliveries/${deliveryId}/finances`,
       financeData,
-    );
+    )) as ApiResponse<FinanceResponse>;
 
     if (response.success) {
       logger.info("Finances created successfully", {
@@ -296,7 +378,9 @@ export const getDeliveries = async (): Promise<{
   error?: string;
 }> => {
   try {
-    const response = await strapiAdapter.get("/deliveries?populate=*");
+    const response = (await strapiAdapter.get("/deliveries?populate=*")) as {
+      data: StrapiDataItem[];
+    };
     const deliveries = Array.isArray(response.data)
       ? response.data.map(mapStrapiToAppFormat)
       : [];
@@ -315,6 +399,44 @@ export const getDeliveries = async (): Promise<{
 };
 
 /**
+ * Pobiera dostawy dla konkretnego dostawcy
+ * @param supplierId ID dostawcy (string, np. 'SUP-123')
+ * @returns Lista dostaw dla danego dostawcy
+ */
+export const getSupplierDeliveries = async (
+  supplierId: string,
+): Promise<{ success: boolean; data: Delivery[]; error?: string }> => {
+  try {
+    const queryParams = new URLSearchParams({
+      populate: "*",
+      "filters[supplier][id_dostawcy][$eq]": supplierId,
+    });
+    const response = (await strapiAdapter.get(
+      `/deliveries?${queryParams}`,
+    )) as {
+      data: StrapiDataItem[];
+    };
+    const deliveries = Array.isArray(response.data)
+      ? response.data.map(mapStrapiToAppFormat)
+      : [];
+    return {
+      success: true,
+      data: deliveries,
+    };
+  } catch (error: unknown) {
+    logger.error("Failed to fetch deliveries for supplier", {
+      supplierId,
+      error,
+    });
+    return {
+      success: false,
+      data: [],
+      error: "Błąd podczas pobierania listy dostaw dla dostawcy",
+    };
+  }
+};
+
+/**
  * Pobiera produkty dla konkretnej dostawy.
  * @param deliveryId - ID dostawy, dla której mają zostać pobrane produkty.
  * @returns Obiekt z danymi produktów zgodny z oczekiwaniami komponentu
@@ -323,9 +445,9 @@ export const getProductsByDeliveryId = async (
   deliveryId: string,
 ): Promise<ApiResponse<DeliveryProduct[]>> => {
   try {
-    const response = await strapiAdapter.get(
+    const response = (await strapiAdapter.get(
       `/deliveries/${deliveryId}/products`,
-    );
+    )) as ApiResponse<DeliveryProduct[]>;
     return response;
   } catch (error) {
     logger.error("Błąd podczas pobierania produktów dla dostawy:", {

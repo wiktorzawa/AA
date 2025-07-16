@@ -19,9 +19,24 @@ export default defineConfig({
     },
   },
   server: {
+    port: 5174, // Explicitly set server port
+    host: true, // Allow access from network
+    strictPort: false, // Allow fallback to other ports
+    // proxy: {
+    //   "/api": {
+    //     target: "http://localhost:1337",
+    //     changeOrigin: true,
+    //   },
+    // },
     hmr: {
-      protocol: "ws",
+      port: 5175, // Separate port for HMR WebSocket
       host: "localhost",
+      clientPort: 5175, // Ensure client connects to correct port
+    },
+    // Dodatkowe opcje dla stabilności
+    watch: {
+      usePolling: false,
+      ignored: ["**/node_modules/**", "**/.git/**"],
     },
   },
 });

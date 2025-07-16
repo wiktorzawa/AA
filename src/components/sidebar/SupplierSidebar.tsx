@@ -25,26 +25,17 @@ import { twMerge } from "tailwind-merge";
 
 interface SupplierSidebarProps {
   isOpen?: boolean;
-  onHoverChange?: (isHovered: boolean) => void;
 }
 
 export const SupplierSidebar: FC<SupplierSidebarProps> = ({
   isOpen = true,
-  onHoverChange,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-    onHoverChange?.(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-    onHoverChange?.(false);
-  };
+  const handleMouseEnter = () => setIsHovered(true);
+  const handleMouseLeave = () => setIsHovered(false);
 
   const isActive = (path: string) => location.pathname === path;
   const shouldShowExpanded = isOpen || isHovered;

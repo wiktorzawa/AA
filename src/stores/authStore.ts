@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { Supplier } from "@/types/supplier.types";
-import type { Staff } from "@/types/staff.types"; // Corrected import path if it exists
+import type { Supplier } from "../types/supplier.types";
+import type { Staff } from "../types/staff.types";
 
 // This is the basic User object returned by Strapi's /users/me endpoint
 export interface StrapiUser {

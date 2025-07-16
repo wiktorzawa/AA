@@ -6,7 +6,7 @@ import {
   aktualizujDostawce,
   usunDostawce,
 } from "@/api/supplierApi";
-import type { Supplier } from "@/types/supplier.types";
+import type { SupplierProfile as Supplier } from "@/types/app.types";
 import { QUERY_KEYS } from "@/constants";
 import { logger } from "@/utils/logger";
 import { toast } from "react-hot-toast";

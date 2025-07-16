@@ -23,62 +23,70 @@ export interface OdpowiedzLogowania {
   error?: string | ApiError;
 }
 
-async function findStaffProfile(email: string): Promise<Staff | null> {
-  try {
-    const response = await strapiAdapter.get<{ data: any[] }>("/staffs", {
-      populate: "*",
-    });
-    const lowercasedEmail = email.toLowerCase();
-    console.log(
-      "STAFF RESPONSE:",
-      response.data,
-      "SZUKANY EMAIL:",
-      lowercasedEmail,
-    );
-    const profile = response.data?.find(
-      (s) => s && s.email && s.email.toLowerCase() === lowercasedEmail,
-    );
-    return profile ?? null;
-  } catch (error) {
-    console.error("Błąd podczas wyszukiwania profilu pracownika:", error);
-    return null;
-  }
+// Interfejs dla użytkownika z relacjami z /users/me
+interface UserWithProfile extends StrapiUser {
+  staff_profile?: Staff;
+  supplier_profile?: Supplier;
 }
 
-async function findSupplierProfile(email: string): Promise<Supplier | null> {
-  try {
-    const response = await strapiAdapter.get<{ data: Supplier[] }>(
-      "/suppliers",
-      {
-        populate: "*",
-      },
-    );
-    const lowercasedEmail = email.toLowerCase();
-    console.log(
-      "SUPPLIER RESPONSE:",
-      response.data,
-      "SZUKANY EMAIL:",
-      lowercasedEmail,
-    );
-    const profile = response.data?.find(
-      (s) => s && s.email && s.email.toLowerCase() === lowercasedEmail,
-    );
-    return profile ?? null;
-  } catch (error) {
-    console.error("Błąd podczas wyszukiwania profilu dostawcy:", error);
-    return null;
+function determineAppRole(userWithProfile: UserWithProfile): AppRole {
+  console.log("🎯 DETERMINING APP ROLE:", {
+    hasStaffProfile: !!userWithProfile.staff_profile,
+    hasSupplierProfile: !!userWithProfile.supplier_profile,
+    staffPosition: userWithProfile.staff_profile?.position || "N/A",
+  });
+
+  // 1. Jeśli ma profil Staff - sprawdź position
+  if (userWithProfile.staff_profile && userWithProfile.staff_profile.position) {
+    const position = userWithProfile.staff_profile.position.toLowerCase();
+    if (position === "admin") {
+      console.log("✅ ROLE: admin (from staff.position)");
+      return "admin";
+    } else if (position === "staff") {
+      console.log("✅ ROLE: staff (from staff.position)");
+      return "staff";
+    } else {
+      console.warn("⚠️ Unknown staff position:", position);
+      throw new Error(`Nieznana rola w polu position: ${position}`);
+    }
   }
+
+  // 2. Jeśli ma profil Supplier - zawsze supplier
+  if (userWithProfile.supplier_profile) {
+    console.log("✅ ROLE: supplier (from supplier profile)");
+    return "supplier";
+  }
+
+  // 3. Jeśli nic nie znaleziono
+  throw new Error(
+    "Nie można określić roli użytkownika - brak profilu staff lub supplier",
+  );
+}
+
+function getActiveProfile(userWithProfile: UserWithProfile): UserProfile {
+  if (userWithProfile.staff_profile) {
+    console.log("📋 ACTIVE PROFILE: staff");
+    return userWithProfile.staff_profile;
+  }
+  if (userWithProfile.supplier_profile) {
+    console.log("📋 ACTIVE PROFILE: supplier");
+    return userWithProfile.supplier_profile;
+  }
+  throw new Error("Brak aktywnego profilu użytkownika");
 }
 
 export const zaloguj = async (
   credentials: DaneLogowania,
 ): Promise<OdpowiedzLogowania> => {
   try {
-    // Zamień email na identifier w payloadzie
+    console.log("🚀 ROZPOCZĘCIE LOGOWANIA:", credentials.email);
+
+    // 1. Uwierzytelnienie użytkownika
     const loginPayload = {
       identifier: credentials.email,
       password: credentials.password,
     };
+
     const loginResponse = await strapiAdapter.post<
       typeof loginPayload,
       { jwt: string; user: StrapiUser }
@@ -90,39 +98,40 @@ export const zaloguj = async (
 
     const { jwt, user } = loginResponse;
     localStorage.setItem("token", jwt);
+    console.log("✅ TOKEN ZAPISANY, pobieranie profilu użytkownika...");
 
-    const staffProfile = await findStaffProfile(user.email);
-    if (staffProfile && staffProfile.position) {
-      const position = staffProfile.position.toLowerCase();
-      let appRole: AppRole;
-      if (position === "admin") {
-        appRole = "admin";
-      } else if (position === "staff") {
-        appRole = "staff";
-      } else {
-        throw new Error(
-          `Nieznana rola w polu position profilu staff: ${position}`,
-        );
-      }
-      useAuthStore
-        .getState()
-        .login({ user, token: jwt, appRole, profile: staffProfile });
-      return { success: true, jwt, user, appRole, profile: staffProfile };
-    }
+    // 2. Pobierz użytkownika z relacjami (JEDEN REQUEST!)
+    console.log("🔍 Pobieranie /users/me?populate=*...");
+    const userWithProfile = await strapiAdapter.get<UserWithProfile>(
+      "/users/me?populate=*",
+    );
 
-    const supplierProfile = await findSupplierProfile(user.email);
-    if (supplierProfile) {
-      const appRole = "supplier";
-      useAuthStore
-        .getState()
-        .login({ user, token: jwt, appRole, profile: supplierProfile });
-      return { success: true, jwt, user, appRole, profile: supplierProfile };
-    }
+    console.log("📊 USER PROFILE SUMMARY:", {
+      email: userWithProfile.email,
+      hasStaffProfile: !!userWithProfile.staff_profile,
+      hasSupplierProfile: !!userWithProfile.supplier_profile,
+      staffPosition: userWithProfile.staff_profile?.position || "N/A",
+      supplierCompany: userWithProfile.supplier_profile?.companyName || "N/A",
+    });
 
-    throw new Error("Nie znaleziono powiązanego profilu staff lub supplier.");
-  } catch (error: unknown) {
-    console.error("🚨 Login error:", error);
+    // 3. Określ rolę aplikacji na podstawie profilu
+    const appRole = determineAppRole(userWithProfile);
+    const profile = getActiveProfile(userWithProfile);
+
+    // 4. Zapisz stan uwierzytelnienia
+    useAuthStore.getState().login({ user, token: jwt, appRole, profile });
+
+    console.log("🎉 LOGOWANIE ZAKOŃCZONE SUKCESEM:", {
+      email: user.email,
+      appRole,
+      profileType: userWithProfile.staff_profile ? "staff" : "supplier",
+    });
+
+    return { success: true, jwt, user, appRole, profile };
+  } catch (error) {
+    console.error("🚨 BŁĄD LOGOWANIA:", error);
     localStorage.removeItem("token");
+
     const apiError = error as {
       response?: { data?: { error?: { message: string; details: unknown } } };
       message?: string;

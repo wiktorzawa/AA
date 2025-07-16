@@ -9,3 +9,6 @@ const DeliveryProductsPage: FC = () => {
 };
 
 export default DeliveryProductsPage;
+
+// Named export dla spójności z innymi komponentami
+export { DeliveryProductsPage };

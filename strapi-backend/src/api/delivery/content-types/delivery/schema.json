@@ -1,0 +1,98 @@
+{
+    "kind": "collectionType",
+    "collectionName": "deliveries",
+    "info": {
+        "singularName": "delivery",
+        "pluralName": "deliveries",
+        "displayName": "Dostawa",
+        "description": "Główna tabela dostaw z informacjami o plikach dostawców"
+    },
+    "options": {
+        "draftAndPublish": false
+    },
+    "pluginOptions": {},
+    "attributes": {
+        "deliveryId": {
+            "type": "string",
+            "unique": true,
+            "private": true,
+            "configurable": false
+        },
+        "idDostawy": {
+            "type": "string",
+            "required": true,
+            "unique": true,
+            "maxLength": 50
+        },
+        "idDostawcy": {
+            "type": "string",
+            "required": true,
+            "maxLength": 20
+        },
+        "idPliku": {
+            "type": "string",
+            "required": true,
+            "unique": true,
+            "maxLength": 255
+        },
+        "nazwaPliku": {
+            "type": "string",
+            "required": true,
+            "maxLength": 255
+        },
+        "urlPlikuS3": {
+            "type": "text"
+        },
+        "nrPaletDostawy": {
+            "type": "text"
+        },
+        "nrLotDostawy": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "statusWeryfikacji": {
+            "type": "enumeration",
+            "enum": [
+                "nowa",
+                "trwa_weryfikacja",
+                "zweryfikowano",
+                "raport",
+                "zakonczono",
+                "blad"
+            ],
+            "default": "nowa",
+            "required": true
+        },
+        "liczbaProdukow": {
+            "type": "integer",
+            "default": 0
+        },
+        "wartoscCalkowita": {
+            "type": "decimal",
+            "default": 0
+        },
+        "products": {
+            "type": "relation",
+            "relation": "oneToMany",
+            "target": "api::product.product",
+            "mappedBy": "delivery"
+        },
+        "supplier": {
+            "type": "relation",
+            "relation": "manyToOne",
+            "target": "api::supplier.supplier",
+            "inversedBy": "deliveries"
+        },
+        "financials": {
+            "type": "component",
+            "repeatable": false,
+            "component": "delivery.financials"
+        },
+        "invoice": {
+            "type": "relation",
+            "relation": "oneToOne",
+            "target": "api::invoice.invoice",
+            "mappedBy": "delivery"
+        }
+    }
+}

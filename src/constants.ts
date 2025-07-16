@@ -53,9 +53,9 @@ export const ROUTES = {
 // ===== API ENDPOINTS =====
 export const API_ENDPOINTS = {
   AUTH: {
-    LOGIN: "/auth/login",
+    LOGIN: "/auth/local", // Zmieniono na poprawny endpoint Strapi
+    ME: "/users/me", // Endpoint do pobierania danych zalogowanego użytkownika
     LOGOUT: "/auth/logout",
-    REFRESH: "/auth/refresh",
     PROFILE: "/auth/profile",
   },
   DELIVERIES: {

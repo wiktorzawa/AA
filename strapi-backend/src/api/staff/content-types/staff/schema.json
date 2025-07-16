@@ -12,8 +12,9 @@
   "attributes": {
     "staffId": {
       "type": "string",
-      "required": true,
-      "unique": true
+      "unique": false,
+      "configurable": false,
+      "private": true
     },
     "firstName": {
       "type": "string",
@@ -38,8 +39,17 @@
       "type": "date"
     },
     "position": {
-      "type": "string",
+      "type": "enumeration",
+      "enum": [
+        "admin",
+        "staff"
+      ],
       "required": true
+    },
+    "user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
     }
   }
 }

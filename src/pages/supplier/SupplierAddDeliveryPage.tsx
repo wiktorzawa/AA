@@ -3,16 +3,24 @@ import { useState } from "react";
 import { FileInput, Card, Alert, Spinner, HelperText } from "flowbite-react";
 import { HiInformationCircle } from "react-icons/hi";
 import * as deliveryApi from "../../api/deliveryApi";
-import type { FilePreviewResponse, ColumnMapping } from "../../types/api.types";
+import type { FilePreviewResponse, ColumnMapping } from "../../api/deliveryApi";
 import { ProductDataTable } from "../../ProductDataTable";
 import { DeliveryDetailsForm } from "../../components/deliveries/DeliveryDetailsForm";
 import { ColumnMappingForm } from "../../components/deliveries/ColumnMappingForm";
 import { toast } from "react-hot-toast";
 import { useMutation } from "@tanstack/react-query";
 import { useAuthStore } from "../../stores/authStore";
+import type { SupplierProfile } from "@/types/app.types";
 
 const SupplierAddDeliveryPage: FC = () => {
-  const supplierId = useAuthStore((state) => state.supplierId);
+  const profile = useAuthStore((state) => state.profile);
+
+  function isSupplier(p: any): p is SupplierProfile {
+    return p && typeof p.supplierId === "string";
+  }
+
+  const supplierId = isSupplier(profile) ? profile.supplierId : null;
+
   const [file, setFile] = useState<File | null>(null);
   const [fileInputKey, setFileInputKey] = useState<number>(0); // Do reset inputa
   const [previewData, setPreviewData] = useState<FilePreviewResponse | null>(
@@ -395,3 +403,6 @@ const SupplierAddDeliveryPage: FC = () => {
 };
 
 export default SupplierAddDeliveryPage;
+
+// Named export dla spójności z innymi komponentami
+export { SupplierAddDeliveryPage };

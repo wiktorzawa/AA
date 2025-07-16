@@ -12,8 +12,9 @@
   "attributes": {
     "supplierId": {
       "type": "string",
-      "required": true,
-      "unique": true
+      "unique": false,
+      "configurable": false,
+      "private": true
     },
     "companyName": {
       "type": "string",
@@ -58,6 +59,17 @@
     },
     "country": {
       "type": "string"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "deliveries": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::delivery.delivery",
+      "mappedBy": "supplier"
     }
   }
 }

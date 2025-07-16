@@ -19,10 +19,10 @@ import {
 } from "flowbite-react";
 
 import { useDeliveries, useProductsByDelivery } from "../../hooks";
-import type { Delivery } from "@/types/delivery.types";
+import type { Delivery } from "@/types/app.types";
 import type { DeliveryProduct } from "../../api/deliveryApi";
 
-export const AdvancedDeliveriesTableWithExpandableRows: FC = () => {
+export const AdvancedExpandableDeliveriesTableWithExpandableRows: FC = () => {
   const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set());
   const [selectedRows, setSelectedRows] = useState<Set<string>>(new Set());
 
@@ -494,4 +494,8 @@ const DeliveryRow: FC<DeliveryRowProps> = ({
   );
 };
 
-export default AdvancedDeliveriesTableWithExpandableRows;
+export default AdvancedExpandableDeliveriesTableWithExpandableRows;
+
+// Alias eksportu dla krótszej nazwy
+export const ExpandableDeliveriesTable =
+  AdvancedExpandableDeliveriesTableWithExpandableRows;
